@@ -59,7 +59,7 @@ class Session extends ContainerAware
             $build = $repository->find($buildId);
         }
 
-        if($build !== null && $build->getProject()->getId() !== $this->getProject()->getId()) {
+        if ($build !== null && $build->getProject()->getId() !== $this->getProject()->getId()) {
             $build = null;
         }
 
