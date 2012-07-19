@@ -14,27 +14,16 @@
     "require": {
         "php":                                  ">=5.3.3",
 
-        "symfony/framework-bundle":             "v2.0.16",
-        "symfony/assetic-bundle":               "2.0.x-dev",
-        "symfony/twig-bundle":                  "2.0.x-dev",
+        "symfony/symfony":  ">=2.0.7,<2.1.0-dev",
+        "doctrine/orm":     ">=2.1.0,<2.2.0-dev",
+        "twig/extensions":  "*",
 
-        "twig/twig":                            "1.8.3",
-        "twig/extensions":                      "dev-master",
+        "symfony/assetic-bundle":         "*",
+        "sensio/generator-bundle":        "*",
+        "sensio/framework-extra-bundle":  "2.0.x-dev",
+        "sensio/distribution-bundle":     "2.0.x-dev",
+        "jms/security-extra-bundle":      "1.0.x-dev",
 
-        "sensio/distribution-bundle":           "2.0.x-dev",
-        "sensio/generator-bundle":              "2.0.x-dev",
-        "sensio/framework-extra-bundle":        "2.0.x-dev",
-
-        "doctrine/common":                      "2.1.4",
-        "doctrine/dbal":                        "2.1.7",
-        "doctrine/orm":                         "2.1.7",
-
-        "jms/metadata":                         "1.1.1",
-        "jms/security-extra-bundle":            "1.0.x-dev",
-
-        "monolog/monolog":                      "1.0.2",
-        "swiftmailer/swiftmailer":              "4.1.7",
-        "kriswallsmith/assetic":                "1.0.x-dev",
         "friendsofsymfony/jsrouting-bundle":    "dev-master",
         "knplabs/knp-markdown-bundle":          "dev-composer"
     },

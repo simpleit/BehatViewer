@@ -29,3 +29,5 @@ app/config/parameters.yml
 behat.yml
 behat-viewer.json
 build.sh
+
+composer.phar
