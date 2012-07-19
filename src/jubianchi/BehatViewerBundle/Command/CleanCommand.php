@@ -1,8 +1,7 @@
 <?php
 namespace jubianchi\BehatViewerBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    Symfony\Component\Console\Input\InputInterface,
+use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Component\EventDispatcher\EventSubscriberInterface,
@@ -14,26 +13,18 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
 /**
  *
  */
-class CleanCommand extends ContainerAwareCommand
+class CleanCommand extends ProjectCommand
 {
-    /**
-     * @var \Symfony\Component\Console\Output\OutputInterface
-     */
-    private $output;
-
     /**
      *
      */
     protected function configure()
     {
+		parent::configure();
+
         $this
             ->setName('behat-viewer:clean')
             ->setDescription('Cleans outdated builds')
-            ->setDefinition(
-                array(
-                    new InputArgument('project', InputArgument::OPTIONAL, 'The project to clean')
-                )
-            )
         ;
     }
 
@@ -45,14 +36,15 @@ class CleanCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-      $repository = $this->getContainer()->get('doctrine')->getRepository('BehatViewerBundle:Project');
-      $project = $repository->findOneById(1);
+		parent::execute($input, $output);
 
-      $output->writeln(sprintf('<info>[INFO]</info> Cleaning outdated builds for project <comment>%s</comment>', $project->getSlug()));
+      	$project = $this->getProject();
 
-      $repository = $this->getContainer()->get('doctrine')->getRepository('BehatViewerBundle:Build');
-      $count = $repository->removeWeekBuildsForProject($project);
+      	$output->writeln(sprintf('<info>[INFO]</info> Cleaning outdated builds for project <comment>%s</comment>', $project->getSlug()));
 
-      $output->writeln(sprintf('<info>[INFO]</info> Deleted <comment>%d</comment> build(s)', $count));
+      	$repository = $this->getContainer()->get('doctrine')->getRepository('BehatViewerBundle:Build');
+		$count = $repository->removeWeekBuildsForProject($project);
+
+      	$output->writeln(sprintf('<info>[INFO]</info> Deleted <comment>%d</comment> build(s)', $count));
     }
 }
