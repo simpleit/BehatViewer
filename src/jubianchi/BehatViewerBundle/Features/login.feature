@@ -3,7 +3,8 @@ Feature: Login
 
     @reset @fixture:user.sql
     Scenario: Login with bad credentials
-        Given I am on the homepage
+        Given I am not logged in
+          And I am on the homepage
           And I follow "Log in"
           And I press "Log in"
          Then I should see "Bad credentials"
@@ -18,13 +19,13 @@ Feature: Login
         Given I am not logged in
           And I am on the homepage
           And I follow "Log in"
-          And I fill in "username" with "behat"
-          And I fill in "password" with "behat"
+          And I fill in "username" with "user"
+          And I fill in "password" with "user"
           And I press "Log in"
-         Then I should be on "/config/"
-          And I should see "Logged in as behat"
+         Then I should be on "/project/create"
+          And I should see "Logged in as user"
 
-        Given I follow "Logged in as behat"
+        Given I follow "Logged in as user"
          Then I should see "Profile"
           And I should see "Projects"
           And I should see "Config"
@@ -33,7 +34,7 @@ Feature: Login
     @javascript
     Scenario: Logout
         Given I am on the homepage
-          And I follow "Logged in as behat"
+          And I follow "Logged in as user"
           And I follow "Logout"
          Then I should be on "/login"
 
@@ -41,6 +42,6 @@ Feature: Login
     Scenario: Logout
         Given I am a logged in user
           And I am on the homepage
-          And I follow "Logged in as behat"
+          And I follow "Logged in as user"
           And I follow "Logout"
          Then I should be on "/"

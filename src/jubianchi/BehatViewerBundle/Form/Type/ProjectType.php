@@ -51,7 +51,7 @@ class ProjectType extends AbstractType
                 'label' => 'Test command',
                 'attr' => array(
                     'rows' => 10,
-                    'cols' => 100,
+                    'cols' => 70,
                     'style' => 'width: auto'
                 )
             ));

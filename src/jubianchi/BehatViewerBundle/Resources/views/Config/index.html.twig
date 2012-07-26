@@ -1,5 +1,4 @@
-{% extends 'BehatViewerBundle::layout.form.html.twig' %}
-
+{% extends 'BehatViewerBundle::layout.html.twig' %}
 
 {% block notification %}
     {% if success %}
@@ -7,20 +6,36 @@
     {% endif %}
 {% endblock %}
 
-{% block action %}{{ path('behatviewer.config') }}{% endblock %}
-
-{% block title %}Project configuration{% endblock %}
-
-{% block before %}
-    {% if project.id is null %}
-        <div class="alert alert-block alert-info">
-            <h4 class="alert-heading">No project configured</h4>
-
-            <p>Before using Behat Viewer, you should configure your project.</p>
+{% block container %}
+<div class="row-fluid">
+    <form class="form-horizontal" method="post" action="" id="configuration">
+        <div style="background-color: #888; border: none;" class="well modal-example">
+            <div style="width: {% block width %}60%{% endblock %}; position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1; max-width: 100%;" class="modal">
+                <div class="modal-header">
+                    <h3>Behat Viewer configuration</h3>
+                </div>
+                <div class="modal-body" style="max-height: inherit;">
+                    <div class="control-group">
+                        <label for="key" class="control-label">SSH Key</label>
+                        {% if ssh_key != '' %}
+                        <div id="key" class="controls">
+                            <p class="well" style="word-wrap:break-word; padding: 10px; padding-top: 5px">{{ ssh_key }}</p>
+                            <p class="help-inline">Allow Behat Viewer to access private repositories by adding this SSH key to them.</p>
+                        </div>
+                        {% else %}
+                        <div id="key" class="controls alert alert-warning alert-block">
+                            <p>There are no key defined for Behat Viewer. Please generate one with this command :</p>
+                            <p><code>app/console behat-viewer:generate-key</code></p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" value="{% block submit %}Save changes{% endblock %}"/>
+                    <input class="btn" type="reset" value="Cancel"/>
+                </div>
+            </div>
         </div>
-    {% endif %}
-{% endblock %}
-
-{% block extrabuttons %}
-    <input class="btn" type="reset" value="Cancel"/>
+    </form>
+</div>
 {% endblock %}

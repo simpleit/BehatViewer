@@ -120,7 +120,7 @@ class AdminController extends BehatViewerController
         if ($form->isValid()) {
             $user->setUsername($form->getData()->getUsername());
             $user->setEmail($form->getData()->getEmail());
-            $user->setIsactive($form->getData()->isActive());
+            $user->setIsActive($form->getData()->isEnabled());
 
             if (($password = $form->get('password')->getData()) !== null) {
                 if ($password === $form->get('confirm')->getData()) {

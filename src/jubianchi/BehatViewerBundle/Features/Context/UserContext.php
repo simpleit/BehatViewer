@@ -6,19 +6,33 @@ use Symfony\Component\HttpKernel\KernelInterface,
 
 class UserContext extends BehatViewerContext
 {
+    private $logged = false;
+
     /**
-     * @Given /^I am a logged in user$/
+     * @AfterScenario
      */
-    public function iAmALoggedInUser()
+    public function afterScenario()
     {
+        $session = $this->getMainContext()->getSubContext('browser')->getSession();
+        if (true === $this->logged && true === $session->isStarted()) {
+            $session->stop();
+        }
+    }
+
+    /**
+     * @Given /^I am a logged in (admin|user)$/
+     */
+    public function iAmALoggedInUser($profile)
+    {
+        $this->logged = true;
+
         return array(
-            new Step\Given('I go to "/logout"'),
-            new Step\Given('I load the "user.sql" fixture'),
+            new Step\Given(sprintf('I load the "%s.sql" fixture', $profile)),
             new Step\Given('I am on "/login"'),
-            new Step\Then('I fill in "Username" with "behat"'),
-            new Step\Then('I fill in "Password" with "behat"'),
+            new Step\Then(sprintf('I fill in "Username" with "%s"', $profile)),
+            new Step\Then(sprintf('I fill in "Password" with "%s"', $profile)),
             new Step\Then('I press "Log in"'),
-            new Step\Then('I should see "Logged in as behat"')
+            new Step\Then(sprintf('I should see "Logged in as %s"', $profile))
         );
     }
 
@@ -32,5 +46,7 @@ class UserContext extends BehatViewerContext
         /** @var $browser \jubianchi\BehatViewerBundle\Features\Context\BrowserContext */
         $browser = $this->getMainContext()->getSubcontext('browser');
         $browser->visit('/logout');
+
+        $this->logged = false;
     }
 }

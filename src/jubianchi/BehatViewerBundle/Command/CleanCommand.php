@@ -20,7 +20,7 @@ class CleanCommand extends ProjectCommand
      */
     protected function configure()
     {
-		parent::configure();
+        parent::configure();
 
         $this
             ->setName('behat-viewer:clean')
@@ -36,15 +36,15 @@ class CleanCommand extends ProjectCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-		parent::execute($input, $output);
+        parent::execute($input, $output);
 
-      	$project = $this->getProject();
+          $project = $this->getProject();
 
-      	$output->writeln(sprintf('<info>[INFO]</info> Cleaning outdated builds for project <comment>%s</comment>', $project->getSlug()));
+          $output->writeln(sprintf('<info>[INFO]</info> Cleaning outdated builds for project <comment>%s</comment>', $project->getSlug()));
 
-      	$repository = $this->getContainer()->get('doctrine')->getRepository('BehatViewerBundle:Build');
-		$count = $repository->removeWeekBuildsForProject($project);
+          $repository = $this->getContainer()->get('doctrine')->getRepository('BehatViewerBundle:Build');
+        $count = $repository->removeWeekBuildsForProject($project);
 
-      	$output->writeln(sprintf('<info>[INFO]</info> Deleted <comment>%d</comment> build(s)', $count));
+          $output->writeln(sprintf('<info>[INFO]</info> Deleted <comment>%d</comment> build(s)', $count));
     }
 }

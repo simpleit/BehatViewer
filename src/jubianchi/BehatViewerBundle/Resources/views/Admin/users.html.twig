@@ -31,13 +31,13 @@
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>
-                {{ user.isActive ? 'Yes' : 'No' }}
+                {{ user.isEnabled ? 'Yes' : 'No' }}
             </td>
             <td>
                 <div class="btn-group" id="toolbar">
                     <a href="{{ path('behatviewer.useredit', {"id": user.id}) }}" class="btn">Edit</a>
                     {% if user.id != app.user.id %}
-                        {% if user.isActive %}
+                        {% if user.isEnabled %}
                             <a href="{{ path('behatviewer.userdisable', {"id": user.id}) }}" class="btn btn-danger">Disable</a>
                         {% else %}
                             <a href="{{ path('behatviewer.userenable', {"id": user.id}) }}" class="btn btn-success">Enable</a>

@@ -3,6 +3,7 @@ namespace jubianchi\BehatViewerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Security\Core\User\UserInterface,
+    Symfony\Component\Security\Core\User\AdvancedUserInterface,
     Symfony\Component\Validator\Constraints as Assert,
     Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @UniqueEntity("username")
  * @UniqueEntity("email")
  */
-class User extends Base implements UserInterface
+class User extends Base implements AdvancedUserInterface
 {
     /**
      * @ORM\Column(type="integer")
@@ -117,12 +118,22 @@ class User extends Base implements UserInterface
         $this->email = $email;
     }
 
-    public function isActive()
+    public function isAccountNonExpired()
     {
-        return $this->isActive;
+        return true;
     }
 
-    public function getIsActive()
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
     {
         return $this->isActive;
     }
@@ -133,6 +144,11 @@ class User extends Base implements UserInterface
     public function setIsActive($active)
     {
         $this->isActive = $active;
+    }
+
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 
         /**

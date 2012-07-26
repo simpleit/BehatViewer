@@ -26,6 +26,8 @@ app/config/parameters.yml
 .Trashes
 
 # BehatViewer
+app/data
+
 behat.yml
 behat-viewer.json
 build.sh

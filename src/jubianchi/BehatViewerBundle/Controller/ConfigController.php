@@ -17,40 +17,20 @@ class ConfigController extends BehatViewerController
      * @return array
      *
      * @Route("/", name="behatviewer.config")
-     * @Secure(roles="ROLE_USER")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function indexAction()
     {
-        $request = $this->getRequest();
-        $project = $this->getSession()->getProject();
-        $success = false;
-
-        if ($project === null) {
-            $project = new \jubianchi\BehatViewerBundle\Entity\Project();
-        }
-
-        $form = $this->get('form.factory')->create(new ProjectType(), $project);
-
-        if ('POST' === $request->getMethod()) {
-            $form->bindRequest($request);
-
-            if ($form->isValid()) {
-                $project->setSlug(trim($form->getData()->getSlug(), ' -'));
-
-                $manager = $this->getDoctrine()->getEntityManager();
-                $manager->persist($project);
-                $manager->flush();
-
-                $this->getSession()->setProject($project);
-                $success = true;
-            }
+        $path = $this->get('kernel')->getRootDir() . '/data/id_rsa.pub';
+        $key = '';
+        if (file_exists($path)) {
+            $key = trim(file_get_contents($path));
         }
 
         return $this->getResponse(array(
-            'project' => $project,
-            'form' => $form->createView(),
-            'success' => $success
+            'success' => false,
+            'ssh_key' => $key
         ));
     }
 }

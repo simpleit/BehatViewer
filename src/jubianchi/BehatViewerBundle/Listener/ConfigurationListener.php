@@ -12,7 +12,7 @@ class ConfigurationListener extends \Symfony\Component\DependencyInjection\Conta
 
         switch (true) {
             case $exception instanceof \jubianchi\BehatViewerBundle\Exception\NoProjectConfiguredException:
-                $event->setResponse(new \Symfony\Component\HttpFoundation\RedirectResponse($this->container->get('router')->generate('behatviewer.config')));
+                $event->setResponse(new \Symfony\Component\HttpFoundation\RedirectResponse($this->container->get('router')->generate('behatviewer.projectcreate')));
                 break;
             default:
                 break;

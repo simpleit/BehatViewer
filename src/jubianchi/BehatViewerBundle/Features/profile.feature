@@ -5,7 +5,7 @@ Feature: Profile
     Scenario: Edit profile
         Given I am a logged in user
           And I am on the homepage
-          And I follow "Logged in as behat"
+          And I follow "Logged in as user"
           And I follow "Profile"
          Then I should be on "/profile"
 

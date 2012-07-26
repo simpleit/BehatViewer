@@ -1,10 +1,10 @@
 Feature: Create project
 
   @reset @javascript @fixture:single-project.sql
-  Scenario: New project
+  Scenario: Project list
     Given I am a logged in user
       And I am on the homepage
-      And I follow "Logged in as behat"
+      And I follow "Logged in as user"
       And I follow "Projects"
      Then I should see a "table" element
       And the columns schema of the "table" table should match:
