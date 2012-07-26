@@ -79,9 +79,10 @@ Feature: History
         Given I follow "Previous"
          Then I should see "Page 1/3"
 
-    @reset @javascript @fixture:single-project.sql @fixture:single-build.sql @fixture:second-build.sql @fixture:user.sql
+    @reset @javascript @fixture:single-project.sql @fixture:single-build.sql @fixture:second-build.sql
     Scenario: Delete build
-      Given I am on the homepage
+      Given I am a logged in user
+        And I am on the homepage
         And I follow "History"
         And the data in the 1st row of the "table" table should match:
           |  | # | Date                               | Completion | Progress | Details                                                    | Action        |
