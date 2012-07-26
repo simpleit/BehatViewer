@@ -1,5 +1,5 @@
 {
-    "hash": "0e5db40645f014bb794f36fdb74ab85e",
+    "hash": "986b1ed3527e90c6f89cd46655e500ad",
     "packages": [
         {
             "package": "doctrine/common",
@@ -22,8 +22,8 @@
         {
             "package": "friendsofsymfony/jsrouting-bundle",
             "version": "dev-master",
-            "source-reference": "b39b2a454c3a64a9e7546b00fd5948bb5699aca8",
-            "commit-date": "1342718224"
+            "source-reference": "69a8b5cb437ce415a72ad12274bb59a06b2c0cf5",
+            "commit-date": "1343207051"
         },
         {
             "package": "jms/metadata",
@@ -84,14 +84,14 @@
         {
             "package": "symfony/assetic-bundle",
             "version": "2.0.x-dev",
-            "source-reference": "a926f5e81718bb920459ce3226ceb258ab3c1f05",
-            "commit-date": "1342126031"
+            "source-reference": "6f15728c1aefa5246caa83730e3dbf70b0d46052",
+            "commit-date": "1342820272"
         },
         {
             "package": "symfony/symfony",
             "version": "2.0.x-dev",
-            "source-reference": "50eb170ead6e48d08a01e157c704a143030b6695",
-            "commit-date": "1342171844"
+            "source-reference": "d92daec6e10a462c51c2825e5e464afcfc533d94",
+            "commit-date": "1343317779"
         },
         {
             "package": "twig/extensions",
@@ -108,8 +108,8 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "7c3b987742ed8512ba70712e0ff8862c52eebbc9",
-            "commit-date": "1342675769"
+            "source-reference": "657de7bdeb680815e0df95f63da9f81e1533d2ea",
+            "commit-date": "1342953178"
         }
     ],
     "packages-dev": null,
