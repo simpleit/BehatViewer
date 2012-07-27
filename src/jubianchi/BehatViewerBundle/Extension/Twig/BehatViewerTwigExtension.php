@@ -46,7 +46,8 @@ class BehatViewerTwigExtension extends \Twig_Extension implements ContainerAware
             'iconv' => new \Twig_Filter_Method($this, 'iconv'),
             'count' => new \Twig_Filter_Function('count'),
             'nl2br' => new \Twig_Filter_Function('nl2br'),
-            'gravatar' => new \Twig_Filter_Method($this, 'getGravatarImage')
+            'gravatar' => new \Twig_Filter_Method($this, 'getGravatarImage'),
+            'stepify' => new \Twig_Filter_Method($this, 'stepify'),
         );
     }
 
@@ -108,6 +109,35 @@ class BehatViewerTwigExtension extends \Twig_Extension implements ContainerAware
 
         return $text;
     }
+
+	public function stepify($text) {
+		$text = trim($text);
+
+		$text = preg_replace('/\(\?P<(\w*)>(\([^\)]*\)|[^\)]*)*\)/', '<strong>$1</strong>', $text);
+		$text = preg_replace('/(Given|Then|And|When|But)\s*.{1}\^/is', '<strong>$1</strong> ', $text);
+		$text = preg_replace('/\$.{1}$/is', '', $text);
+		$text = preg_replace('/"(\w*)\W*(\w*)"/is', '"$1$2"', $text);
+		$text = preg_replace('/(\w{1})\?/', '($1)', $text);
+		$text = preg_replace_callback(
+			'/\(\?i\)(\w*)\(\?\-i\)/',
+			function($matches) {
+				return strtoupper($matches[1]);
+			},
+			$text
+		);
+		$text = preg_replace_callback(
+			'/\(\?:([^\)]*)\)/',
+			function($matches) {
+				$matches = explode('|', $matches[1]);
+				$matches = array_filter($matches);
+
+				return current($matches);
+			},
+			$text
+		);
+		$text = str_replace('*")', '', $text);
+		return $text;
+	}
 
     /**
      * @param string $text

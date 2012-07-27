@@ -31,7 +31,7 @@
     {% for definition in items %}
         <tr>
             <td style="width: 60%" class="snippet" data-search="{{ definition.snippet|clean }}">
-                <strong>{{ definition.snippet }}</strong>
+                {% autoescape false %}{{ definition.snippet|stepify }}{% endautoescape %}
             </td>
             <td style="width: 10%" class="context">{{ definition.context }}::{{ definition.method }}</td>
             <td style="width: 30%">{{definition.description }}</td>
