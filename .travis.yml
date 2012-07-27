@@ -25,8 +25,6 @@ before_script:
     - sh -e .travis/scripts/behat-configure.sh $HOST $BROWSER "" "" $(readlink -f behat.yml-dist)
     - sh -e .travis/scripts/sahi-configure.sh
     - sh -e .travis/scripts/sf2-init.sh
-    - mkdir -p vendor/jubianchi
-    - git clone git://github.com/jubianchi/BehatViewerExtension.git vendor/jubianchi/BehatViewerExtension
     - sh -e .travis/scripts/sahi-start.sh
 
 script: 
