@@ -71,7 +71,7 @@ class Project extends Base
      * @var string $test_command
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="test_command", type="text")
+     * @ORM\Column(name="test_command", type="text", length=65532)
      */
     private $test_command;
 

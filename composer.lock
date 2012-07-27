@@ -1,5 +1,5 @@
 {
-    "hash": "6842a05c51a841a30b3e19b2c0fa545f",
+    "hash": "7811ae1cef0503112ee275a7230498de",
     "packages": [
         {
             "package": "doctrine/common",
@@ -8,10 +8,22 @@
             "commit-date": "1331851788"
         },
         {
+            "package": "doctrine/data-fixtures",
+            "version": "dev-master",
+            "source-reference": "779c3dfe446b6da893be87b908d6be28345d1e01",
+            "commit-date": "1341780535"
+        },
+        {
             "package": "doctrine/dbal",
             "version": "2.1.x-dev",
             "source-reference": "76799960a54af583e82bedcf246e8c9c18006e94",
             "commit-date": "1338146238"
+        },
+        {
+            "package": "doctrine/doctrine-fixtures-bundle",
+            "version": "2.0.x-dev",
+            "source-reference": "479f10d068bd0b01e055aa2f555946893322b79c",
+            "commit-date": "1338408493"
         },
         {
             "package": "doctrine/orm",
@@ -124,6 +136,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "doctrine/doctrine-fixtures-bundle": 20,
         "sensio/framework-extra-bundle": 20,
         "sensio/distribution-bundle": 20,
         "jms/security-extra-bundle": 20,

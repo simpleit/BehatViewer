@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new jubianchi\BehatViewerBundle\BehatViewerBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev'))) {

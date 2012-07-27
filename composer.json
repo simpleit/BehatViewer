@@ -15,8 +15,10 @@
         "php":                                  ">=5.3.3",
 
         "symfony/symfony":                      ">=2.0.7,<2.1.0-dev",
-        "doctrine/orm":                         ">=2.1.0,<2.2.0-dev",
         "twig/extensions":                      "*",
+
+        "doctrine/orm":                         ">=2.1.0,<2.2.0-dev",
+        "doctrine/doctrine-fixtures-bundle":    "2.0.x-dev",
 
         "symfony/assetic-bundle":               "*",
         "sensio/generator-bundle":              "*",
