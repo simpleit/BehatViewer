@@ -6,7 +6,7 @@ Feature: History
         Given I am on the homepage
           And I follow "History"
          Then I should see "Builds for Foo Bar"
-	      And I should see an alert message with title "No build" and text "This project has not been built yet. To build it, please run app/console behat-viewer:build foo-bar."
+          And I should see an alert message with title "No build" and text "This project has not been built yet. To build it, please run app/console behat-viewer:build foo-bar."
 
     @javascript @fixture @fixture:single-build.sql
     Scenario: Single project and a single build
