@@ -25,7 +25,8 @@
         "jms/security-extra-bundle":            "1.0.x-dev",
 
         "friendsofsymfony/jsrouting-bundle":    "dev-master",
-        "knplabs/knp-markdown-bundle":          "dev-composer"
+        "knplabs/knp-markdown-bundle":          "dev-composer",
+        "jubianchi/behat-viewer-extension":     "*"
     },
 
     "require-dev": {

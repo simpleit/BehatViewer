@@ -10,22 +10,19 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
 /**
  *
  */
-class BuildCommand extends ContainerAwareCommand
+class BuildCommand extends ProjectCommand
 {
     /**
      *
      */
     protected function configure()
     {
+        parent::configure();
+
         $this
             ->setName('behat-viewer:build')
             ->setDescription('Builds a project\'s report file')
-            ->setDefinition(
-                array(
-                    new InputArgument('project', InputArgument::OPTIONAL, 'The project to build'),
-                    new InputOption('definitions', null, InputOption::VALUE_NONE, 'Updates definition list'),
-                )
-            )
+            ->addOption('definitions', null, InputOption::VALUE_NONE, 'Updates definition list')
         ;
     }
 
@@ -37,16 +34,12 @@ class BuildCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $project = $this->getContainer()->get('doctrine')
-            ->getRepository('BehatViewerBundle:Project')
-            ->findOneById(1);
+        parent::execute($input, $output);
+
+        $project = $this->getProject();
 
         if ($input->getOption('definitions')) {
             $this->getApplication()->find('behat-viewer:definitions')->run(new \Symfony\Component\Console\Input\ArgvInput(), $output);
-        }
-
-        if ($project === null) {
-            throw new \RuntimeException(sprintf('Project %s does not exist', $input->getArgument('project')));
         }
 
         $cmd = $project->getTestCommand();
@@ -71,7 +64,7 @@ class BuildCommand extends ContainerAwareCommand
         });
 
         if (file_exists('build.sh')) {
-            //unlink('build.sh');
+            unlink('build.sh');
         }
 
         $this->getApplication()->find('behat-viewer:analyze')->run($input, $output);
