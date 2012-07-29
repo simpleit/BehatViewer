@@ -1,6 +1,0 @@
-[submodule "modules/php"]
-	path = modules/php
-	url = git://github.com/saz/puppet-php.git
-[submodule "modules/apache"]
-	path = modules/apache
-	url = git://github.com/saz/puppet-php.git
