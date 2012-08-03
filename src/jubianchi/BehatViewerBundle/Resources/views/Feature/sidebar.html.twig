@@ -21,7 +21,7 @@
 
 
 {% if feature.description != '' %}
-<p>{{ feature.description|nl2br }}</p>
+{% autoescape false %}<p>{{ feature.description|nl2br }}</p>{% endautoescape %}
 {% endif %}
 
 
