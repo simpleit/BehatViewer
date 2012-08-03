@@ -55,8 +55,6 @@ class ProjectController extends BehatViewerController
         $form = $this->get('form.factory')->create(new ProjectType(), new Entity\Project());
 
         if ('POST' === $request->getMethod()) {
-            $form->bindRequest($request);
-
             $success = $this->save($form);
 
             $this->getSession()->setProject($form->getData());
@@ -94,8 +92,6 @@ class ProjectController extends BehatViewerController
         $form = $this->get('form.factory')->create(new ProjectType(), $project);
 
         if ('POST' === $request->getMethod()) {
-            $form->bindRequest($request);
-
             $success = $this->save($form);
         }
 
