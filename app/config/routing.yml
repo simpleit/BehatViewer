@@ -7,8 +7,8 @@ BehatViewerBundle:
     resource: "@BehatViewerBundle/Controller/"
     type:     annotation
 
+BehatViewerBundleJsRouting:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 behatviewer.logout:
     pattern:   /logout
-
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

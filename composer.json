@@ -1,49 +1,60 @@
 {
     "name": "jubianchi/BehatViewer",
-    "description": "Behat report viewer",
-
-    "authors": [
-        {
-            "name": "jubianchi",
-            "email": "contact@jubianchi.fr"
-        }
-    ],
-
-    "minimum-stability": "dev",
-
+    "description": "Behat report browser",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
     "require": {
-        "php":                                  ">=5.3.3",
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.1.*",
+        "doctrine/orm": "2.2.*",
+        "doctrine/doctrine-bundle": "dev-master",
+        "twig/extensions": "dev-master",
+        "symfony/assetic-bundle": "dev-master",
+        "symfony/swiftmailer-bundle": "dev-master",
+        "symfony/monolog-bundle": "dev-master",
+        "sensio/distribution-bundle": "dev-master",
+        "sensio/framework-extra-bundle": "dev-master",
+        "sensio/generator-bundle": "dev-master",
+        "jms/security-extra-bundle": "1.1.*",
+        "jms/di-extra-bundle": "1.0.*",
 
-        "symfony/symfony":                      ">=2.0.7,<2.1.0-dev",
-        "twig/extensions":                      "*",
-
-        "doctrine/orm":                         ">=2.1.0,<2.2.0-dev",
-        "doctrine/doctrine-fixtures-bundle":    "2.0.x-dev",
-
-        "symfony/assetic-bundle":               "*",
-        "sensio/generator-bundle":              "*",
-        "sensio/framework-extra-bundle":        "2.0.x-dev",
-        "sensio/distribution-bundle":           "2.0.x-dev",
-        "jms/security-extra-bundle":            "1.0.x-dev",
-
+        "doctrine/doctrine-fixtures-bundle":    "*",
         "friendsofsymfony/jsrouting-bundle":    "dev-master",
         "knplabs/knp-markdown-bundle":          "dev-composer",
         "jubianchi/behat-viewer-extension":     "*"
     },
-
     "require-dev": {
         "behat/behat":                          "v2.4.0",
-        "behat/gherkin":                        "v2.2.1",
-        "behat/mink":                           "v1.4.0",
         "behat/mink-extension":                 "dev-master",
-        "behat/mink-goutte-driver":             "dev-master",
-        "behat/mink-browserkit-driver":         "v1.0.0",
-        "behat/symfony2-extension":             "v1.0.0"
+        "behat/symfony2-extension":             "v1.0.0",
+        "behat/mink-sahi-driver":               "*",
+        "behat/mink-selenium-driver":           "*",
+        "behat/mink-selenium2-driver":          "*",
+        "behat/mink-browserkit-driver":         "*",
+        "behat/mink-goutte-driver":             "*",
+        "behat/mink-zombie-driver":             "*"
     },
-
-    "autoload": {
-        "psr-0": {
-            "jubianchi": "src/"
-        }
+    "scripts": {
+        "post-install-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ],
+        "post-update-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web"
     }
 }

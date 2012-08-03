@@ -62,7 +62,7 @@ class BehatViewerAnalyzer extends EventDispatcher implements ContainerAwareInter
     public function getEvent($name, $data = null)
     {
         $event = new \Symfony\Component\EventDispatcher\Event();
-        $event->name = $name;
+        $event->setName($name);
         $event->data = $data;
 
         return $event;

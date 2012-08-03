@@ -38,7 +38,7 @@ class Feature extends Base
     /**
      * @var text $description
      *
-     * @ORM\Column(name="description", type="text", nullable="true")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 

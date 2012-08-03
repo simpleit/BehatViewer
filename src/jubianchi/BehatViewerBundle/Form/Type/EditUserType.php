@@ -2,7 +2,7 @@
 
 namespace jubianchi\BehatViewerBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilder,
+use Symfony\Component\Form\FormBuilderInterface,
     Symfony\Component\Form\CallbackValidator,
     Symfony\Component\Form\Form;
 
@@ -24,7 +24,7 @@ class EditUserType extends UserType
      * @param \Symfony\Component\Form\FormBuilder $builder
      * @param array                               $options
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('username', 'text', array(

@@ -3,7 +3,7 @@
 namespace jubianchi\BehatViewerBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType,
-    Symfony\Component\Form\FormBuilder;
+    Symfony\Component\Form\FormBuilderInterface;
 
 /**
  *
@@ -14,7 +14,7 @@ class ProjectType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilder $builder
      * @param array                               $options
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', 'text', array(
