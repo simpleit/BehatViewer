@@ -8,41 +8,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     jubianchi\BehatViewerBundle\Entity;
 
-/**
- * @Route("/feature")
- */
-class FeatureController extends BehatViewerController
+class FeatureController extends BehatViewerBuildController
 {
     /**
      * @return array|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}/{slug}", name="behatviewer.feature", requirements={"id" = "\d+"})
+     * @Route("/{username}/{project}/{build}/{feature}", name="behatviewer.feature")
      * @Template()
      */
-    public function indexAction(Entity\Feature $feature)
+    public function indexAction($username, $project, $build, $feature)
     {
         $this->beforeAction();
 
+		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
+		$feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
+
         return $this->getResponse(array(
             'feature' => $feature,
-            'build' => $this->getSession()->getBuild(),
-            'features' => $this->getSession()->getBuild()->getFeatures()
+            'build' => $this->getBuild(),
+            'features' => $this->getBuild()->getFeatures()
         ));
     }
 
     /**
      * @return array|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}/{slug}/source", name="behatviewer.source", requirements={"id" = "\d+"})
+     * @Route("/{username}/{project}/{build}/{feature}/source", name="behatviewer.feature.source", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function sourceAction(Entity\Feature $feature)
+    public function sourceAction($username, $project, $build, $feature)
     {
         $this->beforeAction();
 
+		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
+		$feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
+
         return $this->getResponse(array(
             'feature' => $feature,
-            'build' => $this->getSession()->getBuild(),
+            'build' => $this->getBuild(),
             'source' => file_get_contents($feature->getFile())
         ));
     }

@@ -3,7 +3,7 @@
 {% block container %}
 <div class="row-fluid">
     <h1 class="page-header">
-        Stats for {{ session.project.name }}
+        Stats for {{ project.name }}
     </h1>
 
     {% if builds|count > 0 %}
@@ -134,7 +134,7 @@
 
         <p>
             This project has not been built yet.
-            To build it, please run <code>app/console behat-viewer:build {{ session.project.slug }}</code>.
+            To build it, please run <code>app/console behat-viewer:build {{ project.slug }}</code>.
         </p>
     </div>
     {% endif %}

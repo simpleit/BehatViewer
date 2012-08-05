@@ -1,13 +1,9 @@
 {% extends 'BehatViewerBundle::layout.table.html.twig' %}
 
-{% if not items and session.build %}
-    {% set items = session.build.features %}
-{% endif %}
-
 {% block title %}
     <h1 class="page-header">
         {% if not tag is defined %}
-            Features for {{ session.project.name }}
+            Features for {{ project.name }}
         {% else %}
             Tag {{ tag.name }}
         {% endif %}
@@ -33,7 +29,7 @@
 {% endblock %}
 
 {% block tbody %}
-    {% for feature in items %}
+    {% for feature in build.features %}
         {% include 'BehatViewerBundle::Default/feature-row.html.twig' %}
     {% endfor %}
 {% endblock %}
@@ -44,7 +40,7 @@
 
         <p>
             This project has not been built yet.
-            To build it, please run <code>app/console behat-viewer:build {{ session.project.slug }}</code>.
+            To build it, please run <code>app/console behat-viewer:build {{ project.slug }}</code>.
         </p>
     </div>
 {% endblock %}

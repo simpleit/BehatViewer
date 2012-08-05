@@ -2,7 +2,7 @@
 
 {% block title %}
     <h1 class="page-header">
-        Builds for {{ session.project.name }}
+        Builds for {{ project.name }}
         {% if pages > 1 %}
             <small>Page {{ current }}/{{ pages }}</small>
         {% endif %}
@@ -11,7 +11,7 @@
 
 {% block before %}
     {% if is_granted('ROLE_USER') %}
-        <form method="post" action="{{ path('behatviewer.historydeletesel') }}">
+        <form method="post" action="{{ path('behatviewer.history.delete.selected', {'username': project.user.username, 'project': project.slug}) }}">
     {% endif %}
 {% endblock %}
 
@@ -52,11 +52,11 @@
         <div id="content-nav" class="pagination pagination-centered menu">
             <ul>
 
-                <li class="prev{% if current == 1 %} disabled{% endif %}"><a href="{{ path("behatviewer.historypage", {page: current - 1}) }}" title="Previous">«</a></li>
+                <li class="prev{% if current == 1 %} disabled{% endif %}"><a href="{{ path("behatviewer.history.page", {"username": project.user.username, "project": project.slug, "page": current - 1}) }}" title="Previous">«</a></li>
                 {% for i in range(1, pages) %}
-                <li{% if i == current %} class="active"{% endif %}><a href="{{ path("behatviewer.historypage", {page: i}) }}">{{ i }}</a></li>
+                <li{% if i == current %} class="active"{% endif %}><a href="{{ path("behatviewer.history.page", {"username": project.user.username, "project": project.slug, "page": i}) }}">{{ i }}</a></li>
                 {% endfor %}
-                <li class="next{% if current == pages %} disabled{% endif %}"><a href="{{ path("behatviewer.historypage", {page: current + 1}) }}" title="Next">»</a></li>
+                <li class="next{% if current == pages %} disabled{% endif %}"><a href="{{ path("behatviewer.history.page", {"username": project.user.username, "project": project.slug, "page": current + 1}) }}" title="Next">»</a></li>
             </ul>
         </div>
     {% endif %}
@@ -68,7 +68,7 @@
 
         <p>
             This project has not been built yet.
-            To build it, please run <code>app/console behat-viewer:build {{ session.project.slug }}</code>.
+            To build it, please run <code>app/console behat-viewer:build {{ project.slug }}</code>.
         </p>
     </div>
 {% endblock %}

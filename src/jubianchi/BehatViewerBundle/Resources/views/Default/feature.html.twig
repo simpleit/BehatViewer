@@ -34,7 +34,7 @@
 
     {% if steps > 0 %}
     <p class="pull-right">
-        <a class="btn" href="{{ path('behatviewer.feature', {'id': feature.id, 'slug':feature.slug}) }}">Details &raquo;</a>
+        <a class="btn" href="{{ path('behatviewer.feature', {'username': project.user.username, 'project': project.slug, 'build': build.id, 'feature':feature.slug}) }}">Details &raquo;</a>
     </p>
     {% endif %}
 </div>

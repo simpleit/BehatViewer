@@ -6,23 +6,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="{{ path('behatviewer.homepage') }}">Behat Viewer <span class="title">{% if session.project != '' and session.project.name %}[{{ session.project.name }}]{% endif %}</span></a>
+            <a class="brand" href="{{ path('behatviewer.homepage') }}">Behat Viewer <span class="title">{% if project is defined and project != null %}[{{ project.name }}]{% endif %}</span></a>
 
             <div class="nav-collapse">
                 <ul class="nav">
                     <li><a href="{{ path('behatviewer.homepage') }}">Home</a></li>
-                    <li><a href="{{ path('behatviewer.history') }}">History</a></li>
-                    <li><a href="{{ path('behatviewer.stats') }}">Stats</a></li>
-                    <li><a href="{{ path('behatviewer.definitions') }}">Definitions</a></li>
+                    {% if project is defined and project != null %}
+                        <li><a href="{{ path('behatviewer.history', {'username': project.user.username, 'project': project.slug}) }}">History</a></li>
+                        <li><a href="{{ path('behatviewer.stats', {'username': project.user.username, 'project': project.slug}) }}">Stats</a></li>
+                        <li><a href="{{ path('behatviewer.definitions', {'username': project.user.username, 'project': project.slug}) }}">Definitions</a></li>
+                    {% endif %}
                     <li><a href="{{ path('behatviewer.help') }}">Help</a></li>
                     <li>
                         <div id="loader"></div>
                     </li>
                 </ul>
                 <ul class="nav pull-right">
-                    {% if lastbuild and lastbuild != session.build.id %}
+                    {% if build is defined and build.id != project.lastBuild.id %}
                         <li>
-                            <button id="last-build" href="{{ path('behatviewer.historyentry', {'id': lastbuild}) }}" class="btn btn-primary">Last build &raquo;</button>
+                            <button id="last-build" href="{{ path('behatviewer.history.entry', {'username': project.user.username, 'project': project.slug, 'build': project.lastBuild.id}) }}" class="btn btn-primary">Last build &raquo;</button>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_USER') %}
@@ -33,7 +35,6 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ path('behatviewer.profile') }}">Profile</a></li>
-                                <li><a href="{{ path('behatviewer.projectslist') }}">Projects</a></li>
                                 <li class="divider"></li>
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <li><a href="{{ path('behatviewer.users') }}">Admin</a></li>

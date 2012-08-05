@@ -19,9 +19,6 @@ abstract class BehatViewerController extends Controller
 
     protected function beforeAction()
     {
-        if (null === $this->getSession()->getProject()) {
-            throw new \jubianchi\BehatViewerBundle\Exception\NoProjectConfiguredException();
-        }
     }
 
     /**
@@ -29,36 +26,14 @@ abstract class BehatViewerController extends Controller
      */
     public function getResponse(array $variables = array())
     {
-        $lastbuild = $this->getLastBuild();
-
         return array_merge(
             array(
                 'session' => $this->getSession(),
-                'lastbuild' => (null !== $lastbuild ? $lastbuild->getId() : 0)
+                'user' => $this->getUser()
             ),
             $variables
         );
     }
 
-    /**
-     * @return \jubianchi\BehatViewerBundle\Entity\Build
-     */
-    protected function getLastBuild()
-    {
-        $project = $this->getSession()->getProject();
-        $build = null;
 
-        if (null !== $project) {
-            $current = $this->getSession()->getBuild();
-
-            $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
-            $last = $repository->findLastForProject($project);
-
-            if (null !== $last && $current !== $last) {
-                $build = $last;
-            }
-        }
-
-        return $build;
-    }
 }

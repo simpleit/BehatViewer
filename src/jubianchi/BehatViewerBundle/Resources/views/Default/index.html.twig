@@ -1,59 +1,40 @@
 {% extends 'BehatViewerBundle::layout.html.twig' %}
 
-{% if not items and session.build %}
-    {% set items = session.build.features %}
-{% endif %}
-
 {% block container %}
 <h1 class="page-header">
-    {% if not tag is defined %}
-        Features for {{ session.project.name }}
-    {% else %}
-        Tag {{ tag.name }}
-    {% endif %}
-
-    {% if build %}
-        <small>(#{{ session.build.id }} Built <span data-rel="moment">{{ session.build.date|date("Y-m-d H:i:s")}}</span>)</small>
-    {% endif %}
-
-    {% include 'BehatViewerBundle::Default/switcher.html.twig' %}
+    Projects
 </h1>
 
 <div class="row-fluid">
     <div class="span12">
         <div class="row-fluid">
-            {% for feature in items %}
-                {% include 'BehatViewerBundle::Default/feature.html.twig' %}
-
-                {% if loop.index is divisibleby(3) %}
-                    </div>
+            {% for project in projects %}
+                <div class="span4 clearfix">
+                    <h3>{{ project.user.username }}/{{ project.name }}</h3>
                     <br/>
-                    <div class="row-fluid">
-                {% endif %}
-            {% else %}
-                <div class="alert alert-block alert-info">
-                    <h4 class="alert-heading">No feature</h4>
+                    {% if project.lastBuild %}
+                        {%
+                            include 'BehatViewerBundle::Components/progress.html.twig'
+                            with {
+                                'passed': project.lastBuild.stat.scenariosPassed,
+                                'failed': project.lastBuild.stat.scenarios,
+                                'skipped': 0,
+                                'undefined': 0
+                            }
+                        %}
+                    {% endif %}
 
-                    <p>
-                        This project has not been built yet.
-                        To build it, please run <code>app/console behat-viewer:build {{ session.project.slug }}</code>.
-                    </p>
+
+
+                    <div class="btn-group pull-right">
+                        <a class="btn {% if not project.lastBuild %}disabled{% endif %}" href="{{ path("behatviewer.project", {"username": project.user.username, "project": project.slug}) }}">Details &raquo;</a>
+                        {% if project.user == user %}
+                            <a class="btn btn-primary" href="{{ path("behatviewer.project.edit", {"username": project.user.username, "project": project.slug}) }}">Edit &raquo;</a>
+                        {% endif %}
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block javascript %}
-    <script type="text/javascript">
-        JSC.require(
-            'behat-viewer/home',
-            function() {
-                $(function() {
-                    app.controller.current(new HomeController('#container'));
-                });
-            }
-        );
-    </script>
 {% endblock %}

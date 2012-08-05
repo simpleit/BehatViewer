@@ -6,24 +6,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-/**
- * @Route("/definitions")
- */
-class DefinitionsController extends BehatViewerController
+class DefinitionsController extends BehatViewerProjectController
 {
     /**
      * @return array
      *
-     * @Route("/", name="behatviewer.definitions")
+     * @Route("/{username}/{project}/definitions", name="behatviewer.definitions")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction($username, $project)
     {
         $this->beforeAction();
 
         $definitions = array();
         $contexts = array();
-        $project = $this->getSession()->getProject();
+        $project = $this->getProject();
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Definition');
 
         if ($project !== null) {

@@ -10,108 +10,114 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     jubianchi\BehatViewerBundle\Form\Type\ProjectType,
     JMS\SecurityExtraBundle\Annotation\Secure;
 
-/**
- * @Route("/project")
- */
-class ProjectController extends BehatViewerController
+class ProjectController extends BehatViewerProjectController
 {
-    /**
-     * @Route("/", name="behatviewer.projectslist")
-     * @Secure(roles="ROLE_USER")
-     * @Template()
-     */
-    public function listAction()
-    {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByUser($user);
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 *
+	 * @Route("/project/create", name="behatviewer.project.create")
+	 * @Secure(roles="ROLE_USER")
+	 * @Template()
+	 */
+	public function createAction()
+	{
+		$request = $this->getRequest();
 
-        return $this->getResponse(array(
-            'items' => $projects
-        ));
-    }
+		$form = $this->get('form.factory')->create(new ProjectType(), new Entity\Project());
 
-    /**
-     * @Route("/{id}/select", name="behatviewer.projectselect")
-     * @Secure(roles="ROLE_USER")
-     */
-    public function selectAction(Entity\Project $project)
-    {
-        $this->getSession()->setProject($project);
+		if ('POST' === $request->getMethod()) {
+			$success = $this->save($form);
 
-        return $this->redirect($this->generateUrl('behatviewer.homepage'));
-    }
+			return $this->redirect(
+				$this->generateUrl(
+					'behatviewer.project.edit',
+					array(
+						'username' => $form->getData()->getUser()->getUsername(),
+						'project' => $form->getData()->getSlug(),
+						'success' => $success
+					)
+				)
+			);
+		}
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/create", name="behatviewer.projectcreate")
-     * @Secure(roles="ROLE_USER")
-     * @Template()
-     */
-    public function createAction()
-    {
-        $request = $this->getRequest();
+		return $this->getResponse(array(
+			'form' => $form->createView(),
+			'success' => false,
+			'hasproject' => false,
+		));
+	}
 
-        $form = $this->get('form.factory')->create(new ProjectType(), new Entity\Project());
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 *
+	 * @Route("/{username}/{project}", name="behatviewer.project", options={"expose"=true})
+	 * @Template()
+	 */
+	public function indexAction($username, $project)
+	{
+		$this->beforeAction();
 
-        if ('POST' === $request->getMethod()) {
-            $success = $this->save($form);
-
-            $this->getSession()->setProject($form->getData());
-
-            return $this->redirect(
-                $this->generateUrl(
-                    'behatviewer.projectedit',
-                    array(
-                        'id' => $form->getData()->getid(),
-                        'success' => $success
-                    )
-                )
-            );
-        }
-
-        return $this->getResponse(array(
-            'hasproject' => $this->getSession()->getProject() !== null,
-            'form' => $form->createView(),
-            'success' => false
-        ));
-    }
+		return $this->forward(
+			'BehatViewerBundle:History:entry',
+			array(
+				'username' => $username,
+				'project' => $project,
+				'build' => $this->getProject()->getLastBuild()
+			)
+		);
+	}
 
     /**
      * @return array
      *
-     * @Route("/edit/{id}", name="behatviewer.projectedit", requirements={"id" = "\d+"})
+     * @Route("/{username}/{project}/edit", name="behatviewer.project.edit")
      * @Secure(roles="ROLE_USER")
-     * @Template()
+     * @Template("BehatViewerBundle:Project:edit.html.twig")
      */
-    public function editAction(Entity\Project $project)
+    public function editAction($username, $project)
     {
         $request = $this->getRequest();
         $success = false;
 
-        $form = $this->get('form.factory')->create(new ProjectType(), $project);
+        $form = $this->get('form.factory')->create(new ProjectType(), $this->getProject());
 
         if ('POST' === $request->getMethod()) {
             $success = $this->save($form);
         }
 
         return $this->getResponse(array(
-            'project' => $project,
-            'hasproject' => $this->getSession()->getProject() !== null,
             'form' => $form->createView(),
             'success' => $success || $this->getRequest()->get('success', false)
         ));
     }
+
+	/**
+	 * @param \jubianchi\BehatViewerBundle\Entity\Build|null $build
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response|array
+	 *
+	 * @Route("/{username}/{project}/delete", name="behatviewer.project.delete")
+	 * @Secure(roles="ROLE_USER")
+	 */
+	public function deleteAction($username, $project)
+	{
+		$this->beforeAction();
+
+		$manager = $this->getDoctrine()->getManager();
+		$manager->remove($this->getProject());
+		$manager->flush();
+
+		return $this->redirect($this->generateUrl('behatviewer.homepage'));
+	}
 
     protected function save(\Symfony\Component\Form\Form $form)
     {
         $form->bind($this->getRequest());
 
         if ($form->isValid()) {
-            $user = $this->get('security.context')->getToken()->getUser();
-            $form->getData()->setUser($user);
+            $form->getData()->setUser($this->getUser());
 
-            $manager = $this->getDoctrine()->getEntityManager();
+            $manager = $this->getDoctrine()->getManager();
             $manager->persist($form->getData());
             $manager->flush();
         }

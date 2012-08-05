@@ -7,22 +7,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     jubianchi\BehatViewerBundle\Form\Type\ProjectType;
 
-/**
- * @Route("/stats")
- */
-class StatsController extends BehatViewerController
+class StatsController extends BehatViewerProjectController
 {
     /**
      * @return array
      *
-     * @Route("/", name="behatviewer.stats")
+     * @Route("/{username}/{project}/stats", name="behatviewer.stats")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction($username, $project)
     {
         $this->beforeAction();
 
-        $project = $this->getSession()->getProject();
+        $project = $this->getProject();
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
         $builds = $repository->findLastBuildsForProject($project, 10);
 

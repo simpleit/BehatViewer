@@ -17,6 +17,17 @@ class BuildRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+	public function findOneByProjectAndId(Entity\Project $project, $id)
+	{
+		return $this->createQueryBuilder('b')
+			->where('b.project = :project')
+			->andWhere('b.id = :id')
+			->setParameter('project', $project)
+			->setParameter('id', $id)
+			->getQuery()
+			->getOneOrNullResult();
+	}
+
     public function findLastBuildsForProject(Entity\Project $project, $limit = 10)
     {
         $limit = $this->createQueryBuilder('bb')

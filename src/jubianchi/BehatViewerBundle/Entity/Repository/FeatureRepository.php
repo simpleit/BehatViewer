@@ -13,7 +13,7 @@ use Doctrine\ORM\Query\Expr,
  */
 class FeatureRepository extends EntityRepository
 {
-    public function findBySlugAndBuild($slug, Entity\Build $build)
+    public function findOneByBuildAndSlug(Entity\Build $build, $slug)
     {
         return $this->createQueryBuilder('f')
             ->select(array('f'))

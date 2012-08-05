@@ -10,25 +10,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     JMS\SecurityExtraBundle\Annotation\Secure,
     jubianchi\BehatViewerBundle\Entity;
 
-/**
- * @Route("/history")
- */
-class HistoryController extends BehatViewerController
+class HistoryController extends BehatViewerProjectController
 {
     /**
      * @param int $page
      *
      * @return array
      *
-     * @Route("/", name="behatviewer.history", defaults={"page" = 1})
-     * @Route("/page/{page}", name="behatviewer.historypage", requirements={"page" = "\d+"})
+     * @Route("/{username}/{project}/history", name="behatviewer.history", defaults={"page" = 1})
+     * @Route("/{username}/{project}/history/page/{page}", name="behatviewer.history.page", requirements={"page" = "\d+"})
      * @Template()
      */
-    public function indexAction($page = 1)
+    public function indexAction($username, $project, $page = 1)
     {
         $this->beforeAction();
 
-        $project = $this->getSession()->getproject();
+        $project = $this->getProject();
 
         $builds = array();
         $pages = $page <= 0 ? 1 : $page;
@@ -67,29 +64,23 @@ class HistoryController extends BehatViewerController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}", requirements={"id" = "\d+"}, name="behatviewer.historyentry")
-     * @Template("BehatViewerBundle:Default:index.html.twig")
+     * @Route("/{username}/{project}/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.entry")
+     * @Template()
      */
-    public function entryAction(Entity\Build $build = null)
+    public function entryAction($username, $project, $build)
     {
         $this->beforeAction();
 
-        if ($build !== null) {
-            $this->getSession()->setBuild($build);
-        }
+		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
+		$build = $repository->findOneByProjectAndId($this->getProject(), $build);
+		if(null === $build) {
+			throw $this->createNotFoundException();
+		}
 
-        $variables = $this->getResponse(array(
+        return $this->getResponse(array(
             'build' => $build,
             'items' => null
         ));
-
-        if ($this->getSession()->get('listview', false)) {
-            $template = 'BehatViewerBundle:Default:list.html.twig';
-        } else {
-            $template = 'BehatViewerBundle:Default:index.html.twig';
-        }
-
-        return $this->render($template, $variables);
     }
 
     /**
@@ -97,12 +88,12 @@ class HistoryController extends BehatViewerController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}/list", requirements={"id" = "\d+"}, name="behatviewer.historyentrylist")
+     * @Route("/{username}/{project}/{build}/list", requirements={"build" = "\d+"}, name="behatviewer.history.entry.list")
      * @Template("BehatViewerBundle:Default:list.html.twig")
      */
-    public function entrylistAction(Entity\Build $build = null)
+    public function entrylistAction($username, $project, $build)
     {
-        return $this->entryAction($build);
+        return $this->entryAction($username, $project, $build);
     }
 
     /**
@@ -110,13 +101,19 @@ class HistoryController extends BehatViewerController
      *
      * @return \Symfony\Component\HttpFoundation\Response|array
      *
-     * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="behatviewer.historydelete")
+     * @Route("/{username}/{project}/history/delete/{build}", requirements={"id" = "\d+"}, name="behatviewer.history.delete")
      * @Secure(roles="ROLE_USER")
      * @Template("BehatViewerBundle:History:index.html.twig")
      */
-    public function deleteAction(Entity\Build $build)
+    public function deleteAction($username, $project, $build)
     {
         $this->beforeAction();
+
+		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
+		$build = $repository->findOneByProjectAndId($this->getProject(), $build);
+		if(null === $build) {
+			throw $this->createNotFoundException();
+		}
 
         $manager = $this->getDoctrine()->getEntityManager();
         $manager->remove($build);
@@ -129,11 +126,11 @@ class HistoryController extends BehatViewerController
      * @return array
      *
      * @Method({"POST"})
-     * @Route("/delete", name="behatviewer.historydeletesel")
+     * @Route("/{username}/{project}/history/delete", name="behatviewer.history.delete.selected")
      * @Secure(roles="ROLE_USER")
      * @Template("BehatViewerBundle:History:index.html.twig")
      */
-    public function deleteSelectedAction()
+    public function deleteSelectedAction($username, $project)
     {
         $this->beforeAction();
 

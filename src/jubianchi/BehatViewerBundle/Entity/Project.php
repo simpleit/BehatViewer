@@ -84,7 +84,6 @@ class Project extends Base
      * @var \jubianchi\BehatViewerBundle\Entity\User $user
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="projects", cascade={"persist"})
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
@@ -120,7 +119,7 @@ class Project extends Base
      */
     public function getUser()
     {
-        return $this->id;
+        return $this->user;
     }
 
     /**
@@ -287,4 +286,9 @@ class Project extends Base
     {
         return $this->test_command;
     }
+
+	public function getLastBuild() {
+		$builds = $this->getBuilds();
+		return $builds->last();
+	}
 }

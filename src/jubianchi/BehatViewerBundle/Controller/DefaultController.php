@@ -6,32 +6,38 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    jubianchi\BehatViewerBundle\Entity;
+    jubianchi\BehatViewerBundle\Entity,
+	JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  *
  */
 class DefaultController extends BehatViewerController
 {
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/", name="behatviewer.homepage", options={"expose"=true})
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $this->beforeAction();
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 *
+	 * @Route("/", name="behatviewer.homepage", options={"expose"=true})
+	 * @Secure(roles="ROLE_USER")
+	 * @Template()
+	 */
+	public function indexAction()
+	{
+		$this->beforeAction();
 
-        if ($this->getSession()->get('listview', false)) {
-            return $this->forward(
-                'BehatViewerBundle:History:entrylist',
-                array('build' => $this->getSession()->getBuild())
-            );
-        } else {
-            return $this->forward('BehatViewerBundle:History:entry', array('build' => $this->getSession()->getBuild()));
-        }
-    }
+		$projects = array();
+		if(null !== $this->getUser()) {
+			$projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByUser($this->getUser());
+		}
+
+		if(0 === count($projects)) {
+			throw new \jubianchi\BehatViewerBundle\Exception\NoProjectConfiguredException();
+		}
+
+		return $this->getResponse(array(
+			'projects' => $projects
+		));
+	}
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
@@ -53,40 +59,22 @@ class DefaultController extends BehatViewerController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/list", name="behatviewer.homepagelist")
-     * @Template()
+     * @Route("/list", name="behatviewer.homepage.list")
+     * @Template("BehatViewerBundle:Default:index.html.twig")
      */
     public function indexlistAction()
     {
-        $this->beforeAction();
-
-        $this->get('session')->set('listview', true);
-
-        return $this->forward(
-            'BehatViewerBundle:History:entrylist',
-            array(
-                'build' => $this->getSession()->getBuild()
-            )
-        );
+        return $this->indexAction();
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/thumb", name="behatviewer.homepagethumb")
-     * @Template()
+     * @Route("/thumb", name="behatviewer.homepage.thumb")
+     * @Template("BehatViewerBundle:Default:index.html.twig")
      */
     public function indexthumbAction()
     {
-        $this->beforeAction();
-
-        $this->get('session')->set('listview', false);
-
-        return $this->forward(
-            'BehatViewerBundle:Default:index',
-            array(
-                'build' => $this->getSession()->getBuild()
-            )
-        );
+        return $this->indexAction();
     }
 }

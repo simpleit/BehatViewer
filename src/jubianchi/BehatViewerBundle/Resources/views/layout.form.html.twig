@@ -18,9 +18,15 @@
                     {% block after %}{% endblock %}
                 </div>
                 <div class="modal-footer">
-                    <input class="btn btn-primary" type="submit" value="{% block submit %}Save changes{% endblock %}"/>
+                    <div class="btn-group pull-right">
+                        {% block buttons %}
+                            <input class="btn btn-success" type="submit" value="{% block submit %}Save changes{% endblock %}"/>
+                        {% endblock %}
+                    </div>
 
-                    {% block extrabuttons %}{% endblock %}
+                    <div class="btn-group pull-left">
+                        {% block extrabuttons %}{% endblock %}
+                    </div>
                 </div>
             </div>
         </div>
