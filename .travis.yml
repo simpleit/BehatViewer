@@ -9,10 +9,12 @@ notifications:
     on_success: change
     on_failure: change
 
+env:
+  - BROWSER="phantomjs"
+
 before_install:
     - export HOST="behat.local"
     - export DATABASE="behat"
-    - export BROWSER="phantomjs"
     - export WEB_DIRECTORY="./web"
     - sh -e .travis/scripts/apt-get.sh
     - sh -e .travis/scripts/apache2-vhost.sh $HOST $(readlink -f $WEB_DIRECTORY)
