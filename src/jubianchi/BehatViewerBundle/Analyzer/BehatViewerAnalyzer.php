@@ -20,6 +20,7 @@ class BehatViewerAnalyzer extends EventDispatcher implements ContainerAwareInter
     public function analyze(Entity\Project $project, array $data)
     {
         $build = $this->getBuildFromData($data);
+        $build->computeStat();
 
         $build->setProject($project);
         $project->addBuild($build);
@@ -90,11 +91,13 @@ class BehatViewerAnalyzer extends EventDispatcher implements ContainerAwareInter
 
         foreach ($data as $featureData) {
             $feature = $this->getFeatureFromData($featureData);
+            $feature->setStatus(\jubianchi\BehatViewerBundle\Entity\Feature::STATUS_PASSED);
 
             $this->dispatchEvent('foundFeature', $featureData);
 
             foreach ($featureData['scenarios'] as $scenarioData) {
                 $scenario = $this->getScenarioFromData($scenarioData);
+                $scenario->setStatus(\jubianchi\BehatViewerBundle\Entity\Scenario::STATUS_PASSED);
 
                 $this->dispatchEvent('foundScenario', $scenarioData);
 
@@ -104,16 +107,29 @@ class BehatViewerAnalyzer extends EventDispatcher implements ContainerAwareInter
                     $this->dispatchEvent('foundStep', $stepData);
 
                     $step->setScenario($scenario);
+
+                    if ($step->getStatus() !== \jubianchi\BehatViewerBundle\Entity\Step::STATUS_PASSED) {
+                        $scenario->setStatus(\jubianchi\BehatViewerBundle\Entity\Scenario::STATUS_FAILED);
+                    }
+
                     $scenario->addStep($step);
+
+                    $this->getEntityManager()->persist($step);
                 }
 
                 $scenario->setFeature($feature);
+
+                if ($scenario->getStatus() !== \jubianchi\BehatViewerBundle\Entity\Scenario::STATUS_PASSED) {
+                    $feature->setStatus(\jubianchi\BehatViewerBundle\Entity\Feature::STATUS_FAILED);
+                }
+
                 $feature->addScenario($scenario);
 
                 $this->getEntityManager()->persist($scenario);
             }
 
             $feature->setBuild($build);
+            $build->addFeature($feature);
             $this->getEntityManager()->persist($feature);
         }
 

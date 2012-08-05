@@ -24,13 +24,13 @@
                 </thead>
                 <tbody>
                 {% for build in builds %}
-                {% set total = build.getStepsHavingStatusCount() %}
-                {% set errors = build.getStepsHavingStatusCount('failed') + build.getStepsHavingStatusCount('skipped') + build.getStepsHavingStatusCount('pending') + build.getStepsHavingStatusCount('undefined') %}
-                <tr>
-                    <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
-                    <td>{{ ((errors / total) * 100)|round(0) }}%</td>
-                    <td>{{ ((build.getStepsHavingStatusCount('passed') / total) * 100)|round(0) }}%</td>
-                </tr>
+                    {% set total = build.stat.steps %}
+                    {% set errors = build.stat.stepsFailed + build.stat.stepsSkipped + build.stat.stepsPending + build.stat.stepsUndefined %}
+                    <tr>
+                        <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
+                        <td>{{ ((errors / total) * 100)|round(0) }}%</td>
+                        <td>{{ ((build.stat.stepsPassed / total) * 100)|round(0) }}%</td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
@@ -58,13 +58,12 @@
                 </thead>
                 <tbody>
                 {% for build in builds %}
-                {% set total = build.getStepsHavingStatusCount() %}
                 <tr>
                     <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
-                    <td>{{ build.getStepsHavingStatusCount('failed') }}</td>
-                    <td>{{ build.getStepsHavingStatusCount('skipped') }}</td>
-                    <td>{{ build.getStepsHavingStatusCount('pending') }}</td>
-                    <td>{{ build.getStepsHavingStatusCount('undefined') }}</td>
+                    <td>{{ build.stat.stepsFailed }}</td>
+                    <td>{{ build.stat.stepsSkipped }}</td>
+                    <td>{{ build.stat.stepsPending }}</td>
+                    <td>{{ build.stat.stepsUndefined }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -90,11 +89,11 @@
                 </thead>
                 <tbody>
                 {% for build in builds %}
-                {% set total = build.getStepsHavingStatusCount() %}
+                {% set total = build.stat.steps %}
                 <tr>
                     <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
-                    <td>{{ build.getFeatures()|count }}</td>
-                    <td>{{ build.getScenarios()|count }}</td>
+                    <td>{{ build.stat.features }}</td>
+                    <td>{{ build.stat.scenarios }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -118,10 +117,9 @@
                 </thead>
                 <tbody>
                 {% for build in builds %}
-                {% set total = build.getStepsHavingStatusCount() %}
                 <tr>
                     <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
-                    <td>{{ build.getStepsHavingStatusCount() }}</td>
+                    <td>{{ build.stat.steps }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>

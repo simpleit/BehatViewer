@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Step extends Base
 {
+    const STATUS_PASSED = 'passed';
+    const STATUS_FAILED = 'failed';
+    const STATUS_SKIPPED = 'skipped';
+    const STATUS_UNDEFINED = 'undefined';
+
     /**
      * @var integer $id
      *

@@ -141,7 +141,7 @@ class HistoryController extends BehatViewerController
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
 
         foreach ($this->getRequest()->get('delete') as $id) {
-            $build = $repository->findOneById($id);
+			$build = $repository->findOneById($id);
             $manager->remove($build);
             $manager->flush();
         }

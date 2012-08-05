@@ -29,12 +29,19 @@ class Build extends Base
     private $date;
 
     /**
-     * @var jubianchi\BehatViewerBundle\Entity\Project $project
+     * @var \jubianchi\BehatViewerBundle\Entity\Project $project
      *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="builds")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $project;
+
+    /**
+     * @var \jubianchi\BehatViewerBundle\Entity\BuildStat $stat
+     *
+     * @ORM\OneToOne(targetEntity="BuildStat", inversedBy="build", cascade={"persist", "remove"})
+     */
+    private $stat;
 
     /**
      * @ORM\OneToMany(targetEntity="Feature", mappedBy="build", cascade={"remove","persist"})
@@ -79,7 +86,7 @@ class Build extends Base
     /**
      * Set project
      *
-     * @param jubianchi\BehatViewerBundle\Entity\Project $project
+     * @param \jubianchi\BehatViewerBundle\Entity\Project $project
      */
     public function setProject(\jubianchi\BehatViewerBundle\Entity\Project $project)
     {
@@ -89,7 +96,7 @@ class Build extends Base
     /**
      * Get project
      *
-     * @return jubianchi\BehatViewerBundle\Entity\Project
+     * @return \jubianchi\BehatViewerBundle\Entity\Project
      */
     public function getProject()
     {
@@ -99,7 +106,7 @@ class Build extends Base
     /**
      * Add features
      *
-     * @param jubianchi\BehatViewerBundle\Entity\Feature $features
+     * @param \jubianchi\BehatViewerBundle\Entity\Feature $features
      */
     public function addFeature(\jubianchi\BehatViewerBundle\Entity\Feature $features)
     {
@@ -109,35 +116,36 @@ class Build extends Base
     /**
      * Get features
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFeatures()
     {
         return $this->features;
     }
 
-    public function getScenarios()
+    public function getStat()
     {
-        $scenarios = array();
-        foreach ($this->getFeatures() as $feature) {
-            $scenarios = array_merge($feature->getScenarios()->toArray(), $scenarios);
+        if (null === $this->stat) {
+            $stat = new BuildStat();
+            $stat->setBuild($this);
+
+            $this->setStat($stat);
         }
 
-        return $scenarios;
+        return $this->stat;
     }
 
-    public function getStepsHavingStatus($status = null)
+    public function setStat(BuildStat $stat)
     {
-        $steps = array();
+        $this->stat = $stat;
+    }
+
+    public function computeStat()
+    {
+        $stat = $this->getStat();
+
         foreach ($this->getFeatures() as $feature) {
-            $steps = array_merge($feature->getStepsHavingStatus($status), $steps);
+            $stat->addFeature($feature);
         }
-
-        return $steps;
-    }
-
-    public function getStepsHavingStatusCount($status = null)
-    {
-        return sizeof($this->getStepsHavingStatus($status));
     }
 }

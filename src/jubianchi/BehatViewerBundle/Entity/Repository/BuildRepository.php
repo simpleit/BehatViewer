@@ -79,7 +79,7 @@ class BuildRepository extends EntityRepository
                 ->andWhere('b.project = :project')
                 ->setParameter('project', $project)
                 ->getQuery()
-                ->getResult()
+                ->getResult(\Doctrine\ORM\Query::HYDRATE_OBJECT)
         );
     }
 
@@ -94,7 +94,7 @@ class BuildRepository extends EntityRepository
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
                 ->getQuery()
-                ->getResult()
+                ->getResult(\Doctrine\ORM\Query::HYDRATE_OBJECT)
         );
     }
 
@@ -109,7 +109,7 @@ class BuildRepository extends EntityRepository
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
                 ->getQuery()
-                ->getResult()
+                ->getResult(\Doctrine\ORM\Query::HYDRATE_OBJECT)
         );
     }
 }

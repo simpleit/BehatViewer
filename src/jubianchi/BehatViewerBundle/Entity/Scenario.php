@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Scenario extends Base
 {
+    const STATUS_PASSED = 'passed';
+    const STATUS_FAILED = 'failed';
+
     /**
      * @var integer $id
      *
@@ -53,7 +56,7 @@ class Scenario extends Base
     /**
      * @ORM\OneToMany(targetEntity="Step", mappedBy="scenario", cascade={"remove","persist"})
      */
-    private $steps;
+    private $steps = array();
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="scenarios", cascade={"remove", "persist"})

@@ -16,4 +16,4 @@ sh -e .travis/scripts/sahi-configure.sh
 sh -e .travis/scripts/sf2-init.sh
 sh -e .travis/scripts/sahi-start.sh
 
-php behat.phar --profile=travis @BehatViewerBundle
+bin/behat --profile=travis @BehatViewerBundle

@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Feature extends Base
 {
+    const STATUS_PASSED = 'passed';
+    const STATUS_FAILED = 'failed';
+
     /**
      * @var integer $id
      *
@@ -62,6 +65,13 @@ class Feature extends Base
     private $tags;
 
     /**
+     * @var string $status
+     *
+     * @ORM\Column(name="status", type="string", length=20)
+     */
+    private $status;
+
+    /**
      * Get id
      *
      * @return integer
@@ -89,6 +99,26 @@ class Feature extends Base
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
@@ -155,7 +185,7 @@ class Feature extends Base
 
     public function getPassedScenarios()
     {
-        return $this->getHavingStatusScenarios('passed');
+        return $this->getHavingStatusScenarios(self::STATUS_PASSED);
     }
 
     public function getPassedScenariosCount()
@@ -165,7 +195,7 @@ class Feature extends Base
 
     public function getFailedScenarios()
     {
-        return $this->getHavingStatusScenarios('failed');
+        return $this->getHavingStatusScenarios(self::STATUS_FAILED);
     }
 
     public function getFailedScenariosCount()

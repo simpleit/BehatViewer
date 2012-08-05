@@ -1,18 +1,18 @@
-{% set steps = build.getStepsHavingStatusCount() %}
+{% set steps = build.stat.steps %}
 
-{% set passed = build.getStepsHavingStatusCount('passed') %}
+{% set passed = build.stat.stepsPassed %}
 {% set passedpcnt = ((passed / steps) * 100)|round(3) %}
 
-{% set failed = build.getStepsHavingStatusCount('failed') %}
+{% set failed = build.stat.stepsFailed %}
 {% set failedpcnt = ((failed / steps) * 100)|round(3) %}
 
-{% set skipped = build.getStepsHavingStatusCount('skipped') %}
+{% set skipped = build.stat.stepsSkipped %}
 {% set skippedpcnt = ((skipped / steps) * 100)|round(3) %}
 
-{% set undefined = build.getStepsHavingStatusCount('undefined') %}
+{% set undefined = build.stat.stepsUndefined %}
 {% set undefinedpcnt = ((undefined / steps) * 100)|round(3) %}
 
-{% set pending = build.getStepsHavingStatusCount('pending') %}
+{% set pending = build.stat.stepsPending %}
 {% set pendingpcnt = ((pending / steps) * 100)|round(3) %}
 
 <tr class="navig">

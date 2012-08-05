@@ -20,7 +20,7 @@ class ProjectController extends BehatViewerController
      * @Secure(roles="ROLE_USER")
      * @Template()
      */
-    public function indexAction()
+    public function listAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
         $projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByUser($user);
@@ -105,7 +105,7 @@ class ProjectController extends BehatViewerController
 
     protected function save(\Symfony\Component\Form\Form $form)
     {
-        $form->bindRequest($this->getRequest());
+        $form->bind($this->getRequest());
 
         if ($form->isValid()) {
             $user = $this->get('security.context')->getToken()->getUser();
