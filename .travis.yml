@@ -30,4 +30,4 @@ before_script:
     - sh -e .travis/scripts/sahi-start.sh
 
 script: 
-    - php behat.phar --profile=travis @BehatViewerBundle
+    - bin/behat --profile=travis @BehatViewerBundle
