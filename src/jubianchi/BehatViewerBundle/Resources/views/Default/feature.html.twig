@@ -20,22 +20,15 @@
 <div class="span4 clearfix">
     <h2>{{ feature.name }} {% if steps > 0 %}({{ passedpcnt|round }}%){% else %}(No steps){% endif %}</h2>
 
-    <div class="progress">
-        {% if steps > 0 %}
-        {% if passed > 0 %}
-        <div class="bar progress-success" style="width: {{ passedpcnt }}%;"></div>
-        {% endif %}
-        {% if failed > 0 %}
-        <div class="bar progress-danger" style="width: {{ failedpcnt }}%;"></div>
-        {% endif %}
-        {% if skipped + pending > 0 %}
-        <div class="bar progress-info" style="width: {{ skippedpcnt + pendingpcnt }}%;"></div>
-        {% endif %}
-        {% if undefined > 0 %}
-        <div class="bar progress-warning" style="width: {{ undefinedpcnt }}%;"></div>
-        {% endif %}
-        {% endif %}
-    </div>
+    {%
+        include 'BehatViewerBundle::Components/progress.html.twig'
+        with {
+            'passed': feature.getStepsHavingStatusCount('passed'),
+            'failed': feature.getStepsHavingStatusCount('failed'),
+            'skipped': feature.getStepsHavingStatusCount('skipped') + feature.getStepsHavingStatusCount('pending'),
+            'undefined': feature.getStepsHavingStatusCount('undefined')
+        }
+    %}
 
     {% if steps > 0 %}
     <ul class="pull-left">

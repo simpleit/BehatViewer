@@ -1,0 +1,35 @@
+{% set total = (passed + failed + skipped + undefined) %}
+
+{% if total > 0 %}
+    {% set passedpcnt = ((passed / total) * 100)|round(3) %}
+    {% set failedpcnt = ((failed / total) * 100)|round(3) %}
+    {% set skippedpcnt = ((skipped / total) * 100)|round(3) %}
+    {% set undefinedpcnt = ((undefined / total) * 100)|round(3) %}
+{% else %}
+    {% set passedpcnt = 0 %}
+    {% set failedpcnt = 0 %}
+    {% set skippedpcnt = 0 %}
+    {% set undefinedpcnt = 0 %}
+{% endif %}
+
+{% set class = "progress" %}
+{% if stripped is defined and stripped == true %}{% set class = class ~ " progress-striped" %}{% endif %}
+{% if active is defined and active == true %}{% set class = class ~ " active" %}{% endif %}
+
+<div class="{{ class }}">
+    {% if passed > 0 %}
+        <div class="bar progress-success" style="width: {{ passedpcnt }}%;"></div>
+    {% endif %}
+
+    {% if failed > 0 %}
+        <div class="bar progress-danger" style="width: {{ failedpcnt }}%;"></div>
+    {% endif %}
+
+    {% if skipped > 0 %}
+        <div class="bar progress-info" style="width: {{ skippedpcnt }}%;"></div>
+    {% endif %}
+
+    {% if undefined > 0 %}
+        <div class="bar progress-warning" style="width: {{ undefinedpcnt }}%;"></div>
+    {% endif %}
+</div>

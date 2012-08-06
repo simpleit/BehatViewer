@@ -29,22 +29,15 @@
     </td>
     <td style="width: 10%">{% if steps > 0 %}{{ passedpcnt|round }}{% else %}0{% endif %}%</td>
     <td style="min-width: 250px; width: 25%" data-value="{% if steps > 0 %}{{ passedpcnt|round }}{% else %}0{% endif %}">
-        <div class="progress">
-            {% if steps > 0 %}
-            {% if passed > 0 %}
-            <div class="bar progress-success" style="width: {{ passedpcnt }}%;"></div>
-            {% endif %}
-            {% if failed > 0 %}
-            <div class="bar progress-danger" style="width: {{ failedpcnt }}%;"></div>
-            {% endif %}
-            {% if skipped + pending > 0 %}
-            <div class="bar progress-info" style="width: {{ skippedpcnt + pendingpcnt }}%;"></div>
-            {% endif %}
-            {% if undefined > 0 %}
-            <div class="bar progress-warning" style="width: {{ undefinedpcnt }}%;"></div>
-            {% endif %}
-            {% endif %}
-        </div>
+        {%
+            include 'BehatViewerBundle::Components/progress.html.twig'
+            with {
+                'passed': feature.getStepsHavingStatusCount('passed'),
+                'failed': feature.getStepsHavingStatusCount('failed'),
+                'skipped': feature.getStepsHavingStatusCount('skipped') + feature.getStepsHavingStatusCount('pending'),
+                'undefined': feature.getStepsHavingStatusCount('undefined')
+            }
+        %}
     </td>
     <td data-value="{{ steps }}">
         <ul class="pull-left">
