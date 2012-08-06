@@ -15,7 +15,7 @@ Feature: Profile
           And I should see "Logged in as viewer"
 
         Given I fill in "Username" with "behat"
-          And I fill in "Email" with "behat@viewer.com"
+          And I fill in "E-mail" with "behat@viewer.com"
           And I press "Save changes"
          Then I should be on "/profile"
-          And The value of the "Email" field should be "behat@viewer.com"
+          And The value of the "E-mail" field should be "behat@viewer.com"
