@@ -17,11 +17,13 @@ class ProfileType extends UserType
     {
         $builder
             ->add('username', 'text', array(
+                'label' => 'Username',
                 'attr' => array(
                     'class' => 'input-xlarge'
                 )
             ))
             ->add('email', 'email', array(
+                'label' => 'E-mail',
                 'attr' => array(
                     'class' => 'input-xlarge'
                 )
