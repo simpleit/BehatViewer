@@ -29,6 +29,7 @@ class FixtureContext extends BehatViewerContext
             'BehatViewerBundle:Scenario',
             'BehatViewerBundle:Feature',
             'BehatViewerBundle:Build',
+            'BehatViewerBundle:BuildStat',
             'BehatViewerBundle:Definition',
             'BehatViewerBundle:Project',
             'BehatViewerBundle:User'

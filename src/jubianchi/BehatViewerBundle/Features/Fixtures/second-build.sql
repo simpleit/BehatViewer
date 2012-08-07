@@ -1,5 +1,5 @@
-INSERT INTO `behatviewer_build` (`id`, `project_id`, `date`) VALUES
-(2, 1, '1970-01-01 00:00:00');
+INSERT INTO `behatviewer_build` (`id`, `stat_id`, `project_id`, `date`) VALUES
+(2, 2, 1, '1970-01-01 00:00:00');
 
 INSERT INTO `behatviewer_feature` (`id`, `build_id`, `name`, `slug`, `description`) VALUES
 (3, 2, 'Passed', 'passed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.'),
@@ -18,3 +18,6 @@ INSERT INTO `behatviewer_step` (`id`, `scenario_id`, `type`, `background`, `clea
 (14, 4, 'And',   0, 'I should see "bar"', 'I should see "bar"', '/foo/bar/passed.feature', '7', 'passed',  'foo\\bar\\Context\\FeatureContext::see()',   '', '', ''),
 (15, 4, 'And',   0, 'I should see "baz"', 'I should see "baz"', '/foo/bar/passed.feature', '8', 'failed',  'foo\\bar\\Context\\FeatureContext::see()',   '', '', 'This is the exception message'),
 (16, 4, 'And',   0, 'I should see "boo"', 'I should see "boo"', '/foo/bar/passed.feature', '9', 'skipped', 'foo\\bar\\Context\\FeatureContext::see()',   '', '', '');
+
+INSERT INTO `behatviewer_build_stat` (`id`, `features`, `features_passed`, `features_failed`, `scenarios`, `scenarios_passed`, `scenarios_failed`, `steps`, `steps_passed`, `steps_failed`, `steps_skipped`, `steps_undefined`, `steps_pending`) VALUES
+(2, 2, 1, 1, 2, 1, 1, 8, 6, 1, 1, 0, 0);

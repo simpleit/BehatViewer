@@ -6,16 +6,13 @@ use Symfony\Component\HttpKernel\KernelInterface,
 
 class UserContext extends BehatViewerContext
 {
-    private $logged = false;
-
     /**
      * @AfterScenario
      */
     public function afterScenario()
     {
-        if (true === $this->logged) {
-            $this->getMainContext()->getSubContext('browser')->getSession()->stop();
-        }
+		$this->iAmNotLoggedIn();
+		$this->getMainContext()->getSubContext('browser')->getSession()->stop();
     }
 
     /**
@@ -23,8 +20,6 @@ class UserContext extends BehatViewerContext
      */
     public function iAmALoggedInUser($profile)
     {
-        $this->logged = true;
-
         return array(
             new Step\Given(sprintf('I load the "%s.sql" fixture', $profile)),
             new Step\Given('I am on "/login"'),
@@ -45,7 +40,5 @@ class UserContext extends BehatViewerContext
         /** @var $browser \jubianchi\BehatViewerBundle\Features\Context\BrowserContext */
         $browser = $this->getMainContext()->getSubcontext('browser');
         $browser->visit('/logout');
-
-        $this->logged = false;
     }
 }

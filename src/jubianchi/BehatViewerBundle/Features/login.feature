@@ -31,9 +31,10 @@ Feature: Login
           And I should see "Config"
           And I should see "Logout"
 
-    @javascript
+    @javascript @reset
     Scenario: Logout
-        Given I am on the homepage
+        Given I am a logged in user
+          And I am on the homepage
           And I follow "Logged in as user"
           And I follow "Logout"
          Then I should be on "/login"
