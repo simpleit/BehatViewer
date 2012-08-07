@@ -30,10 +30,10 @@
         {%
             include 'BehatViewerBundle::Components/progress.html.twig'
             with {
-                'passed': build.getStepsHavingStatusCount('passed'),
-                'failed': build.getStepsHavingStatusCount('failed'),
-                'skipped': build.getStepsHavingStatusCount('skipped') + build.getStepsHavingStatusCount('pending'),
-                'undefined': build.getStepsHavingStatusCount('undefined')
+                'passed': build.stat.stepsPassed,
+                'failed': build.stat.stepsFailed,
+                'skipped': build.stat.stepsSkipped + build.stat.stepsPending,
+                'undefined': build.stat.stepsUndefined
             }
         %}
     </td>
