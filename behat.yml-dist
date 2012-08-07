@@ -10,25 +10,33 @@ default:
 
     formatter:
         classes:
-            "jubianchi\BehatViewerExtension\Formatter\BehatViewerFormatter": viewer
+            "jubianchi\BehatViewerExtension\Formatter\BehatViewerFormatter": "viewer"
 
         name: pretty,viewer
         parameters:
-            viewer_output_path: .
-            screen_id: 99
+            viewer_output_path: "."
+            behat_viewer_url: "http://behat.local/app_dev.php/analyze"
+            screen_id: 1
 
     extensions:
         jubianchi\BehatViewerExtension\Extension: ~
 
-        Behat\Symfony2Extension\Extension: ~
+
+        Behat\Symfony2Extension\Extension:
+            #mink_driver: true
+            kernel:
+                bootstrap: "app/bootstrap.php"
+                env: "test"
+                debug: true
 
         Behat\MinkExtension\Extension:
+            #default_session: "symfony2"
+            javascript_session: "sahi"
             mink_loader: "vendor/behat/mink/src/Behat/Mink/Mink.php"
-            base_url: "http://%hostname%/app_test.php"
+            base_url: "http://behat.local/app_test.php"
             sahi: ~
             goutte: ~
-            javascript_session: "sahi"
-            browser_name: %browser%
+            browser_name: "%browser%"
 
 travis:
     context:
@@ -37,14 +45,14 @@ travis:
 
     formatter:
         classes:
-            "jubianchi\BehatViewerExtension\Formatter\BehatViewerDistantFormatter": distant
+            "jubianchi\BehatViewerExtension\Formatter\BehatViewerDistantFormatter": "distant"
 
         name: pretty,distant
         parameters:
-            viewer_output_path: .
+            viewer_output_path: "."
             behat_viewer_url: "%behat_viewer_url%"
             screen_id: 99
 
     extensions:
         Behat\MinkExtension\Extension:
-            browser_name: phantomjs
+            browser_name: "phantomjs"

@@ -39,7 +39,7 @@ app/console --env=test doctrine:schema:create
 app/console --env=test cache:clear
 app/console assets:install --symlink web
 
-php behat.phar @BehatViewerBundle
+bin/behat @BehatViewerBundle
 SCRIPT
 );
         $project->setUser($this->getReference('admin-user'));
