@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Table(name="project")
  * @ORM\Entity(repositoryClass="jubianchi\BehatViewerBundle\Entity\Repository\ProjectRepository")
  * @UniqueEntity({"user", "name"})
- * @UniqueEntity("slug")
+ * @UniqueEntity({"user", "slug"})
  */
 class Project extends Base
 {

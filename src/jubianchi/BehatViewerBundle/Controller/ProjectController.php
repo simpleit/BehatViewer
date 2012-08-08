@@ -28,22 +28,24 @@ class ProjectController extends BehatViewerProjectController
 		if ('POST' === $request->getMethod()) {
 			$success = $this->save($form);
 
-			return $this->redirect(
-				$this->generateUrl(
-					'behatviewer.project.edit',
-					array(
-						'username' => $form->getData()->getUser()->getUsername(),
-						'project' => $form->getData()->getSlug(),
-						'success' => $success
-					)
-				)
-			);
+            if($success) {
+                return $this->redirect(
+                    $this->generateUrl(
+                        'behatviewer.project.edit',
+                        array(
+                            'username' => $this->getUser()->getUsername(),
+                            'project' => $form->getData()->getSlug(),
+                            'success' => $success
+                        )
+                    )
+                );
+            }
 		}
 
 		return $this->getResponse(array(
 			'form' => $form->createView(),
 			'success' => false,
-			'hasproject' => false,
+			'hasproject' => (null !== $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findOneByUser($this->getUser())),
 		));
 	}
 
@@ -87,7 +89,8 @@ class ProjectController extends BehatViewerProjectController
 
         return $this->getResponse(array(
             'form' => $form->createView(),
-            'success' => $success || $this->getRequest()->get('success', false)
+            'success' => $success || $this->getRequest()->get('success', false),
+            'hasproject' => true,
         ));
     }
 

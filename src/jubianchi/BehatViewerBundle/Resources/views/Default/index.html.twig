@@ -3,30 +3,51 @@
 {% block container %}
 <h1 class="page-header">
     Projects
+
+    <div class="pull-right">
+        <div class="btn-group">
+            <a class="btn" href="{{ path('behatviewer.project.create') }}">
+                <i class="icon-plus"></i> <span>Add project</span>
+            </a>
+        </div>
+    </div>
 </h1>
 
 <div class="row-fluid">
     <div class="span12">
         <div class="row-fluid">
             {% for project in projects %}
-                {% set features = project.lastBuild.stat.features %}
+                {% if project.lastBuild %}
+                    {% set features = project.lastBuild.stat.features %}
+                {% endif %}
 
-                {% if features > 0 %}
+                {% if features is defined and features > 0 %}
                     {% set passedpcnt = ((project.lastBuild.stat.featuresPassed / features) * 100)|round(3) %}
                 {% else %}
                     {% set passedpcnt = 0 %}
                 {% endif %}
 
                 <div class="span4 clearfix">
-                    <h3>{{ project.user.username }}/{{ project.name }} ({% if features > 0 %}{{ passedpcnt }}%{% else %}No features{% endif %})</h3>
+                    <h3>{{ project.user.username }}/{{ project.name }} ({% if features is defined and features > 0 %}{{ passedpcnt|round }}%{% else %}No features{% endif %})</h3>
                     <br/>
                     {% if project.lastBuild %}
                         {%
                             include 'BehatViewerBundle::Components/progress-bar.html.twig'
                             with {
                                 'passed': project.lastBuild.stat.featuresPassed,
-                                'failed': project.lastBuild.stat.features,
+                                'failed': project.lastBuild.stat.featuresFailed,
                                 'skipped': 0,
+                                'undefined': 0
+                            }
+                        %}
+                        {%
+                            include 'BehatViewerBundle::Components/progress-summary.html.twig'
+                            with {
+                                'class': 'pull-left',
+                                'passed': project.lastBuild.stat.featuresPassed,
+                                'failed': project.lastBuild.stat.featuresFailed,
+                                'skipped': 0,
+                                'pending': 0,
                                 'undefined': 0
                             }
                         %}

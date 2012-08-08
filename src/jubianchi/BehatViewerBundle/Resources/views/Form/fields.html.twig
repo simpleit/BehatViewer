@@ -16,7 +16,31 @@
 {% endblock %}
 
 {% block field_errors %}
+
     {% for error in errors %}
-        <br/><span class="help-inline">{{ error.getMessageTemplate()|trans(error.getMessageParameters(), 'validators') }}</span>
+        <br/>
+        <span class="help-inline">
+            {{
+                error.messagePluralization is null
+                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+            }}
+        </span>
     {% endfor %}
 {% endblock %}
+
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <div class="alert alert-error alert-block">
+            {% for error in errors %}
+                <p>
+                    {{
+                        error.messagePluralization is null
+                            ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                            : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                    }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock form_errors %}

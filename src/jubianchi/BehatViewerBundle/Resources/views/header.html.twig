@@ -6,12 +6,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="{{ path('behatviewer.homepage') }}">Behat Viewer <span class="title">{% if project is defined and project != null %}[{{ project.name }}]{% endif %}</span></a>
+            <a class="brand" href="{{ path('behatviewer.homepage') }}">Behat Viewer</a>
 
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li><a href="{{ path('behatviewer.homepage') }}">Home</a></li>
                     {% if project is defined and project != null %}
+                        <li><a href="{{ path('behatviewer.project', {'username': project.user.username, 'project': project.slug}) }}">{{ project.name }}</a></li>
                         <li><a href="{{ path('behatviewer.history', {'username': project.user.username, 'project': project.slug}) }}">History</a></li>
                         <li><a href="{{ path('behatviewer.stats', {'username': project.user.username, 'project': project.slug}) }}">Stats</a></li>
                         <li><a href="{{ path('behatviewer.definitions', {'username': project.user.username, 'project': project.slug}) }}">Definitions</a></li>

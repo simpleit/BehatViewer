@@ -3,12 +3,12 @@
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #   prefix:   /_internal
 
+BehatViewerBundleJsRouting:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 BehatViewerBundle:
     resource: "@BehatViewerBundle/Controller/"
     type:     annotation
-
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 behatviewer.logout:
     pattern:   /logout

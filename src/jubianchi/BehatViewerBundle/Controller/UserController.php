@@ -44,7 +44,7 @@ class UserController extends BehatViewerController
      */
     public function checkAction()
     {
-        return $this->getResponse(array());
+        return array();
     }
 
     /**
