@@ -15,7 +15,7 @@ default:
         name: pretty,viewer
         parameters:
             viewer_output_path: "."
-            behat_viewer_url: "http://behat.local/app_dev.php/analyze"
+            behat_viewer_url: "http://%hostname%/app_dev.php/analyze"
             screen_id: 1
 
     extensions:
@@ -33,7 +33,7 @@ default:
             #default_session: "symfony2"
             javascript_session: "sahi"
             mink_loader: "vendor/behat/mink/src/Behat/Mink/Mink.php"
-            base_url: "http://behat.local/app_test.php"
+            base_url: "http://%hostname%/app_test.php"
             sahi: ~
             goutte: ~
             browser_name: "%browser%"
