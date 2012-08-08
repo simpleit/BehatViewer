@@ -29,7 +29,7 @@
         <li class="nav-header">Summary</li>
         <li>
             {%
-                include 'BehatViewerBundle::Components/progress.html.twig'
+                include 'BehatViewerBundle::Components/progress-bar.html.twig'
                 with {
                     'passed': feature.getStepsHavingStatusCount('passed'),
                     'failed': feature.getStepsHavingStatusCount('failed'),

@@ -1,19 +1,10 @@
 {% set steps = build.stat.steps %}
 
-{% set passed = build.stat.stepsPassed %}
-{% set passedpcnt = ((passed / steps) * 100)|round(3) %}
-
-{% set failed = build.stat.stepsFailed %}
-{% set failedpcnt = ((failed / steps) * 100)|round(3) %}
-
-{% set skipped = build.stat.stepsSkipped %}
-{% set skippedpcnt = ((skipped / steps) * 100)|round(3) %}
-
-{% set undefined = build.stat.stepsUndefined %}
-{% set undefinedpcnt = ((undefined / steps) * 100)|round(3) %}
-
-{% set pending = build.stat.stepsPending %}
-{% set pendingpcnt = ((pending / steps) * 100)|round(3) %}
+{% if steps > 0 %}
+    {% set passedpcnt = ((build.stat.stepsPassed / steps) * 100)|round(3) %}
+{% else %}
+    {% set passedpcnt = 0 %}
+{% endif %}
 
 <tr class="navig">
     {% if is_granted('ROLE_USER') %}
@@ -28,7 +19,7 @@
     <td style="width: 10%">{{ passedpcnt|round }}%</td>
     <td style="min-width: 250px; width: 25%" data-value="{{ passedpcnt }}">
         {%
-            include 'BehatViewerBundle::Components/progress.html.twig'
+            include 'BehatViewerBundle::Components/progress-bar.html.twig'
             with {
                 'passed': build.stat.stepsPassed,
                 'failed': build.stat.stepsFailed,
@@ -38,28 +29,17 @@
         %}
     </td>
     <td data-value="{{ steps }}">
-        <ul class="pull-left">
-            {% if passed > 0 %}
-            <li><span class="success" style="color: #62C462; font-weight: bold">Passed: {{ passed }}/{{ steps }} ({{ passedpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% if failed > 0 %}
-            <li><span class="danger" style="color: #EE5F5B; font-weight: bold">Failed: {{ failed }}/{{ steps }} ({{ failedpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% if skipped > 0 %}
-            <li><span class="info" style="color: #5BC0DE; font-weight: bold">Skipped: {{ skipped }}/{{ steps }} ({{ skippedpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% if pending > 0 %}
-            <li><span class="info" style="color: #5BC0DE; font-weight: bold">Pending: {{ pending }}/{{ steps }} ({{ pendingpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% if undefined > 0 %}
-            <li><span class="warning" style="color: #FBB450; font-weight: bold">Undefined: {{ undefined }}/{{ steps }} ({{ undefinedpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-        </ul>
+        {%
+            include 'BehatViewerBundle::Components/progress-summary.html.twig'
+            with {
+                'class': 'pull-left',
+                'passed': build.stat.stepsPassed,
+                'failed': build.stat.stepsFailed,
+                'skipped': build.stat.stepsSkipped,
+                'pending': build.stat.stepsPending,
+                'undefined': build.stat.stepsUndefined
+            }
+        %}
     </td>
     <td class="action" style="min-width: 150px; width: 10%">
         <div class="btn-group" id="toolbar">

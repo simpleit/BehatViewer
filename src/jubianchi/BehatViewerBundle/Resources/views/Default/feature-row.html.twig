@@ -30,7 +30,7 @@
     <td style="width: 10%">{% if steps > 0 %}{{ passedpcnt|round }}{% else %}0{% endif %}%</td>
     <td style="min-width: 250px; width: 25%" data-value="{% if steps > 0 %}{{ passedpcnt|round }}{% else %}0{% endif %}">
         {%
-            include 'BehatViewerBundle::Components/progress.html.twig'
+            include 'BehatViewerBundle::Components/progress-bar.html.twig'
             with {
                 'passed': feature.getStepsHavingStatusCount('passed'),
                 'failed': feature.getStepsHavingStatusCount('failed'),
@@ -40,30 +40,16 @@
         %}
     </td>
     <td data-value="{{ steps }}">
-        <ul class="pull-left">
-            {% if steps > 0 %}
-            {% if passed > 0 %}
-            <li><span class="success" style="color: #62C462; font-weight: bold">Passed: {{ passed }}/{{ steps }} ({{ passedpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% if failed > 0 %}
-            <li><span class="danger" style="color: #EE5F5B; font-weight: bold">Failed: {{ failed }}/{{ steps }} ({{ failedpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% if skipped > 0 %}
-            <li><span class="info" style="color: #5BC0DE; font-weight: bold">Skipped: {{ skipped }}/{{ steps }} ({{ skippedpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% if pending > 0 %}
-            <li><span class="info" style="color: #5BC0DE; font-weight: bold">Pending: {{ pending }}/{{ steps }} ({{ pendingpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% if undefined > 0 %}
-            <li><span class="warning" style="color: #FBB450; font-weight: bold">Undefined: {{ undefined }}/{{ steps }} ({{ undefinedpcnt|round }}%)</span>
-            </li>
-            {% endif %}
-            {% endif %}
-        </ul>
+        {%
+            include 'BehatViewerBundle::Components/progress-summary.html.twig'
+            with {
+                'class': 'pull-left',
+                'passed': feature.getStepsHavingStatusCount('passed'),
+                'failed': feature.getStepsHavingStatusCount('failed'),
+                'skipped': feature.getStepsHavingStatusCount('skipped') + feature.getStepsHavingStatusCount('pending'),
+                'undefined': feature.getStepsHavingStatusCount('undefined')
+            }
+        %}
     </td>
     <td class="action">
         <a class="btn" href="{{ path('behatviewer.feature', {'id': feature.id, 'slug':feature.slug}) }}">Details &raquo;</a>
