@@ -9,15 +9,23 @@
     <div class="span12">
         <div class="row-fluid">
             {% for project in projects %}
+                {% set features = project.lastBuild.stat.features %}
+
+                {% if features > 0 %}
+                    {% set passedpcnt = ((project.lastBuild.stat.featuresPassed / features) * 100)|round(3) %}
+                {% else %}
+                    {% set passedpcnt = 0 %}
+                {% endif %}
+
                 <div class="span4 clearfix">
-                    <h3>{{ project.user.username }}/{{ project.name }}</h3>
+                    <h3>{{ project.user.username }}/{{ project.name }} ({% if features > 0 %}{{ passedpcnt }}%{% else %}No features{% endif %})</h3>
                     <br/>
                     {% if project.lastBuild %}
                         {%
-                            include 'BehatViewerBundle::Components/progress.html.twig'
+                            include 'BehatViewerBundle::Components/progress-bar.html.twig'
                             with {
-                                'passed': project.lastBuild.stat.scenariosPassed,
-                                'failed': project.lastBuild.stat.scenarios,
+                                'passed': project.lastBuild.stat.featuresPassed,
+                                'failed': project.lastBuild.stat.features,
                                 'skipped': 0,
                                 'undefined': 0
                             }
