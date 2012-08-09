@@ -38,12 +38,14 @@ class FixtureContext extends BehatViewerContext
         $this->connection->query(sprintf('SET FOREIGN_KEY_CHECKS = 0;'));
 
         foreach ($entities as $entity) {
-            $this->connection->executeUpdate(
+			$this->connection->executeUpdate(
                 $this->platform->getTruncateTableSQL(
                     $this->manager->getClassMetadata($entity)->getTableName(),
                     true
                 )
             );
+
+			$this->manager->flush();
         }
 
         $this->BeforeScenarioFixture($event);
@@ -83,6 +85,13 @@ class FixtureContext extends BehatViewerContext
             throw new \RuntimeException(sprintf('Fixture %s does not exist', $fixture));
         }
 
-        $this->connection->executeUpdate(file_get_contents($file));
+		$sql = file_get_contents($file);
+
+		try {
+			$this->connection->executeUpdate(file_get_contents($file));
+		} catch(\PDOException $exception) {
+			throw new \RuntimeException($sql, $exception->getCode(), $exception);
+		}
+
     }
 }

@@ -1,20 +1,10 @@
 {% set steps = feature.getStepsHavingStatusCount() %}
 
 {% if steps > 0 %}
-{% set passed = feature.getStepsHavingStatusCount('passed') %}
-{% set passedpcnt = ((passed / steps) * 100)|round(3) %}
-
-{% set failed = feature.getStepsHavingStatusCount('failed') %}
-{% set failedpcnt = ((failed / steps) * 100)|round(3) %}
-
-{% set skipped = feature.getStepsHavingStatusCount('skipped') %}
-{% set skippedpcnt = ((skipped / steps) * 100)|round(3) %}
-
-{% set undefined = feature.getStepsHavingStatusCount('undefined') %}
-{% set undefinedpcnt = ((undefined / steps) * 100)|round(3) %}
-
-{% set pending = feature.getStepsHavingStatusCount('pending') %}
-{% set pendingpcnt = ((pending / steps) * 100)|round(3) %}
+    {% set passed = feature.getStepsHavingStatusCount('passed') %}
+    {% set passedpcnt = ((passed / steps) * 100)|round(3) %}
+{% else %}
+    {% set passedpcnt = 0 %}
 {% endif %}
 
 <tr class="navig">
@@ -46,7 +36,8 @@
                 'class': 'pull-left',
                 'passed': feature.getStepsHavingStatusCount('passed'),
                 'failed': feature.getStepsHavingStatusCount('failed'),
-                'skipped': feature.getStepsHavingStatusCount('skipped') + feature.getStepsHavingStatusCount('pending'),
+                'skipped': feature.getStepsHavingStatusCount('skipped'),
+                'pending': feature.getStepsHavingStatusCount('pending'),
                 'undefined': feature.getStepsHavingStatusCount('undefined')
             }
         %}

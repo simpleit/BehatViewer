@@ -1,22 +1,46 @@
 Feature: Create project
 
   @reset @javascript @fixture:single-project.sql
-  Scenario: Project list
+  Scenario: Create a new project
     Given I am a logged in user
       And I am on the homepage
       And I follow "Logged in as user"
       And I follow "Projects"
-     Then I should see a "table" element
-      And the columns schema of the "table" table should match:
-        | Columns Title |
-        | #             |
-        | Name          |
-        | Identifier    |
-        | Root path     |
-        | Output path   |
-        | Action        |
-       And the data in the 1st row of the "table" table should match:
-        | # | Name    | Identifier      | Root path | Output path | Action   |
-        | 1 | Foo Bar | foo-bar         | /foo/bar  | /foo/bar    | ViewEdit |
+      And I follow "Add project"
+     Then I should see "New project"
+    Given I fill in "Project name" with "Bar Foo"
+      And I fill in "Identifier" with "bar-foo"
+      And I fill in "Base URL" with "http://bar.foo/baz"
+      And I fill in "Root path" with "/bar/foo"
+      And I fill in "Output path" with "/bar/foo"
+      And I fill in "Test command" with "app/console bar foo"
+      And I press "Save changes"
+     Then I should see "Settings were successfully saved."
 
+  @reset @javascript @fixture:single-project.sql
   Scenario: Project with duplicate name and identifier
+    Given I am a logged in user
+      And I am on the homepage
+      And I follow "Logged in as user"
+      And I follow "Projects"
+      And I follow "Add project"
+     Then I should see "New project"
+
+    Given I fill in "Project name" with "Foo Bar"
+      And I fill in "Identifier" with "foo-baz"
+      And I fill in "Base URL" with "http://foo.baz"
+      And I fill in "Root path" with "/foo/baz"
+      And I fill in "Output path" with "/foo/baz"
+      And I fill in "Test command" with "app/console foo baz"
+      And I press "Save changes"
+     Then I should see "You already own a project with the same name"
+
+    Given I fill in "Identifier" with "foo-bar"
+      And I press "Save changes"
+     Then I should see "You already own a project with the same identifier"
+
+    Given I fill in "Project name" with "Foo Baz"
+      And I fill in "Identifier" with "foo-baz"
+      And I press "Save changes"
+     Then I should see "Project configuration"
+     Then I should see "Settings were successfully saved."

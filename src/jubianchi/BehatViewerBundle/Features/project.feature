@@ -1,5 +1,5 @@
 @config
-Feature: Configuration
+Feature: Project
 
     @reset @javascript
     Scenario: First project
@@ -15,7 +15,5 @@ Feature: Configuration
           And I fill in "Test command" with "app/console foo bar"
           And I press "Save changes"
          Then I should see "Settings were successfully saved"
-          And I should see "Behat Viewer [Foo Bar]"
-          And I should see "Settings were successfully saved."
           But I should not see "No project configured"
           And I should not see "Before using Behat Viewer, you should configure your project."

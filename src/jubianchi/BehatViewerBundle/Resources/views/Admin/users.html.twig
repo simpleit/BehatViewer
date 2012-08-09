@@ -14,10 +14,11 @@
     </h1>
 {% endblock %}
 
-{% block sort %}{sortlist: [[0,0]]}{% endblock %}
+{% block sort %}{sortlist: [[1,0]]}{% endblock %}
 
 {% block thead %}
     <tr>
+        <th class="{sorter: false}"></th>
         <th>Username</th>
         <th>Email</th>
         <th>Active</th>
@@ -28,7 +29,9 @@
 {% block tbody %}
     {% for user in items %}
         <tr>
-            <td>{{ user.username }}</td>
+            <td>
+                {{ user.username }}
+            </td>
             <td>{{ user.email }}</td>
             <td>
                 {{ user.isEnabled ? 'Yes' : 'No' }}

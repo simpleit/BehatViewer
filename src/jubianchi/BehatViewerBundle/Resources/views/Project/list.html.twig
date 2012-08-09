@@ -6,7 +6,7 @@
 
         <div class="pull-right">
             <div class="btn-group">
-                <a class="btn" href="{{ path('behatviewer.projectcreate') }}">
+                <a class="btn" href="{{ path('behatviewer.project.create') }}">
                     <i class="icon-plus"></i> <span>Add project</span>
                 </a>
             </div>
@@ -30,18 +30,16 @@
 {% block tbody %}
     {% for proj in items %}
         <tr>
-            <td>{{ project.id }}</td>
-            <td>{{ project.name }}</td>
-            <td>{{ project.slug }}</td>
-            <td>{{ project.rootpath }}</td>
-            <td>{{ project.outputpath }}</td>
+            <td>{{ proj.id }}</td>
+            <td>{{ proj.name }}</td>
+            <td>{{ proj.slug }}</td>
+            <td>{{ proj.rootpath }}</td>
+            <td>{{ proj.outputpath }}</td>
             <td>
                 <div class="btn-group" id="toolbar">
-                    <a href="{{ path('behatviewer.projectselect', {"id": proj.id}) }}" class="btn">View</a>
-                    <a href="{{ path('behatviewer.projectedit', {"id": proj.id}) }}" class="btn">Edit</a>
-                    {% if proj.id != project.id %}
-                        <a href="" class="btn btn-danger">Delete</a>
-                    {% endif %}
+                    <a href="{{ path('behatviewer.project', {"project": proj.slug, "username": user.username}) }}" class="btn">View</a>
+                    <a href="{{ path('behatviewer.project.edit', {"project": proj.slug, "username": user.username}) }}" class="btn">Edit</a>
+                    <a href="{{ path('behatviewer.project.delete', {"project": proj.slug, "username": user.username}) }}" class="btn btn-danger">Delete</a>
                 </div>
             </td>
         </tr>

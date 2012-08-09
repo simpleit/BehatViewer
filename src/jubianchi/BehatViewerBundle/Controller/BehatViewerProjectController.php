@@ -19,6 +19,10 @@ abstract class BehatViewerProjectController extends BehatViewerController
 		}
 	}
 
+	/**
+	 * @return \jubianchi\BehatViewerBundle\Entity\Project
+	 * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+	 */
 	protected function getProject()
 	{
 		if(null === $this->project) {

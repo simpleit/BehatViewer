@@ -65,35 +65,28 @@ class HistoryController extends BehatViewerProjectController
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/{username}/{project}/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.entry")
+	 * @Route("/{username}/{project}/{build}/{type}", requirements={"type" = "list|thumb", "build" = "\d+"}, name="behatviewer.history.entry.switch")
      * @Template()
      */
-    public function entryAction($username, $project, $build)
+    public function entryAction($username, $project, $build, $type = 'thumb')
     {
         $this->beforeAction();
 
 		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
 		$build = $repository->findOneByProjectAndId($this->getProject(), $build);
-		if(null === $build) {
-			throw $this->createNotFoundException();
-		}
 
-        return $this->getResponse(array(
-            'build' => $build,
-            'items' => null
-        ));
-    }
+		$type = $this->setViewType($type);
+		$view = 'entry' . ($type !== null ? '-' . $type : '');
 
-    /**
-     * @param \jubianchi\BehatViewerBundle\Entity\Build|null $build
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/{username}/{project}/{build}/list", requirements={"build" = "\d+"}, name="behatviewer.history.entry.list")
-     * @Template("BehatViewerBundle:Default:list.html.twig")
-     */
-    public function entrylistAction($username, $project, $build)
-    {
-        return $this->entryAction($username, $project, $build);
+		return $this->render(
+			'BehatViewerBundle:History:' . $view . '.html.twig',
+			$this->getResponse(
+				array(
+					'build' => $build,
+					'items' => $build->getFeatures()
+				)
+			)
+		);
     }
 
     /**

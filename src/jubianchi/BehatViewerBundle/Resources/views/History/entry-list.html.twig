@@ -12,7 +12,7 @@
             <small>(#{{ build.id }} Built <span data-rel="moment">{{ build.date|date("Y-m-d H:i:s")}}</span>)</small>
         {% endif %}
 
-        {% include 'BehatViewerBundle::Default/switcher.html.twig' %}
+        {% include 'BehatViewerBundle::History/switcher.html.twig' %}
     </h1>
 {% endblock %}
 
@@ -29,9 +29,11 @@
 {% endblock %}
 
 {% block tbody %}
-    {% for feature in build.features %}
-        {% include 'BehatViewerBundle::Default/feature-row.html.twig' %}
-    {% endfor %}
+    {% if build != null %}
+        {% for feature in build.features %}
+            {% include 'BehatViewerBundle::History/feature-row.html.twig' %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block alert %}

@@ -27,7 +27,15 @@ Feature: Login
 
         Given I follow "Logged in as user"
          Then I should see "Profile"
-          And I should see "Projects"
+          And I should see "Config"
+          And I should see "Logout"
+
+        Given I am not logged in
+          And I am a logged in admin
+          And I am on the homepage
+          And I follow "Logged in as admin"
+         Then I should see "Profile"
+          And I should see "Admin"
           And I should see "Config"
           And I should see "Logout"
 
@@ -45,4 +53,4 @@ Feature: Login
           And I am on the homepage
           And I follow "Logged in as user"
           And I follow "Logout"
-         Then I should be on "/"
+         Then I should be on "/login"

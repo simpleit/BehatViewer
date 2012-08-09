@@ -23,7 +23,10 @@ class ProjectController extends BehatViewerProjectController
 	{
 		$request = $this->getRequest();
 
-		$form = $this->get('form.factory')->create(new ProjectType(), new Entity\Project());
+		$project = new Entity\Project();
+		$project->setUser($this->getUser());
+
+		$form = $this->get('form.factory')->create(new ProjectType(), $project);
 
 		if ('POST' === $request->getMethod()) {
 			$success = $this->save($form);
@@ -52,19 +55,19 @@ class ProjectController extends BehatViewerProjectController
 	/**
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 *
-	 * @Route("/{username}/{project}", name="behatviewer.project", options={"expose"=true})
+	 * @Route("/{username}/{project}", name="behatviewer.project")
+	 * @Route("/{username}/{project}/{type}", requirements={"type" = "list|thumb"}, name="behatviewer.project.switch")
 	 * @Template()
 	 */
-	public function indexAction($username, $project)
+	public function indexAction($username, $project, $type = 'thumb')
 	{
-		$this->beforeAction();
-
 		return $this->forward(
 			'BehatViewerBundle:History:entry',
 			array(
 				'username' => $username,
 				'project' => $project,
-				'build' => $this->getProject()->getLastBuild()
+				'build' => $this->getProject()->getLastBuild(),
+				'type' => $type
 			)
 		);
 	}
@@ -76,7 +79,7 @@ class ProjectController extends BehatViewerProjectController
      * @Secure(roles="ROLE_USER")
      * @Template("BehatViewerBundle:Project:edit.html.twig")
      */
-    public function editAction($username, $project)
+    public function editAction()
     {
         $request = $this->getRequest();
         $success = false;
@@ -102,7 +105,7 @@ class ProjectController extends BehatViewerProjectController
 	 * @Route("/{username}/{project}/delete", name="behatviewer.project.delete")
 	 * @Secure(roles="ROLE_USER")
 	 */
-	public function deleteAction($username, $project)
+	public function deleteAction()
 	{
 		$this->beforeAction();
 
@@ -118,8 +121,6 @@ class ProjectController extends BehatViewerProjectController
         $form->bind($this->getRequest());
 
         if ($form->isValid()) {
-            $form->getData()->setUser($this->getUser());
-
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($form->getData());
             $manager->flush();

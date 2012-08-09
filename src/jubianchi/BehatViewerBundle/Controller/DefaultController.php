@@ -34,6 +34,18 @@ class DefaultController extends BehatViewerController
 			throw new \jubianchi\BehatViewerBundle\Exception\NoProjectConfiguredException();
 		}
 
+		if(1 === count($projects)) {
+			return $this->redirect(
+				$this->generateUrl(
+					'behatviewer.project',
+					array(
+						'project' => $projects[0]->getSlug(),
+						'username' => $projects[0]->getUser()->getUsername()
+					)
+				)
+			);
+		}
+
 		return $this->getResponse(array(
 			'projects' => $projects
 		));
@@ -54,17 +66,6 @@ class DefaultController extends BehatViewerController
         $analyzer->analyze($project, $data);
 
         return  new \Symfony\Component\HttpFoundation\Response();
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/list", name="behatviewer.homepage.list")
-     * @Template("BehatViewerBundle:Default:index.html.twig")
-     */
-    public function indexlistAction()
-    {
-        return $this->indexAction();
     }
 
     /**

@@ -1,0 +1,2 @@
+INSERT INTO `behatviewer_project` (`id`, `name`, `slug`, `base_url`, `output_path`, `root_path`, `test_command`, `user_id`) VALUES
+(2, 'Bar Foo', 'bar-foo', 'http://bar/foo', '/bar/foo', '/bar/foo', 'app/console bar foo', 1);

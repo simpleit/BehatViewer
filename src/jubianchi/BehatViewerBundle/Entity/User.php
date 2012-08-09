@@ -5,15 +5,21 @@ use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Security\Core\User\UserInterface,
     Symfony\Component\Security\Core\User\AdvancedUserInterface,
     Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+    Symfony\Bridge\Doctrine\Validator\Constraints;
 
 /**
  * Acme\UserBundle\Entity\User
  *
- * @ORM\Table(name="users")
+ * @ORM\Table(
+ * 		name="user",
+ * 		uniqueConstraints={
+ * 			@ORM\UniqueConstraint(name="username", columns={"username"}),
+ * 			@ORM\UniqueConstraint(name="email", columns={"email"})
+ * 		}
+ * )
  * @ORM\Entity(repositoryClass="jubianchi\BehatViewerBundle\Entity\Repository\UserRepository")
- * @UniqueEntity("username")
- * @UniqueEntity("email")
+ * @Constraints\UniqueEntity("username")
+ * @Constraints\UniqueEntity("email")
  */
 class User extends Base implements AdvancedUserInterface
 {

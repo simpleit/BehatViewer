@@ -4,16 +4,22 @@ namespace jubianchi\BehatViewerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
+    Symfony\Bridge\Doctrine\Validator\Constraints,
     jubianchi\BehatViewerBundle\Entity;
 
 /**
  * jubianchi\BehatViewerBundle\Entity\Project
  *
- * @ORM\Table(name="project")
+ * @ORM\Table(
+ * 		name="project",
+ * 		uniqueConstraints={
+ * 			@ORM\UniqueConstraint(name="user__name", columns={"user_id", "name"}),
+ * 			@ORM\UniqueConstraint(name="user__slug", columns={"user_id", "slug"})
+ * 		}
+ * )
  * @ORM\Entity(repositoryClass="jubianchi\BehatViewerBundle\Entity\Repository\ProjectRepository")
- * @UniqueEntity({"user", "name"})
- * @UniqueEntity({"user", "slug"})
+ * @Constraints\UniqueEntity(fields={"name", "user"}, message="You already own a project with the same name")
+ * @Constraints\UniqueEntity(fields={"slug", "user"}, message="You already own a project with the same identifier")
  */
 class Project extends Base
 {
@@ -289,6 +295,6 @@ class Project extends Base
 
 	public function getLastBuild() {
 		$builds = $this->getBuilds();
-		return $builds->last();
+		return $builds->last() ?: null;
 	}
 }

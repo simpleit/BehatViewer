@@ -200,6 +200,11 @@ td small { font-size: 0.8em; }
     border-radius: 4px;
 }
 
+.gravatar.large {
+    width: 36px;
+    height: 36px;
+}
+
 h3 .gravatar {
     width: 48px;
     height: 48px;

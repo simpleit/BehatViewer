@@ -11,7 +11,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     {% if project is defined and project != null %}
-                        <li><a href="{{ path('behatviewer.project', {'username': project.user.username, 'project': project.slug}) }}">{{ project.name }}</a></li>
+                        <li><a href="{{ path('behatviewer.project', {'username': project.user.username, 'project': project.slug}) }}">Features</a></li>
                         <li><a href="{{ path('behatviewer.history', {'username': project.user.username, 'project': project.slug}) }}">History</a></li>
                         <li><a href="{{ path('behatviewer.stats', {'username': project.user.username, 'project': project.slug}) }}">Stats</a></li>
                         <li><a href="{{ path('behatviewer.definitions', {'username': project.user.username, 'project': project.slug}) }}">Definitions</a></li>
@@ -22,7 +22,7 @@
                     </li>
                 </ul>
                 <ul class="nav pull-right">
-                    {% if build is defined and build.id != project.lastBuild.id %}
+                    {% if build is defined and build != null and build.id != project.lastBuild.id %}
                         <li>
                             <button id="last-build" href="{{ path('behatviewer.history.entry', {'username': project.user.username, 'project': project.slug, 'build': project.lastBuild.id}) }}" class="btn btn-primary">Last build &raquo;</button>
                         </li>
@@ -35,6 +35,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ path('behatviewer.profile') }}">Profile</a></li>
+                                <li><a href="{{ path('behatviewer.projects') }}">Projects</a></li>
                                 <li class="divider"></li>
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <li><a href="{{ path('behatviewer.users') }}">Admin</a></li>
