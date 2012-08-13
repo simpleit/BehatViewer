@@ -25,6 +25,9 @@ app/config/parameters.yml
 .Spotlight-V100
 .Trashes
 
+# Capifony
+app/config/deploy.rb
+
 # BehatViewer
 app/data
 
@@ -36,3 +39,4 @@ composer.phar
 
 bin/behat
 app/SymfonyRequirements.php
+
