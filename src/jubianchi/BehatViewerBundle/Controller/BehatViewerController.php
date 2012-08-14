@@ -35,16 +35,18 @@ abstract class BehatViewerController extends Controller
         );
     }
 
-	protected function setViewType($type) {
-		$key = $this->getRequest()->get('_controller') . '.type';
-		$this->getSession()->set($key, $type);
+    protected function setViewType($type)
+    {
+        $key = $this->getRequest()->get('_controller') . '.type';
+        $this->getSession()->set($key, $type);
 
-		return $type;
-	}
+        return $type;
+    }
 
-	protected function getViewType($default = null) {
-		$key = $this->getRequest()->get('_controller') . '.type';
+    protected function getViewType($default = null)
+    {
+        $key = $this->getRequest()->get('_controller') . '.type';
 
-		return $this->getSession()->get($key, $default);
-	}
+        return $this->getSession()->get($key, $default);
+    }
 }

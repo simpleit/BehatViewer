@@ -1,7 +1,7 @@
-{% set steps = feature.getStepsHavingStatusCount() %}
+{% set steps = feature.stat.steps %}
 
 {% if steps > 0 %}
-    {% set passed = feature.getStepsHavingStatusCount('passed') %}
+    {% set passed = feature.stat.stepsPassed %}
     {% set passedpcnt = ((passed / steps) * 100)|round(3) %}
 {% else %}
     {% set passedpcnt = 0 %}
@@ -22,10 +22,10 @@
         {%
             include 'BehatViewerBundle::Components/progress-bar.html.twig'
             with {
-                'passed': feature.getStepsHavingStatusCount('passed'),
-                'failed': feature.getStepsHavingStatusCount('failed'),
-                'skipped': feature.getStepsHavingStatusCount('skipped') + feature.getStepsHavingStatusCount('pending'),
-                'undefined': feature.getStepsHavingStatusCount('undefined')
+                'passed': feature.stat.stepsPassed,
+                'failed': feature.stat.stepsFailed,
+                'skipped': feature.stat.stepsSkipped + feature.stat.stepsPending,
+                'undefined': feature.stat.stepsUndefined
             }
         %}
     </td>
@@ -34,11 +34,11 @@
             include 'BehatViewerBundle::Components/progress-summary.html.twig'
             with {
                 'class': 'pull-left',
-                'passed': feature.getStepsHavingStatusCount('passed'),
-                'failed': feature.getStepsHavingStatusCount('failed'),
-                'skipped': feature.getStepsHavingStatusCount('skipped'),
-                'pending': feature.getStepsHavingStatusCount('pending'),
-                'undefined': feature.getStepsHavingStatusCount('undefined')
+                'passed': feature.stat.stepsPassed,
+                'failed': feature.stat.stepsFailed,
+                'skipped': feature.stat.stepsSkipped,
+                'pending': feature.stat.stepsPending,
+                'undefined': feature.stat.stepsundefined
             }
         %}
     </td>

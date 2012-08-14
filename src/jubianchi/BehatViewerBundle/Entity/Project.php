@@ -293,8 +293,10 @@ class Project extends Base
         return $this->test_command;
     }
 
-	public function getLastBuild() {
-		$builds = $this->getBuilds();
-		return $builds->last() ?: null;
-	}
+    public function getLastBuild()
+    {
+        $builds = $this->getBuilds();
+
+        return $builds->last() ?: null;
+    }
 }

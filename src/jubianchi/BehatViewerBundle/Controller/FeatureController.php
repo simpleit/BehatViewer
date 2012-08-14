@@ -20,8 +20,8 @@ class FeatureController extends BehatViewerBuildController
     {
         $this->beforeAction();
 
-		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
-		$feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
+        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
+        $feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
 
         return $this->getResponse(array(
             'feature' => $feature,
@@ -40,8 +40,8 @@ class FeatureController extends BehatViewerBuildController
     {
         $this->beforeAction();
 
-		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
-		$feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
+        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
+        $feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
 
         return $this->getResponse(array(
             'feature' => $feature,

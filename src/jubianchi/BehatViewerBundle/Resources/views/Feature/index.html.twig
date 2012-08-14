@@ -1,11 +1,11 @@
 {% extends 'BehatViewerBundle::layout.sidebar.html.twig' %}
 
-{% set scenarios = feature.getScenariosCount %}
+{% set scenarios = feature.stat.scenarios %}
 
-{% set passed = feature.getPassedScenariosCount %}
+{% set passed = feature.stat.scenariosPassed %}
 {% set passedpcnt = ((passed / scenarios) * 100)|round %}
 
-{% set failed = feature.getFailedScenariosCount %}
+{% set failed = feature.stat.scenariosFailed %}
 {% set failedpcnt = ((failed / scenarios) * 100)|round %}
 
 {% block title %}

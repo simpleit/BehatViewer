@@ -65,28 +65,28 @@ class HistoryController extends BehatViewerProjectController
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/{username}/{project}/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.entry")
-	 * @Route("/{username}/{project}/{build}/{type}", requirements={"type" = "list|thumb", "build" = "\d+"}, name="behatviewer.history.entry.switch")
-     * @Template()
+     * @Route("/{username}/{project}/{build}/{type}", requirements={"type" = "list|thumb", "build" = "\d+"}, name="behatviewer.history.entry.switch")
+	 * @Template()
      */
     public function entryAction($username, $project, $build, $type = 'thumb')
     {
         $this->beforeAction();
 
-		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
-		$build = $repository->findOneByProjectAndId($this->getProject(), $build);
+        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
+        $build = $repository->findOneByProjectAndId($this->getProject(), $build);
 
-		$type = $this->setViewType($type);
-		$view = 'entry' . ($type !== null ? '-' . $type : '');
+        $type = $this->setViewType($type);
+        $view = 'entry' . ($type !== null ? '-' . $type : '');
 
-		return $this->render(
-			'BehatViewerBundle:History:' . $view . '.html.twig',
-			$this->getResponse(
-				array(
-					'build' => $build,
-					'items' => $build->getFeatures()
-				)
-			)
-		);
+        return $this->render(
+            'BehatViewerBundle:History:' . $view . '.html.twig',
+            $this->getResponse(
+                array(
+                    'build' => $build,
+                    'items' => null !== $build ? $build->getFeatures() : array()
+                )
+            )
+        );
     }
 
     /**
@@ -102,11 +102,11 @@ class HistoryController extends BehatViewerProjectController
     {
         $this->beforeAction();
 
-		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
-		$build = $repository->findOneByProjectAndId($this->getProject(), $build);
-		if(null === $build) {
-			throw $this->createNotFoundException();
-		}
+        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
+        $build = $repository->findOneByProjectAndId($this->getProject(), $build);
+        if (null === $build) {
+            throw $this->createNotFoundException();
+        }
 
         $manager = $this->getDoctrine()->getEntityManager();
         $manager->remove($build);
@@ -131,7 +131,7 @@ class HistoryController extends BehatViewerProjectController
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
 
         foreach ($this->getRequest()->get('delete') as $id) {
-			$build = $repository->findOneById($id);
+            $build = $repository->findOneById($id);
             $manager->remove($build);
             $manager->flush();
         }

@@ -12,21 +12,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 
 class UserController extends BehatViewerController
 {
-	/**
-	 * @Route("/projects", name="behatviewer.projects")
-	 * @Secure(roles="ROLE_USER")
-	 * @Template()
-	 */
-	public function listAction()
-	{
-		$projects = $this->getDoctrine()
-			->getRepository('BehatViewerBundle:Project')
-			->findByUser($this->getUser());
+    /**
+     * @Route("/projects", name="behatviewer.projects")
+     * @Secure(roles="ROLE_USER")
+     * @Template("BehatViewerBundle:Project:list.html.twig")
+     */
+    public function listAction()
+    {
+        $projects = $this->getDoctrine()
+            ->getRepository('BehatViewerBundle:Project')
+            ->findByUser($this->getUser());
 
-		return $this->getResponse(array(
-			'items' => $projects
-		));
-	}
+        return $this->getResponse(array(
+            'items' => $projects
+        ));
+    }
 
     /**
      * @Route("/login", name="behatviewer.login")

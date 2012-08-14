@@ -1,24 +1,12 @@
-{% set steps = feature.getStepsHavingStatusCount %}
-{% set scenarios = feature.getScenariosCount %}
+{% set steps = feature.stat.steps %}
+{% set scenarios = feature.stat.scenarios %}
 
-{% set spassed = feature.getPassedScenariosCount %}
-{% set sfailed = feature.getFailedScenariosCount %}
-
-{% set passed = feature.getStepsHavingStatusCount('passed') %}
-{% set passedpcnt = ((passed / steps) * 100)|round(3) %}
-
-{% set failed = feature.getStepsHavingStatusCount('failed') %}
-{% set failedpcnt = ((failed / steps) * 100)|round(3) %}
-
-{% set skipped = feature.getStepsHavingStatusCount('skipped') %}
-{% set skippedpcnt = ((skipped / steps) * 100)|round(3) %}
-
-{% set undefined = feature.getStepsHavingStatusCount('undefined') %}
-{% set undefinedpcnt = ((undefined / steps) * 100)|round(3) %}
-
-{% set pending = feature.getStepsHavingStatusCount('pending') %}
-{% set pendingpcnt = ((pending / steps) * 100)|round(3) %}
-
+{% if steps > 0 %}
+    {% set passed = feature.stat.stepsPassed %}
+    {% set passedpcnt = ((passed / steps) * 100)|round(3) %}
+{% else %}
+    {% set passedpcnt = 0 %}
+{% endif %}
 
 {% if feature.description != '' %}
     {% autoescape false %}<p>{{ feature.description|nl2br }}</p>{% endautoescape %}
@@ -31,51 +19,66 @@
             {%
                 include 'BehatViewerBundle::Components/progress-bar.html.twig'
                 with {
-                    'passed': feature.getStepsHavingStatusCount('passed'),
-                    'failed': feature.getStepsHavingStatusCount('failed'),
-                    'skipped': feature.getStepsHavingStatusCount('skipped') + feature.getStepsHavingStatusCount('pending'),
-                    'undefined': feature.getStepsHavingStatusCount('undefined')
+                    'passed': feature.stat.stepsPassed,
+                    'failed': feature.stat.stepsFailed,
+                    'skipped': feature.stat.stepsSkipped + feature.stat.stepsPending,
+                    'undefined': feature.stat.stepsUndefined
                 }
             %}
         </li>
     </ul>
     <ul class="nav nav-list pull-left">
         <li class="nav-header">Feature:</li>
-        <li><span class="success" style="color: #62C462; font-weight: bold">Completion: {{ passedpcnt|round }}%</span>
+        <li>
+            <span class="success" style="color: #62C462; font-weight: bold">
+                Completion: {{ passedpcnt|round }}%
+            </span>
         </li>
     </ul>
     <ul class="nav nav-list pull-left">
         <li class="nav-header">Scenarios:</li>
-        {% if spassed > 0 %}
-        <li><span class="success"
-                  style="color: #62C462; font-weight: bold">Passed: {{ spassed }} / {{ scenarios }}</span></li>
+        {% if feature.stat.scenariosPassed > 0 %}
+            <li>
+                <span class="success" style="color: #62C462; font-weight: bold">
+                    Passed: {{ feature.stat.scenariosPassed }} / {{ scenarios }}
+                </span>
+            </li>
         {% endif %}
-        {% if sfailed > 0 %}
-        <li><span class="danger"
-                  style="color: #EE5F5B; font-weight: bold">Failed: {{ sfailed }} / {{ scenarios }}</span></li>
+        {% if feature.stat.scenariosFailed > 0 %}
+            <li>
+                <span class="danger" style="color: #EE5F5B; font-weight: bold">
+                    Failed: {{ feature.stat.scenariosFailed }} / {{ scenarios }}
+                </span>
+            </li>
         {% endif %}
     </ul>
     <ul class="nav nav-list pull-left">
         <li class="nav-header">Steps:</li>
-        {% if passed %}
-        <li><span class="success" style="color: #62C462; font-weight: bold">Passed: {{ passed }} / {{ steps }}</span>
+        {% if feature.stat.stepsPassed > 0 %}
+            <li>
+                <span class="success" style="color: #62C462; font-weight: bold">
+                    Passed: {{ feature.stat.stepsPassed }} / {{ steps }}
+                </span>
+            </li>
+        {% endif %}
+        {% if feature.stat.stepsFailed > 0 %}
+            <li>
+                <span class="danger" style="color: #EE5F5B; font-weight: bold">
+                    Failed: {{ feature.stat.stepsFailed }} / {{ steps }}
+                </span>
+            </li>
+        {% endif %}
+        {% if feature.stat.stepsSkipped > 0 %}
+        <li><span class="info" style="color: #5BC0DE; font-weight: bold">Skipped: {{ feature.stat.stepsSkipped }} / {{ steps }}</span>
         </li>
         {% endif %}
-        {% if failed %}
-        <li><span class="danger" style="color: #EE5F5B; font-weight: bold">Failed: {{ failed }} / {{ steps }}</span>
+        {% if feature.stat.stepsPending > 0 %}
+        <li><span class="info" style="color: #5BC0DE; font-weight: bold">Pending: {{ feature.stat.stepsPending }} / {{ steps }}</span>
         </li>
         {% endif %}
-        {% if skipped %}
-        <li><span class="info" style="color: #5BC0DE; font-weight: bold">Skipped: {{ skipped }} / {{ steps }}</span>
-        </li>
-        {% endif %}
-        {% if pending %}
-        <li><span class="info" style="color: #5BC0DE; font-weight: bold">Pending: {{ pending }} / {{ steps }}</span>
-        </li>
-        {% endif %}
-        {% if undefined %}
+        {% if feature.stat.stepsUndefined > 0 %}
         <li><span class="warning"
-                  style="color: #FBB450; font-weight: bold">Undefined: {{ undefined }} / {{ steps }}</span></li>
+                  style="color: #FBB450; font-weight: bold">Undefined: {{ feature.stat.stepsUndefined }} / {{ steps }}</span></li>
         {% endif %}
     </ul>
 </div>

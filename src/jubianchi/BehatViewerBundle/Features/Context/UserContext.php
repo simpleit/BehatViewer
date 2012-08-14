@@ -11,8 +11,8 @@ class UserContext extends BehatViewerContext
      */
     public function afterScenario()
     {
-		$this->iAmNotLoggedIn();
-		$this->getMainContext()->getSubContext('browser')->getSession()->stop();
+        $this->iAmNotLoggedIn();
+        $this->getMainContext()->getSubContext('browser')->getSession()->stop();
     }
 
     /**

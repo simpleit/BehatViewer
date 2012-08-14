@@ -145,6 +145,7 @@ class Build extends Base
         $stat = $this->getStat();
 
         foreach ($this->getFeatures() as $feature) {
+            $feature->computeStat();
             $stat->addFeature($feature);
         }
     }

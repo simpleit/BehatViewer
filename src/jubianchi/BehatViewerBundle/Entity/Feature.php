@@ -72,6 +72,13 @@ class Feature extends Base
     private $status;
 
     /**
+     * @var \jubianchi\BehatViewerBundle\Entity\FeatureStat $stat
+     *
+     * @ORM\OneToOne(targetEntity="FeatureStat", inversedBy="feature", cascade={"persist", "remove"})
+     */
+    private $stat;
+
+    /**
      * Get id
      *
      * @return integer
@@ -166,58 +173,6 @@ class Feature extends Base
         return $this->scenarios;
     }
 
-    public function getScenariosCount()
-    {
-        return sizeof($this->getScenarios());
-    }
-
-    public function getHavingStatusScenarios($status)
-    {
-        $scenarios = array();
-        foreach ($this->getScenarios() as $scenario) {
-            if ($scenario->getStatus() === $status) {
-                $scenarios[] = $scenario;
-            }
-        }
-
-        return $scenarios;
-    }
-
-    public function getPassedScenarios()
-    {
-        return $this->getHavingStatusScenarios(self::STATUS_PASSED);
-    }
-
-    public function getPassedScenariosCount()
-    {
-        return sizeof($this->getPassedScenarios());
-    }
-
-    public function getFailedScenarios()
-    {
-        return $this->getHavingStatusScenarios(self::STATUS_FAILED);
-    }
-
-    public function getFailedScenariosCount()
-    {
-        return sizeof($this->getFailedScenarios());
-    }
-
-    public function getStepsHavingStatus($status = null)
-    {
-        $steps = array();
-        foreach ($this->getScenarios() as $scenario) {
-            $steps = array_merge($scenario->getStepsHavingStatus($status), $steps);
-        }
-
-        return $steps;
-    }
-
-    public function getStepsHavingStatusCount($status = null)
-    {
-        return sizeof($this->getStepsHavingStatus($status));
-    }
-
     /**
      * Set slug
      *
@@ -294,5 +249,31 @@ class Feature extends Base
     public function getBuild()
     {
         return $this->build;
+    }
+
+    public function getStat()
+    {
+        if (null === $this->stat) {
+            $stat = new FeatureStat();
+            $stat->setFeature($this);
+
+            $this->setStat($stat);
+        }
+
+        return $this->stat;
+    }
+
+    public function setStat(FeatureStat $stat)
+    {
+        $this->stat = $stat;
+    }
+
+    public function computeStat()
+    {
+        $stat = $this->getStat();
+
+        foreach ($this->getScenarios() as $scenario) {
+            $stat->addScenario($scenario);
+        }
     }
 }
