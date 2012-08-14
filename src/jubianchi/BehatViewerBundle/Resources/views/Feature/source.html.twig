@@ -10,7 +10,8 @@
     </h1>
     <div class="row-fluid">
         {% if source %}
-        <pre class="prettyprint linenums lang-feature">{{ source }}</pre>
+            <div class="step well"><h4>{{ feature.file }}</h4></div>
+            <pre class="prettyprint linenums lang-feature">{{ source }}</pre>
         {% else %}
         <div class="alert alert-danger alert-block">
             <h4 class="alert-heading">Error</h4>

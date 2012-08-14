@@ -214,6 +214,41 @@ h3 .gravatar {
     border-radius: 8px;
 }
 
+.step.alert {
+    margin-bottom: 0px;
+    border-bottom: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.step.well {
+    margin-bottom: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    padding: 10px;
+}
+
+.step.well + .prettyprint {
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+}
+
+.step.well:first-of-type {
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+.step.alert:last-of-type {
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
 @media (max-width: 979px) {
     .noty_bar.noty_layout_top {
         position: static;

@@ -16,13 +16,6 @@
         {% endif %}
 
         {% include 'BehatViewerBundle::Feature/switcher.html.twig' %}
-
-        {% if feature.tags|count %}
-            <br/>
-            {% for tag in feature.tags %}
-                <a href="{{ path("behatviewer.tag", {slug: tag.slug}) }}" class="label label-info"> {{ tag.name }} </a>
-            {% endfor %}
-        {% endif %}
     </h1>
 {% endblock %}
 

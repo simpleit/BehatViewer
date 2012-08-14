@@ -12,6 +12,14 @@
     {% autoescape false %}<p>{{ feature.description|nl2br }}</p>{% endautoescape %}
 {% endif %}
 
+{% if feature.tags|count %}
+<p>
+    {% for tag in feature.tags %}
+        <a href="{{ path("behatviewer.tag", {slug: tag.slug}) }}" class="label label-info"> {{ tag.name }} </a>&nbsp;
+    {% endfor %}
+</p>
+{% endif %}
+
 <div class="well sidebar-nav clearfix">
     <ul class="nav nav-list">
         <li class="nav-header">Summary</li>
@@ -27,6 +35,7 @@
             %}
         </li>
     </ul>
+
     <ul class="nav nav-list pull-left">
         <li class="nav-header">Feature:</li>
         <li>

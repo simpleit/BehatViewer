@@ -15,10 +15,13 @@
 {% set pending = scenario.getStepsHavingStatusCount('pending') %}
 {% set pendingpcnt = ((pending / steps) * 100)|round %}
 
-<h2 id="{{ scenario.slug }}">
-    {{ scenario.name }}
-    <small>
-        <span>{{ steps }} step(s)</span> /
+<div class="step well">
+    <h2 id="{{ scenario.slug }}">
+        {{ scenario.name }}
+    </h2>
+
+    <p>
+        <strong>{{ steps }} step(s)</strong> /
         {% if passed > 0 %}<span class="success" style="color: #62C462; font-weight: bold">Passed: {{ passed }}/{{ steps }} ({{ passedpcnt }}%)</span>{% endif %}
         {% if passed > 0 and (failed > 0 or skipped > 0 or pending > 0 or undefined > 0) %} / {% endif %}
         {% if failed > 0 %}<span class="danger" style="color: #EE5F5B; font-weight: bold">Failed: {{ failed }}/{{ steps }} ({{ failedpcnt }}%)</span>{% endif %}
@@ -28,18 +31,16 @@
         {% if pending > 0 %}<span class="info" style="color: #5BC0DE; font-weight: bold">Pending: {{ pending }}/{{ steps }} ({{ pendingpcnt }}%)</span>{% endif %}
         {% if pending > 0 and undefined > 0 %} / {% endif %}
         {% if undefined > 0 %}<span class="warning" style="color: #FBB450; font-weight: bold">Undefined: {{ undefined }}/{{ steps }} ({{ undefinedpcnt }}%)</span>{% endif %}
-    </small>
-</h2>
+    </p>
 
-<p>
-    {% for tag in scenario.tags %}
-    <a href="{{ path('behatviewer.tag', {slug: tag.slug}) }}" class="label label-info">{{ tag.name }}</a>
-    {% endfor %}
-</p>
+    <p>
+        {% for tag in scenario.tags %}
+            <a href="{{ path('behatviewer.tag', {slug: tag.slug}) }}" class="label label-info">{{ tag.name }}</a>
+        {% endfor %}
+    </p>
+</div>
 
 
 {% for step in scenario.steps %}
 {% include "BehatViewerBundle::Feature/step.html.twig" %}
 {% endfor %}
-
-<hr class="soften"/>
