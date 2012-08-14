@@ -41,7 +41,13 @@ class DefinitionsCommand extends ProjectCommand
             return 0;
         }
 
-        exec(sprintf('php behat.phar -di'), $data);
+		$cmd = $project->getTestCommand();
+
+		if(false == preg_match('/(.*(?:\/|\s){1}behat(?:\s+|\.phar\s+))(?:(@[[:alnum:]]*)|)/', $cmd, $m)) {
+			throw new \RuntimeException('Could not load definition for project ' . $project->getSlug() . ' : error parsing command');
+		}
+
+        exec(sprintf($m[0] . ' -di'), $data);
 
         $this->saveProjectDefinitionsFromData($project, $data, $output);
 
