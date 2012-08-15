@@ -12,11 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Step extends Base
 {
-    const STATUS_PASSED = 'passed';
-    const STATUS_FAILED = 'failed';
-    const STATUS_SKIPPED = 'skipped';
-    const STATUS_UNDEFINED = 'undefined';
-
     /**
      * @var integer $id
      *
@@ -71,7 +66,7 @@ class Step extends Base
     /**
      * @var string $status
      *
-     * @ORM\Column(name="status", type="string", length=20)
+     * @ORM\Column(name="status", type="step_status")
      */
     private $status;
 
@@ -111,7 +106,7 @@ class Step extends Base
     private $exception;
 
     /**
-     * @var jubianchi\BehatViewerBundle\Entity\Scenario $scenario
+     * @var \jubianchi\BehatViewerBundle\Entity\Scenario $scenario
      *
      * @ORM\ManyToOne(targetEntity="Scenario", inversedBy="steps", cascade={"remove", "persist"})
      * @ORM\JoinColumn(name="scenario_id", referencedColumnName="id")
@@ -351,7 +346,7 @@ class Step extends Base
     /**
      * Set scenario
      *
-     * @param jubianchi\BehatViewerBundle\Entity\Scenario $scenario
+     * @param \jubianchi\BehatViewerBundle\Entity\Scenario $scenario
      */
     public function setScenario(\jubianchi\BehatViewerBundle\Entity\Scenario $scenario)
     {
@@ -361,7 +356,7 @@ class Step extends Base
     /**
      * Get scenario
      *
-     * @return jubianchi\BehatViewerBundle\Entity\Scenario
+     * @return \jubianchi\BehatViewerBundle\Entity\Scenario
      */
     public function getScenario()
     {

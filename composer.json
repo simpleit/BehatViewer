@@ -5,19 +5,20 @@
         "psr-0": { "": "src/" }
     },
     "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "2.1.*",
-        "doctrine/orm": "2.2.*",
-        "doctrine/doctrine-bundle": "dev-master",
-        "twig/extensions": "dev-master",
-        "symfony/assetic-bundle": "dev-master",
-        "symfony/swiftmailer-bundle": "dev-master",
-        "symfony/monolog-bundle": "dev-master",
-        "sensio/distribution-bundle": "dev-master",
-        "sensio/framework-extra-bundle": "dev-master",
-        "sensio/generator-bundle": "dev-master",
-        "jms/security-extra-bundle": "1.1.*",
-        "jms/di-extra-bundle": "1.0.*",
+        "php":                                  ">=5.3.3",
+
+        "symfony/symfony":                      "2.1.*",
+        "doctrine/orm":                         "2.2.*",
+        "doctrine/doctrine-bundle":             "dev-master",
+        "twig/extensions":                      "dev-master",
+        "symfony/assetic-bundle":               "dev-master",
+        "symfony/swiftmailer-bundle":           "dev-master",
+        "symfony/monolog-bundle":               "dev-master",
+        "sensio/distribution-bundle":           "dev-master",
+        "sensio/framework-extra-bundle":        "dev-master",
+        "sensio/generator-bundle":              "dev-master",
+        "jms/security-extra-bundle":            "1.1.*",
+        "jms/di-extra-bundle":                  "1.0.*",
 
         "doctrine/doctrine-fixtures-bundle":    "*",
         "friendsofsymfony/jsrouting-bundle":    "dev-master",
@@ -25,6 +26,7 @@
         "jubianchi/behat-viewer-extension":     "*"
     },
     "require-dev": {
+        "doctrine/doctrine-migrations-bundle":  "*",
         "behat/behat":                          "v2.4.0",
         "behat/mink-extension":                 "dev-master",
         "behat/symfony2-extension":             "v1.0.0",

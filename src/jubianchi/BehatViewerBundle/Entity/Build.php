@@ -43,6 +43,13 @@ class Build extends Base
      */
     private $stat;
 
+	/**
+	 * @var string $status
+	 *
+	 * @ORM\Column(name="status", type="status")
+	 */
+	private $status;
+
     /**
      * @ORM\OneToMany(targetEntity="Feature", mappedBy="build", cascade={"remove","persist"})
      */
@@ -149,4 +156,24 @@ class Build extends Base
             $stat->addFeature($feature);
         }
     }
+
+	/**
+	 * Set status
+	 *
+	 * @param string $status
+	 */
+	public function setStatus($status)
+	{
+		$this->status = $status;
+	}
+
+	/**
+	 * Get status
+	 *
+	 * @return string
+	 */
+	public function getStatus()
+	{
+		return $this->status;
+	}
 }

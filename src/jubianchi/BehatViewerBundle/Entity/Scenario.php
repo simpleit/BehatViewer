@@ -12,9 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Scenario extends Base
 {
-    const STATUS_PASSED = 'passed';
-    const STATUS_FAILED = 'failed';
-
     /**
      * @var integer $id
      *
@@ -41,7 +38,7 @@ class Scenario extends Base
     /**
      * @var string $status
      *
-     * @ORM\Column(name="status", type="string", length=20)
+     * @ORM\Column(name="status", type="status")
      */
     private $status;
 
