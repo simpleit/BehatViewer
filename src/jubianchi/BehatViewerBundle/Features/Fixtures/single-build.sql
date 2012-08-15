@@ -1,9 +1,9 @@
 INSERT INTO `behatviewer_build` (`id`, `stat_id`, `project_id`, `date`) VALUES
 (1, 1, 1, '1970-01-01 00:00:00');
 
-INSERT INTO `behatviewer_feature` (`id`, `build_id`, `name`, `slug`, `description`) VALUES
-(1, 1, 'Passed', 'passed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.'),
-(2, 1, 'Failed', 'failed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.');
+INSERT INTO `behatviewer_feature` (`id`, `build_id`, `stat_id`, `name`, `slug`, `description`) VALUES
+(1, 1, 1, 'Passed', 'passed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.'),
+(2, 1, 2, 'Failed', 'failed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.');
 
 INSERT INTO `behatviewer_scenario` (`id`, `feature_id`, `name`, `slug`, `status`) VALUES
 (1, 1, 'Passed', 'passed', 'passed'),
@@ -21,3 +21,7 @@ INSERT INTO `behatviewer_step` (`id`, `scenario_id`, `type`, `background`, `clea
 
 INSERT INTO `behatviewer_build_stat` (`id`, `features`, `features_passed`, `features_failed`, `scenarios`, `scenarios_passed`, `scenarios_failed`, `steps`, `steps_passed`, `steps_failed`, `steps_skipped`, `steps_undefined`, `steps_pending`) VALUES
 (1, 2, 1, 1, 2, 1, 1, 8, 7, 1, 0, 0, 0);
+
+INSERT INTO `behatviewer_feature_stat` (`id`, `scenarios`, `scenarios_passed`, `scenarios_failed`, `steps`, `steps_passed`, `steps_failed`, `steps_skipped`, `steps_undefined`, `steps_pending`) VALUES
+(1, 1, 1, 0, 3, 3, 0, 0, 0, 0),
+(2, 1, 0, 1, 5, 4, 1, 0, 0, 0);

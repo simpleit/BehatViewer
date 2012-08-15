@@ -419,13 +419,12 @@ class BuildStat
             $this->featuresFailed += 1;
         }
 
-        $this->scenarios += count($feature->getScenarios());
-
-        $this->scenariosFailed += count($feature->getHavingStatusScenarios(Scenario::STATUS_FAILED));
-        $this->scenariosPassed += count($feature->getHavingStatusScenarios(Scenario::STATUS_PASSED));
-
         foreach ($feature->getScenarios() as $scenario) {
-            $this->steps += count($scenario->getSteps());
+			$this->scenarios ++;
+			$this->scenariosFailed += $scenario->getStatus() === Scenario::STATUS_FAILED ? 1 : 0;
+			$this->scenariosPassed += $scenario->getStatus() === Scenario::STATUS_PASSED ? 1 : 0;
+
+			$this->steps += count($scenario->getSteps());
 
             $this->stepsFailed += $scenario->getStepsHavingStatusCount(Step::STATUS_FAILED);
             $this->stepsPassed += $scenario->getStepsHavingStatusCount(Step::STATUS_PASSED);
