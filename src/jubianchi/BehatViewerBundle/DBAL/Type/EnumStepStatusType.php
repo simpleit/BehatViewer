@@ -8,7 +8,7 @@ class EnumStepStatusType extends Type
 {
 	const ENUM_STEP_STATUS = 'step_status';
 	const STATUS_PASSED = 'passed';
-	const STATUS_FALIED = 'failed';
+	const STATUS_FAILED = 'failed';
 	const STATUS_SKIPPED = 'skipped';
 	const STATUS_PENDING = 'pending';
 	const STATUS_UNDEFINED = 'undefined';
@@ -25,8 +25,8 @@ class EnumStepStatusType extends Type
 
 	public function convertToDatabaseValue($value, AbstractPlatform $platform)
 	{
-		if (!in_array($value, array(self::STATUS_PASSED, self::STATUS_FALIED, self::STATUS_SKIPPED, self::STATUS_PENDING, self::STATUS_UNDEFINED))) {
-			throw new \InvalidArgumentException("Invalid status");
+		if (false === in_array($value, array(self::STATUS_PASSED, self::STATUS_FAILED, self::STATUS_SKIPPED, self::STATUS_PENDING, self::STATUS_UNDEFINED))) {
+			throw new \InvalidArgumentException('Invalid step status : ' . $value);
 		}
 		return $value;
 	}

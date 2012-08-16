@@ -53,4 +53,4 @@ Feature: Login
           And I am on the homepage
           And I follow "Logged in as user"
           And I follow "Logout"
-         Then I should be on "/login"
+         Then I should be on "/user/foo-bar"

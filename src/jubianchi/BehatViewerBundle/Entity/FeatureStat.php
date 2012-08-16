@@ -2,7 +2,9 @@
 
 namespace jubianchi\BehatViewerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM,
+	jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType,
+	jubianchi\BehatViewerBundle\DBAL\Type\EnumStepStatusType;
 
 /**
  * jubianchi\BehatViewerBundle\Entity\BuildStat
@@ -324,16 +326,16 @@ class FeatureStat
     {
         $this->scenarios++;
 
-        $this->scenariosFailed += $scenario->getStatus() === Step::STATUS_FAILED ? 1 : 0;
-        $this->scenariosPassed += $scenario->getStatus() === Step::STATUS_PASSED ? 1 : 0;
+        $this->scenariosFailed += $scenario->getStatus() === EnumStatusType::STATUS_FAILED ? 1 : 0;
+        $this->scenariosPassed += $scenario->getStatus() === EnumStatusType::STATUS_PASSED ? 1 : 0;
 
         foreach ($scenario->getSteps() as $step) {
             $this->steps++;
 
-            $this->stepsFailed += $step->getStatus() === Step::STATUS_FAILED ? 1 : 0;
-            $this->stepsPassed += $step->getStatus() === Step::STATUS_PASSED ? 1 : 0;
-            $this->stepsSkipped += $step->getStatus() === Step::STATUS_SKIPPED ? 1 : 0;
-            $this->stepsUndefined += $step->getStatus() === Step::STATUS_UNDEFINED ? 1 : 0;
+            $this->stepsFailed += $step->getStatus() === EnumStepStatusType::STATUS_FAILED ? 1 : 0;
+            $this->stepsPassed += $step->getStatus() === EnumStepStatusType::STATUS_PASSED ? 1 : 0;
+            $this->stepsSkipped += $step->getStatus() === EnumStepStatusType::STATUS_SKIPPED ? 1 : 0;
+            $this->stepsUndefined += $step->getStatus() === EnumStepStatusType::STATUS_UNDEFINED ? 1 : 0;
         }
     }
 }

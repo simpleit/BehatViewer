@@ -1,3 +1,4 @@
+@project @user
 Feature: Create project
 
   @reset @javascript @fixture:single-project.sql

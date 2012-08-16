@@ -16,8 +16,6 @@ class DefinitionsController extends BehatViewerProjectController
      */
     public function indexAction($username, $project)
     {
-        $this->beforeAction();
-
         $definitions = array();
         $contexts = array();
         $project = $this->getProject();

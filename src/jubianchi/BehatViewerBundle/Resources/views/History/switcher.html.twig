@@ -5,8 +5,8 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li><a href="{{ path("behatviewer.project.switch", {"type": "list", "project": project.slug, "username": user.username}) }}" title="List view"><i class="icon-tasks"></i> List</a></li>
-      <li><a href="{{ path("behatviewer.project.switch", {"type": "thumb", "project": project.slug, "username": user.username}) }}" title="Dashboard"><i class="icon-dashboard"></i> Dashboard</a></li>
+      <li><a href="{{ path("behatviewer.project.switch", {"type": "list", "project": project.slug, "username": project.user.username}) }}" title="List view"><i class="icon-tasks"></i> List</a></li>
+      <li><a href="{{ path("behatviewer.project.switch", {"type": "thumb", "project": project.slug, "username": project.user.username}) }}" title="Dashboard"><i class="icon-dashboard"></i> Dashboard</a></li>
     </ul>
   </div>
 </div>

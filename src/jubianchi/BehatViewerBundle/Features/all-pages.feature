@@ -14,12 +14,21 @@ Feature: All pages
             | /profile                  | 200    |
             | /logout                   | 200    |
             | /config                   | 200    |
-            | /user/project             | 200    |
-            | /user/project/history     | 200    |
-            | /user/project/stats       | 200    |
-            | /user/project/definitions | 200    |
+            | /user/project/edit        | 200    |
 
-    @reset @fixture:single-project.sql @fixture:single-build.sql
+    @reset
+    Scenario Outline: Accessing not existing resources
+        Given am on "<url>"
+         Then the response status code should be <status>
+
+          Examples:
+            | url                       | status |
+            | /user/project             | 404    |
+            | /user/project/history     | 404    |
+            | /user/project/stats       | 404    |
+            | /user/project/definitions | 404    |
+
+    @reset @fixture:user.sql @fixture:single-project.sql @fixture:single-build.sql
     Scenario Outline: Anonymous user with data
         Given I am on "<url>"
          Then the response status code should be <status>
@@ -27,15 +36,13 @@ Feature: All pages
 
           Examples:
             | url                       | status |
-            | /                         | 200    |
             | /login                    | 200    |
             | /profile                  | 200    |
-            | /logout                   | 200    |
             | /config                   | 200    |
-            | /user/project             | 200    |
-            | /user/project/history     | 200    |
-            | /user/project/stats       | 200    |
-            | /user/project/definitions | 200    |
+            | /projects                 | 200    |
+            | /password                 | 200    |
+            | /project/create           | 200    |
+            | /user/foo-bar/edit        | 200    |
 
     @reset
     Scenario Outline: Logged in user without data
@@ -48,10 +55,7 @@ Feature: All pages
           Examples:
             | url                       | status |
             | /                         | 200    |
-            | /user/project             | 200    |
-            | /user/project/history     | 200    |
-            | /user/project/stats       | 200    |
-            | /user/project/definitions | 200    |
+            | /project/create           | 200    |
 
   @reset @fixture:single-project.sql
   Scenario Outline: Logged in user with data

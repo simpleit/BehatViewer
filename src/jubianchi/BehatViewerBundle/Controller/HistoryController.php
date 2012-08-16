@@ -23,8 +23,6 @@ class HistoryController extends BehatViewerProjectController
      */
     public function indexAction($username, $project, $page = 1)
     {
-        $this->beforeAction();
-
         $project = $this->getProject();
 
         $builds = array();
@@ -70,8 +68,6 @@ class HistoryController extends BehatViewerProjectController
      */
     public function entryAction($username, $project, $build, $type = 'thumb')
     {
-        $this->beforeAction();
-
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
         $build = $repository->findOneByProjectAndId($this->getProject(), $build);
 

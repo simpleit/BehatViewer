@@ -13,17 +13,21 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+
+			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+			new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+
+			new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\AopBundle\JMSAopBundle(),
+			new JMS\DiExtraBundle\JMSDiExtraBundle($this),
 
 			new jubianchi\BehatViewerBundle\BehatViewerBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-			new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev'))) {

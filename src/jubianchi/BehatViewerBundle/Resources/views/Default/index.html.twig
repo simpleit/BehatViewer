@@ -4,6 +4,7 @@
 <h1 class="page-header">
     Projects
 
+    {% if user.id is defined %}
     <div class="pull-right">
         <div class="btn-group">
             <a class="btn" href="{{ path('behatviewer.project.create') }}">
@@ -11,6 +12,7 @@
             </a>
         </div>
     </div>
+    {% endif %}
 </h1>
 
 <div class="row-fluid">

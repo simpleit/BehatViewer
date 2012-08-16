@@ -84,10 +84,9 @@ class Project extends Base
 	/**
 	 * @var string $type
 	 *
-	 * @Assert\NotBlank()
 	 * @ORM\Column(name="type", type="project_type", options={"default": "public"})
 	 */
-	private $type;
+	private $type = 'public';
 
     /**
      * @ORM\OneToMany(targetEntity="Build", mappedBy="project", cascade={"remove","persist"})

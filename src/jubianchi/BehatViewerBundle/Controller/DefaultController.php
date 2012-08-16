@@ -7,7 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     jubianchi\BehatViewerBundle\Entity,
-    JMS\SecurityExtraBundle\Annotation\Secure;
+    JMS\SecurityExtraBundle\Annotation\Secure,
+	jubianchi\BehatViewerBundle\DBAL\Type\EnumProjectTypeType;
 
 /**
  *
@@ -18,17 +19,13 @@ class DefaultController extends BehatViewerController
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/", name="behatviewer.homepage", options={"expose"=true})
-     * @Secure(roles="ROLE_USER")
      * @Template()
      */
     public function indexAction()
     {
         $this->beforeAction();
 
-        $projects = array();
-        if (null !== $this->getUser()) {
-            $projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByUser($this->getUser());
-        }
+		$projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByType(EnumProjectTypeType::TYPE_PUBLIC);
 
         if (0 === count($projects)) {
             throw new \jubianchi\BehatViewerBundle\Exception\NoProjectConfiguredException();

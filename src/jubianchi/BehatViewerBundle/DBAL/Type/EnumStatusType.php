@@ -8,7 +8,7 @@ class EnumStatusType extends Type
 {
 	const ENUM_STATUS = 'status';
 	const STATUS_PASSED = 'passed';
-	const STATUS_FALIED = 'failed';
+	const STATUS_FAILED = 'failed';
 
 	public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
 	{
@@ -22,8 +22,8 @@ class EnumStatusType extends Type
 
 	public function convertToDatabaseValue($value, AbstractPlatform $platform)
 	{
-		if (!in_array($value, array(self::STATUS_PASSED, self::STATUS_FALIED))) {
-			throw new \InvalidArgumentException("Invalid status");
+		if (false === in_array($value, array(self::STATUS_PASSED, self::STATUS_FAILED))) {
+			throw new \InvalidArgumentException('Invalid status : ' . $value);
 		}
 		return $value;
 	}

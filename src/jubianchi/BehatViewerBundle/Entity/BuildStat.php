@@ -2,7 +2,9 @@
 
 namespace jubianchi\BehatViewerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM,
+	jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType,
+	jubianchi\BehatViewerBundle\DBAL\Type\EnumStepStatusType;
 
 /**
  * jubianchi\BehatViewerBundle\Entity\BuildStat
@@ -413,7 +415,7 @@ class BuildStat
     public function addFeature(Feature $feature)
     {
         $this->features += 1;
-        if ($feature->getStatus() === Feature::STATUS_PASSED) {
+        if ($feature->getStatus() === EnumStatusType::STATUS_PASSED) {
             $this->featuresPassed += 1;
         } else {
             $this->featuresFailed += 1;
@@ -421,15 +423,15 @@ class BuildStat
 
         foreach ($feature->getScenarios() as $scenario) {
 			$this->scenarios ++;
-			$this->scenariosFailed += $scenario->getStatus() === Scenario::STATUS_FAILED ? 1 : 0;
-			$this->scenariosPassed += $scenario->getStatus() === Scenario::STATUS_PASSED ? 1 : 0;
+			$this->scenariosFailed += $scenario->getStatus() === EnumStatusType::STATUS_FAILED ? 1 : 0;
+			$this->scenariosPassed += $scenario->getStatus() === EnumStatusType::STATUS_PASSED ? 1 : 0;
 
 			$this->steps += count($scenario->getSteps());
 
-            $this->stepsFailed += $scenario->getStepsHavingStatusCount(Step::STATUS_FAILED);
-            $this->stepsPassed += $scenario->getStepsHavingStatusCount(Step::STATUS_PASSED);
-            $this->stepsSkipped += $scenario->getStepsHavingStatusCount(Step::STATUS_SKIPPED);
-            $this->stepsUndefined += $scenario->getStepsHavingStatusCount(Step::STATUS_UNDEFINED);
+            $this->stepsFailed += $scenario->getStepsHavingStatusCount(EnumStepStatusType::STATUS_FAILED);
+            $this->stepsPassed += $scenario->getStepsHavingStatusCount(EnumStepStatusType::STATUS_PASSED);
+            $this->stepsSkipped += $scenario->getStepsHavingStatusCount(EnumStepStatusType::STATUS_SKIPPED);
+            $this->stepsUndefined += $scenario->getStepsHavingStatusCount(EnumStepStatusType::STATUS_UNDEFINED);
         }
     }
 }

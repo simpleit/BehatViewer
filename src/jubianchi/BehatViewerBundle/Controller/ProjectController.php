@@ -61,8 +61,6 @@ class ProjectController extends BehatViewerProjectController
      */
     public function indexAction($username, $project, $type = 'thumb')
     {
-		$this->beforeAction();
-
         return $this->forward(
             'BehatViewerBundle:History:entry',
             array(
