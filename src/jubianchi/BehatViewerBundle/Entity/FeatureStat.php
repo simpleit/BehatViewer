@@ -3,8 +3,8 @@
 namespace jubianchi\BehatViewerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-	jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType,
-	jubianchi\BehatViewerBundle\DBAL\Type\EnumStepStatusType;
+    jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType,
+    jubianchi\BehatViewerBundle\DBAL\Type\EnumStepStatusType;
 
 /**
  * jubianchi\BehatViewerBundle\Entity\BuildStat

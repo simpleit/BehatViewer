@@ -64,7 +64,7 @@ class HistoryController extends BehatViewerProjectController
      *
      * @Route("/{username}/{project}/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.entry")
      * @Route("/{username}/{project}/{build}/{type}", requirements={"type" = "list|thumb", "build" = "\d+"}, name="behatviewer.history.entry.switch")
-	 * @Template()
+     * @Template()
      */
     public function entryAction($username, $project, $build, $type = 'thumb')
     {

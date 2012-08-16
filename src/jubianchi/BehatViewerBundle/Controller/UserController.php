@@ -14,14 +14,14 @@ class UserController extends BehatViewerController
 {
     /**
      * @Route("/projects", name="behatviewer.projects")
-	 * @Secure(roles="ROLE_USER")
+     * @Secure(roles="ROLE_USER")
      * @Template("BehatViewerBundle:Project:list.html.twig")
      */
     public function listAction()
     {
-		$projects = $this->getDoctrine()
-			->getRepository('BehatViewerBundle:Project')
-			->findByUser($this->getUser());
+        $projects = $this->getDoctrine()
+            ->getRepository('BehatViewerBundle:Project')
+            ->findByUser($this->getUser());
 
         return $this->getResponse(array(
             'items' => $projects

@@ -110,7 +110,7 @@ class BehatViewerAnalyzer extends EventDispatcher implements ContainerAwareInter
 
                     if ($step->getStatus() !== \jubianchi\BehatViewerBundle\DBAL\Type\EnumStepStatusType::STATUS_PASSED) {
                         $scenario->setStatus(\jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
-						$build->setStatus(\jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
+                        $build->setStatus(\jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
                     }
 
                     $scenario->addStep($step);
@@ -128,7 +128,7 @@ class BehatViewerAnalyzer extends EventDispatcher implements ContainerAwareInter
             $feature->setBuild($build);
             $build->addFeature($feature);
             $this->getEntityManager()->persist($build);
-			$this->getEntityManager()->flush();
+            $this->getEntityManager()->flush();
         }
 
         return $build;

@@ -133,13 +133,13 @@ class BrowserContext extends MinkContext implements KernelAwareInterface
         return new Step\Given(sprintf('I am on "%s"', $this->parameters['base_url']));
     }
 
-	/**
-	 * @Then /^I should be on the homepage$/
-	 */
-	public function iShouldBeOnTheHomepage()
-	{
-		return new Step\Given(sprintf('I should be on "%s"', $this->parameters['base_url']));
-	}
+    /**
+     * @Then /^I should be on the homepage$/
+     */
+    public function iShouldBeOnTheHomepage()
+    {
+        return new Step\Given(sprintf('I should be on "%s"', $this->parameters['base_url']));
+    }
 
     /**
      * @Then /^The value of the "(?P<field>(?:[^"]|\\")*)" field should be "(?P<value>(?:[^"]|\\")*)"$/

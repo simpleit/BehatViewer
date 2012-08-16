@@ -3,8 +3,8 @@
 namespace jubianchi\BehatViewerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-	jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType,
-	jubianchi\BehatViewerBundle\DBAL\Type\EnumStepStatusType;
+    jubianchi\BehatViewerBundle\DBAL\Type\EnumStatusType,
+    jubianchi\BehatViewerBundle\DBAL\Type\EnumStepStatusType;
 
 /**
  * jubianchi\BehatViewerBundle\Entity\BuildStat
@@ -422,11 +422,11 @@ class BuildStat
         }
 
         foreach ($feature->getScenarios() as $scenario) {
-			$this->scenarios ++;
-			$this->scenariosFailed += $scenario->getStatus() === EnumStatusType::STATUS_FAILED ? 1 : 0;
-			$this->scenariosPassed += $scenario->getStatus() === EnumStatusType::STATUS_PASSED ? 1 : 0;
+            $this->scenarios ++;
+            $this->scenariosFailed += $scenario->getStatus() === EnumStatusType::STATUS_FAILED ? 1 : 0;
+            $this->scenariosPassed += $scenario->getStatus() === EnumStatusType::STATUS_PASSED ? 1 : 0;
 
-			$this->steps += count($scenario->getSteps());
+            $this->steps += count($scenario->getSteps());
 
             $this->stepsFailed += $scenario->getStepsHavingStatusCount(EnumStepStatusType::STATUS_FAILED);
             $this->stepsPassed += $scenario->getStepsHavingStatusCount(EnumStepStatusType::STATUS_PASSED);

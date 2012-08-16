@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     jubianchi\BehatViewerBundle\Entity,
     JMS\SecurityExtraBundle\Annotation\Secure,
-	jubianchi\BehatViewerBundle\DBAL\Type\EnumProjectTypeType;
+    jubianchi\BehatViewerBundle\DBAL\Type\EnumProjectTypeType;
 
 /**
  *
@@ -25,7 +25,7 @@ class DefaultController extends BehatViewerController
     {
         $this->beforeAction();
 
-		$projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByType(EnumProjectTypeType::TYPE_PUBLIC);
+        $projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByType(EnumProjectTypeType::TYPE_PUBLIC);
 
         if (0 === count($projects)) {
             throw new \jubianchi\BehatViewerBundle\Exception\NoProjectConfiguredException();

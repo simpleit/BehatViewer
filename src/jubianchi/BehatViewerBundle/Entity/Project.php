@@ -81,12 +81,12 @@ class Project extends Base
      */
     private $test_command;
 
-	/**
-	 * @var string $type
-	 *
-	 * @ORM\Column(name="type", type="project_type", options={"default": "public"})
-	 */
-	private $type = 'public';
+    /**
+     * @var string $type
+     *
+     * @ORM\Column(name="type", type="project_type", options={"default": "public"})
+     */
+    private $type = 'public';
 
     /**
      * @ORM\OneToMany(targetEntity="Build", mappedBy="project", cascade={"remove","persist"})
@@ -307,23 +307,23 @@ class Project extends Base
         return $builds->last() ?: null;
     }
 
-	/**
-	 * Get definitions
-	 *
-	 * @return \Doctrine\Common\Collections\Collection
-	 */
-	public function getType()
-	{
-		return $this->type;
-	}
+    /**
+     * Get definitions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
-	/**
-	 * Set test_command
-	 *
-	 * @param string $testCommand
-	 */
-	public function setType($type)
-	{
-		$this->type = $type;
-	}
+    /**
+     * Set test_command
+     *
+     * @param string $testCommand
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 }
