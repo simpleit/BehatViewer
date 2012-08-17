@@ -59,7 +59,7 @@ class ProjectController extends BehatViewerProjectController
      * @Route("/{username}/{project}/{type}", requirements={"type" = "list|thumb"}, name="behatviewer.project.switch")
      * @Template()
      */
-    public function indexAction($username, $project, $type = 'thumb')
+    public function indexAction($username, $project, $type = null)
     {
         return $this->forward(
             'BehatViewerBundle:History:entry',

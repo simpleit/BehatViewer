@@ -66,12 +66,16 @@ class HistoryController extends BehatViewerProjectController
      * @Route("/{username}/{project}/{build}/{type}", requirements={"type" = "list|thumb", "build" = "\d+"}, name="behatviewer.history.entry.switch")
      * @Template()
      */
-    public function entryAction($username, $project, $build, $type = 'thumb')
+    public function entryAction($username, $project, $build, $type = null)
     {
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
         $build = $repository->findOneByProjectAndId($this->getProject(), $build);
 
-        $type = $this->setViewType($type);
+        if(null === $type) {
+			$type = $this->getViewType('thumb');
+		}
+		$this->setViewType($type);
+
         $view = 'entry' . ($type !== null ? '-' . $type : '');
 
         return $this->render(
