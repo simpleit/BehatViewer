@@ -1,5 +1,5 @@
 {
-    "name": "jubianchi/BehatViewer",
+    "name": "behat-viewer/BehatViewer",
     "description": "Behat report browser",
     "autoload": {
         "psr-0": { "": "src/" }
