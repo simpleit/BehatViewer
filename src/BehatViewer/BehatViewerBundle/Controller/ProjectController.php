@@ -59,14 +59,14 @@ class ProjectController extends BehatViewerProjectController
      * @Route("/{username}/{project}/{type}", requirements={"type" = "list|thumb"}, name="behatviewer.project.switch")
      * @Template()
      */
-    public function indexAction($username, $project, $type = null)
+    public function indexAction(Entity\Project $project, $type = null)
     {
         return $this->forward(
             'BehatViewerBundle:History:entry',
             array(
-                'username' => $username,
-                'project' => $project,
-                'build' => $this->getProject()->getLastBuild(),
+                'username' => $project->getUser()->getUsername(),
+                'project' => $project->getSlug(),
+                'build' => $project->getLastBuild(),
                 'type' => $type
             )
         );
@@ -79,12 +79,12 @@ class ProjectController extends BehatViewerProjectController
      * @Secure(roles="ROLE_USER")
      * @Template("BehatViewerBundle:Project:edit.html.twig")
      */
-    public function editAction()
+    public function editAction(Entity\Project $project)
     {
         $request = $this->getRequest();
         $success = false;
 
-        $form = $this->get('form.factory')->create(new ProjectType(), $this->getProject());
+        $form = $this->get('form.factory')->create(new ProjectType(), $project);
 
         if ('POST' === $request->getMethod()) {
             $success = $this->save($form);
@@ -105,12 +105,12 @@ class ProjectController extends BehatViewerProjectController
      * @Route("/{username}/{project}/delete", name="behatviewer.project.delete")
      * @Secure(roles="ROLE_USER")
      */
-    public function deleteAction()
+    public function deleteAction(Entity\Project $project)
     {
         $this->beforeAction();
 
         $manager = $this->getDoctrine()->getManager();
-        $manager->remove($this->getProject());
+        $manager->remove($project);
         $manager->flush();
 
         return $this->redirect($this->generateUrl('behatviewer.homepage'));

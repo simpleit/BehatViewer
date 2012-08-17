@@ -5,7 +5,8 @@ namespace BehatViewer\BehatViewerBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    BehatViewer\BehatViewerBundle\Form\Type\ProjectType;
+    BehatViewer\BehatViewerBundle\Form\Type\ProjectType,
+	BehatViewer\BehatViewerBundle\Entity;
 
 class StatsController extends BehatViewerProjectController
 {
@@ -15,9 +16,8 @@ class StatsController extends BehatViewerProjectController
      * @Route("/{username}/{project}/stats", name="behatviewer.stats")
      * @Template()
      */
-    public function indexAction($username, $project)
+    public function indexAction(Entity\Project $project)
     {
-        $project = $this->getProject();
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
         $builds = $repository->findLastBuildsForProject($project, 10);
 

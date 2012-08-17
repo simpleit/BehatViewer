@@ -10,12 +10,20 @@
         <parameter key="behat_viewer.session.class">BehatViewer\BehatViewerBundle\Session</parameter>
         <parameter key="behat_viewer.markdown_parser.class">BehatViewer\BehatViewerBundle\Markdown\MarkdownParser</parameter>
         <parameter key="behat_viewer.listener.configuration.class">BehatViewer\BehatViewerBundle\Listener\ConfigurationListener</parameter>
+        <parameter key="behat_viewer.project.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\ProjectParamConverter</parameter>
 
         <parameter key="behat_viewer.db.table_prefix_subscriber.class">BehatViewer\BehatViewerBundle\Extension\Doctrine\BehatViewerTablePrefix</parameter>
         <parameter key="behat_viewer.db.table_prefix">behatviewer_</parameter>
     </parameters>
 
     <services>
+        <service id="project_converter" class="%behat_viewer.project.converter.class%">
+            <tag name="request.param_converter" priority="1"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="behat_viewer.twig.extension" class="%behat_viewer.twig.extension.class%">
             <tag name="twig.extension"/>
             <call method="setContainer">

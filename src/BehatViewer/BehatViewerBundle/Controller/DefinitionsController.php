@@ -4,7 +4,8 @@ namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
+	BehatViewer\BehatViewerBundle\Entity;
 
 class DefinitionsController extends BehatViewerProjectController
 {
@@ -14,11 +15,10 @@ class DefinitionsController extends BehatViewerProjectController
      * @Route("/{username}/{project}/definitions", name="behatviewer.definitions")
      * @Template()
      */
-    public function indexAction($username, $project)
+    public function indexAction(Entity\Project $project)
     {
         $definitions = array();
         $contexts = array();
-        $project = $this->getProject();
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Definition');
 
         if ($project !== null) {

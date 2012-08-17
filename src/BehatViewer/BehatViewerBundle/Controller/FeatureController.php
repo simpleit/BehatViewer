@@ -16,7 +16,7 @@ class FeatureController extends BehatViewerBuildController
      * @Route("/{username}/{project}/{build}/{feature}", name="behatviewer.feature")
      * @Template()
      */
-    public function indexAction($username, $project, $build, $feature)
+    public function indexAction(Entity\Project $project, $build, $feature)
     {
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
         $feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
@@ -34,7 +34,7 @@ class FeatureController extends BehatViewerBuildController
      * @Route("/{username}/{project}/{build}/{feature}/source", name="behatviewer.feature.source", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function sourceAction($username, $project, $build, $feature)
+    public function sourceAction(Entity\Project $project, $build, $feature)
     {
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
         $feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);

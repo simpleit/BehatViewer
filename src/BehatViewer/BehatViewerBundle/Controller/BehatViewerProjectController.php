@@ -1,6 +1,8 @@
 <?php
 namespace BehatViewer\BehatViewerBundle\Controller;
 
+use BehatViewer\BehatViewerBundle\Entity;
+
 /**
  *
  */
@@ -26,15 +28,19 @@ abstract class BehatViewerProjectController extends BehatViewerController
     protected function getProject()
     {
         if (null === $this->project) {
-            $username = $this->getRequest()->get('username');
-            $project = $this->getRequest()->get('project');
+            if($this->getRequest()->get('project') instanceof Entity\Project) {
+				$this->project = $this->getRequest()->get('project');
+			} else {
+				$username = $this->getRequest()->get('username');
+				$project = $this->getRequest()->get('project');
 
-            $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
-            $this->project = $repository->findOneByUsernameAndSlug($username, $project);
+				$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
+				$this->project = $repository->findOneByUsernameAndSlug($username, $project);
 
-            if (null === $this->project) {
-                throw $this->createNotFoundException();
-            }
+				if (null === $this->project) {
+					throw $this->createNotFoundException();
+				}
+			}
         }
 
         return $this->project;
