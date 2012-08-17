@@ -1,7 +1,7 @@
 default:
     paths:
-        features: "src/jubianchi/BehatViewerBundle/Features"
-        bootstrap: "src/jubianchi/BehatViewerBundle/Features/Context"
+        features: "src/BehatViewer/BehatViewerBundle/Features"
+        bootstrap: "src/BehatViewer/BehatViewerBundle/Features/Context"
 
     context:
         parameters:
@@ -10,7 +10,7 @@ default:
 
     formatter:
         classes:
-            "jubianchi\BehatViewerExtension\Formatter\BehatViewerFormatter": "viewer"
+            "BehatViewer\BehatViewerExtension\Formatter\BehatViewerFormatter": "viewer"
 
         name: pretty,viewer
         parameters:
@@ -19,7 +19,7 @@ default:
             screen_id: 1
 
     extensions:
-        jubianchi\BehatViewerExtension\Extension: ~
+        BehatViewer\BehatViewerExtension\Extension: ~
 
 
         Behat\Symfony2Extension\Extension:
@@ -45,7 +45,7 @@ travis:
 
     formatter:
         classes:
-            "jubianchi\BehatViewerExtension\Formatter\BehatViewerDistantFormatter": "distant"
+            "BehatViewer\BehatViewerExtension\Formatter\BehatViewerDistantFormatter": "distant"
 
         name: pretty,distant
         parameters:
