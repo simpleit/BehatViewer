@@ -19,7 +19,7 @@ class StatsController extends BehatViewerProjectController
     public function indexAction(Entity\Project $project)
     {
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
-        $builds = $repository->findLastBuildsForProject($project, 10);
+        $builds = $repository->findLastBuildsForProject($project, 50);
 
         return $this->getResponse(array(
             'builds' => $builds

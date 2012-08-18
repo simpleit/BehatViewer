@@ -14,7 +14,6 @@ Feature: All pages
             | /profile                  | 200    |
             | /logout                   | 200    |
             | /config                   | 200    |
-            | /user/project/edit        | 200    |
 
     @reset
     Scenario Outline: Accessing not existing resources
@@ -27,6 +26,7 @@ Feature: All pages
             | /user/project/history     | 404    |
             | /user/project/stats       | 404    |
             | /user/project/definitions | 404    |
+            | /user/project/edit        | 200    |
 
     @reset @fixture:user.sql @fixture:single-project.sql @fixture:single-build.sql
     Scenario Outline: Anonymous user with data

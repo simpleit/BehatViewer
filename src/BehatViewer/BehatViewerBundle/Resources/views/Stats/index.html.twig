@@ -1,153 +1,344 @@
 {% extends 'BehatViewerBundle::layout.html.twig' %}
 
 {% block container %}
-<div class="row-fluid">
-    <h1 class="page-header">
-        Stats for {{ project.name }}
-    </h1>
+    <div class="row-fluid">
+        <h1 class="page-header">
+            Stats for {{ project.name }}
+        </h1>
 
-    {% if builds|count > 0 %}
-    <section class="row-fluid">
-        <h2>Completion</h2>
+        {% if builds|count > 0 %}
+            <section class="row-fluid">
+                <div id="graph-completion" class="row-fluid"></div>
+            </section>
 
-        <div class="span5">
-            <table class="table table-striped highchart" data-graph-container=".. .. .highchart-container"
-                   data-graph-type="area" data-graph-yaxis-1-title-text="%" data-graph-color-1="#EE5F5B"
-                   data-graph-color-2="#5EB95E">
-                <caption>Build completion</caption>
-                <thead>
-                <tr>
-                    <th>Build</th>
-                    <th data-graph-stack-group="percent">Error</th>
-                    <th data-graph-stack-group="percent">Completion</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for build in builds %}
-                    {% set total = build.stat.steps %}
-                    {% set errors = build.stat.stepsFailed + build.stat.stepsSkipped + build.stat.stepsPending + build.stat.stepsUndefined %}
-                    <tr>
-                        <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
-                        <td>{{ ((errors / total) * 100)|round(0) }}%</td>
-                        <td>{{ ((build.stat.stepsPassed / total) * 100)|round(0) }}%</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            <section class="row-fluid">
+                <div id="graph-steps" class="row-fluid"></div>
+            </section>
+        {% else %}
+            <div class="alert alert-info">
+                <h4 class="alert-heading">No build</h4>
 
-        <div class="span6 highchart-container"></div>
-    </section>
-
-    <section class="row-fluid">
-        <h2>Errors</h2>
-
-        <div class="span5">
-            <table class="table table-striped highchart" data-graph-container=".. .. .highchart-container"
-                   data-graph-type="area" data-graph-yaxis-1-title-text="Errors" data-graph-color-1="#EE5F5B"
-                   data-graph-color-2="#5BC0DE" data-graph-color-3="#5BC0DE" data-graph-color-4="#C09853">
-                <caption>Number of errors</caption>
-                <thead>
-                <tr>
-                    <th>Build</th>
-                    <th data-graph-stack-group="percent">Failed</th>
-                    <th data-graph-stack-group="percent">Skipped</th>
-                    <th data-graph-stack-group="percent">Pending</th>
-                    <th data-graph-stack-group="percent">Undefined</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for build in builds %}
-                <tr>
-                    <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
-                    <td>{{ build.stat.stepsFailed }}</td>
-                    <td>{{ build.stat.stepsSkipped }}</td>
-                    <td>{{ build.stat.stepsPending }}</td>
-                    <td>{{ build.stat.stepsUndefined }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="span6 highchart-container"></div>
-    </section>
-
-    <section class="row-fluid">
-        <h2>Features &amp; Scenarios</h2>
-
-        <div class="span5">
-            <table class="table table-striped highchart" data-graph-container=".. .. .highchart-container"
-                   data-graph-type="line" data-graph-yaxis-1-title-text="Features / Scenarios">
-                <caption>Number of features &amp; scenarios</caption>
-                <thead>
-                <tr>
-                    <th>Build</th>
-                    <th>Features</th>
-                    <th>Scenarios</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for build in builds %}
-                {% set total = build.stat.steps %}
-                <tr>
-                    <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
-                    <td>{{ build.stat.features }}</td>
-                    <td>{{ build.stat.scenarios }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="span6 highchart-container"></div>
-    </section>
-
-    <section class="row-fluid">
-        <h2>Steps</h2>
-
-        <div class="span5">
-            <table class="table table-striped highchart" data-graph-container=".. .. .highchart-container" data-graph-type="line" data-graph-yaxis-1-title-text="Steps">
-                <caption>Number of steps</caption>
-                <thead>
-                <tr>
-                    <th>Build</th>
-                    <th>Steps</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for build in builds %}
-                <tr>
-                    <td>#{{ build.id }} {{ build.date|date("Y-m-d") }}</td>
-                    <td>{{ build.stat.steps }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="span6 highchart-container"></div>
-    </section>
-    {% else %}
-    <div class="alert alert-info">
-        <h4 class="alert-heading">No build</h4>
-
-        <p>
-            This project has not been built yet.
-            To build it, please run <code>app/console behat-viewer:build {{ project.slug }}</code>.
-        </p>
+                <p>
+                    This project has not been built yet.
+                    To build it, please run <code>app/console behat-viewer:build {{ project.slug }}</code>.
+                </p>
+            </div>
+        {% endif %}
     </div>
-    {% endif %}
-
-</div>
 {% endblock %}
 
 {% block javascript %}
 <script src="{{ asset('bundles/behatviewer/js/highchart.js') }}"></script>
-<script src="{{ asset('bundles/behatviewer/js/jquery.highchartTable.js') }}"></script>
 <script>
-    $(function () {
-        $('table.highchart').highchartTable(); $(window).off('loaded', this);
-    });
+    (function () {
+        var chart, i;
+
+        var data = {
+                dates: [
+                    {% set sep = '' %}
+                    {% for build in builds %}
+                        {{ sep }}'{{ build.date|date("Y-m-d") }}'
+                        {% set sep = ', ' %}
+                    {% endfor %}
+                ],
+                completion: {
+                    success: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {% set total = build.stat.features %}
+                            {% set errors = build.stat.featuresFailed %}
+                            {% set success = (((total - errors) / total) * 100)|round(2) %}
+
+                            {{ sep }}{{ success }}
+                        {% set sep = ', ' %}
+                        {% endfor %}
+                    ],
+                    error: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {% set total = build.stat.features %}
+                            {% set errors = build.stat.featuresFailed %}
+                            {% set error = ((errors / total) * 100)|round(2) %}
+
+                            {{ sep }}{{ error }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ]
+                },
+                features: {
+                    total: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {{ sep }}{{ build.stat.features }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ]
+                },
+                scenarios: {
+                    total: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {{ sep }}{{ build.stat.scenarios }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ]
+                },
+                steps: {
+                    total: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {{ sep }}{{ build.stat.steps }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ],
+                    passed: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {% set total = build.stat.steps %}
+                            {{ sep }}{{ ((build.stat.stepsPassed / total) * 100)|round(2) }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ],
+                    failed: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {% set total = build.stat.steps %}
+                            {{ sep }}{{ ((build.stat.stepsFailed / total) * 100)|round(2) }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ],
+                    skipped: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {% set total = build.stat.steps %}
+                            {{ sep }}{{ ((build.stat.stepsSkipped / total) * 100)|round(2) }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ],
+                    pending: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {% set total = build.stat.steps %}
+                            {{ sep }}{{ ((build.stat.stepsPending / total) * 100)|round(2) }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ],
+                    undefined: [
+                        {% set sep = '' %}
+                        {% for build in builds %}
+                            {% set total = build.stat.steps %}
+                            {{ sep }}{{ ((build.stat.stepsUndefined / total) * 100)|round(2) }}
+                            {% set sep = ', ' %}
+                        {% endfor %}
+                    ]
+                }
+            },
+            opts = {
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: data.dates,
+                    labels: {
+                        enabled: false
+                    },
+                    title: {
+                        text: null
+                    }
+                },
+                tooltip: {
+                    shared: true
+                },
+                plotOptions: {
+                    areaspline: {
+                        stacking: 'normal',
+                        lineWidth: 1,
+                        marker: {
+                            enabled: false,
+                            states: {
+                                hover: {
+                                    enabled: true,
+                                    radius: 5
+                                }
+                            }
+                        },
+                        shadow: false,
+                        states: {
+                            hover: {
+                                lineWidth: 2
+                            }
+                        }
+                    }
+                }
+            };
+
+        $(document).ready(function() {
+            new Highcharts.Chart(
+                $.extend(
+                    opts,
+                    {
+                        chart: {
+                            type: 'areaspline',
+                            renderTo: 'graph-completion',
+                            zoomType: 'xy'
+                        },
+                        title: {
+                            text: 'Project completion over time'
+                        },
+                        yAxis: [
+                            {
+                                title: {
+                                    text: 'Rate'
+                                },
+                                labels: {
+                                    formatter: function() {
+                                        return this.value + '%';
+                                    }
+                                }
+                            },
+                            {
+                                title: {
+                                    text: 'Features',
+                                    style: {
+                                        color: '#89A54E'
+                                    }
+                                },
+                                opposite: true,
+                                labels: {
+                                    style: {
+                                        color: '#89A54E'
+                                    }
+                                }
+                            }
+                        ],
+                        series: [
+                            {
+                                name: 'Success',
+                                color: 'rgba(94,185,94,1)',
+                                fillColor: 'rgba(94,185,94,.5)',
+                                data: data.completion.success
+                            },
+                            {
+                                name: 'Error',
+                                color: 'rgba(238,95,91,1)',
+                                fillColor: 'rgba(238,95,91,.5)',
+                                data: data.completion.error
+                            },
+                            {
+                                name: 'Features',
+                                type: 'spline',
+                                color: '#89A54E',
+                                yAxis: 1,
+                                data: data.features.total
+                            }
+                        ]
+                    }
+                )
+            );
+            new Highcharts.Chart(
+                $.extend(
+                        opts,
+                        {
+                            chart: {
+                                type: 'areaspline',
+                                renderTo: 'graph-steps',
+                                zoomType: 'xy'
+                            },
+                            yAxis: [
+                                {
+                                    title: {
+                                        text: 'Rate'
+                                    },
+                                    labels: {
+                                        formatter: function() {
+                                            return this.value + '%';
+                                        }
+                                    }
+                                },
+                                {
+                                    title: {
+                                        text: 'Steps',
+                                        style: {
+                                            color: '#89A54E'
+                                        }
+                                    },
+                                    opposite: true,
+                                    labels: {
+                                        style: {
+                                            color: '#89A54E'
+                                        }
+                                    }
+                                },
+                                {
+                                    title: {
+                                        text: 'Scenarios',
+                                        style: {
+                                            color: 'rgba(184, 97, 184, 1)'
+                                        }
+                                    },
+                                    opposite: true,
+                                    labels: {
+                                        style: {
+                                            color: 'rgba(184, 97, 184, 1)'
+                                        }
+                                    }
+                                }
+                            ],
+                            title: {
+                                text: 'Steps statuses over time'
+                            },
+                            series: [
+                                {
+                                    name: 'Passed',
+                                    color: 'rgba(94,185,94,1)',
+                                    fillColor: 'rgba(94,185,94,.5)',
+                                    data: data.steps.passed
+                                },
+                                {
+                                    name: 'Failed',
+                                    color: 'rgba(238,95,91,1)',
+                                    fillColor: 'rgba(238,95,91,.5)',
+                                    data: data.steps.failed
+                                },
+                                {
+                                    name: 'Skipped',
+                                    color: 'rgba(91,192,222,1)',
+                                    fillColor: 'rgba(91,192,222,.5)',
+                                    data: data.steps.skipped
+                                },
+                                {
+                                    name: 'Pending',
+                                    color: 'rgba(91,192,222,1)',
+                                    fillColor: 'rgba(91,192,222,.5)',
+                                    data: data.steps.pending
+                                },
+                                {
+                                    name: 'Undefined',
+                                    color: 'rgba(192,152,83,1)',
+                                    fillColor: 'rgba(192,152,83,.5)',
+                                    data: data.steps.undefined
+                                },
+                                {
+                                    name: 'Steps',
+                                    type: 'spline',
+                                    color: '#89A54E',
+                                    yAxis: 1,
+                                    data: data.steps.total
+                                },
+                                {
+                                    name: 'Scenarios',
+                                    type: 'spline',
+                                    color: 'rgba(184, 97, 184, 1)',
+                                    yAxis: 2,
+                                    data: data.scenarios.total
+                                }
+                            ]
+                        }
+                )
+            );
+        });
+    })();
 </script>
 {% endblock %}
+
+
