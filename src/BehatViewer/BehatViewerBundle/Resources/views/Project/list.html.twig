@@ -37,9 +37,9 @@
             <td>{{ proj.outputpath }}</td>
             <td>
                 <div class="btn-group" id="toolbar">
-                    <a href="{{ path('behatviewer.project', {"project": proj.slug, "username": user.username}) }}" class="btn">View</a>
-                    <a href="{{ path('behatviewer.project.edit', {"project": proj.slug, "username": user.username}) }}" class="btn">Edit</a>
-                    <a href="{{ path('behatviewer.project.delete', {"project": proj.slug, "username": user.username}) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ path('behatviewer.project', {"project": proj.slug, "username": proj.user.username}) }}" class="btn">View</a>
+                    <a href="{{ path('behatviewer.project.edit', {"project": proj.slug, "username": proj.user.username}) }}" class="btn">Edit</a>
+                    <a href="{{ path('behatviewer.project.delete', {"project": proj.slug, "username": proj.user.username}) }}" class="btn btn-danger">Delete</a>
                 </div>
             </td>
         </tr>

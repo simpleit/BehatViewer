@@ -22,9 +22,10 @@ class ProjectController extends BehatViewerProjectController
     public function createAction()
     {
         $request = $this->getRequest();
+		$user = $this->getUser();
 
         $project = new Entity\Project();
-        $project->setUser($this->getUser());
+        $project->setUser($user);
 
         $form = $this->get('form.factory')->create(new ProjectType(), $project);
 
@@ -36,7 +37,7 @@ class ProjectController extends BehatViewerProjectController
                     $this->generateUrl(
                         'behatviewer.project.edit',
                         array(
-                            'username' => $this->getUser()->getUsername(),
+                            'username' => $user->getUsername(),
                             'project' => $form->getData()->getSlug(),
                             'success' => $success
                         )
@@ -59,7 +60,7 @@ class ProjectController extends BehatViewerProjectController
      * @Route("/{username}/{project}/{type}", requirements={"type" = "list|thumb"}, name="behatviewer.project.switch")
      * @Template()
      */
-    public function indexAction(Entity\Project $project, $type = null)
+    public function indexAction(Entity\User $user, Entity\Project $project, $type = null)
     {
         return $this->forward(
             'BehatViewerBundle:History:entry',
@@ -79,7 +80,7 @@ class ProjectController extends BehatViewerProjectController
      * @Secure(roles="ROLE_USER")
      * @Template("BehatViewerBundle:Project:edit.html.twig")
      */
-    public function editAction(Entity\Project $project)
+    public function editAction(Entity\User $user, Entity\Project $project)
     {
         $request = $this->getRequest();
         $success = false;
@@ -105,10 +106,8 @@ class ProjectController extends BehatViewerProjectController
      * @Route("/{username}/{project}/delete", name="behatviewer.project.delete")
      * @Secure(roles="ROLE_USER")
      */
-    public function deleteAction(Entity\Project $project)
+    public function deleteAction(Entity\User $user, Entity\Project $project)
     {
-        $this->beforeAction();
-
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($project);
         $manager->flush();

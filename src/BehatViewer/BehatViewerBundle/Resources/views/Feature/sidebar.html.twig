@@ -15,7 +15,12 @@
 {% if feature.tags|count %}
 <p>
     {% for tag in feature.tags %}
-        <a href="{{ path("behatviewer.tag", {slug: tag.slug}) }}" class="label label-info"> {{ tag.name }} </a>&nbsp;
+        {%
+            include 'BehatViewerBundle::Components/tag.html.twig'
+            with {
+                'tag': tag
+            }
+        %}
     {% endfor %}
 </p>
 {% endif %}

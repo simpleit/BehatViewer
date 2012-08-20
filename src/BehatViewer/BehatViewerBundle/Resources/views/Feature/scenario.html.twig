@@ -35,7 +35,12 @@
 
     <p>
         {% for tag in scenario.tags %}
-            <a href="{{ path('behatviewer.tag', {slug: tag.slug}) }}" class="label label-info">{{ tag.name }}</a>
+            {%
+                include 'BehatViewerBundle::Components/tag.html.twig'
+                with {
+                    'tag': tag
+                }
+            %}
         {% endfor %}
     </p>
 </div>

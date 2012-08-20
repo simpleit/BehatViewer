@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block width %}50%{% endblock %}
-{% block action %}{{ path('behatviewer.useredit', {'id': user.id}) }}{% endblock %}
+{% block action %}{{ path('behatviewer.useredit', {'username': user.username}) }}{% endblock %}
 
 {%block title %}
     <img data-rel="avatar" data-size="48" class="gravatar" src="{{ user.email|gravatar(48)}}" />

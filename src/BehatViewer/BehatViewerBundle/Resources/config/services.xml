@@ -10,7 +10,12 @@
         <parameter key="behat_viewer.session.class">BehatViewer\BehatViewerBundle\Session</parameter>
         <parameter key="behat_viewer.markdown_parser.class">BehatViewer\BehatViewerBundle\Markdown\MarkdownParser</parameter>
         <parameter key="behat_viewer.listener.configuration.class">BehatViewer\BehatViewerBundle\Listener\ConfigurationListener</parameter>
+
         <parameter key="behat_viewer.project.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\ProjectParamConverter</parameter>
+        <parameter key="behat_viewer.tag.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\TagParamConverter</parameter>
+        <parameter key="behat_viewer.user.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\UserParamConverter</parameter>
+        <parameter key="behat_viewer.build.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\BuildParamConverter</parameter>
+        <parameter key="behat_viewer.feature.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\FeatureParamConverter</parameter>
 
         <parameter key="behat_viewer.db.table_prefix_subscriber.class">BehatViewer\BehatViewerBundle\Extension\Doctrine\BehatViewerTablePrefix</parameter>
         <parameter key="behat_viewer.db.table_prefix">behatviewer_</parameter>
@@ -18,6 +23,34 @@
 
     <services>
         <service id="project_converter" class="%behat_viewer.project.converter.class%">
+            <tag name="request.param_converter" priority="1"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="tag_converter" class="%behat_viewer.tag.converter.class%">
+            <tag name="request.param_converter" priority="1"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="user_converter" class="%behat_viewer.user.converter.class%">
+            <tag name="request.param_converter" priority="1"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="build_converter" class="%behat_viewer.build.converter.class%">
+            <tag name="request.param_converter" priority="1"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="feature_converter" class="%behat_viewer.feature.converter.class%">
             <tag name="request.param_converter" priority="1"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

@@ -13,18 +13,15 @@ class FeatureController extends BehatViewerBuildController
     /**
      * @return array|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{username}/{project}/{build}/{feature}", name="behatviewer.feature")
+     * @Route("/{username}/{project}/{build}/{feature}", name="behatviewer.feature", requirements={"build" = "\d+"})
      * @Template()
      */
-    public function indexAction(Entity\Project $project, $build, $feature)
+    public function indexAction(Entity\User $user, Entity\Project $project, Entity\Build $build, Entity\Feature $feature)
     {
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
-        $feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
-
         return $this->getResponse(array(
             'feature' => $feature,
-            'build' => $this->getBuild(),
-            'features' => $this->getBuild()->getFeatures()
+            'build' => $build,
+            'features' => $build->getFeatures()
         ));
     }
 
@@ -34,16 +31,14 @@ class FeatureController extends BehatViewerBuildController
      * @Route("/{username}/{project}/{build}/{feature}/source", name="behatviewer.feature.source", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function sourceAction(Entity\Project $project, $build, $feature)
+    public function sourceAction(Entity\User $user, Entity\Project $project, Entity\Build $build, Entity\Feature $feature)
     {
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature');
-        $feature = $repository->findOneByBuildAndSlug($this->getBuild(), $feature);
         $file = $feature->getFile();
         $source = file_exists($file) ? file_get_contents($file) : '';
 
         return $this->getResponse(array(
             'feature' => $feature,
-            'build' => $this->getBuild(),
+            'build' => $build,
             'source' => $source
         ));
     }
@@ -51,7 +46,7 @@ class FeatureController extends BehatViewerBuildController
   /**
    * @return string
    *
-   * @Route("/screenshot/{id}", name="behatviewer.screenshot", options={"expose"=true})
+   * @Route("/screenshot/{id}", name="behatviewer.screenshot", options={"expose"=true}, requirements={"id" = "\d+"})
    */
   public function screenshotAction(Entity\Step $step)
   {

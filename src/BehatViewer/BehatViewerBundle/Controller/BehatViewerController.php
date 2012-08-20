@@ -17,10 +17,6 @@ abstract class BehatViewerController extends Controller
         return $this->get('behat_viewer.session');
     }
 
-    protected function beforeAction()
-    {
-    }
-
     /**
      * @return array
      */
@@ -29,7 +25,7 @@ abstract class BehatViewerController extends Controller
         return array_merge(
             array(
                 'session' => $this->getSession(),
-                'user' => $this->getUser()
+                'user' => $this->getRequest()->get('user')
             ),
             $variables
         );
@@ -37,7 +33,7 @@ abstract class BehatViewerController extends Controller
 
     protected function setViewType($type)
     {
-        $key = $this->getRequest()->get('_controller') . '.type';
+        $key = $this->getRequest()->get('_route') . '.type';
         $this->getSession()->set($key, $type);
 
         return $type;
@@ -45,7 +41,7 @@ abstract class BehatViewerController extends Controller
 
     protected function getViewType($default = null)
     {
-        $key = $this->getRequest()->get('_controller') . '.type';
+        $key = $this->getRequest()->get('_route') . '.type';
 
         return $this->getSession()->get($key, $default);
     }

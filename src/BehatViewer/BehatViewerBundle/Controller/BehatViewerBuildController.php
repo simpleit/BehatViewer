@@ -6,24 +6,6 @@ namespace BehatViewer\BehatViewerBundle\Controller;
  */
 abstract class BehatViewerBuildController extends BehatViewerProjectController
 {
-    private $build;
-
-    protected function getBuild()
-    {
-        if (null === $this->build) {
-            $project = $this->getProject();
-
-            $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
-            $this->build = $repository->findOneByProjectAndId($project, $this->getRequest()->get('build'));
-
-            if (null === $this->build) {
-                throw $this->createNotFoundException();
-            }
-        }
-
-        return $this->build;
-    }
-
     /**
      * @return array
      */
@@ -31,7 +13,7 @@ abstract class BehatViewerBuildController extends BehatViewerProjectController
     {
         return array_merge(
             array(
-                'build' => $this->getBuild()
+                'build' => $this->getRequest()->get('build')
             ),
             parent::getResponse($variables)
         );

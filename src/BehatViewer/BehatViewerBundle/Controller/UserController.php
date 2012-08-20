@@ -72,7 +72,7 @@ class UserController extends BehatViewerController
     {
         $request = $this->getRequest();
         $success = false;
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
         $form = $this->get('form.factory')->create(new ProfileType(), $user);
 
         if ('POST' === $request->getMethod()) {
@@ -120,7 +120,7 @@ class UserController extends BehatViewerController
         $request = $this->getRequest();
         $success = false;
         /** @var $user \BehatViewer\BehatViewerBundle\Entity\User */
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
         /** @var $form \Symfony\Component\Form\Form */
         $form = $this->get('form.factory')->create(new PasswordType(), $user);
 

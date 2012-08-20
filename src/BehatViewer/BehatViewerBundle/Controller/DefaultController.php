@@ -23,8 +23,6 @@ class DefaultController extends BehatViewerController
      */
     public function indexAction()
     {
-        $this->beforeAction();
-
         $projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByType(EnumProjectTypeType::TYPE_PUBLIC);
 
         if (0 === count($projects)) {
@@ -51,14 +49,13 @@ class DefaultController extends BehatViewerController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/analyze", name="behatviewer.analyze")
+     * @Route("/{username}/{project}/analyze", name="behatviewer.analyze")
      * @Method({"PUT"})
      */
-    public function analyzeAction()
+    public function analyzeAction(Entity\Project $project)
     {
         $data = json_decode($this->getRequest()->getContent(), true);
 
-        $project = $this->getSession()->getProject();
         $analyzer = $this->get('behat_viewer.analyzer');
         $analyzer->analyze($project, $data);
 

@@ -15,6 +15,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
  */
 class AdminController extends BehatViewerController
 {
+	/**
+	 * @return array
+	 *
+	 * @Route("/users/create", name="behatviewer.usercreate")
+	 * @Secure(roles="ROLE_USER")
+	 * @Template()
+	 */
+	public function userCreateAction()
+	{
+		$request = $this->getRequest();
+		$user = new Entity\User();
+		$form = $this->get('form.factory')->create(new EditUserType(), $user);
+
+		if ('POST' === $request->getMethod()) {
+			if ($this->save($form, $user)) {
+				return  $this->redirect($this->generateUrl('behatviewer.useredit', array('id' => $user->getId())));
+			}
+		}
+
+		return  $this->getResponse(array(
+			'success' => false,
+			'user' => $user,
+			'form' => $form->createView()
+		));
+	}
+
     /**
      * @return array
      *
@@ -33,7 +59,7 @@ class AdminController extends BehatViewerController
     }
 
     /**
-     * @Route("/users/disable/{id}", name="behatviewer.userdisable")
+     * @Route("/users/disable/{username}", name="behatviewer.userdisable")
      * @Secure(roles="ROLE_USER")
      */
     public function userDisableAction(Entity\User $user)
@@ -47,7 +73,7 @@ class AdminController extends BehatViewerController
     }
 
     /**
-     * @Route("/users/enable/{id}", name="behatviewer.userenable")
+     * @Route("/users/enable/{username}", name="behatviewer.userenable")
      * @Secure(roles="ROLE_USER")
      */
     public function userEnableAction(Entity\User $user)
@@ -63,7 +89,7 @@ class AdminController extends BehatViewerController
     /**
      * @return array
      *
-     * @Route("/users/{id}", name="behatviewer.useredit", requirements={"id" = "\d+"})
+     * @Route("/users/{username}", name="behatviewer.useredit", requirements={"id" = "\d+"})
      * @Secure(roles="ROLE_USER")
      * @Template()
      */
@@ -71,7 +97,7 @@ class AdminController extends BehatViewerController
     {
         $request = $this->getRequest();
         $form = $this->get('form.factory')->create(
-            new EditUserType(false, $user->getId() !== $this->get('security.context')->getToken()->getUser()->getId()),
+            new EditUserType(false, $user->getId() !== $this->getUser()->getId()),
             $user
         );
         $success = false;
@@ -82,32 +108,6 @@ class AdminController extends BehatViewerController
 
         return  $this->getResponse(array(
             'success' => $success,
-            'user' => $user,
-            'form' => $form->createView()
-        ));
-    }
-
-    /**
-     * @return array
-     *
-     * @Route("/users/create", name="behatviewer.usercreate")
-     * @Secure(roles="ROLE_USER")
-     * @Template()
-     */
-    public function userCreateAction()
-    {
-        $request = $this->getRequest();
-        $user = new Entity\User();
-        $form = $this->get('form.factory')->create(new EditUserType(), $user);
-
-        if ('POST' === $request->getMethod()) {
-            if ($this->save($form, $user)) {
-                return  $this->redirect($this->generateUrl('behatviewer.useredit', array('id' => $user->getId())));
-            }
-        }
-
-        return  $this->getResponse(array(
-            'success' => false,
             'user' => $user,
             'form' => $form->createView()
         ));

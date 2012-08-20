@@ -15,7 +15,7 @@ class DefinitionsController extends BehatViewerProjectController
      * @Route("/{username}/{project}/definitions", name="behatviewer.definitions")
      * @Template()
      */
-    public function indexAction(Entity\Project $project)
+    public function indexAction(Entity\User $user, Entity\Project $project)
     {
         $definitions = array();
         $contexts = array();

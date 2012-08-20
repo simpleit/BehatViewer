@@ -16,7 +16,7 @@ class StatsController extends BehatViewerProjectController
      * @Route("/{username}/{project}/stats", name="behatviewer.stats")
      * @Template()
      */
-    public function indexAction(Entity\Project $project)
+    public function indexAction(Entity\User $user, Entity\Project $project)
     {
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
         $builds = $repository->findLastBuildsForProject($project, 50);

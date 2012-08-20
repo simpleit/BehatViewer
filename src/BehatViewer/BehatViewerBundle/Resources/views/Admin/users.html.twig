@@ -37,12 +37,12 @@
             </td>
             <td>
                 <div class="btn-group" id="toolbar">
-                    <a href="{{ path('behatviewer.useredit', {"id": user.id}) }}" class="btn">Edit</a>
+                    <a href="{{ path('behatviewer.useredit', {"username": user.username}) }}" class="btn">Edit</a>
                     {% if user.id != app.user.id %}
                         {% if user.isEnabled %}
-                            <a href="{{ path('behatviewer.userdisable', {"id": user.id}) }}" class="btn btn-danger">Disable</a>
+                            <a href="{{ path('behatviewer.userdisable', {"username": user.username}) }}" class="btn btn-danger">Disable</a>
                         {% else %}
-                            <a href="{{ path('behatviewer.userenable', {"id": user.id}) }}" class="btn btn-success">Enable</a>
+                            <a href="{{ path('behatviewer.userenable', {"username": user.username}) }}" class="btn btn-success">Enable</a>
                         {% endif %}
                     {% endif %}
                 </div>
