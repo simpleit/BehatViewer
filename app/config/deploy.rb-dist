@@ -11,7 +11,7 @@ set :shared_children,       [app_path + "/logs", app_path + "/cache", web_path +
 set :use_composer,          true
 #set :update_vendors,       true
 
-set :repository,            "git://github.com/jubianchi/BehatViewer.git"
+set :repository,            "git://github.com/behat-viewer/BehatViewer.git"
 set :branch,                "master"
 set :scm,                   :git
 
