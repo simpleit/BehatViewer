@@ -1,6 +1,7 @@
 <?php
-
 namespace BehatViewer\BehatViewerBundle\Entity;
+
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 
 abstract class Base
 {
@@ -15,4 +16,8 @@ abstract class Base
 
         return $instance;
     }
+
+	public function getIdentity() {
+		return ObjectIdentity::fromDomainObject($this);
+	}
 }

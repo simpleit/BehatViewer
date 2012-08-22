@@ -1,5 +1,4 @@
 <?php
-
 namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,6 +15,10 @@ abstract class BehatViewerController extends Controller
     {
         return $this->get('behat_viewer.session');
     }
+
+	public function getAclProvider() {
+		return $this->get('security.acl.provider');
+	}
 
     /**
      * @return array

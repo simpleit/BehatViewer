@@ -1,23 +1,21 @@
 <?php
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     BehatViewer\BehatViewerBundle\Entity,
     BehatViewer\BehatViewerBundle\Form\Type\ProjectType,
-    JMS\SecurityExtraBundle\Annotation\Secure;
+    JMS\SecurityExtraBundle\Annotation as Security,
+	Symfony\Component\Security\Acl\Permission\MaskBuilder,
+	Symfony\Component\Security\Acl\Exception\AclAlreadyExistsException;
 
 class ProjectController extends BehatViewerProjectController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/project/create", name="behatviewer.project.create")
-     * @Secure(roles="ROLE_USER")
-     * @Template()
+     * @Configuration\Route("/project/create", name="behatviewer.project.create")
+     * @Security\Secure(roles="ROLE_USER")
+     * @Configuration\Template()
      */
     public function createAction()
     {
@@ -56,16 +54,17 @@ class ProjectController extends BehatViewerProjectController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{username}/{project}", name="behatviewer.project")
-     * @Route("/{username}/{project}/{type}", requirements={"type" = "list|thumb"}, name="behatviewer.project.switch")
-     * @Template()
+     * @Configuration\Route("/{username}/{project}", name="behatviewer.project")
+     * @Configuration\Route("/{username}/{project}/{type}", requirements={"type" = "list|thumb"}, name="behatviewer.project.switch")
+     * @Configuration\Template()
+	 * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */
     public function indexAction(Entity\User $user, Entity\Project $project, $type = null)
     {
         return $this->forward(
             'BehatViewerBundle:History:entry',
             array(
-                'username' => $project->getUser()->getUsername(),
+                'username' => $user->getUsername(),
                 'project' => $project->getSlug(),
                 'build' => $project->getLastBuild(),
                 'type' => $type
@@ -76,9 +75,10 @@ class ProjectController extends BehatViewerProjectController
     /**
      * @return array
      *
-     * @Route("/{username}/{project}/edit", name="behatviewer.project.edit")
-     * @Secure(roles="ROLE_USER")
-     * @Template("BehatViewerBundle:Project:edit.html.twig")
+     * @Configuration\Route("/{username}/{project}/edit", name="behatviewer.project.edit")
+	 * @Configuration\Template("BehatViewerBundle:Project:edit.html.twig")
+	 * @Security\Secure(roles="ROLE_USER")
+	 * @Security\SecureParam(name="project", permissions="EDIT")
      */
     public function editAction(Entity\User $user, Entity\Project $project)
     {
@@ -103,8 +103,9 @@ class ProjectController extends BehatViewerProjectController
      *
      * @return \Symfony\Component\HttpFoundation\Response|array
      *
-     * @Route("/{username}/{project}/delete", name="behatviewer.project.delete")
-     * @Secure(roles="ROLE_USER")
+     * @Configuration\Route("/{username}/{project}/delete", name="behatviewer.project.delete")
+     * @Security\Secure(roles="ROLE_USER")
+	 * @Security\SecureParam(name="project", permissions="DELETE")
      */
     public function deleteAction(Entity\User $user, Entity\Project $project)
     {
@@ -120,6 +121,15 @@ class ProjectController extends BehatViewerProjectController
         $form->bind($this->getRequest());
 
         if ($form->isValid()) {
+			try {
+				$acl = $this->getAclProvider()->createAcl($form->getData()->getIdentity());
+			} catch(AclAlreadyExistsException $exception) {
+				$acl = $this->getAclProvider()->findAcl($form->getData()->getIdentity());
+			}
+
+			$acl->insertObjectAce($this->getUser()->getIdentity(), MaskBuilder::MASK_OWNER);
+			$this->getAclProvider()->updateAcl($acl);
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($form->getData());
             $manager->flush();
