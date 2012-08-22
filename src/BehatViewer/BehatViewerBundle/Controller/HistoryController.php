@@ -2,12 +2,8 @@
 
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
-    JMS\SecurityExtraBundle\Annotation\Secure,
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
+    JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Entity;
 
 class HistoryController extends BehatViewerProjectController
@@ -17,9 +13,9 @@ class HistoryController extends BehatViewerProjectController
      *
      * @return array
      *
-     * @Route("/{username}/{project}/history", name="behatviewer.history", defaults={"page" = 1})
-     * @Route("/{username}/{project}/history/page/{page}", name="behatviewer.history.page", requirements={"page" = "\d+"})
-     * @Template()
+     * @Configuration\Route("/{username}/{project}/history", name="behatviewer.history", defaults={"page" = 1})
+     * @Configuration\Route("/{username}/{project}/history/page/{page}", name="behatviewer.history.page", requirements={"page" = "\d+"})
+     * @Configuration\Template()
      */
     public function indexAction(Entity\User $user, Entity\Project $project, $page = 1)
     {
@@ -60,9 +56,9 @@ class HistoryController extends BehatViewerProjectController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{username}/{project}/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.entry")
-     * @Route("/{username}/{project}/{build}/{type}", requirements={"type" = "list|thumb", "build" = "\d+"}, name="behatviewer.history.entry.switch")
-     * @Template()
+     * @Configuration\Route("/{username}/{project}/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.entry")
+     * @Configuration\Route("/{username}/{project}/{build}/{type}", requirements={"type" = "list|thumb", "build" = "\d+"}, name="behatviewer.history.entry.switch")
+     * @Configuration\Template()
      */
     public function entryAction(Entity\User $user, Entity\Project $project, Entity\Build $build = null, $type = null)
     {
@@ -92,9 +88,10 @@ class HistoryController extends BehatViewerProjectController
      *
      * @return \Symfony\Component\HttpFoundation\Response|array
      *
-     * @Route("/{username}/{project}/history/delete/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.delete")
-     * @Secure(roles="ROLE_USER")
-     * @Template("BehatViewerBundle:History:index.html.twig")
+     * @Configuration\Route("/{username}/{project}/history/delete/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.delete")
+	 * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
+	 * @Security\Secure(roles="ROLE_USER")
+	 * @Security\SecureParam(name="project", permissions="EDIT")
      */
     public function deleteAction(Entity\User $user, Entity\Project $project, Entity\Build $build)
     {
@@ -108,10 +105,11 @@ class HistoryController extends BehatViewerProjectController
     /**
      * @return array
      *
-     * @Method({"POST"})
-     * @Route("/{username}/{project}/history/delete", name="behatviewer.history.delete.selected")
-     * @Secure(roles="ROLE_USER")
-     * @Template("BehatViewerBundle:History:index.html.twig")
+     * @Configuration\Method({"POST"})
+     * @Configuration\Route("/{username}/{project}/history/delete", name="behatviewer.history.delete.selected")
+	 * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
+	 * @Security\Secure(roles="ROLE_USER")
+	 * @Security\SecureParam(name="project", permissions="EDIT")
      */
     public function deleteSelectedAction(Entity\User $user, Entity\Project $project)
     {

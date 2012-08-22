@@ -2,19 +2,18 @@
 
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Symfony\Component\HttpFoundation\Request,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    BehatViewer\BehatViewerBundle\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
+    BehatViewer\BehatViewerBundle\Entity,
+    JMS\SecurityExtraBundle\Annotation as Security;
 
 class FeatureController extends BehatViewerBuildController
 {
     /**
      * @return array|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{username}/{project}/{build}/{feature}", name="behatviewer.feature", requirements={"build" = "\d+"})
-     * @Template()
+     * @Configuration\Route("/{username}/{project}/{build}/{feature}", name="behatviewer.feature", requirements={"build" = "\d+"})
+     * @Configuration\Template()
+	 * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */
     public function indexAction(Entity\User $user, Entity\Project $project, Entity\Build $build, Entity\Feature $feature)
     {
@@ -28,8 +27,9 @@ class FeatureController extends BehatViewerBuildController
     /**
      * @return array|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{username}/{project}/{build}/{feature}/source", name="behatviewer.feature.source", requirements={"id" = "\d+"})
-     * @Template()
+     * @Configuration\Route("/{username}/{project}/{build}/{feature}/source", name="behatviewer.feature.source", requirements={"id" = "\d+"})
+     * @Configuration\Template()
+	 * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */
     public function sourceAction(Entity\User $user, Entity\Project $project, Entity\Build $build, Entity\Feature $feature)
     {
@@ -46,7 +46,7 @@ class FeatureController extends BehatViewerBuildController
   /**
    * @return string
    *
-   * @Route("/screenshot/{id}", name="behatviewer.screenshot", options={"expose"=true}, requirements={"id" = "\d+"})
+   * @Configuration\Route("/screenshot/{id}", name="behatviewer.screenshot", options={"expose"=true}, requirements={"id" = "\d+"})
    */
   public function screenshotAction(Entity\Step $step)
   {

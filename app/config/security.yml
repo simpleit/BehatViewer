@@ -3,6 +3,9 @@ jms_security_extra:
     expressions: true
 
 security:
+    acl:
+        connection: default
+
     encoders:
         BehatViewer\BehatViewerBundle\Entity\User:
             algorithm:        sha1

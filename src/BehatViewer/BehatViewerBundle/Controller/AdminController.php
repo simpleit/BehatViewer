@@ -2,25 +2,23 @@
 
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    JMS\SecurityExtraBundle\Annotation\Secure,
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
+    JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Form\Type\ProjectType,
     BehatViewer\BehatViewerBundle\Entity,
     BehatViewer\BehatViewerBundle\Form\Type\EditUserType;
 
 /**
- * @Route("/admin")
+ * @Configuration\Route("/admin")
  */
 class AdminController extends BehatViewerController
 {
 	/**
 	 * @return array
 	 *
-	 * @Route("/users/create", name="behatviewer.usercreate")
-	 * @Secure(roles="ROLE_USER")
-	 * @Template()
+	 * @Configuration\Route("/users/create", name="behatviewer.usercreate")
+	 * @Configuration\Template()
+	 * @Security\Secure(roles="ROLE_ADMIN")
 	 */
 	public function userCreateAction()
 	{
@@ -44,9 +42,9 @@ class AdminController extends BehatViewerController
     /**
      * @return array
      *
-     * @Route("/users", name="behatviewer.users")
-     * @Secure(roles="ROLE_USER")
-     * @Template()
+     * @Configuration\Route("/users", name="behatviewer.users")
+     * @Configuration\Template()
+	 * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function usersAction()
     {
@@ -59,29 +57,29 @@ class AdminController extends BehatViewerController
     }
 
     /**
-     * @Route("/users/disable/{username}", name="behatviewer.userdisable")
-     * @Secure(roles="ROLE_USER")
+     * @Configuration\Route("/users/disable/{username}", name="behatviewer.userdisable")
+	 * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function userDisableAction(Entity\User $user)
     {
         $user->setIsActive(false);
 
-        $this->getDoctrine()->getEntityManager()->persist($user);
-        $this->getDoctrine()->getEntityManager()->flush();
+        $this->getDoctrine()->getManager()->persist($user);
+        $this->getDoctrine()->getManager()->flush();
 
         return $this->redirect($this->getRequest()->headers->get('referer'));
     }
 
     /**
-     * @Route("/users/enable/{username}", name="behatviewer.userenable")
-     * @Secure(roles="ROLE_USER")
+     * @Configuration\Route("/users/enable/{username}", name="behatviewer.userenable")
+	 * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function userEnableAction(Entity\User $user)
     {
         $user->setIsActive(true);
 
-        $this->getDoctrine()->getEntityManager()->persist($user);
-        $this->getDoctrine()->getEntityManager()->flush();
+        $this->getDoctrine()->getManager()->persist($user);
+        $this->getDoctrine()->getManager()->flush();
 
         return $this->redirect($this->getRequest()->headers->get('referer'));
     }
@@ -89,9 +87,9 @@ class AdminController extends BehatViewerController
     /**
      * @return array
      *
-     * @Route("/users/{username}", name="behatviewer.useredit", requirements={"id" = "\d+"})
-     * @Secure(roles="ROLE_USER")
-     * @Template()
+     * @Configuration\Route("/users/{username}", name="behatviewer.useredit", requirements={"id" = "\d+"})
+     * @Configuration\Template()
+	 * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function userEditAction(Entity\User $user)
     {
@@ -136,8 +134,8 @@ class AdminController extends BehatViewerController
                 }
             }
 
-            $this->getDoctrine()->getEntityManager()->persist($user);
-            $this->getDoctrine()->getEntityManager()->flush();
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
         }
 
         return $form->isValid();

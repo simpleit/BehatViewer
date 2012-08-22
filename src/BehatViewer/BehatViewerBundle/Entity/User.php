@@ -5,7 +5,8 @@ use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Security\Core\User\UserInterface,
     Symfony\Component\Security\Core\User\AdvancedUserInterface,
     Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Bridge\Doctrine\Validator\Constraints;
+    Symfony\Bridge\Doctrine\Validator\Constraints,
+	Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 
 /**
  * Acme\UserBundle\Entity\User
@@ -179,4 +180,8 @@ class User extends Base implements AdvancedUserInterface
     {
         return $this->username === $user->getUsername();
     }
+
+	public function getIdentity() {
+		return UserSecurityIdentity::fromAccount($this);
+	}
 }

@@ -2,19 +2,18 @@
 
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    BehatViewer\BehatViewerBundle\Form\Type\ProjectType,
-	BehatViewer\BehatViewerBundle\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
+	BehatViewer\BehatViewerBundle\Entity,
+	JMS\SecurityExtraBundle\Annotation as Security;
 
 class StatsController extends BehatViewerProjectController
 {
     /**
      * @return array
      *
-     * @Route("/{username}/{project}/stats", name="behatviewer.stats")
-     * @Template()
+     * @Configuration\Route("/{username}/{project}/stats", name="behatviewer.stats")
+     * @Configuration\Template()
+	 * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */
     public function indexAction(Entity\User $user, Entity\Project $project)
     {
