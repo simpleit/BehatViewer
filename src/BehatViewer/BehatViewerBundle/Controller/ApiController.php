@@ -42,10 +42,12 @@ class ApiController extends BehatViewerController
 		$ghrepository = $payload->repository;
 
 		$repository = $this->getDoctrine()->getManager('BehatViewerBundle:Project');
-		$repository->findOneByUsernameAndSlug($this->getUser()->getUsername(), $ghrepository->name);
+		$project = $repository->findOneByUsernameAndSlug($this->getUser()->getUsername(), $ghrepository->name);
 
-		$msg = array('project' => $project->getSlug());
-		$this->get('old_sound_rabbit_mq.build_producer')->publish(serialize($msg));
+		if(null !== $project) {
+			$msg = array('project' => $project->getSlug());
+			$this->get('old_sound_rabbit_mq.build_producer')->publish(serialize($msg));
+		}
 
 		return new \Symfony\Component\HttpFoundation\Response();
 	}
