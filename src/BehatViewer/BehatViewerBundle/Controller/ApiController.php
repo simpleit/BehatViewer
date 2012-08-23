@@ -41,11 +41,11 @@ class ApiController extends BehatViewerController
 		$fp = fopen('/tmp/github.log', 'w+');
 		fwrite($fp, $this->getRequest()->get('payload') . PHP_EOL . PHP_EOL . PHP_EOL);
 		fclose($fp);
-		
+
 		$payload = json_decode($this->getRequest()->get('payload'));
 		$ghrepository = $payload->repository;
 
-		$repository = $this->getDoctrine()->getManager('BehatViewerBundle:Project');
+		$repository = $this->getDoctrine()->getManager()->getRepository('BehatViewerBundle:Project');
 		$project = $repository->findOneByUsernameAndSlug($this->getUser()->getUsername(), $ghrepository->name);
 
 		if(null !== $project) {
