@@ -38,10 +38,6 @@ class ApiController extends BehatViewerController
 	 */
 	public function githubAction()
 	{
-		$fp = fopen('/tmp/github.log', 'w+');
-		fwrite($fp, $this->getRequest()->get('payload') . PHP_EOL . PHP_EOL . PHP_EOL);
-		fclose($fp);
-
 		$payload = json_decode($this->getRequest()->get('payload'));
 		$ghrepository = $payload->repository;
 
