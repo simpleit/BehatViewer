@@ -24,7 +24,10 @@
         "doctrine/doctrine-migrations-bundle":  "*",
         "friendsofsymfony/jsrouting-bundle":    "dev-master",
         "knplabs/knp-markdown-bundle":          "dev-composer",
-        "jubianchi/behat-viewer-extension":     "*"
+        "jubianchi/behat-viewer-extension":     "*",
+
+
+        "oldsound/rabbitmq-bundle":             "dev-master"
     },
     "require-dev": {
         "behat/behat":                          "v2.4.0",

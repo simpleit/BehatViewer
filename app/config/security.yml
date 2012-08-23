@@ -19,7 +19,16 @@ security:
         main:
             entity: { class: BehatViewerBundle:User, property: username }
 
+    access_control:
+        - { path: ^/api, roles: ROLE_USER }
+
     firewalls:
+        api:
+            pattern:    ^/api
+            anonymous: ~
+            http_basic:
+                realm: "Secured Demo Area"
+
         secured_area:
             pattern:    ^/
             anonymous: ~

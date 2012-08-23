@@ -23,6 +23,9 @@ class DefaultController extends BehatViewerController
      */
     public function indexAction()
     {
+		//$msg = array('project' => 'behat-viewer');
+		//$this->get('old_sound_rabbit_mq.build_producer')->publish(serialize($msg));
+
         $projects = $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findByType(EnumProjectTypeType::TYPE_PUBLIC);
 
         if (0 === count($projects)) {

@@ -96,9 +96,9 @@ class UserController extends BehatViewerController
                     }
                 }
 
-                $this->getDoctrine()->getEntityManager()->persist($user);
-                $this->getDoctrine()->getEntityManager()->flush();
-                $this->getDoctrine()->getEntityManager()->refresh($user);
+                $this->getDoctrine()->getManager()->persist($user);
+                $this->getDoctrine()->getManager()->flush();
+                $this->getDoctrine()->getManager()->refresh($user);
 
                 $success = true;
             }
@@ -129,7 +129,7 @@ class UserController extends BehatViewerController
 
         if ('POST' === $request->getMethod()) {
             $oldPassword = $user->getPassword();
-            $form->bindRequest($request);
+            $form->bind($request);
 
             $givenPassword = $encoder->encodePassword(
                 $form->get('oldpassword')->getData(),
@@ -145,9 +145,9 @@ class UserController extends BehatViewerController
                         )
                     );
 
-                    $this->getDoctrine()->getEntityManager()->persist($user);
-                    $this->getDoctrine()->getEntityManager()->flush();
-                    $this->getDoctrine()->getEntityManager()->refresh($user);
+                    $this->getDoctrine()->getManager()->persist($user);
+                    $this->getDoctrine()->getManager()->flush();
+                    $this->getDoctrine()->getManager()->refresh($user);
 
                     $success = true;
                 } else {

@@ -26,8 +26,10 @@ class AppKernel extends Kernel
 			new JMS\DiExtraBundle\JMSDiExtraBundle($this),
 
 			new BehatViewer\BehatViewerBundle\BehatViewerBundle(),
+			new BehatViewer\BehatViewerWorkerBundle\BehatViewerWorkerBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+			new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev'))) {

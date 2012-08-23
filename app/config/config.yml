@@ -64,3 +64,23 @@ swiftmailer:
 knp_markdown:
     parser:
         service: behat_viewer.markdown_parser
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:      %rabbitmq_host%
+            port:      %rabbitmq_port%
+            user:      %rabbitmq_user%
+            password:  %rabbitmq_password%
+            vhost:     %rabbitmq_vhost%
+    producers:
+        build:
+            connection: default
+            exchange_options: {name: 'build', type: direct}
+
+    consumers:
+        build:
+            connection: default
+            exchange_options: {name: 'build', type: direct}
+            queue_options:    {name: 'build'}
+            callback:         build_consumer

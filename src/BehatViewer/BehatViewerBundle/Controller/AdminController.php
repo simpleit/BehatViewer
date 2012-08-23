@@ -28,7 +28,16 @@ class AdminController extends BehatViewerController
 
 		if ('POST' === $request->getMethod()) {
 			if ($this->save($form, $user)) {
-				return  $this->redirect($this->generateUrl('behatviewer.useredit', array('id' => $user->getId())));
+				/*$token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken(
+					$user,
+					null,
+					'main',
+					$user->getRoles()
+				);
+				// give it to the security context
+				$this->container->get('security.context')->setToken($token);*/
+
+				return  $this->redirect($this->generateUrl('behatviewer.useredit', array('username' => $user->getUsername())));
 			}
 		}
 
