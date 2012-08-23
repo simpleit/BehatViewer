@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="behat_viewer.api.security.authentication.provider.class">BehatViewer\BehatViewerApiBundle\Security\AuthProvider</parameter>
+        <parameter key="behat_viewer.api.security.authentication.firewall.class">BehatViewer\BehatViewerApiBundle\Security\UserFirewall</parameter>
+    </parameters>
+
+    <services>
+        <service id="behat_viewer.api.security.authentication.provider" class="%behat_viewer.api.security.authentication.provider.class%" public="false">
+            <argument /> <!-- User Provider -->
+        </service>
+
+        <service id="behat_viewer.api.security.authentication.listener" class="%behat_viewer.api.security.authentication.firewall.class%" public="false">
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="security.authentication.manager" />
+        </service>
+    </services>
+</container>

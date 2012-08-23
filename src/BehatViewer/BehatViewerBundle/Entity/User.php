@@ -48,6 +48,11 @@ class User extends Base implements AdvancedUserInterface
      */
     private $password;
 
+	/**
+	 * @ORM\Column(type="string", length=40)
+	 */
+	private $token;
+
     /**
      * @Assert\NotBlank()
      * @Assert\Email()
@@ -114,6 +119,16 @@ class User extends Base implements AdvancedUserInterface
     {
         $this->password = $password;
     }
+
+	public function getToken()
+	{
+		return $this->token;
+	}
+
+	public function setToken($token)
+	{
+		$this->token = $token;
+	}
 
     public function getEmail()
     {
