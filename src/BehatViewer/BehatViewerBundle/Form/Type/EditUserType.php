@@ -9,74 +9,25 @@ use Symfony\Component\Form\FormBuilderInterface,
 /**
  *
  */
-class EditUserType extends UserType
+class EditUserType extends CreateUserType
 {
-    private $passwordRequired;
-    private $allowActive;
-
-    public function __construct($passwordRequired = true, $allowActive = true)
-    {
-        $this->passwordRequired = $passwordRequired;
-        $this->allowActive = $allowActive;
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder
      * @param array                               $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('username', 'text', array(
-                'attr' => array(
-                    'class' => 'input-xlarge'
-                )
-            ))
-            ->add('email', 'email', array(
-                'attr' => array(
-                    'class' => 'input-xlarge'
-                )
-            ))
-            ->add(
-                'password',
-                'password',
-                array(
-                    'label' => 'New password',
-                    'required' => $this->passwordRequired,
-                    'property_path' => false,
-                    'attr' => array(
-                        'class' => 'input-xlarge'
-                    )
-                )
-            )
-            ->add(
-                'confirm',
-                'password',
-                array(
-                    'label' => 'Confirm password',
-                    'required' => $this->passwordRequired,
-                    'property_path' => false,
-                    'attr' => array(
-                        'class' => 'input-xlarge'
-                    )
-                )
-            )
-        ;
+		parent::buildForm($builder, $options);
 
-        if (true === $this->allowActive) {
-            $builder->add(
-                'isActive',
-                'choice',
-                array(
-                    'label' => 'Active',
-                    'required' => true,
-                    'choices' => array(
-                        '1' => 'Yes',
-                        '0' => 'No',
-                    )
-                )
-            );
-        }
+        $builder
+			->add('token', 'text', array(
+				'label' => 'API token',
+				'attr' => array(
+					'class' => 'input-xlarge',
+					'readonly' => 'readonly'
+				)
+			))
+		;
 
         $builder->addValidator(new CallbackValidator(function(Form $form) {
             $password = $form->get('password');

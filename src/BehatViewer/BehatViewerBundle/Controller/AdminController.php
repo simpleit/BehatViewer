@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Form\Type\ProjectType,
     BehatViewer\BehatViewerBundle\Entity,
+    BehatViewer\BehatViewerBundle\Form\Type\CreateUserType,
     BehatViewer\BehatViewerBundle\Form\Type\EditUserType;
 
 /**
@@ -24,19 +25,10 @@ class AdminController extends BehatViewerController
 	{
 		$request = $this->getRequest();
 		$user = new Entity\User();
-		$form = $this->get('form.factory')->create(new EditUserType(), $user);
+		$form = $this->get('form.factory')->create(new CreateUserType(), $user);
 
 		if ('POST' === $request->getMethod()) {
 			if ($this->save($form, $user)) {
-				/*$token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken(
-					$user,
-					null,
-					'main',
-					$user->getRoles()
-				);
-				// give it to the security context
-				$this->container->get('security.context')->setToken($token);*/
-
 				return  $this->redirect($this->generateUrl('behatviewer.useredit', array('username' => $user->getUsername())));
 			}
 		}
@@ -122,7 +114,7 @@ class AdminController extends BehatViewerController
 
     protected function save(\Symfony\Component\Form\Form $form, Entity\User $user)
     {
-        $form->bindRequest($this->getRequest());
+        $form->bind($this->getRequest());
 
         if ($form->isValid()) {
             $user->setUsername($form->getData()->getUsername());
@@ -140,6 +132,10 @@ class AdminController extends BehatViewerController
                             $user->getSalt()
                         )
                     );
+
+					if($user->getToken() == '') {
+						$user->setToken(md5(uniqid()));
+					}
                 }
             }
 
