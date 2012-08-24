@@ -54,7 +54,7 @@ class UserFirewall implements ListenerInterface
 		if (($username = $this->getUsername($request)) && ($apiToken = $this->getToken($request))) {
 			$token = new UserToken();
 			$token->setUser($username);
-			$token->token   = $apiToken;
+			$token->token = $apiToken;
 
 			try {
 				$returnValue = $this->authenticationManager->authenticate($token);
