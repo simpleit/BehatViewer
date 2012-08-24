@@ -19,16 +19,17 @@ class ProjectController extends BehatViewerProjectController
      */
     public function createAction()
     {
-        $request = $this->getRequest();
+
+		$request = $this->getRequest();
 		$user = $this->getUser();
 
-        $project = new Entity\Project();
-        $project->setUser($user);
+		$project = new Entity\Project();
+		$project->setUser($user);
 
-        $form = $this->get('form.factory')->create(new ProjectType(), $project);
+		$form = $this->get('form.factory')->create(new ProjectType(), $project);
 
-        if ('POST' === $request->getMethod()) {
-            $success = $this->save($form);
+		if ('POST' === $request->getMethod()) {
+			$success = $this->save($form);
 
             if ($success) {
                 return $this->redirect(
@@ -119,8 +120,11 @@ class ProjectController extends BehatViewerProjectController
     protected function save(\Symfony\Component\Form\Form $form)
     {
         $form->bind($this->getRequest());
-
         if ($form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($form->getData());
+            $manager->flush();
+
 			try {
 				$acl = $this->getAclProvider()->createAcl($form->getData()->getIdentity());
 			} catch(AclAlreadyExistsException $exception) {
@@ -129,10 +133,6 @@ class ProjectController extends BehatViewerProjectController
 
 			$acl->insertObjectAce($this->getUser()->getIdentity(), MaskBuilder::MASK_OWNER);
 			$this->getAclProvider()->updateAcl($acl);
-
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($form->getData());
-            $manager->flush();
         }
 
         return $form->isValid();

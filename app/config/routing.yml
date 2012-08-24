@@ -10,5 +10,9 @@ BehatViewerBundle:
     resource: "@BehatViewerBundle/Controller/"
     type:     annotation
 
+BehatViewerApiBundle:
+    resource: "@BehatViewerApiBundle/Controller/"
+    type:     annotation
+
 behatviewer.logout:
     pattern:   /logout

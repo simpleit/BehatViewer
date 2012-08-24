@@ -1,10 +1,11 @@
 <?php
 
-namespace BehatViewer\BehatViewerBundle\Controller;
+namespace BehatViewer\BehatViewerApiBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
-	BehatViewer\BehatViewerBundle\Entity;
+	BehatViewer\BehatViewerBundle\Entity,
+	BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
 class ApiController extends BehatViewerController
 {

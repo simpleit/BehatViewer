@@ -21,20 +21,37 @@ class UserFirewall implements ListenerInterface
 		$this->authenticationManager = $authenticationManager;
 	}
 
+	protected function getUsername($request)
+	{
+		if($request->server->has('PHP_AUTH_USER')) {
+			$username = $request->server->get('PHP_AUTH_USER');
+		} else {
+			$username = $request->request->has('username')
+				? $request->request->get('username')
+				: $request->query->get('username');
+		}
+
+		return $username;
+	}
+
+	protected function getToken($request)
+	{
+		if($request->server->has('PHP_AUTH_PW')) {
+			$token = $request->server->get('PHP_AUTH_PW');
+		} else {
+			$token = $request->request->has('apiToken')
+				? $request->request->get('apiToken')
+				: $request->query->get('apiToken');
+		}
+
+		return $token;
+	}
+
 	public function handle(GetResponseEvent $event)
 	{
 		$request = $event->getRequest();
 
-		$username = $request->request->has('username') ?
-			$request->request->get('username') :
-			$request->query->get('username');
-
-		$apiToken = $request->request->has('apiToken') ?
-			$request->request->get('apiToken') :
-			$request->query->get('apiToken');
-
-		//$request->server->has('PHP_AUTH_USER') && $request->server->has('PHP_AUTH_PW')
-		if ($username && $apiToken) {
+		if (($username = $this->getUsername($request)) && ($apiToken = $this->getToken($request))) {
 			$token = new UserToken();
 			$token->setUser($username);
 			$token->token   = $apiToken;
