@@ -13,10 +13,12 @@ class GenerateKeyCommand extends ContainerAwareCommand
     {
         $this
             ->setName('behat-viewer:generate-key')
-            ->setDescription('Generate a ssh key for Behat Viewer')
+            ->setDescription('Generate a ssh key for a given project')
             ->setDefinition(
                 array(
-                    new InputArgument('user', InputArgument::OPTIONAL, 'WWW user', 'www-data')
+                    new InputArgument('username', InputArgument::REQUIRED, 'Username'),
+                    new InputArgument('project', InputArgument::REQUIRED, 'Project identifier'),
+                    new InputArgument('owner', InputArgument::OPTIONAL, 'WWW user', 'www-data')
                 )
             )
         ;
@@ -28,11 +30,16 @@ class GenerateKeyCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $path = $this->getContainer()->get('kernel')->getRootDir() . '/data/id_rsa';
+        $path = sprintf(
+			$this->getContainer()->get('kernel')->getRootDir() . '/data/%s-%s',
+			$input->getArgument('username'),
+			$input->getArgument('project')
+		);
+
         passthru(
             sprintf(
                 'sudo -u %s ssh-keygen -t rsa -f %s',
-                $input->getArgument('user'),
+				$input->getArgument('owner'),
                 $path
             )
         );

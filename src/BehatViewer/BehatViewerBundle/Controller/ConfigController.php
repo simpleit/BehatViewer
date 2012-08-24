@@ -22,15 +22,8 @@ class ConfigController extends BehatViewerController
      */
     public function indexAction()
     {
-        $path = $this->get('kernel')->getRootDir() . '/data/id_rsa.pub';
-        $key = '';
-        if (file_exists($path)) {
-            $key = trim(file_get_contents($path));
-        }
-
         return $this->getResponse(array(
-            'success' => false,
-            'ssh_key' => $key
+            'success' => false
         ));
     }
 }

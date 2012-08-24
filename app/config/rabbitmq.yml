@@ -17,7 +17,9 @@ old_sound_rabbit_mq:
         clean:
             connection: default
             exchange_options: {name: 'clean', type: direct}
-
+        definition:
+            connection: default
+            exchange_options: {name: 'definition', type: direct}
 
     consumers:
         build:
@@ -34,3 +36,7 @@ old_sound_rabbit_mq:
             exchange_options: {name: 'clean', type: direct}
             queue_options:    {name: 'behat_viewer'}
             callback:         build_consumer
+        definition:
+            exchange_options: {name: 'definition', type: direct}
+            queue_options:    {name: 'behat_viewer'}
+            callback:         definition_consumer

@@ -16,18 +16,7 @@
                 </div>
                 <div class="modal-body" style="max-height: inherit;">
                     <div class="control-group">
-                        <label for="key" class="control-label">SSH Key</label>
-                        {% if ssh_key != '' %}
-                        <div id="key" class="controls">
-                            <p class="well" style="word-wrap:break-word; padding: 10px; padding-top: 5px">{{ ssh_key }}</p>
-                            <p class="help-inline">Allow Behat Viewer to access private repositories by adding this SSH key to them.</p>
-                        </div>
-                        {% else %}
-                        <div id="key" class="controls alert alert-warning alert-block">
-                            <p>There are no key defined for Behat Viewer. Please generate one with this command :</p>
-                            <p><code>app/console behat-viewer:generate-key</code></p>
-                        </div>
-                        {% endif %}
+                        
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -92,10 +92,21 @@ class ProjectController extends BehatViewerProjectController
             $success = $this->save($form);
         }
 
+		$path = sprintf(
+			$this->get('kernel')->getRootDir() . '/data/%s-%s.pub',
+			$user->getUsername(),
+			$project->getSlug()
+		);
+		$key = '';
+		if (file_exists($path)) {
+			$key = trim(file_get_contents($path));
+		}
+
         return $this->getResponse(array(
             'form' => $form->createView(),
             'success' => $success || $this->getRequest()->get('success', false),
             'hasproject' => true,
+			'ssh_key' => $key
         ));
     }
 
