@@ -6,10 +6,24 @@
 
     <parameters>
         <parameter key="behat_viewer.consumer.build.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\BuildConsumer</parameter>
+        <parameter key="behat_viewer.consumer.clean.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\CleanConsumer</parameter>
+        <parameter key="behat_viewer.consumer.analyze.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\AnalyzeConsumer</parameter>
     </parameters>
 
     <services>
         <service id="build_consumer" class="%behat_viewer.consumer.build.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="clean_consumer" class="%behat_viewer.consumer.clean.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="analyze_consumer" class="%behat_viewer.consumer.analyze.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

@@ -1,17 +1,14 @@
 <?php
 namespace BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer;
 
-use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Input\ArrayInput;
-use PhpAmqpLib\Message\AMQPMessage;
+use Symfony\Component\Console\Output\ConsoleOutput,
+	PhpAmqpLib\Message\AMQPMessage;
 
-class BuildConsumer extends \Symfony\Component\DependencyInjection\ContainerAware implements ConsumerInterface
+class BuildConsumer extends Consumer
 {
 	public function execute(AMQPMessage $msg)
 	{
-		$options = unserialize($msg->body);
+		$options = $this->getOptions($msg);
 		$repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Project');
 		$project = $repository->findOneBySlug($options['project']);
 

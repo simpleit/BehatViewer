@@ -38,9 +38,9 @@ class CleanCommand extends ProjectCommand
     {
         parent::execute($input, $output);
 
-          $project = $this->getProject();
+	  	$project = $this->getProject();
 
-          $output->writeln(sprintf('<info>[INFO]</info> Cleaning outdated builds for project <comment>%s</comment>', $project->getSlug()));
+	  	$output->writeln(sprintf('<info>[INFO]</info> Cleaning outdated builds for project <comment>%s</comment>', $project->getSlug()));
 
         $repository = $this->getContainer()->get('doctrine')->getRepository('BehatViewerBundle:Build');
         $count = $repository->removeWeekBuildsForProject($project);
