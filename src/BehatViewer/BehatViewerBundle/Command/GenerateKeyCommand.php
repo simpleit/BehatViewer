@@ -30,8 +30,13 @@ class GenerateKeyCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+		$dir = $this->getContainer()->get('kernel')->getRootDir() . '/data/keys';
+		if(false === is_dir($dir)) {
+			mkdir($dir, 0777, true);
+		}
+
         $path = sprintf(
-			$this->getContainer()->get('kernel')->getRootDir() . '/data/%s-%s',
+			$dir . '/%s-%s',
 			$input->getArgument('username'),
 			$input->getArgument('project')
 		);

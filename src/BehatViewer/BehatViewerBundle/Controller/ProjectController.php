@@ -113,7 +113,7 @@ class ProjectController extends BehatViewerProjectController
         }
 
 		$path = sprintf(
-			$this->get('kernel')->getRootDir() . '/data/%s-%s.pub',
+			$this->get('kernel')->getRootDir() . '/data/keys/%s-%s.pub',
 			$user->getUsername(),
 			$project->getSlug()
 		);
