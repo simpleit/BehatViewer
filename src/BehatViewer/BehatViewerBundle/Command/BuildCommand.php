@@ -36,37 +36,10 @@ class BuildCommand extends ProjectCommand
     {
         parent::execute($input, $output);
 
-        $project = $this->getProject();
+        $strategy = $this->getContainer()->get('behat_viewer.strategy.provider')->getStrategyForProject($this->getProject());
 
-        if ($input->getOption('definitions')) {
-            $this->getApplication()->find('behat-viewer:definitions')->run(new \Symfony\Component\Console\Input\ArgvInput(), $output);
-        }
-
-        $cmd = $project->getTestCommand();
-        $cmd = str_replace("\r\n", PHP_EOL, $cmd);
-
-        if (file_exists('build.sh')) {
-            unlink('build.sh');
-        }
-        $fp = fopen('build.sh', 'w+');
-        $script = '#!/bin/sh' . PHP_EOL . $cmd;
-        fwrite($fp, $script, strlen($script));
-        fclose($fp);
-
-        $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess('sh -e build.sh', $project->getRootPath());
-        $process->setTimeout(600);
-        $process->run(function ($type, $buffer) use ($output) {
-            if ('err' === $type) {
-                $output->writeln('<error>' . $buffer . '</error>');
-            } else {
-                $output->write($buffer);
-            }
-        });
-
-        if (file_exists('build.sh')) {
-            unlink('build.sh');
-        }
-
-        $this->getApplication()->find('behat-viewer:analyze')->run($input, $output);
+		if($strategy->build() === 0) {
+			$this->getApplication()->find('behat-viewer:analyze')->run($input, $output);
+		}
     }
 }

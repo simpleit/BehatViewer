@@ -28,7 +28,8 @@ class StrategyProvider extends ContainerAware
 	public function getStrategyForProject(Entity\Project $project) {
 		$class = $this->container->getParameter(sprintf('behat_viewer.strategy.%s.class', $project->getStrategy()));
 		$strategy = new $class();
-		$strategy->setData($project->getConfiguration()->getData());
+
+		$strategy->setProject($project);
 
 		return $strategy;
 	}

@@ -182,7 +182,7 @@ class AnalyzeCommand extends ProjectCommand implements EventSubscriberInterface
 
         $this->output = $this->styleOutput($output);
         $project = $this->getProject();
-        $report = $project->getOutputPath() . DIRECTORY_SEPARATOR . 'behat-viewer.json';
+        $report = $project->getConfiguration()->path . DIRECTORY_SEPARATOR . 'behat-viewer.json';
 
         if (!is_file($report) || !is_readable($report)) {
             throw new \RuntimeException(sprintf('File not found : %s', $report));

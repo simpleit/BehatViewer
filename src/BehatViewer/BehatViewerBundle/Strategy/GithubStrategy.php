@@ -20,6 +20,6 @@ class GithubStrategy extends Strategy
 	}
 
 	public function build() {
-
+		return 1;
 	}
 }

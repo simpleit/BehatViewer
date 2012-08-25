@@ -62,7 +62,7 @@ class Configuration
 	public function __set($name, $value) {
 		$params = json_decode($this->data, true);
 
-		$params[$name] = $value;
+		$params->$name = $value;
 
 		$this->setData(json_encode($params));
 	}
@@ -70,6 +70,6 @@ class Configuration
 	public function __get($name) {
 		$params = json_decode($this->data);
 
-		return $params[$name];
+		return $params->$name;
 	}
 }

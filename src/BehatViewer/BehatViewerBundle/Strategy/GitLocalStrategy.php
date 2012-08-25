@@ -20,6 +20,6 @@ class GitLocalStrategy extends Strategy
 	}
 
 	public function build() {
-
+		return 1;
 	}
 }

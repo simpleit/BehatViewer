@@ -145,26 +145,6 @@ class Project extends Base
         return $this->name;
     }
 
-    /**
-     * Set base_url
-     *
-     * @param string $baseUrl
-     */
-    public function setBaseUrl($baseUrl)
-    {
-        $this->base_url = $baseUrl;
-    }
-
-    /**
-     * Get base_url
-     *
-     * @return string
-     */
-    public function getBaseUrl()
-    {
-        return $this->base_url;
-    }
-
 	public function setStrategy($strategy)
 	{
 		$this->strategy = $strategy;
@@ -184,46 +164,6 @@ class Project extends Base
 	{
 		return $this->configuration;
 	}
-
-    /**
-     * Set output_path
-     *
-     * @param string $outputPath
-     */
-    public function setOutputPath($outputPath)
-    {
-        $this->output_path = $outputPath;
-    }
-
-    /**
-     * Get output_path
-     *
-     * @return string
-     */
-    public function getOutputPath()
-    {
-        return $this->output_path;
-    }
-
-    /**
-     * Set source_path
-     *
-     * @param string $sourcePath
-     */
-    public function setRootPath($rootPath)
-    {
-        $this->root_path = $rootPath;
-    }
-
-    /**
-     * Get source_path
-     *
-     * @return string
-     */
-    public function getRootPath()
-    {
-        return $this->root_path;
-    }
 
     public function __construct()
     {
