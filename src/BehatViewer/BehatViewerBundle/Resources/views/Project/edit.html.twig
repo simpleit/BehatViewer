@@ -6,13 +6,15 @@
     Project configuration
 {% endblock %}
 
-{% block after %}
-    <div class="control-group">
-        <label for="key" class="control-label">SSH Key</label>
-        <div id="key" class="controls">
-            <p class="well" style="word-wrap:break-word; padding: 10px; padding-top: 5px">{{ ssh_key }}</p>
+{% block extrastrategy %}
+    {% if strategy.name == 'git' or strategy.name == 'github' %}
+        <div class="control-group">
+            <label for="key" class="control-label">SSH Key</label>
+            <div id="key" class="controls">
+                <p class="well" style="word-wrap:break-word; padding: 10px; padding-top: 5px">{{ ssh_key }}</p>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}
 
 {% block extrabuttons %}

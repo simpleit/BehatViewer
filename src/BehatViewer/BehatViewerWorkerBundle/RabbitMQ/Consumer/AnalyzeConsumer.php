@@ -1,7 +1,8 @@
 <?php
 namespace BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer;
 
-use PhpAmqpLib\Message\AMQPMessage;
+use BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\Consumer,
+	PhpAmqpLib\Message\AMQPMessage;
 
 class AnalyzeConsumer extends Consumer
 {

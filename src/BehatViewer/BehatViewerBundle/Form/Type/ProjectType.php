@@ -10,6 +10,12 @@ use Symfony\Component\Form\AbstractType,
  */
 class ProjectType extends AbstractType
 {
+	protected $strategies;
+
+	public function __construct(array $strategies) {
+		$this->strategies = $strategies;
+	}
+
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder
      * @param array                               $options
@@ -17,45 +23,57 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'Project name',
-                'attr' => array(
-                    'class' => 'input-xlarge'
-                )
-            ))
-            ->add('slug', 'text', array(
-                'label' => 'Identifier',
-                'attr' => array(
-                    'class' => 'input-xlarge'
-                )
-            ))
-            ->add('base_url', 'url', array(
-                'label' => 'Base URL',
-                'attr' => array(
-                    'class' => 'input-xlarge'
-                )
-            ))
-            ->add('output_path', 'text', array(
-                'label' => 'Output path',
-                'attr' => array(
-                    'class' => 'input-xlarge'
-                )
-            ))
-            ->add('root_path', 'text', array(
-                'label' => 'Root path',
-                'attr' => array(
-                    'class' => 'input-xlarge'
-                )
-            ))
-            ->add('test_command', 'textarea', array(
-                'label' => 'Test command',
-                'attr' => array(
-                    'rows' => 10,
-                    'cols' => 70,
-                    'style' => 'width: auto'
-                )
-            ));
+            ->add(
+				'name',
+				'text',
+				array(
+                	'label' => 'Project name',
+                	'attr' => array(
+                    	'class' => 'input-xlarge'
+                	)
+            	)
+			)
+            ->add(
+				'slug',
+				'text',
+				array(
+                	'label' => 'Identifier',
+                	'attr' => array(
+                    	'class' => 'input-xlarge'
+                	)
+            	)
+			)
+            ->add(
+				'test_command',
+				'textarea',
+				array(
+					'label' => 'Test command',
+					'attr' => array(
+						'rows' => 10,
+						'cols' => 70,
+						'style' => 'width: auto'
+					)
+            	)
+			)
+			->add(
+				'strategy',
+				'choice',
+				array(
+					'label' => 'Type',
+					'required' => true,
+					'choices' => $this->getStrategyChoices($this->strategies)
+				)
+			)
+		;
     }
+
+	protected function getStrategyChoices($strategies) {
+		foreach($strategies as &$strategy) {
+			$strategy = $strategy->getLabel();
+		}
+
+		return $strategies;
+	}
 
     /**
      * @param array $options

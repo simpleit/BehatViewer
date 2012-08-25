@@ -49,37 +49,27 @@ class Project extends Base
     private $slug;
 
     /**
-     * @var string $base_url
-     *
-     * @Assert\NotBlank()
-     * @Assert\Url()
-     * @ORM\Column(name="base_url", type="string", length=255)
-     */
-    private $base_url;
-
-    /**
-     * @var string $output_path
-     *
-     * @Assert\NotBlank()
-     * @ORM\Column(name="output_path", type="string", length=255)
-     */
-    private $output_path;
-
-    /**
-     * @var string $root_path
-     *
-     * @Assert\NotBlank()
-     * @ORM\Column(name="root_path", type="string", length=255)
-     */
-    private $root_path;
-
-    /**
      * @var string $test_command
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="test_command", type="text", length=65532)
      */
     private $test_command;
+
+	/**
+	 * @var string $strategy
+	 *
+	 * @Assert\NotBlank()
+	 * @ORM\Column(name="strategy", type="string", length=40)
+	 */
+	private $strategy;
+
+	/**
+	 * @var \BehatViewer\BehatViewerBundle\Entity\Configuration $configuration
+	 *
+	 * @ORM\OneToOne(targetEntity="Configuration", inversedBy="project", cascade={"persist"})
+	 */
+	private $configuration;
 
     /**
      * @var string $type
@@ -174,6 +164,26 @@ class Project extends Base
     {
         return $this->base_url;
     }
+
+	public function setStrategy($strategy)
+	{
+		$this->strategy = $strategy;
+	}
+
+	public function getStrategy()
+	{
+		return $this->strategy;
+	}
+
+	public function setConfiguration(\BehatViewer\BehatViewerBundle\Entity\Configuration $configuration)
+	{
+		$this->configuration = $configuration;
+	}
+
+	public function getConfiguration()
+	{
+		return $this->configuration;
+	}
 
     /**
      * Set output_path

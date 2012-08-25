@@ -23,17 +23,45 @@
     {% endif %}
 {% endblock %}
 
+{% block container %}
+    {{ parent() }}
 
+    {% for label, strategy in strategies %}
+        <div id="{{ strategy.name }}" class="hide">
+            <h4>{{ label }}</h4>
+            {{ form_errors(strategy) }}
+
+            {{ form_rest(strategy) }}
+
+            {% block extrastrategy %}{% endblock %}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block after %}
+    <div id="strategies">
+    </div>
+{% endblock %}
 
 {% block javascript %}
     <script type="text/javascript">
-        JSC.require(
-            ['behat-viewer/config'],
-            function() {
-                $(function() {
-                    app.controller.current(new ConfigController('#container'));
-                });
-            }
-        );
+        $(function() {
+            var show = function($e) {
+                    hide($('.show'));
+                    $e.removeClass('hide').addClass('show').appendTo($('#strategies'));
+                },
+                hide = function($e) {
+                    $e.removeClass('show').addClass('hide').appendTo($('body'));
+                },
+                change = function($e) {
+                    show($('#' + $e.val()));
+                };
+
+            $('#Project_strategy').change(function() {
+                change($(this));
+            });
+
+            change($('#Project_strategy'));
+        });
     </script>
 {% endblock %}

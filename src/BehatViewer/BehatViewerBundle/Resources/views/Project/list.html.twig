@@ -21,8 +21,8 @@
         <th>#</th>
         <th>Name</th>
         <th>Identifier</th>
-        <th>Root path</th>
-        <th>Output path</th>
+        <th>Type</th>
+        <th>Visibility</th>
         <th class="{sorter: false}">Action</th>
     </tr>
 {% endblock %}
@@ -33,8 +33,8 @@
             <td>{{ proj.id }}</td>
             <td>{{ proj.name }}</td>
             <td>{{ proj.slug }}</td>
-            <td>{{ proj.rootpath }}</td>
-            <td>{{ proj.outputpath }}</td>
+            <td>{{ proj.strategy }}</td>
+            <td>{{ proj.type }}</td>
             <td>
                 <div class="btn-group" id="toolbar">
                     <a href="{{ path('behatviewer.project', {"project": proj.slug, "username": proj.user.username}) }}" class="btn">View</a>
