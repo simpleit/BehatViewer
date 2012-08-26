@@ -60,7 +60,7 @@ class Configuration
 	}
 
 	public function __set($name, $value) {
-		$params = json_decode($this->data, true);
+		$params = json_decode($this->data);
 
 		$params->$name = $value;
 

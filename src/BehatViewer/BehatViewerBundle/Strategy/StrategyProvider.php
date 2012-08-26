@@ -29,6 +29,7 @@ class StrategyProvider extends ContainerAware
 		$class = $this->container->getParameter(sprintf('behat_viewer.strategy.%s.class', $project->getStrategy()));
 		$strategy = new $class();
 
+		$strategy->setContainer($this->container);
 		$strategy->setProject($project);
 
 		return $strategy;

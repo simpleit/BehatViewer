@@ -26,13 +26,13 @@ class AppKernel extends Kernel
 			new JMS\DiExtraBundle\JMSDiExtraBundle($this),
 
 			new BehatViewer\BehatViewerBundle\BehatViewerBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            	new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            	new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
 
 			new BehatViewer\BehatViewerApiBundle\BehatViewerApiBundle(),
 
 			new BehatViewer\BehatViewerWorkerBundle\BehatViewerWorkerBundle(),
-			new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+				new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev'))) {
