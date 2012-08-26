@@ -84,7 +84,7 @@ class GithubStrategy extends Strategy
 
 		$output = new ConsoleOutput();
 		$process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-			'sh -e build.sh',
+			'vagrant up' . PHP_EOL . 'vagrant ssh -c "sh -e /vagrant/build.sh"' . PHP_EOL . 'vagrant halt',
 			$dir
 		);
 		$process->setTimeout(600);

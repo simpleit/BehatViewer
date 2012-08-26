@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt-get -y --force-yes install python-software-properties pwgen vim git
+sudo apt-get -y --force-yes install python-software-properties git
 
 echo "deb http://packages.dotdeb.org squeeze all" | sudo tee -a /etc/apt/sources.list
 wget -q- -O - http://www.dotdeb.org/dotdeb.gpg | sudo apt-key add -
@@ -16,18 +16,12 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 
 sudo apt-get update
 
-sudo apt-get install -y --force-yes make gearman-job-server libgearman-dev gearman-tools libevent-dev uuid-dev
 sudo apt-get install -y --force-yes apache2 php5 php5-dev libapache2-mod-php5 php5-mysql php-pear php-apc php5-curl
 sudo apt-get install -y --force-yes sun-java6-jre sun-java6-plugin
 sudo apt-get install -y --force-yes xvfb firefox google-chrome-stable phantomjs
 
-sudo pecl install gearman
-
-echo "extension=gearman.so" | sudo tee /etc/php5/conf.d/gearman.ini
-
 sudo /etc/init.d/apache2 restart
 
-#MYSQL_PASS=$(pwgen -s 12 1);
 MYSQL_PASS=""
 
 cat <<MYSQL_PRESEED | debconf-set-selections
@@ -42,3 +36,5 @@ sudo sed -i 's/;date.timezone =/date.timezone = Europe\/Paris/g' /etc/php5/apach
 sudo sed -i 's/;date.timezone =/date.timezone = Europe\/Paris/g' /etc/php5/cli/php.ini
 
 Xvfb :99 -ac &
+
+sudo apt-get install -y --force-yes unzip curl

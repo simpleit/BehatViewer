@@ -28,6 +28,9 @@ app/config/parameters.yml
 # Capifony
 app/config/deploy.rb
 
+# Vagrant
+.vagrant
+
 # BehatViewer
 app/data
 
