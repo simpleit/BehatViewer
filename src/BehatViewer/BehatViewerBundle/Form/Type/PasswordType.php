@@ -12,8 +12,8 @@ use Symfony\Component\Form\FormBuilderInterface,
 class PasswordType extends UserType
 {
     /**
-     * @param \Symfony\Component\Form\FormBuilder $builder
-     * @param array                               $options
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array                                        $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

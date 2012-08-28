@@ -5,6 +5,11 @@ use Symfony\Component\Process\Process;
 
 class UnbefferedProcess extends Process
 {
+    /**
+     * @param callable $callback
+     *
+     * @return int
+     */
     public function run($callback = null)
     {
         exec('which unbuffer', $output, $status);

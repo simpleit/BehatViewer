@@ -13,6 +13,10 @@ class CreateUserType extends UserType
     private $passwordRequired;
     private $allowActive;
 
+    /**
+     * @param bool $passwordRequired
+     * @param bool $allowActive
+     */
     public function __construct($passwordRequired = true, $allowActive = true)
     {
         $this->passwordRequired = $passwordRequired;
@@ -20,8 +24,8 @@ class CreateUserType extends UserType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilder $builder
-     * @param array                               $options
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array                                        $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

@@ -2,28 +2,27 @@
 namespace BehatViewer\BehatViewerBundle\Extension\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface,
-    Symfony\Component\DependencyInjection\ContainerInterface;;
+    Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  *
  */
 class BehatViewerTwigExtension extends \Twig_Extension implements ContainerAwareInterface
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
     protected $container;
 
     /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface $container A ContainerInterface instance
-     *
-     * @api
+     * @param Symfony\Component\DependencyInjection\ContainerInterface $container
      */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
 
-  /**
+      /**
      * @return string
      */
     public function getName()
@@ -51,11 +50,21 @@ class BehatViewerTwigExtension extends \Twig_Extension implements ContainerAware
         );
     }
 
+    /**
+     * @param string $email
+     * @param int    $size
+     * @param string $rating
+     *
+     * @return string
+     */
     public function getGravatarImage($email, $size = 32, $rating = 'G')
     {
         return  $grav_url = "http://www.gravatar.com/avatar/" . md5(strtolower(trim( $email))) . "&s=" . $size . '&r=' . $rating;
     }
 
+    /**
+     * @return array
+     */
     public function getGlobals()
     {
         return array(
@@ -110,6 +119,11 @@ class BehatViewerTwigExtension extends \Twig_Extension implements ContainerAware
         return $text;
     }
 
+    /**
+     * @param string $text
+     *
+     * @return string
+     */
     public function stepify($text)
     {
         $text = trim($text);
