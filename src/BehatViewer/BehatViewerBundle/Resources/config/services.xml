@@ -17,48 +17,11 @@
         <parameter key="behat_viewer.build.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\BuildParamConverter</parameter>
         <parameter key="behat_viewer.feature.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\FeatureParamConverter</parameter>
 
-        <parameter key="behat_viewer.strategy.provider.class">BehatViewer\BehatViewerBundle\Strategy\StrategyProvider</parameter>
-        <parameter key="behat_viewer.strategy.local.class">BehatViewer\BehatViewerBundle\Strategy\LocalStrategy</parameter>
-        <parameter key="behat_viewer.strategy.git.class">BehatViewer\BehatViewerBundle\Strategy\GitStrategy</parameter>
-        <parameter key="behat_viewer.strategy.git_local.class">BehatViewer\BehatViewerBundle\Strategy\GitLocalStrategy</parameter>
-        <parameter key="behat_viewer.strategy.github.class">BehatViewer\BehatViewerBundle\Strategy\GithubStrategy</parameter>
-
         <parameter key="behat_viewer.db.table_prefix_subscriber.class">BehatViewer\BehatViewerBundle\Extension\Doctrine\BehatViewerTablePrefix</parameter>
         <parameter key="behat_viewer.db.table_prefix">behatviewer_</parameter>
     </parameters>
 
     <services>
-        <service id="behat_viewer.strategy.provider" class="%behat_viewer.strategy.provider.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="local" class="%behat_viewer.strategy.local.class%">
-            <tag name="behat_viewer.strategy"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-        <service id="git" class="%behat_viewer.strategy.git.class%">
-            <tag name="behat_viewer.strategy"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-        <service id="git_local" class="%behat_viewer.strategy.git_local.class%">
-            <tag name="behat_viewer.strategy"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-        <service id="github" class="%behat_viewer.strategy.github.class%">
-            <tag name="behat_viewer.strategy"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="project_converter" class="%behat_viewer.project.converter.class%">
             <tag name="request.param_converter" priority="1"/>
             <call method="setContainer">

@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Strategy\Form\Type;
+namespace BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface,
     Symfony\Component\Form\CallbackValidator,
@@ -9,14 +9,14 @@ use Symfony\Component\Form\FormBuilderInterface,
 /**
  *
  */
-class GithubStrategyType extends AbstractType
+class LocalStrategyType extends AbstractType
 {
 	/**
 	 * @return string
 	 */
 	public function getName()
 	{
-		return 'github';
+		return 'local';
 	}
 
     /**
@@ -27,27 +27,27 @@ class GithubStrategyType extends AbstractType
     {
         $builder
             ->add(
-                'username',
+                'path',
                 'text',
                 array(
-                    'label' => 'Username',
+                    'label' => 'Path',
                     'required' => true,
                     'attr' => array(
-                        'class' => 'input-xlarge'
+                        'class' => 'input-xxlarge'
                     )
                 )
             )
-            ->add(
-                'repository',
-                'text',
-                array(
-                    'label' => 'Repository',
-                    'required' => true,
-                    'attr' => array(
-                        'class' => 'input-xlarge'
-                    )
-                )
-            )
+			->add(
+				'base_url',
+				'url',
+				array(
+					'label' => 'Base URL',
+					'required' => true,
+					'attr' => array(
+						'class' => 'input-xxlarge'
+					)
+				)
+			)
 		;
     }
 }

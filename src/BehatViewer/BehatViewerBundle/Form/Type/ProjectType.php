@@ -69,7 +69,7 @@ class ProjectType extends AbstractType
 
 	protected function getStrategyChoices($strategies) {
 		foreach($strategies as &$strategy) {
-			$strategy = $strategy->getLabel();
+			$strategy = $strategy::getLabel();
 		}
 
 		return $strategies;

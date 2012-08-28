@@ -1,9 +1,9 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Strategy;
+namespace BehatViewer\BehatViewerWorkerBundle\Strategy;
 
 use
 	Symfony\Component\DependencyInjection\ContainerAware,
-	BehatViewer\BehatViewerBundle\Strategy\Form\Type\GithubStrategyType,
+	BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type\GithubStrategyType,
 	BehatViewer\BehatViewerBundle\Entity
 ;
 
@@ -27,11 +27,25 @@ class StrategyProvider extends ContainerAware
 
 	public function getStrategyForProject(Entity\Project $project) {
 		$class = $this->container->getParameter(sprintf('behat_viewer.strategy.%s.class', $project->getStrategy()));
+
 		$strategy = new $class();
 
 		$strategy->setContainer($this->container);
 		$strategy->setProject($project);
+		$strategy->setConfiguration($this->getStrategyConfigurationForProject($project));
 
 		return $strategy;
+	}
+
+	public function getStrategyConfigurationForProject(Entity\Project $project) {
+		$class = $this->container->getParameter(sprintf('behat_viewer.strategy.%s.class', $project->getStrategy()));
+		$configuration = $class::getNewConfiguration();
+
+		$config = $project->getConfiguration();
+		if(null !== $config) {
+			$configuration->setData($config->getData());
+		}
+
+		return $configuration;
 	}
 }

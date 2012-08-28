@@ -58,18 +58,4 @@ class Configuration
 	{
 		return $this->project;
 	}
-
-	public function __set($name, $value) {
-		$params = json_decode($this->data);
-
-		$params->$name = $value;
-
-		$this->setData(json_encode($params));
-	}
-
-	public function __get($name) {
-		$params = json_decode($this->data);
-
-		return $params->$name;
-	}
 }

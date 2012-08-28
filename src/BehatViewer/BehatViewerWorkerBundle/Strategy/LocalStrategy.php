@@ -1,31 +1,37 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Strategy;
+namespace BehatViewer\BehatViewerWorkerBundle\Strategy;
 
 use
-	BehatViewer\BehatViewerBundle\Strategy\Form\Type\LocalStrategyType,
+	BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type\LocalStrategyType,
 	Symfony\Component\Console\Output\ConsoleOutput
 ;
 
 class LocalStrategy extends Strategy
 {
-	public function getId() {
+	public static function getId() {
 		return 'local';
 	}
 
-	public function getLabel() {
+	public static function getLabel() {
 		return 'Local directory';
 	}
 
-	public function getForm() {
+	public static function getForm() {
 		return new LocalStrategyType();
 	}
-	
+
+	public static function getNewConfiguration() {
+		return new Configuration\LocalStrategyConfiguration();
+	}
+
 	public function build() {
+		parent::build();
+
 		$project = $this->getProject();
 
 		$cmd = $project->getTestCommand();
 		$cmd = str_replace("\r\n", PHP_EOL, $cmd);
-		$path = $project->getConfiguration()->path;
+		$path = $this->getConfiguration()->getPath();
 
 		if (file_exists($path . DIRECTORY_SEPARATOR . 'build.sh')) {
 			unlink($path . DIRECTORY_SEPARATOR . 'build.sh');
@@ -37,13 +43,13 @@ class LocalStrategy extends Strategy
 
 		$output = new ConsoleOutput();
 		$process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-			'vagrant up' . PHP_EOL . 'vagrant ssh -c "cd /vagrant; sh -e ./build.sh"' . PHP_EOL . 'vagrant halt',
-			$dir
+			'vagrant up' . PHP_EOL . 'vagrant ssh -c "cd /vagrant; sh -e ./build.sh"' . PHP_EOL . 'vagrant halt' . PHP_EOL . 'vagrant destroy -f',
+			$path
 		);
 		$process->setTimeout(600);
 		$status = $process->run(function ($type, $buffer) use (&$output) {
 			if ('err' === $type) {
-				$output->writeln('<error>' . $buffer . '</error>');
+				$output->write('<error>' . $buffer . '</error>');
 			} else {
 				$output->write($buffer);
 			}

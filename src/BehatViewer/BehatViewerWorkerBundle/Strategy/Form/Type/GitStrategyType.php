@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Strategy\Form\Type;
+namespace BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface,
     Symfony\Component\Form\CallbackValidator,
@@ -37,6 +37,17 @@ class GitStrategyType extends AbstractType
                     )
                 )
             )
+			->add(
+				'branch',
+				'text',
+				array(
+					'label' => 'Branch',
+					'required' => true,
+					'attr' => array(
+						'class' => 'input-xxlarge'
+					)
+				)
+			)
 		;
     }
 }

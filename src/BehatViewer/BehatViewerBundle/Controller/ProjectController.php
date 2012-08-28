@@ -18,13 +18,12 @@ class ProjectController extends BehatViewerProjectController
 		$strategies = $this->getStrategies();
 		$forms = array();
 
-
-		foreach($strategies as $strategy) {
-			$data = $strategy->getId() === $project->getStrategy()
+		foreach($strategies as $id => $strategy) {
+			$data = $id === $project->getStrategy() && null !== $project->getConfiguration()
 				? $data = json_decode($project->getConfiguration()->getData())
 				: null;
 
-			$forms[$strategy->getLabel()] = $this->get('form.factory')->create($strategy->getForm(), $data)->createView();
+			$forms[$strategy::getLabel()] = $this->get('form.factory')->create($strategy::getForm(), $data)->createView();
 		}
 
 		return $forms;
@@ -156,14 +155,19 @@ class ProjectController extends BehatViewerProjectController
             $manager = $this->getDoctrine()->getManager();
 
 			$configuration = $form->getData()->getConfiguration();
+			$decorated = $this->container->get('behat_viewer.strategy.provider')->getStrategyConfigurationForProject($form->getData());
 			if(null === $configuration) {
 				$configuration = new Entity\Configuration();
 				$form->getData()->setConfiguration($configuration);
 			}
 
-			foreach($this->getRequest()->get($form->getData()->getStrategy(), array()) as $param => $value) {
-				$configuration->$param = $value;
+			$config = $this->getRequest()->get($form->getData()->getStrategy(), array());
+			if(($data = $decorated->validate($config))) {
+				$data = json_encode($data);
+			} else {
+				$data = json_encode(new StdClass);
 			}
+			$configuration->setData($data);
 
             $manager->persist($form->getData());
             $manager->flush();

@@ -1,12 +1,13 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Command;
+namespace BehatViewer\BehatViewerWorkerBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\EventDispatcher\EventSubscriberInterface,
     Symfony\Component\EventDispatcher\Event,
     Symfony\Component\Console\Formatter\OutputFormatterStyle,
-    Symfony\Component\Console\Input\InputOption;
+    Symfony\Component\Console\Input\InputOption,
+	BehatViewer\BehatViewerBundle\Command\ProjectCommand;
 
 /**
  *
