@@ -3,21 +3,21 @@ namespace BehatViewer\BehatViewerWorkerBundle\Strategy;
 
 interface StrategyInterface
 {
-	/**
-	 * @abstract
-	 *
-	 * @return string
-	 */
-	static function getId();
+    /**
+     * @abstract
+     *
+     * @return string
+     */
+    public static function getId();
 
-	/**
-	 * @abstract
-	 *
-	 * @return string
-	 */
-	static function getLabel();
+    /**
+     * @abstract
+     *
+     * @return string
+     */
+    public static function getLabel();
 
-	static function getForm();
+    public static function getForm();
 
-	static function getNewConfiguration();
+    public static function getNewConfiguration();
 }

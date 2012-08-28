@@ -1,8 +1,6 @@
 <?php
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use BehatViewer\BehatViewerBundle\Entity;
-
 /**
  *
  */

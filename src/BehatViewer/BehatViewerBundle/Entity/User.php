@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Security\Core\User\AdvancedUserInterface,
     Symfony\Component\Validator\Constraints as Assert,
     Symfony\Bridge\Doctrine\Validator\Constraints,
-	Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+    Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 
 /**
  * Acme\UserBundle\Entity\User
@@ -48,10 +48,10 @@ class User extends Base implements AdvancedUserInterface
      */
     private $password;
 
-	/**
-	 * @ORM\Column(type="string", length=40)
-	 */
-	private $token;
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $token;
 
     /**
      * @Assert\NotBlank()
@@ -120,15 +120,15 @@ class User extends Base implements AdvancedUserInterface
         $this->password = $password;
     }
 
-	public function getToken()
-	{
-		return $this->token;
-	}
+    public function getToken()
+    {
+        return $this->token;
+    }
 
-	public function setToken($token)
-	{
-		$this->token = $token;
-	}
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
 
     public function getEmail()
     {
@@ -196,7 +196,8 @@ class User extends Base implements AdvancedUserInterface
         return $this->username === $user->getUsername();
     }
 
-	public function getIdentity() {
-		return UserSecurityIdentity::fromAccount($this);
-	}
+    public function getIdentity()
+    {
+        return UserSecurityIdentity::fromAccount($this);
+    }
 }

@@ -30,21 +30,21 @@ class GenerateKeyCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-		$dir = $this->getContainer()->get('kernel')->getRootDir() . '/data/keys';
-		if(false === is_dir($dir)) {
-			mkdir($dir, 0777, true);
-		}
+        $dir = $this->getContainer()->get('kernel')->getRootDir() . '/data/keys';
+        if (false === is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
 
         $path = sprintf(
-			$dir . '/%s-%s',
-			$input->getArgument('username'),
-			$input->getArgument('project')
-		);
+            $dir . '/%s-%s',
+            $input->getArgument('username'),
+            $input->getArgument('project')
+        );
 
         passthru(
             sprintf(
                 'sudo -u %s ssh-keygen -t rsa -f %s',
-				$input->getArgument('owner'),
+                $input->getArgument('owner'),
                 $path
             )
         );

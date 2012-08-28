@@ -5,10 +5,10 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class DefinitionConsumer extends Consumer
 {
-	public function execute(AMQPMessage $msg)
-	{
-		$options = $this->getOptions($msg);
+    public function execute(AMQPMessage $msg)
+    {
+        $options = $this->getOptions($msg);
 
-		return true;
-	}
+        return true;
+    }
 }

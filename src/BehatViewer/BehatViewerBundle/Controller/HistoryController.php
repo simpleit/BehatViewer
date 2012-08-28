@@ -65,10 +65,10 @@ class HistoryController extends BehatViewerProjectController
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
         $build = $repository->findOneByProjectAndId($project, $build);
 
-        if(null === $type) {
-			$type = $this->getViewType('thumb');
-		}
-		$this->setViewType($type);
+        if (null === $type) {
+            $type = $this->getViewType('thumb');
+        }
+        $this->setViewType($type);
 
         $view = 'entry' . ($type !== null ? '-' . $type : '');
 
@@ -89,9 +89,9 @@ class HistoryController extends BehatViewerProjectController
      * @return \Symfony\Component\HttpFoundation\Response|array
      *
      * @Configuration\Route("/{username}/{project}/history/delete/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.delete")
-	 * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
-	 * @Security\Secure(roles="ROLE_USER")
-	 * @Security\SecureParam(name="project", permissions="EDIT")
+     * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
+     * @Security\Secure(roles="ROLE_USER")
+     * @Security\SecureParam(name="project", permissions="EDIT")
      */
     public function deleteAction(Entity\User $user, Entity\Project $project, Entity\Build $build)
     {
@@ -107,9 +107,9 @@ class HistoryController extends BehatViewerProjectController
      *
      * @Configuration\Method({"POST"})
      * @Configuration\Route("/{username}/{project}/history/delete", name="behatviewer.history.delete.selected")
-	 * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
-	 * @Security\Secure(roles="ROLE_USER")
-	 * @Security\SecureParam(name="project", permissions="EDIT")
+     * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
+     * @Security\Secure(roles="ROLE_USER")
+     * @Security\SecureParam(name="project", permissions="EDIT")
      */
     public function deleteSelectedAction(Entity\User $user, Entity\Project $project)
     {

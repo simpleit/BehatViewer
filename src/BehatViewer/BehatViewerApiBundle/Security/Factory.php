@@ -9,31 +9,31 @@ use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityF
 
 class Factory implements SecurityFactoryInterface
 {
-	public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
-	{
-		$providerId = 'security.authentication.provider.'.$id;
-		$container
-			->setDefinition($providerId, new DefinitionDecorator('behat_viewer.api.security.authentication.provider'))
-			->replaceArgument(0, new Reference($userProvider))
-		;
+    public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
+    {
+        $providerId = 'security.authentication.provider.'.$id;
+        $container
+            ->setDefinition($providerId, new DefinitionDecorator('behat_viewer.api.security.authentication.provider'))
+            ->replaceArgument(0, new Reference($userProvider))
+        ;
 
-		$listenerId = 'security.authentication.listener.'.$id;
-		$listener = $container->setDefinition($listenerId, new DefinitionDecorator('behat_viewer.api.security.authentication.listener'));
+        $listenerId = 'security.authentication.listener.'.$id;
+        $listener = $container->setDefinition($listenerId, new DefinitionDecorator('behat_viewer.api.security.authentication.listener'));
 
-		return array($providerId, $listenerId, $defaultEntryPoint);
-	}
+        return array($providerId, $listenerId, $defaultEntryPoint);
+    }
 
-	public function getPosition()
-	{
-		return 'pre_auth';
-	}
+    public function getPosition()
+    {
+        return 'pre_auth';
+    }
 
-	public function getKey()
-	{
-		return 'api';
-	}
+    public function getKey()
+    {
+        return 'api';
+    }
 
-	public function addConfiguration(NodeDefinition $node)
-	{
-	}
+    public function addConfiguration(NodeDefinition $node)
+    {
+    }
 }

@@ -2,42 +2,46 @@
 namespace BehatViewer\BehatViewerWorkerBundle\Strategy\Configuration;
 
 use
-	Symfony\Component\DependencyInjection\ContainerAware,
-	BehatViewer\BehatViewerBundle\Entity,
-	Symfony\Component\Config
+    Symfony\Component\DependencyInjection\ContainerAware,
+    BehatViewer\BehatViewerBundle\Entity,
+    Symfony\Component\Config
 ;
 
 abstract class Configuration extends Entity\Configuration
 {
-	protected $config = array();
+    protected $config = array();
 
-	public function setData($data) {
-		$config = json_decode($data, true);
-		$this->validate($config);
+    public function setData($data)
+    {
+        $config = json_decode($data, true);
+        $this->validate($config);
 
-		$this->config = $config;
-	}
+        $this->config = $config;
+    }
 
-	public function getData() {
-		return json_encode($this->config);
-	}
+    public function getData()
+    {
+        return json_encode($this->config);
+    }
 
-	/**
-	 * @param array $config
-	 *
-	 * @return array
-	 */
-	public function validate(array $config) {
-		$processor = new Config\Definition\Processor();
+    /**
+     * @param array $config
+     *
+     * @return array
+     */
+    public function validate(array $config)
+    {
+        $processor = new Config\Definition\Processor();
 
-		$config = array('strategy' => $config);
-		return $processor->process($this->getTreeBuilder()->buildTree(), $config);
-	}
+        $config = array('strategy' => $config);
 
-	/**
-	 * @abstract
-	 *
-	 * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
-	 */
-	abstract protected function getTreeBuilder();
+        return $processor->process($this->getTreeBuilder()->buildTree(), $config);
+    }
+
+    /**
+     * @abstract
+     *
+     * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
+     */
+    abstract protected function getTreeBuilder();
 }

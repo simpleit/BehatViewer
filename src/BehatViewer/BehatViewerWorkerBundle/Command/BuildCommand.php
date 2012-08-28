@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Input\InputArgument,
-	BehatViewer\BehatViewerBundle\Command\ProjectCommand;
+    BehatViewer\BehatViewerBundle\Command\ProjectCommand;
 
 /**
  *
@@ -38,8 +38,8 @@ class BuildCommand extends ProjectCommand
         parent::execute($input, $output);
 
         $strategy = $this->getContainer()->get('behat_viewer.strategy.provider')->getStrategyForProject($this->getProject());
-		$strategy->setOutput($output);
+        $strategy->setOutput($output);
 
-		return $strategy->build();
+        return $strategy->build();
     }
 }

@@ -3,8 +3,8 @@
 namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
-	BehatViewer\BehatViewerBundle\Entity,
-	JMS\SecurityExtraBundle\Annotation as Security;
+    BehatViewer\BehatViewerBundle\Entity,
+    JMS\SecurityExtraBundle\Annotation as Security;
 
 class DefinitionsController extends BehatViewerProjectController
 {
@@ -13,7 +13,7 @@ class DefinitionsController extends BehatViewerProjectController
      *
      * @Configuration\Route("/{username}/{project}/definitions", name="behatviewer.definitions")
      * @Configuration\Template()
-	 * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
+     * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */
     public function indexAction(Entity\User $user, Entity\Project $project)
     {

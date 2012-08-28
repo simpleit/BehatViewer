@@ -3,20 +3,20 @@
 namespace BehatViewer\BehatViewerBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle,
-	Symfony\Component\DependencyInjection\ContainerBuilder,
+    Symfony\Component\DependencyInjection\ContainerBuilder,
     Doctrine\DBAL\Types\Type,
-	BehatViewer\BehatViewerBundle\DependencyInjection\Compiler\Pass;
+    BehatViewer\BehatViewerBundle\DependencyInjection\Compiler\Pass;
 
 /**
  *
  */
 class BehatViewerBundle extends Bundle
 {
-	public function build(ContainerBuilder $container)
-	{
-		$compiler = $container->getCompilerPassConfig();
-		$compiler->addPass(new Pass\StrategyCompilerPass());
-	}
+    public function build(ContainerBuilder $container)
+    {
+        $compiler = $container->getCompilerPassConfig();
+        $compiler->addPass(new Pass\StrategyCompilerPass());
+    }
 
     public function boot()
     {

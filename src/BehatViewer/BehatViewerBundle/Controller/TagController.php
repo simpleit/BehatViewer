@@ -21,9 +21,9 @@ class TagController extends BehatViewerProjectController
      */
     public function indexAction(Entity\User $user, Entity\Project $project, Entity\Tag $tag, Entity\Build $build = null, $type = null)
     {
-		if(null === $build) {
-			$build = $project->getLastBuild();
-		}
+        if (null === $build) {
+            $build = $project->getLastBuild();
+        }
 
         $features = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature')->findByTagAndBuild($tag, $build);
         $scenarios = $this->getDoctrine()->getRepository('BehatViewerBundle:Scenario')->findByTagAndBuild($tag, $build);
@@ -34,22 +34,22 @@ class TagController extends BehatViewerProjectController
             }
         }
 
-		if(null === $type) {
-			$type = $this->getViewType('thumb');
-		}
-		$this->setViewType($type);
+        if (null === $type) {
+            $type = $this->getViewType('thumb');
+        }
+        $this->setViewType($type);
 
-		$view = 'entry' . ($type !== null ? '-' . $type : '');
+        $view = 'entry' . ($type !== null ? '-' . $type : '');
 
-		return $this->render(
-			'BehatViewerBundle:History:' . $view . '.html.twig',
-			$this->getResponse(
-				array(
-					'tag' => $tag,
-					'build' => $build,
-					'items' => $features
-				)
-			)
-		);
+        return $this->render(
+            'BehatViewerBundle:History:' . $view . '.html.twig',
+            $this->getResponse(
+                array(
+                    'tag' => $tag,
+                    'build' => $build,
+                    'items' => $features
+                )
+            )
+        );
     }
 }

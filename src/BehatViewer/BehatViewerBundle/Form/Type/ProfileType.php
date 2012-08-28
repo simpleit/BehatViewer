@@ -15,16 +15,16 @@ class ProfileType extends UserType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-		parent::buildForm($builder, $options);
+        parent::buildForm($builder, $options);
 
         $builder
-			->add('token', 'text', array(
-				'label' => 'API token',
-				'attr' => array(
-					'class' => 'input-xlarge',
-					'readonly' => 'readonly'
-				)
-			));
-		;
+            ->add('token', 'text', array(
+                'label' => 'API token',
+                'attr' => array(
+                    'class' => 'input-xlarge',
+                    'readonly' => 'readonly'
+                )
+            ));
+        ;
     }
 }

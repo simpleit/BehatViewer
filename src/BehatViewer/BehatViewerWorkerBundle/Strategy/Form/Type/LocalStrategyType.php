@@ -4,20 +4,20 @@ namespace BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface,
     Symfony\Component\Form\CallbackValidator,
     Symfony\Component\Form\Form,
-	Symfony\Component\Form\AbstractType;
+    Symfony\Component\Form\AbstractType;
 
 /**
  *
  */
 class LocalStrategyType extends AbstractType
 {
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'local';
-	}
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'local';
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder
@@ -37,17 +37,17 @@ class LocalStrategyType extends AbstractType
                     )
                 )
             )
-			->add(
-				'base_url',
-				'url',
-				array(
-					'label' => 'Base URL',
-					'required' => true,
-					'attr' => array(
-						'class' => 'input-xxlarge'
-					)
-				)
-			)
-		;
+            ->add(
+                'base_url',
+                'url',
+                array(
+                    'label' => 'Base URL',
+                    'required' => true,
+                    'attr' => array(
+                        'class' => 'input-xxlarge'
+                    )
+                )
+            )
+        ;
     }
 }

@@ -10,11 +10,12 @@ use Symfony\Component\Form\AbstractType,
  */
 class ProjectType extends AbstractType
 {
-	protected $strategies;
+    protected $strategies;
 
-	public function __construct(array $strategies) {
-		$this->strategies = $strategies;
-	}
+    public function __construct(array $strategies)
+    {
+        $this->strategies = $strategies;
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder
@@ -24,56 +25,57 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add(
-				'name',
-				'text',
-				array(
-                	'label' => 'Project name',
-                	'attr' => array(
-                    	'class' => 'input-xlarge'
-                	)
-            	)
-			)
+                'name',
+                'text',
+                array(
+                    'label' => 'Project name',
+                    'attr' => array(
+                        'class' => 'input-xlarge'
+                    )
+                )
+            )
             ->add(
-				'slug',
-				'text',
-				array(
-                	'label' => 'Identifier',
-                	'attr' => array(
-                    	'class' => 'input-xlarge'
-                	)
-            	)
-			)
+                'slug',
+                'text',
+                array(
+                    'label' => 'Identifier',
+                    'attr' => array(
+                        'class' => 'input-xlarge'
+                    )
+                )
+            )
             ->add(
-				'test_command',
-				'textarea',
-				array(
-					'label' => 'Test command',
-					'attr' => array(
-						'rows' => 10,
-						'cols' => 70,
-						'style' => 'width: auto'
-					)
-            	)
-			)
-			->add(
-				'strategy',
-				'choice',
-				array(
-					'label' => 'Type',
-					'required' => true,
-					'choices' => $this->getStrategyChoices($this->strategies)
-				)
-			)
-		;
+                'test_command',
+                'textarea',
+                array(
+                    'label' => 'Test command',
+                    'attr' => array(
+                        'rows' => 10,
+                        'cols' => 70,
+                        'style' => 'width: auto'
+                    )
+                )
+            )
+            ->add(
+                'strategy',
+                'choice',
+                array(
+                    'label' => 'Type',
+                    'required' => true,
+                    'choices' => $this->getStrategyChoices($this->strategies)
+                )
+            )
+        ;
     }
 
-	protected function getStrategyChoices($strategies) {
-		foreach($strategies as &$strategy) {
-			$strategy = $strategy::getLabel();
-		}
+    protected function getStrategyChoices($strategies)
+    {
+        foreach ($strategies as &$strategy) {
+            $strategy = $strategy::getLabel();
+        }
 
-		return $strategies;
-	}
+        return $strategies;
+    }
 
     /**
      * @param array $options

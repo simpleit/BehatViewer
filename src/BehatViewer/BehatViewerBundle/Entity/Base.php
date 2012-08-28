@@ -17,7 +17,8 @@ abstract class Base
         return $instance;
     }
 
-	public function getIdentity() {
-		return ObjectIdentity::fromDomainObject($this);
-	}
+    public function getIdentity()
+    {
+        return ObjectIdentity::fromDomainObject($this);
+    }
 }

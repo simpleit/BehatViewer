@@ -4,20 +4,20 @@ namespace BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface,
     Symfony\Component\Form\CallbackValidator,
     Symfony\Component\Form\Form,
-	Symfony\Component\Form\AbstractType;
+    Symfony\Component\Form\AbstractType;
 
 /**
  *
  */
 class GitLocalStrategyType extends AbstractType
 {
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'git_local';
-	}
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'git_local';
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder
@@ -37,17 +37,17 @@ class GitLocalStrategyType extends AbstractType
                     )
                 )
             )
-			->add(
-				'branch',
-				'text',
-				array(
-					'label' => 'Branch',
-					'required' => true,
-					'attr' => array(
-						'class' => 'input-xxlarge'
-					)
-				)
-			)
-		;
+            ->add(
+                'branch',
+                'text',
+                array(
+                    'label' => 'Branch',
+                    'required' => true,
+                    'attr' => array(
+                        'class' => 'input-xxlarge'
+                    )
+                )
+            )
+        ;
     }
 }

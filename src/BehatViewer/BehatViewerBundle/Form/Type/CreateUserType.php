@@ -25,7 +25,7 @@ class CreateUserType extends UserType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-		parent::buildForm($builder, $options);
+        parent::buildForm($builder, $options);
 
         $builder
             ->add(
@@ -52,7 +52,7 @@ class CreateUserType extends UserType
                     )
                 )
             )
-        	->add(
+            ->add(
                 'isActive',
                 'choice',
                 array(
@@ -64,7 +64,7 @@ class CreateUserType extends UserType
                     )
                 )
             )
-		;
+        ;
 
         $builder->addValidator(new CallbackValidator(function(Form $form) {
             $password = $form->get('password');

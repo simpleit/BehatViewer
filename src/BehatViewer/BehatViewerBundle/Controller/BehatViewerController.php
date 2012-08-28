@@ -16,9 +16,10 @@ abstract class BehatViewerController extends Controller
         return $this->get('behat_viewer.session');
     }
 
-	public function getAclProvider() {
-		return $this->get('security.acl.provider');
-	}
+    public function getAclProvider()
+    {
+        return $this->get('security.acl.provider');
+    }
 
     /**
      * @return array

@@ -5,18 +5,18 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 class UserToken extends AbstractToken
 {
-	public $username;
-	public $token;
+    public $username;
+    public $token;
 
-	public function __construct(array $roles = array())
-	{
-		parent::__construct($roles);
+    public function __construct(array $roles = array())
+    {
+        parent::__construct($roles);
 
-		$this->setAuthenticated(count($roles) > 0);
-	}
+        $this->setAuthenticated(count($roles) > 0);
+    }
 
-	public function getCredentials()
-	{
-		return '';
-	}
+    public function getCredentials()
+    {
+        return '';
+    }
 }

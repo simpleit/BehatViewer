@@ -14,38 +14,38 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
  */
 class AdminController extends BehatViewerController
 {
-	/**
-	 * @return array
-	 *
-	 * @Configuration\Route("/users/create", name="behatviewer.usercreate")
-	 * @Configuration\Template()
-	 * @Security\Secure(roles="ROLE_ADMIN")
-	 */
-	public function userCreateAction()
-	{
-		$request = $this->getRequest();
-		$user = new Entity\User();
-		$form = $this->get('form.factory')->create(new CreateUserType(), $user);
+    /**
+     * @return array
+     *
+     * @Configuration\Route("/users/create", name="behatviewer.usercreate")
+     * @Configuration\Template()
+     * @Security\Secure(roles="ROLE_ADMIN")
+     */
+    public function userCreateAction()
+    {
+        $request = $this->getRequest();
+        $user = new Entity\User();
+        $form = $this->get('form.factory')->create(new CreateUserType(), $user);
 
-		if ('POST' === $request->getMethod()) {
-			if ($this->save($form, $user)) {
-				return  $this->redirect($this->generateUrl('behatviewer.useredit', array('username' => $user->getUsername())));
-			}
-		}
+        if ('POST' === $request->getMethod()) {
+            if ($this->save($form, $user)) {
+                return  $this->redirect($this->generateUrl('behatviewer.useredit', array('username' => $user->getUsername())));
+            }
+        }
 
-		return  $this->getResponse(array(
-			'success' => false,
-			'user' => $user,
-			'form' => $form->createView()
-		));
-	}
+        return  $this->getResponse(array(
+            'success' => false,
+            'user' => $user,
+            'form' => $form->createView()
+        ));
+    }
 
     /**
      * @return array
      *
      * @Configuration\Route("/users", name="behatviewer.users")
      * @Configuration\Template()
-	 * @Security\Secure(roles="ROLE_ADMIN")
+     * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function usersAction()
     {
@@ -59,7 +59,7 @@ class AdminController extends BehatViewerController
 
     /**
      * @Configuration\Route("/users/disable/{username}", name="behatviewer.userdisable")
-	 * @Security\Secure(roles="ROLE_ADMIN")
+     * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function userDisableAction(Entity\User $user)
     {
@@ -73,7 +73,7 @@ class AdminController extends BehatViewerController
 
     /**
      * @Configuration\Route("/users/enable/{username}", name="behatviewer.userenable")
-	 * @Security\Secure(roles="ROLE_ADMIN")
+     * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function userEnableAction(Entity\User $user)
     {
@@ -90,7 +90,7 @@ class AdminController extends BehatViewerController
      *
      * @Configuration\Route("/users/{username}", name="behatviewer.useredit", requirements={"id" = "\d+"})
      * @Configuration\Template()
-	 * @Security\Secure(roles="ROLE_ADMIN")
+     * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function userEditAction(Entity\User $user)
     {
@@ -133,9 +133,9 @@ class AdminController extends BehatViewerController
                         )
                     );
 
-					if($user->getToken() == '') {
-						$user->setToken(md5(uniqid()));
-					}
+                    if ($user->getToken() == '') {
+                        $user->setToken(md5(uniqid()));
+                    }
                 }
             }
 

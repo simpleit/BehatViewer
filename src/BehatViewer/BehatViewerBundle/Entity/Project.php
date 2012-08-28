@@ -56,20 +56,20 @@ class Project extends Base
      */
     private $test_command;
 
-	/**
-	 * @var string $strategy
-	 *
-	 * @Assert\NotBlank()
-	 * @ORM\Column(name="strategy", type="string", length=40)
-	 */
-	private $strategy;
+    /**
+     * @var string $strategy
+     *
+     * @Assert\NotBlank()
+     * @ORM\Column(name="strategy", type="string", length=40)
+     */
+    private $strategy;
 
-	/**
-	 * @var \BehatViewer\BehatViewerBundle\Entity\Configuration $configuration
-	 *
-	 * @ORM\OneToOne(targetEntity="Configuration", inversedBy="project", cascade={"persist"})
-	 */
-	private $configuration;
+    /**
+     * @var \BehatViewer\BehatViewerBundle\Entity\Configuration $configuration
+     *
+     * @ORM\OneToOne(targetEntity="Configuration", inversedBy="project", cascade={"persist"})
+     */
+    private $configuration;
 
     /**
      * @var string $type
@@ -145,25 +145,25 @@ class Project extends Base
         return $this->name;
     }
 
-	public function setStrategy($strategy)
-	{
-		$this->strategy = $strategy;
-	}
+    public function setStrategy($strategy)
+    {
+        $this->strategy = $strategy;
+    }
 
-	public function getStrategy()
-	{
-		return $this->strategy;
-	}
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
 
-	public function setConfiguration(\BehatViewer\BehatViewerBundle\Entity\Configuration $configuration)
-	{
-		$this->configuration = $configuration;
-	}
+    public function setConfiguration(\BehatViewer\BehatViewerBundle\Entity\Configuration $configuration)
+    {
+        $this->configuration = $configuration;
+    }
 
-	public function getConfiguration()
-	{
-		return $this->configuration;
-	}
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
 
     public function __construct()
     {

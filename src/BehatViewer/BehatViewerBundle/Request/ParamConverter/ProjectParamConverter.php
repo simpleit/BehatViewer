@@ -5,32 +5,34 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProjectParamConverter extends BehatViewerParamConverter
 {
-	public function getObject(Request $request, array $options) {
-		$repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Project');
+    public function getObject(Request $request, array $options)
+    {
+        $repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Project');
 
-		$slug = $request->get($options['mapping']['project']);
+        $slug = $request->get($options['mapping']['project']);
 
-		if(null !== ($user = $request->get('user'))) {
-			$object = $repository->findOneByUsernameAndSlug($user->getUsername(), $slug);
-		} else {
-			$username = $request->get($options['mapping']['username']);
-			$object = $repository->findOneByUsernameAndSlug($username, $slug);
-		}
+        if (null !== ($user = $request->get('user'))) {
+            $object = $repository->findOneByUsernameAndSlug($user->getUsername(), $slug);
+        } else {
+            $username = $request->get($options['mapping']['username']);
+            $object = $repository->findOneByUsernameAndSlug($username, $slug);
+        }
 
-		return $object;
-	}
+        return $object;
+    }
 
-	protected function getClass() {
-		return 'BehatViewer\\BehatViewerBundle\\Entity\\Project';
-	}
+    protected function getClass()
+    {
+        return 'BehatViewer\\BehatViewerBundle\\Entity\\Project';
+    }
 
-	protected function getDefaultOptions()
-	{
-		return array(
-			'mapping' => array(
-				'username' => 'username',
-				'project' => 'project'
-			),
-		);
-	}
+    protected function getDefaultOptions()
+    {
+        return array(
+            'mapping' => array(
+                'username' => 'username',
+                'project' => 'project'
+            ),
+        );
+    }
 }

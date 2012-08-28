@@ -12,64 +12,64 @@ use BehatViewer\BehatViewerApiBundle\Security\UserToken;
 
 class UserFirewall implements ListenerInterface
 {
-	protected $securityContext;
-	protected $authenticationManager;
+    protected $securityContext;
+    protected $authenticationManager;
 
-	public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager)
-	{
-		$this->securityContext = $securityContext;
-		$this->authenticationManager = $authenticationManager;
-	}
+    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager)
+    {
+        $this->securityContext = $securityContext;
+        $this->authenticationManager = $authenticationManager;
+    }
 
-	protected function getUsername($request)
-	{
-		if($request->server->has('PHP_AUTH_USER')) {
-			$username = $request->server->get('PHP_AUTH_USER');
-		} else {
-			$username = $request->request->has('username')
-				? $request->request->get('username')
-				: $request->query->get('username');
-		}
+    protected function getUsername($request)
+    {
+        if ($request->server->has('PHP_AUTH_USER')) {
+            $username = $request->server->get('PHP_AUTH_USER');
+        } else {
+            $username = $request->request->has('username')
+                ? $request->request->get('username')
+                : $request->query->get('username');
+        }
 
-		return $username;
-	}
+        return $username;
+    }
 
-	protected function getToken($request)
-	{
-		if($request->server->has('PHP_AUTH_PW')) {
-			$token = $request->server->get('PHP_AUTH_PW');
-		} else {
-			$token = $request->request->has('apiToken')
-				? $request->request->get('apiToken')
-				: $request->query->get('apiToken');
-		}
+    protected function getToken($request)
+    {
+        if ($request->server->has('PHP_AUTH_PW')) {
+            $token = $request->server->get('PHP_AUTH_PW');
+        } else {
+            $token = $request->request->has('apiToken')
+                ? $request->request->get('apiToken')
+                : $request->query->get('apiToken');
+        }
 
-		return $token;
-	}
+        return $token;
+    }
 
-	public function handle(GetResponseEvent $event)
-	{
-		$request = $event->getRequest();
+    public function handle(GetResponseEvent $event)
+    {
+        $request = $event->getRequest();
 
-		if (($username = $this->getUsername($request)) && ($apiToken = $this->getToken($request))) {
-			$token = new UserToken();
-			$token->setUser($username);
-			$token->token = $apiToken;
+        if (($username = $this->getUsername($request)) && ($apiToken = $this->getToken($request))) {
+            $token = new UserToken();
+            $token->setUser($username);
+            $token->token = $apiToken;
 
-			try {
-				$returnValue = $this->authenticationManager->authenticate($token);
+            try {
+                $returnValue = $this->authenticationManager->authenticate($token);
 
-				if ($returnValue instanceof TokenInterface) {
-					return $this->securityContext->setToken($returnValue);
-				} elseif ($returnValue instanceof Response) {
-					$event->setResponse($returnValue);
-				}
-			} catch (AuthenticationException $e) {
-			}
-		}
+                if ($returnValue instanceof TokenInterface) {
+                    return $this->securityContext->setToken($returnValue);
+                } elseif ($returnValue instanceof Response) {
+                    $event->setResponse($returnValue);
+                }
+            } catch (AuthenticationException $e) {
+            }
+        }
 
-		$response = new Response();
-		$response->setStatusCode(403);
-		$event->setResponse($response);
-	}
+        $response = new Response();
+        $response->setStatusCode(403);
+        $event->setResponse($response);
+    }
 }
