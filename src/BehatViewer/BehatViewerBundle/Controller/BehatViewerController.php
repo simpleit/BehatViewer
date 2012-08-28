@@ -22,6 +22,8 @@ abstract class BehatViewerController extends Controller
     }
 
     /**
+     * @param array $variables
+     *
      * @return array
      */
     public function getResponse(array $variables = array())
@@ -35,6 +37,11 @@ abstract class BehatViewerController extends Controller
         );
     }
 
+    /**
+     * @param string $type
+     *
+     * @return string
+     */
     protected function setViewType($type)
     {
         $key = $this->getRequest()->get('_route') . '.type';
@@ -43,6 +50,11 @@ abstract class BehatViewerController extends Controller
         return $type;
     }
 
+    /**
+     * @param string|null $default
+     *
+     * @return string|null
+     */
     protected function getViewType($default = null)
     {
         $key = $this->getRequest()->get('_route') . '.type';

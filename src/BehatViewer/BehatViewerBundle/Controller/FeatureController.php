@@ -9,7 +9,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
 class FeatureController extends BehatViewerBuildController
 {
     /**
-     * @return array|\Symfony\Component\HttpFoundation\Response
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerBundle\Entity\Build   $build
+     * @param \BehatViewer\BehatViewerBundle\Entity\Feature $feature
+     *
+     * @return array
      *
      * @Configuration\Route("/{username}/{project}/{build}/{feature}", name="behatviewer.feature", requirements={"build" = "\d+"})
      * @Configuration\Template()
@@ -25,7 +30,12 @@ class FeatureController extends BehatViewerBuildController
     }
 
     /**
-     * @return array|\Symfony\Component\HttpFoundation\Response
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerBundle\Entity\Build   $build
+     * @param \BehatViewer\BehatViewerBundle\Entity\Feature $feature
+     *
+     * @return array
      *
      * @Configuration\Route("/{username}/{project}/{build}/{feature}/source", name="behatviewer.feature.source", requirements={"id" = "\d+"})
      * @Configuration\Template()
@@ -43,19 +53,21 @@ class FeatureController extends BehatViewerBuildController
         ));
     }
 
-  /**
-   * @return string
-   *
-   * @Configuration\Route("/screenshot/{id}", name="behatviewer.screenshot", options={"expose"=true}, requirements={"id" = "\d+"})
-   */
-  public function screenshotAction(Entity\Step $step)
-  {
-    return new \Symfony\Component\HttpFoundation\Response(
-      $step->getScreen(),
-      200,
-      array(
-        'Content-type' => 'image/png'
-      )
-    );
-  }
+    /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\Step $step
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Configuration\Route("/screenshot/{id}", name="behatviewer.screenshot", options={"expose"=true}, requirements={"id" = "\d+"})
+     */
+    public function screenshotAction(Entity\Step $step)
+    {
+        return new \Symfony\Component\HttpFoundation\Response(
+              $step->getScreen(),
+              200,
+              array(
+                'Content-type' => 'image/png'
+              )
+        );
+      }
 }

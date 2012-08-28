@@ -2,9 +2,9 @@
 namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
+    JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Entity,
     BehatViewer\BehatViewerBundle\Form\Type\ProjectType,
-    JMS\SecurityExtraBundle\Annotation as Security,
     Symfony\Component\Security\Acl\Permission\MaskBuilder,
     Symfony\Component\Security\Acl\Exception\AclAlreadyExistsException;
 
@@ -35,8 +35,8 @@ class ProjectController extends BehatViewerProjectController
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Configuration\Route("/project/create", name="behatviewer.project.create")
-     * @Security\Secure(roles="ROLE_USER")
      * @Configuration\Template()
+     * @Security\Secure(roles="ROLE_USER")
      */
     public function createAction()
     {
@@ -74,6 +74,10 @@ class ProjectController extends BehatViewerProjectController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param string|null                                   $type
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Configuration\Route("/{username}/{project}", name="behatviewer.project")
@@ -95,6 +99,9 @@ class ProjectController extends BehatViewerProjectController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     *
      * @return array
      *
      * @Configuration\Route("/{username}/{project}/edit", name="behatviewer.project.edit")
@@ -133,9 +140,10 @@ class ProjectController extends BehatViewerProjectController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\Build|null $build
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
      *
-     * @return \Symfony\Component\HttpFoundation\Response|array
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Configuration\Route("/{username}/{project}/delete", name="behatviewer.project.delete")
      * @Security\Secure(roles="ROLE_USER")
@@ -150,6 +158,11 @@ class ProjectController extends BehatViewerProjectController
         return $this->redirect($this->generateUrl('behatviewer.homepage'));
     }
 
+    /**
+     * @param \Symfony\Component\Form\Form $form
+     *
+     * @return bool
+     */
     protected function save(\Symfony\Component\Form\Form $form)
     {
         $form->bind($this->getRequest());

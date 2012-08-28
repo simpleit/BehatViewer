@@ -1,12 +1,7 @@
 <?php
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    BehatViewer\BehatViewerBundle\Entity,
-    Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration;
 
 /**
  * @Route("/help")
@@ -14,17 +9,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 class HelpController extends BehatViewerController
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param string $section
+     * @param string $page
      *
-     * @Route("/{section}/{page}", name="behatviewer.help", defaults={"section" = "", "page" = "home"})
-     * @Template()
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return array
+     *
+     * @Configuration\Route("/{section}/{page}", name="behatviewer.help", defaults={"section" = "", "page" = "home"})
+     * @Configuration\Template()
      */
     public function indexAction($section, $page)
     {
         $section = $section ? $section . '/' : '';
         $file = $this->getDataDirectory() . '/' . $section . $page . '.md';
         if (false === file_exists($file)) {
-            return new Response('', 404);
+            throw $this->createNotFoundException();
         }
 
         return $this->getResponse(array(
@@ -33,11 +33,17 @@ class HelpController extends BehatViewerController
         ));
     }
 
+    /**
+     * @return string
+     */
     protected function getDataDirectory()
     {
         return __DIR__ . '/../Resources/doc/help';
     }
 
+    /**
+     * @return array
+     */
     protected function getSections()
     {
         $content = new \RecursiveDirectoryIterator($this->getDataDirectory(), \FilesystemIterator::SKIP_DOTS);

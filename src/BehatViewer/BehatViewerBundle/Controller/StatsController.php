@@ -9,6 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
 class StatsController extends BehatViewerProjectController
 {
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     *
      * @return array
      *
      * @Configuration\Route("/{username}/{project}/stats", name="behatviewer.stats")

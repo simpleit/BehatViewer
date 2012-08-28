@@ -2,22 +2,23 @@
 
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     BehatViewer\BehatViewerBundle\Entity;
 
 class TagController extends BehatViewerProjectController
 {
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\Tag $tag
+     * @param \BehatViewer\BehatViewerBundle\Entity\User       $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project    $project
+     * @param \BehatViewer\BehatViewerBundle\Entity\Tag        $tag
+     * @param \BehatViewer\BehatViewerBundle\Entity\Build|null $build
+     * @param string|null                                      $type
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{username}/{project}/tag/{slug}", name="behatviewer.tag", defaults={"build" = null})
-     * @Route("/{username}/{project}/{build}/tag/{slug}", name="behatviewer.tag.build", requirements={"build_id" = "\d+"})
-     * @Template("BehatViewerBundle:History:index.html.twig")
+     * @Configuration\Route("/{username}/{project}/tag/{slug}", name="behatviewer.tag", defaults={"build" = null})
+     * @Configuration\Route("/{username}/{project}/{build}/tag/{slug}", name="behatviewer.tag.build", requirements={"build_id" = "\d+"})
+     * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
      */
     public function indexAction(Entity\User $user, Entity\Project $project, Entity\Tag $tag, Entity\Build $build = null, $type = null)
     {

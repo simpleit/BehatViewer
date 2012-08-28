@@ -2,20 +2,18 @@
 
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     Symfony\Component\Security\Core\SecurityContext,
-    JMS\SecurityExtraBundle\Annotation\Secure,
+    JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Form\Type\ProfileType,
     BehatViewer\BehatViewerBundle\Form\Type\PasswordType;
 
 class UserController extends BehatViewerController
 {
     /**
-     * @Route("/projects", name="behatviewer.projects")
-     * @Secure(roles="ROLE_USER")
-     * @Template("BehatViewerBundle:Project:list.html.twig")
+     * @Configuration\Route("/projects", name="behatviewer.projects")
+     * @Configuration\Template("BehatViewerBundle:Project:list.html.twig")
+     * @Security\Secure(roles="ROLE_USER")
      */
     public function listAction()
     {
@@ -29,8 +27,8 @@ class UserController extends BehatViewerController
     }
 
     /**
-     * @Route("/login", name="behatviewer.login")
-     * @Template()
+     * @Configuration\Route("/login", name="behatviewer.login")
+     * @Configuration\Template()
      */
     public function indexAction()
     {
@@ -55,8 +53,8 @@ class UserController extends BehatViewerController
     }
 
     /**
-     * @Route("/login/check", name="behatviewer.logincheck")
-     * @Template()
+     * @Configuration\Route("/login/check", name="behatviewer.logincheck")
+     * @Configuration\Template()
      */
     public function checkAction()
     {
@@ -64,9 +62,9 @@ class UserController extends BehatViewerController
     }
 
     /**
-     * @Route("/profile", name="behatviewer.profile")
-     * @Secure(roles="ROLE_USER")
-     * @Template()
+     * @Configuration\Route("/profile", name="behatviewer.profile")
+     * @Configuration\Template()
+     * @Security\Secure(roles="ROLE_USER")
      */
     public function profileAction()
     {
@@ -111,9 +109,9 @@ class UserController extends BehatViewerController
     }
 
     /**
-     * @Route("/password", name="behatviewer.password")
-     * @Secure(roles="ROLE_USER")
-     * @Template()
+     * @Configuration\Route("/password", name="behatviewer.password")
+     * @Configuration\Template()
+     * @Security\Secure(roles="ROLE_USER")
      */
     public function passwordAction()
     {

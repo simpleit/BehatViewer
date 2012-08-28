@@ -9,7 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
 class HistoryController extends BehatViewerProjectController
 {
     /**
-     * @param int $page
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param int                                           $page
      *
      * @return array
      *
@@ -52,7 +54,10 @@ class HistoryController extends BehatViewerProjectController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User       $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project    $project
      * @param \BehatViewer\BehatViewerBundle\Entity\Build|null $build
+     * @param string|null                                      $type
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -84,6 +89,8 @@ class HistoryController extends BehatViewerProjectController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User       $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project    $project
      * @param \BehatViewer\BehatViewerBundle\Entity\Build|null $build
      *
      * @return \Symfony\Component\HttpFoundation\Response|array
@@ -103,6 +110,9 @@ class HistoryController extends BehatViewerProjectController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     *
      * @return array
      *
      * @Configuration\Method({"POST"})

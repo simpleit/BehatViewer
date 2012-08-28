@@ -2,23 +2,21 @@
 
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    JMS\SecurityExtraBundle\Annotation\Secure,
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
+    JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Form\Type\ProjectType;
 
 /**
- * @Route("/config")
+ * @Configuration\Route("/config")
  */
 class ConfigController extends BehatViewerController
 {
     /**
      * @return array
      *
-     * @Route("/", name="behatviewer.config")
-     * @Secure(roles="ROLE_ADMIN")
-     * @Template()
+     * @Configuration\Route("/", name="behatviewer.config")
+     * @Security\Secure(roles="ROLE_ADMIN")
+     * @Configuration\Template()
      */
     public function indexAction()
     {

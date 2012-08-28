@@ -7,6 +7,8 @@ namespace BehatViewer\BehatViewerBundle\Controller;
 abstract class BehatViewerBuildController extends BehatViewerProjectController
 {
     /**
+     * @param array $variables
+     *
      * @return array
      */
     public function getResponse(array $variables = array())

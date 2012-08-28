@@ -1,13 +1,8 @@
 <?php
 namespace BehatViewer\BehatViewerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
+use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     BehatViewer\BehatViewerBundle\Entity,
-    JMS\SecurityExtraBundle\Annotation\Secure,
     BehatViewer\BehatViewerBundle\DBAL\Type\EnumProjectTypeType;
 
 /**
@@ -16,10 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 class DefaultController extends BehatViewerController
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/", name="behatviewer.homepage", options={"expose"=true})
-     * @Template()
+     * @throws \BehatViewer\BehatViewerBundle\Exception\NoProjectConfiguredException
+     *
+     * @Configuration\Route("/", name="behatviewer.homepage", options={"expose"=true})
+     * @Configuration\Template()
      */
     public function indexAction()
     {
@@ -47,10 +44,12 @@ class DefaultController extends BehatViewerController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{username}/{project}/analyze", name="behatviewer.analyze")
-     * @Method({"PUT"})
+     * @Configuration\Route("/{username}/{project}/analyze", name="behatviewer.analyze")
+     * @Configuration\Method({"PUT"})
      */
     public function analyzeAction(Entity\Project $project)
     {
@@ -65,8 +64,8 @@ class DefaultController extends BehatViewerController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/thumb", name="behatviewer.homepage.thumb")
-     * @Template("BehatViewerBundle:Default:index.html.twig")
+     * @Configuration\Route("/thumb", name="behatviewer.homepage.thumb")
+     * @Configuration\Template("BehatViewerBundle:Default:index.html.twig")
      */
     public function indexthumbAction()
     {

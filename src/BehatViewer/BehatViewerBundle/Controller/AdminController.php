@@ -4,7 +4,6 @@ namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
-    BehatViewer\BehatViewerBundle\Form\Type\ProjectType,
     BehatViewer\BehatViewerBundle\Entity,
     BehatViewer\BehatViewerBundle\Form\Type\CreateUserType,
     BehatViewer\BehatViewerBundle\Form\Type\EditUserType;
@@ -58,6 +57,10 @@ class AdminController extends BehatViewerController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User $user
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @Configuration\Route("/users/disable/{username}", name="behatviewer.userdisable")
      * @Security\Secure(roles="ROLE_ADMIN")
      */
@@ -72,6 +75,10 @@ class AdminController extends BehatViewerController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User $user
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @Configuration\Route("/users/enable/{username}", name="behatviewer.userenable")
      * @Security\Secure(roles="ROLE_ADMIN")
      */
@@ -86,6 +93,8 @@ class AdminController extends BehatViewerController
     }
 
     /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User $user
+     *
      * @return array
      *
      * @Configuration\Route("/users/{username}", name="behatviewer.useredit", requirements={"id" = "\d+"})
@@ -112,6 +121,12 @@ class AdminController extends BehatViewerController
         ));
     }
 
+    /**
+     * @param \Symfony\Component\Form\Form               $form
+     * @param \BehatViewer\BehatViewerBundle\Entity\User $user
+     *
+     * @return bool
+     */
     protected function save(\Symfony\Component\Form\Form $form, Entity\User $user)
     {
         $form->bind($this->getRequest());
