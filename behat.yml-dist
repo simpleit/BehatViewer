@@ -5,7 +5,7 @@ default:
 
     context:
         parameters:
-            javascript_session: sahi
+            javascript_session: selenium2
             base_url: "http://%hostname%/app_test.php"
 
     formatter:
@@ -15,8 +15,7 @@ default:
         name: pretty,viewer
         parameters:
             viewer_output_path: "."
-            behat_viewer_url: "http://%hostname%/app_dev.php/analyze"
-            screen_id: 1
+            screen_id: 99
 
     extensions:
         jubianchi\BehatViewerExtension\Extension: ~
