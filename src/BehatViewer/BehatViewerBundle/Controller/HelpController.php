@@ -4,7 +4,7 @@ namespace BehatViewer\BehatViewerBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration;
 
 /**
- * @Route("/help")
+ * @Configuration\Route("/help")
  */
 class HelpController extends BehatViewerController
 {
