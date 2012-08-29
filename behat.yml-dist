@@ -31,10 +31,10 @@ default:
 
         Behat\MinkExtension\Extension:
             #default_session: "symfony2"
-            javascript_session: "sahi"
+            javascript_session: "selenium2"
             mink_loader: "vendor/behat/mink/src/Behat/Mink/Mink.php"
             base_url: "http://%hostname%/app_test.php"
-            sahi: ~
+            selenium2: ~
             goutte: ~
             browser_name: "%browser%"
 
