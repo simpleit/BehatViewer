@@ -14,7 +14,7 @@ Feature: Login
           And I press "Log in"
          Then I should see "Bad credentials"
 
-    @javascript
+    @reset @javascript @fixture:user.sql
     Scenario: Login with existing credentials
         Given I am not logged in
           And I am on the homepage
