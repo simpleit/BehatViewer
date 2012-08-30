@@ -38,11 +38,15 @@ Feature: Create project
      Then I should see "You already own a project with the same name"
 
     Given I fill in "Identifier" with "foo-bar"
+      And I fill in "Path" with "/foo/baz"
+      And I fill in "Base URL" with "http://foo.baz"
       And I press "Save changes"
      Then I should see "You already own a project with the same identifier"
 
     Given I fill in "Project name" with "Foo Baz"
       And I fill in "Identifier" with "foo-baz"
+      And I fill in "Path" with "/foo/baz"
+      And I fill in "Base URL" with "http://foo.baz"
       And I press "Save changes"
      Then I should see "Project configuration"
      Then I should see "Settings were successfully saved."
