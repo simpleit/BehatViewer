@@ -95,11 +95,11 @@ Feature: History
         And I follow "History"
         And the data in the 1st row of the "table" table should match:
           |  | # | Date                               | Completion | Progress | Details                                                    | Action        |
-          |  | 2 | 43 years ago (1970-01-01 00:00:00) | 75%        |          | Passed: 6/8 (75%) Failed: 1/8 (12.5%) Skipped: 1/8 (12.5%) | DetailsDelete |
+          |  | 2 | 43 years ago (1970-01-01 00:00:00) | 75%        |          | Passed: 6/8 (75%) Failed: 1/8 (12.5%) Skipped: 1/8 (12.5%) | Details Delete |
         And the data in the 2nd row of the "table" table should match:
           |  | # | Date                               | Completion | Progress | Details                                 | Action        |
-          |  | 1 | 43 years ago (1970-01-01 00:00:00) | 87.5%      |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | DetailsDelete |
+          |  | 1 | 43 years ago (1970-01-01 00:00:00) | 87.5%      |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details Delete |
         And I click on the 1st "Delete" link
        Then the data in the 1st row of the "table" table should match:
           |  | # | Date                               | Completion | Progress | Details                                 | Action        |
-          |  | 1 | 43 years ago (1970-01-01 00:00:00) | 87.5%      |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | DetailsDelete |
+          |  | 1 | 43 years ago (1970-01-01 00:00:00) | 87.5%      |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details Delete |

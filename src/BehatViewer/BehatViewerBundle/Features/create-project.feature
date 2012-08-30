@@ -9,12 +9,13 @@ Feature: Create project
       And I follow "Projects"
       And I follow "Add project"
      Then I should see "New project"
+
     Given I fill in "Project name" with "Bar Foo"
       And I fill in "Identifier" with "bar-foo"
-      And I fill in "Base URL" with "http://bar.foo/baz"
-      And I fill in "Root path" with "/bar/foo"
-      And I fill in "Output path" with "/bar/foo"
       And I fill in "Test command" with "app/console bar foo"
+      And I select "Local directory" from "Type"
+      And I fill in "Path" with "/bar/foo"
+      And I fill in "Base URL" with "http://bar.foo/baz"
       And I press "Save changes"
      Then I should see "Settings were successfully saved."
 
@@ -29,10 +30,10 @@ Feature: Create project
 
     Given I fill in "Project name" with "Foo Bar"
       And I fill in "Identifier" with "foo-baz"
-      And I fill in "Base URL" with "http://foo.baz"
-      And I fill in "Root path" with "/foo/baz"
-      And I fill in "Output path" with "/foo/baz"
       And I fill in "Test command" with "app/console foo baz"
+      And I select "Local directory" from "Type"
+      And I fill in "Path" with "/foo/baz"
+      And I fill in "Base URL" with "http://foo.baz"
       And I press "Save changes"
      Then I should see "You already own a project with the same name"
 
