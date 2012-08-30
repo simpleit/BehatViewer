@@ -13,7 +13,6 @@ Feature: Project
           And I select "Local directory" from "Type"
           And I fill in "Path" with "/foo/bar"
           And I fill in "Base URL" with "http://foo.bar/baz"
-          And I fill in "Output path" with "/foo/bar"
           And I press "Save changes"
          Then I should see "Settings were successfully saved"
           But I should not see "No project configured"
