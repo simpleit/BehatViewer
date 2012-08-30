@@ -23,7 +23,7 @@ class EnumProjectTypeType extends Type
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (!in_array($value, array('', self::TYPE_PUBLIC, self::TYPE_PRIVATE))) {
-            throw new \InvalidArgumentException('Invalid type : ' . $value);
+            throw new \InvalidArgumentException('Invalid project type : ' . $value);
         }
 
         return $value;

@@ -73,7 +73,7 @@ class GitStrategy extends Strategy
 
         if ($status !== 0) {
             $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-                'git pull origin ' . $this->getConfiguration()->getBranch(),
+                'git reset --hard; git pull origin ' . $this->getConfiguration()->getBranch(),
                 $dir
             );
             $status = $process->run(function ($type, $buffer) use (&$output) {

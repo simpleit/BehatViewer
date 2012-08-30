@@ -2,7 +2,9 @@
 namespace BehatViewer\BehatViewerBundle\Listener;
 
 use Symfony\Component\DependencyInjection\ContainerAware,
-    Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+    Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent,
+	Symfony\Component\HttpFoundation\RedirectResponse,
+	BehatViewer\BehatViewerBundle\Exception\NoProjectConfiguredException;
 
 class ConfigurationListener extends ContainerAware
 {
@@ -13,12 +15,10 @@ class ConfigurationListener extends ContainerAware
     {
         $exception = $event->getException();
 
-        switch (true) {
-            case $exception instanceof \BehatViewer\BehatViewerBundle\Exception\NoProjectConfiguredException:
-                $event->setResponse(new \Symfony\Component\HttpFoundation\RedirectResponse($this->container->get('router')->generate('behatviewer.project.create')));
-                break;
-            default:
-                break;
-        }
+		if($exception instanceof NoProjectConfiguredException) {
+			$router = $this->container->get('router');
+			$response = new RedirectResponse($router->generate('behatviewer.project.create'));
+			$event->setResponse($response);
+		}
     }
 }

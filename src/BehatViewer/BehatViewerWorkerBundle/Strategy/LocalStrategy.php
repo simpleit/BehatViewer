@@ -48,7 +48,7 @@ class LocalStrategy extends Strategy
 
         $output = new ConsoleOutput();
         $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-            'vagrant up' . PHP_EOL . 'vagrant ssh -c "cd /vagrant; sh -e ./build.sh"' . PHP_EOL . 'vagrant halt' . PHP_EOL . 'vagrant destroy -f',
+            'vagrant up' . PHP_EOL . 'vagrant ssh -c "sudo rm -rf /var/www; sudo cp -rf /vagrant /var/www; cd /var/www; sudo sh -e ./build.sh"' . PHP_EOL . 'vagrant halt',  //. PHP_EOL . 'vagrant destroy -f',
             $path
         );
         $process->setTimeout(600);
