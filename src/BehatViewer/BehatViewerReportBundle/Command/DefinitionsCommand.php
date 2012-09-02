@@ -1,11 +1,12 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Command;
+namespace BehatViewer\BehatViewerReportBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Component\Console\Input\InputOption,
-    BehatViewer\BehatViewerBundle\Entity;
+    BehatViewer\BehatViewerBundle\Entity,
+    BehatViewer\BehatViewerBundle\Command\ProjectCommand;
 
 /**
  *

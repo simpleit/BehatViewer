@@ -31,6 +31,8 @@ class AppKernel extends Kernel
 
 			new BehatViewer\BehatViewerApiBundle\BehatViewerApiBundle(),
 
+			new BehatViewer\BehatViewerReportBundle\BehatViewerReportBundle(),
+
 			new BehatViewer\BehatViewerWorkerBundle\BehatViewerWorkerBundle(),
 				new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
         );

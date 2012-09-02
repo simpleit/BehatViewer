@@ -1,18 +1,13 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Analyzer;
+namespace BehatViewer\BehatViewerReportBundle\Analyzer;
 
-use Symfony\Component\EventDispatcher\EventDispatcher,
-    Symfony\Component\DependencyInjection\ContainerAwareInterface,
-    Symfony\Component\DependencyInjection\ContainerInterface,
-    BehatViewer\BehatViewerBundle\Entity;
+use BehatViewer\BehatViewerBundle\Entity;
 
 /**
  *
  */
-class BehatViewerAnalyzer extends EventDispatcher implements ContainerAwareInterface
+class ReportAnalyzer extends Analyzer
 {
-    protected $container;
-
     /**
      * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
      * @param array                                         $data
@@ -30,59 +25,11 @@ class BehatViewerAnalyzer extends EventDispatcher implements ContainerAwareInter
     }
 
     /**
-     * @param null|\Symfony\Component\DependencyInjection\ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
-    /**
-     * @return \Doctrine\Bundle\DoctrineBundle\Registry
-     */
-    public function getDoctrine()
-    {
-        return $this->container->get('doctrine');
-    }
-
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     */
-    public function getEntityManager()
-    {
-        return $this->getDoctrine()->getEntityManager();
-    }
-
-    /**
-     * @param string $name
-     * @param mixed  $data
-     *
-     * @return \Symfony\Component\EventDispatcher\Event
-     */
-    public function getEvent($name, $data = null)
-    {
-        $event = new \Symfony\Component\EventDispatcher\Event();
-        $event->setName($name);
-        $event->data = $data;
-
-        return $event;
-    }
-
-    /**
-     * @param string $name
-     * @param mixed  $data
-     */
-    public function dispatchEvent($name, $data = null)
-    {
-        $this->dispatch($name, $this->getEvent($name, $data));
-    }
-
-    /**
      * @param array $data
      *
      * @return \BehatViewer\BehatViewerBundle\Entity\Build
      */
-    public function getBuildFromData(array $data)
+    protected function getBuildFromData(array $data)
     {
         $build = new Entity\Build();
         $build->setDate(new \DateTime('now'));
