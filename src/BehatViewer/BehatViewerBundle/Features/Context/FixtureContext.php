@@ -91,7 +91,7 @@ class FixtureContext extends BehatViewerContext
         try {
             $this->connection->executeUpdate(file_get_contents($file));
         } catch (\PDOException $exception) {
-            throw new \RuntimeException($sql, (int)$exception->getCode() ?: 0, $exception);
+            throw new \RuntimeException($sql, (int) $exception->getCode() ?: 0, $exception);
         }
 
     }

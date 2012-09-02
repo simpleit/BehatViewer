@@ -40,23 +40,23 @@ class CleanCommand extends ProjectCommand
 
         $project = $this->getProject();
 
-		$this->log(
-			$output,
-			sprintf(
-				'<info>[INFO]</info> Cleaning outdated builds for project <comment>%s</comment>',
-				$project->getSlug()
-			)
-		);
+        $this->log(
+            $output,
+            sprintf(
+                '<info>[INFO]</info> Cleaning outdated builds for project <comment>%s</comment>',
+                $project->getSlug()
+            )
+        );
 
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
         $count = $repository->removeWeekBuildsForProject($project);
 
         $this->log(
-			$output,
-			sprintf(
-				'<info>[INFO]</info> Deleted <comment>%d</comment> build(s)',
-				$count
-			)
-		);
+            $output,
+            sprintf(
+                '<info>[INFO]</info> Deleted <comment>%d</comment> build(s)',
+                $count
+            )
+        );
     }
 }

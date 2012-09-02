@@ -5,9 +5,9 @@ use BehatViewer\BehatViewerBundle\Entity;
 
 interface AnalyzerInterface
 {
-	/**
-	 * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-	 * @param array                                         $data
-	 */
-	function analyze(Entity\Project $project, array $data);
+    /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param array                                         $data
+     */
+    public function analyze(Entity\Project $project, array $data);
 }

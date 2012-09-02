@@ -33,13 +33,13 @@ class LocalStrategy extends Strategy
         parent::build();
 
         $path = $this->getConfiguration()->getPath();
-		$file = $this->getBuildScript();
+        $file = $this->getBuildScript();
         $output = $this->getOutput();
 
-		$vagrant = new \BehatViewer\BehatViewerWorkerBundle\Script\VagrantScript($file);
+        $vagrant = new \BehatViewer\BehatViewerWorkerBundle\Script\VagrantScript($file);
         $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-            (string)$vagrant,
-			$path
+            (string) $vagrant,
+            $path
         );
         $process->setTimeout(600);
         $status = $process->run(function ($type, $buffer) use (&$output) {
@@ -50,32 +50,33 @@ class LocalStrategy extends Strategy
             }
         });
 
-		$analyzer = $this->container->get('behat_viewer.analyzer');
-		$data = json_decode(file_get_contents($path . DIRECTORY_SEPARATOR . 'behat-viewer.json'), true);
-		$analyzer->analyze($this->getProject(), $data);
+        $analyzer = $this->container->get('behat_viewer.analyzer');
+        $data = json_decode(file_get_contents($path . DIRECTORY_SEPARATOR . 'behat-viewer.json'), true);
+        $analyzer->analyze($this->getProject(), $data);
 
         return $status;
     }
 
-	protected function getBuildScript() {
-		$cmd = $this->getProject()->getTestCommand();
-		$cmd = str_replace("\r\n", PHP_EOL, $cmd);
-		$path = $this->getConfiguration()->getPath();
+    protected function getBuildScript()
+    {
+        $cmd = $this->getProject()->getTestCommand();
+        $cmd = str_replace("\r\n", PHP_EOL, $cmd);
+        $path = $this->getConfiguration()->getPath();
 
-		$file = uniqid() . '.sh';
-		$filepath = $path . DIRECTORY_SEPARATOR . $file;
-		$fp = fopen($filepath, 'w+');
+        $file = uniqid() . '.sh';
+        $filepath = $path . DIRECTORY_SEPARATOR . $file;
+        $fp = fopen($filepath, 'w+');
 
-		$build = new \BehatViewer\BehatViewerWorkerBundle\Script\Script();
-		$build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\XvfbScript());
-		$build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SahiScript());
-		$build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SeleniumScript());
+        $build = new \BehatViewer\BehatViewerWorkerBundle\Script\Script();
+        $build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\XvfbScript());
+        $build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SahiScript());
+        $build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SeleniumScript());
 
-		$script = '#!/bin/sh' . PHP_EOL . $build . PHP_EOL . $cmd;
+        $script = '#!/bin/sh' . PHP_EOL . $build . PHP_EOL . $cmd;
 
-		fwrite($fp, $script, strlen($script));
-		fclose($fp);
+        fwrite($fp, $script, strlen($script));
+        fclose($fp);
 
-		return $file;
-	}
+        return $file;
+    }
 }
