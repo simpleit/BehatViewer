@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="behat_viewer.twig.extension.class">BehatViewer\BehatViewerBundle\Extension\Twig\BehatViewerTwigExtension</parameter>
-        <parameter key="behat_viewer.analyzer.class">BehatViewer\BehatViewerBundle\Analyzer\BehatViewerAnalyzer</parameter>
+
         <parameter key="behat_viewer.session.class">BehatViewer\BehatViewerBundle\Session</parameter>
         <parameter key="behat_viewer.markdown_parser.class">BehatViewer\BehatViewerBundle\Markdown\MarkdownParser</parameter>
         <parameter key="behat_viewer.listener.configuration.class">BehatViewer\BehatViewerBundle\Listener\ConfigurationListener</parameter>
@@ -74,12 +74,6 @@
         <service id="behat_viewer.db.table_prefix_subscriber" class="%behat_viewer.db.table_prefix_subscriber.class%">
             <argument>%behat_viewer.db.table_prefix%</argument>
             <tag name="doctrine.event_subscriber"/>
-        </service>
-
-        <service id="behat_viewer.analyzer" class="%behat_viewer.analyzer.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
         <service id="behat_viewer.markdown_parser" class="%behat_viewer.markdown_parser.class%">

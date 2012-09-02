@@ -1,6 +1,8 @@
 <?php
 namespace BehatViewer\BehatViewerWorkerBundle\Script;
 
+use Symfony\Component\Console\Output\OutputInterface;
+
 class Script
 {
 	private $commands = array();
@@ -12,7 +14,7 @@ class Script
 	}
 
 	public function addCommands(array $commands) {
-		$this->commands += $commands;
+		$this->commands = array_merge($this->commands, $commands);
 
 		return $this;
 	}

@@ -86,7 +86,7 @@ abstract class Strategy extends ContainerAware implements StrategyInterface
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Strategy\Configuration\Configuration $config
+     * @param \BehatViewer\BehatViewerWorkerBundle\Strategy\Configuration\Configuration $config
      *
      * @return Strategy
      */
@@ -98,7 +98,7 @@ abstract class Strategy extends ContainerAware implements StrategyInterface
     }
 
     /**
-     * @return \BehatViewer\BehatViewerBundle\Strategy\Configuration\Configuration
+     * @return \BehatViewer\BehatViewerWorkerBundle\Strategy\Configuration\Configuration
      */
     public function getConfiguration()
     {

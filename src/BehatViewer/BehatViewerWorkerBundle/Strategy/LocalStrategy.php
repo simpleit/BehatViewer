@@ -32,30 +32,14 @@ class LocalStrategy extends Strategy
     {
         parent::build();
 
-        $project = $this->getProject();
-
-        $cmd = $project->getTestCommand();
-        $cmd = str_replace("\r\n", PHP_EOL, $cmd);
         $path = $this->getConfiguration()->getPath();
+		$file = $this->getBuildScript();
+        $output = $this->getOutput();
 
-		$file = uniqid() . '.sh';
-		$filepath = $path . DIRECTORY_SEPARATOR . $file;
-        $fp = fopen($filepath, 'w+');
-
-		$script = new \BehatViewer\BehatViewerWorkerBundle\Script\Script();
-		$script->append(new \BehatViewer\BehatViewerWorkerBundle\Script\XvfbScript());
-		$script->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SahiScript());
-		$script->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SeleniumScript());
-
-		$script = '#!/bin/sh' . PHP_EOL . $script . PHP_EOL . $cmd;
-
-        fwrite($fp, $script, strlen($script));
-        fclose($fp);
-
-        $output = new ConsoleOutput();
+		$vagrant = new \BehatViewer\BehatViewerWorkerBundle\Script\VagrantScript($file);
         $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-            'vagrant up' . PHP_EOL . 'vagrant ssh -c "cd /vagrant; sudo sh -e ./' . $file . '"' . PHP_EOL . 'vagrant halt',  //. PHP_EOL . 'vagrant destroy -f',
-            $path
+            (string)$vagrant,
+			$path
         );
         $process->setTimeout(600);
         $status = $process->run(function ($type, $buffer) use (&$output) {
@@ -66,10 +50,32 @@ class LocalStrategy extends Strategy
             }
         });
 
-        if (file_exists($path)) {
-            //unlink($path);
-        }
+		$analyzer = $this->container->get('behat_viewer.analyzer');
+		$data = json_decode(file_get_contents($path . DIRECTORY_SEPARATOR . 'behat-viewer.json'), true);
+		$analyzer->analyze($this->getProject(), $data);
 
         return $status;
     }
+
+	protected function getBuildScript() {
+		$cmd = $this->getProject()->getTestCommand();
+		$cmd = str_replace("\r\n", PHP_EOL, $cmd);
+		$path = $this->getConfiguration()->getPath();
+
+		$file = uniqid() . '.sh';
+		$filepath = $path . DIRECTORY_SEPARATOR . $file;
+		$fp = fopen($filepath, 'w+');
+
+		$build = new \BehatViewer\BehatViewerWorkerBundle\Script\Script();
+		$build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\XvfbScript());
+		$build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SahiScript());
+		$build->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SeleniumScript());
+
+		$script = '#!/bin/sh' . PHP_EOL . $build . PHP_EOL . $cmd;
+
+		fwrite($fp, $script, strlen($script));
+		fclose($fp);
+
+		return $file;
+	}
 }
