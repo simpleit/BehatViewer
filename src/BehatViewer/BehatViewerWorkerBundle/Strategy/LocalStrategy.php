@@ -38,17 +38,23 @@ class LocalStrategy extends Strategy
         $cmd = str_replace("\r\n", PHP_EOL, $cmd);
         $path = $this->getConfiguration()->getPath();
 
-        if (file_exists($path . DIRECTORY_SEPARATOR . 'build.sh')) {
-            unlink($path . DIRECTORY_SEPARATOR . 'build.sh');
-        }
-        $fp = fopen($path . DIRECTORY_SEPARATOR . 'build.sh', 'w+');
-        $script = '#!/bin/sh' . PHP_EOL . $cmd;
+		$file = uniqid() . '.sh';
+		$filepath = $path . DIRECTORY_SEPARATOR . $file;
+        $fp = fopen($filepath, 'w+');
+
+		$script = new \BehatViewer\BehatViewerWorkerBundle\Script\Script();
+		$script->append(new \BehatViewer\BehatViewerWorkerBundle\Script\XvfbScript());
+		$script->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SahiScript());
+		$script->append(new \BehatViewer\BehatViewerWorkerBundle\Script\SeleniumScript());
+
+		$script = '#!/bin/sh' . PHP_EOL . $script . PHP_EOL . $cmd;
+
         fwrite($fp, $script, strlen($script));
         fclose($fp);
 
         $output = new ConsoleOutput();
         $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-            'vagrant up' . PHP_EOL . 'vagrant ssh -c "sudo rm -rf /var/www; sudo cp -rf /vagrant /var/www; cd /var/www; sudo sh -e ./build.sh"' . PHP_EOL . 'vagrant halt',  //. PHP_EOL . 'vagrant destroy -f',
+            'vagrant up' . PHP_EOL . 'vagrant ssh -c "cd /vagrant; sudo sh -e ./' . $file . '"' . PHP_EOL . 'vagrant halt',  //. PHP_EOL . 'vagrant destroy -f',
             $path
         );
         $process->setTimeout(600);
@@ -60,8 +66,8 @@ class LocalStrategy extends Strategy
             }
         });
 
-        if (file_exists('build.sh')) {
-            unlink('build.sh');
+        if (file_exists($path)) {
+            //unlink($path);
         }
 
         return $status;
