@@ -10,6 +10,10 @@ BehatViewerApiBundle:
     resource: "@BehatViewerApiBundle/Controller/"
     type:     annotation
 
+BehatViewerAdminBundle:
+    resource: "@BehatViewerAdminBundle/Controller/"
+    type:     annotation
+
 BehatViewerBundle:
     resource: "@BehatViewerBundle/Controller/"
     type:     annotation

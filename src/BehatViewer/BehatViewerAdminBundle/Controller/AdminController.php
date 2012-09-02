@@ -1,12 +1,13 @@
 <?php
 
-namespace BehatViewer\BehatViewerBundle\Controller;
+namespace BehatViewer\BehatViewerAdminBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Entity,
     BehatViewer\BehatViewerBundle\Form\Type\CreateUserType,
-    BehatViewer\BehatViewerBundle\Form\Type\EditUserType;
+    BehatViewer\BehatViewerBundle\Form\Type\EditUserType,
+	BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
 /**
  * @Configuration\Route("/admin")
