@@ -18,18 +18,18 @@
 
 <div class="{{ class }}">
     {% if passed > 0 %}
-        <div class="bar progress-success" style="width: {{ passedpcnt }}%;"></div>
+        <div class="bar bar-success" style="width: {{ passedpcnt }}%;"></div>
     {% endif %}
 
     {% if failed > 0 %}
-        <div class="bar progress-danger" style="width: {{ failedpcnt }}%;"></div>
+        <div class="bar bar-danger" style="width: {{ failedpcnt }}%;"></div>
     {% endif %}
 
     {% if skipped > 0 %}
-        <div class="bar progress-info" style="width: {{ skippedpcnt }}%;"></div>
+        <div class="bar bar-info" style="width: {{ skippedpcnt }}%;"></div>
     {% endif %}
 
     {% if undefined > 0 %}
-        <div class="bar progress-warning" style="width: {{ undefinedpcnt }}%;"></div>
+        <div class="bar bar-warning" style="width: {{ undefinedpcnt }}%;"></div>
     {% endif %}
 </div>
