@@ -7,7 +7,7 @@ class VagrantScript extends Script
     {
         $this->addCommands(array(
             'vagrant up',
-            'vagrant ssh -c "sudo rm -rf /var/www && sudo cp -rf /vagrant /var/www && cd /var/www && sudo sh -e ./' . $script . '; cp -f behat-viewer.json /vagrant/behat-viewer.json"',
+            'vagrant ssh -c "cd /vagrant && sudo sh -e ./' . $script . '"',
             'vagrant halt',
             'vagrant destroy -f'
         ));
