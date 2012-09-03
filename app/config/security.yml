@@ -27,6 +27,7 @@ security:
     firewalls:
         api:
             pattern:    ^/api
+            stateless:  true
             api:        true
 
         main:
