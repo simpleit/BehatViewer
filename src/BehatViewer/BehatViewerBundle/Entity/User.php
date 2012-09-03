@@ -6,11 +6,10 @@ use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Security\Core\User\AdvancedUserInterface,
     Symfony\Component\Validator\Constraints as Assert,
     Symfony\Bridge\Doctrine\Validator\Constraints,
-    Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+    Symfony\Component\Security\Acl\Domain\UserSecurityIdentity,
+	Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Acme\UserBundle\Entity\User
- *
  * @ORM\Table(
  * 		name="user",
  * 		uniqueConstraints={
@@ -70,8 +69,14 @@ class User extends Base implements AdvancedUserInterface
      */
     private $projects;
 
-    public function __construct()
-    {
+	/**
+	 * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+	 *
+	 */
+	private $roles;
+
+	public function __construct() {
+		$this->roles = new ArrayCollection();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
     }
@@ -173,17 +178,11 @@ class User extends Base implements AdvancedUserInterface
         return $this->isActive;
     }
 
-        /**
-     * @inheritDoc
-     */
     public function getRoles()
     {
-        return array('ROLE_USER', 'ROLE_ADMIN');
+		return $this->roles->toArray();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function eraseCredentials()
     {
     }
