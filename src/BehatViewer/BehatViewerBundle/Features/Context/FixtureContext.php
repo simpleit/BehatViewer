@@ -33,7 +33,8 @@ class FixtureContext extends BehatViewerContext
             'BehatViewerBundle:BuildStat',
             'BehatViewerBundle:Definition',
             'BehatViewerBundle:Project',
-            'BehatViewerBundle:User'
+            'BehatViewerBundle:User',
+            'BehatViewerBundle:Role',
         );
 
         $this->connection->query(sprintf('SET FOREIGN_KEY_CHECKS = 0;'));
