@@ -1,38 +1,63 @@
 <?php
-namespace BehatViewer\BehatViewerWorkerBundle\Strategy;
+namespace BehatViewer\BehatViewerWorkerBundle\Entity;
 
 use
-    BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type\GithubStrategyType
+	Doctrine\ORM\Mapping as ORM,
+	Symfony\Component\Validator\Constraints as Assert,
+	BehatViewer\BehatViewerBundle\Entity\Strategy
 ;
 
-class GithubStrategy extends GitStrategy
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="strategy_github")
+ */
+class GithubStrategy extends Strategy
 {
-    public static function getId()
-    {
-        return 'github';
-    }
+	/**
+	 * @var string $username
+	 *
+	 * @Assert\NotBlank()
+	 * @ORM\Column(name="username", type="string", length=50)
+	 */
+	private $username;
 
-    public static function getLabel()
-    {
-        return 'Github repository';
-    }
+	/**
+	 * @var string $repository
+	 *
+	 * @Assert\NotBlank()
+	 * @ORM\Column(name="repository", type="string", length=50)
+	 */
+	private $repository;
 
-    public static function getForm()
-    {
-        return new GithubStrategyType();
-    }
+	/**
+	 * @var string $branch
+	 *
+	 * @Assert\NotBlank()
+	 * @ORM\Column(name="branch", type="string", length=255)
+	 */
+	private $branch;
 
-    public static function getNewConfiguration()
-    {
-        return new Configuration\GithubStrategyConfiguration();
-    }
+	public function getFormType() {
+		return new \BehatViewer\BehatViewerWorkerBundle\Form\Type\GithubStrategyType();
+	}
 
-    protected function getRepositoryUrl()
-    {
-        return sprintf(
-            'git://github.com/%s/%s',
-            $this->getConfiguration()->getUsername(),
-            $this->getConfiguration()->getRepository()
-        );
-    }
+	public function build() {
+
+	}
+
+	public function getUsername() {
+		return $this->username;
+	}
+
+	public function getRepository() {
+		return $this->repository;
+	}
+
+	public function getBranch() {
+		return $this->branch;
+	}
+
+	public function __toString() {
+		return 'Github';
+	}
 }

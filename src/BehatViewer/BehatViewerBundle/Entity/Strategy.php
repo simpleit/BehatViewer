@@ -3,16 +3,23 @@
 namespace BehatViewer\BehatViewerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-    BehatViewer\BehatViewerBundle\DBAL\Type\EnumStatusType,
-    BehatViewer\BehatViewerBundle\DBAL\Type\EnumStepStatusType;
+	BehatViewer\BehatViewerBundle\Entity\Project;
 
 /**
  * BehatViewer\BehatViewerBundle\Entity\BuildStat
  *
- * @ORM\Table(name="configuration")
- * @ORM\Entity(repositoryClass="BehatViewer\BehatViewerBundle\Entity\Repository\ConfigurationRepository")
+ * @ORM\Table(name="strategy")
+ * @ORM\Entity(repositoryClass="BehatViewer\BehatViewerBundle\Entity\Repository\StrategyRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({
+ * 		"local" = "BehatViewer\BehatViewerWorkerBundle\Entity\LocalStrategy",
+ * 		"git" = "BehatViewer\BehatViewerWorkerBundle\Entity\GitStrategy",
+ * 		"git_local" = "BehatViewer\BehatViewerWorkerBundle\Entity\GitLocalStrategy",
+ * 		"github" = "BehatViewer\BehatViewerWorkerBundle\Entity\GithubStrategy"
+ * })
  */
-class Configuration
+abstract class Strategy extends Base
 {
     /**
      * @var integer $id
@@ -24,16 +31,9 @@ class Configuration
     private $id;
 
     /**
-     * @var integer $data
-     *
-     * @ORM\Column(name="data", type="text")
-     */
-    private $data;
-
-    /**
      * @var \BehatViewer\BehatViewerBundle\Entity\Project $project
      *
-     * @ORM\OneToOne(targetEntity="Project", mappedBy="configuration", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Project", mappedBy="strategy", cascade={"persist"})
      */
     private $project;
 
@@ -42,17 +42,7 @@ class Configuration
         return $this->id;
     }
 
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function setProject(\BehatViewer\BehatViewerBundle\Entity\Project $project)
+    public function setProject(Project $project)
     {
         $this->project = $project;
     }
@@ -61,4 +51,7 @@ class Configuration
     {
         return $this->project;
     }
+
+	abstract public function getFormType();
+	abstract public function build();
 }

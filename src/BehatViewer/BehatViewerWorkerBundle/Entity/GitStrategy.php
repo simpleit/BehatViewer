@@ -1,128 +1,51 @@
 <?php
-namespace BehatViewer\BehatViewerWorkerBundle\Strategy;
+namespace BehatViewer\BehatViewerWorkerBundle\Entity;
 
 use
-    BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type\GitStrategyType
+	Doctrine\ORM\Mapping as ORM,
+	Symfony\Component\Validator\Constraints as Assert,
+	BehatViewer\BehatViewerBundle\Entity\Strategy
 ;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="strategy_git")
+ */
 class GitStrategy extends Strategy
 {
-    public static function getId()
-    {
-        return 'git';
-    }
+	/**
+	 * @var string $url
+	 *
+	 * @Assert\NotBlank()
+	 * @ORM\Column(name="url", type="string", length=255)
+	 */
+	private $url;
 
-    public static function getLabel()
-    {
-        return 'Git repository';
-    }
+	/**
+	 * @var string $branch
+	 *
+	 * @Assert\NotBlank()
+	 * @ORM\Column(name="branch", type="string", length=255)
+	 */
+	private $branch;
 
-    public static function getForm()
-    {
-        return new GitStrategyType();
-    }
+	public function getFormType() {
+		return new \BehatViewer\BehatViewerWorkerBundle\Form\Type\GitStrategyType();
+	}
 
-    public static function getNewConfiguration()
-    {
-        return new Configuration\GitStrategyConfiguration();
-    }
+	public function build() {
 
-    protected function getRepositoryUrl()
-    {
-        return $this->getConfiguration()->getRepositoryUrl();
-    }
+	}
 
-    protected function getCloneCommand()
-    {
-        return 'git clone --depth=50 ' . $this->getRepositoryUrl();
-    }
+	public function getUrl() {
+		return $this->url;
+	}
 
-    protected function getClonePath()
-    {
-        return sprintf(
-            $this->container->get('kernel')->getRootDir() . '/data/repos/%s/%s',
-            $this->getProject()->getUser()->getUsername(),
-            $this->getProject()->getSlug()
-        );
-    }
+	public function getBranch() {
+		return $this->branch;
+	}
 
-    protected function cloneRepository()
-    {
-        $output = $this->getOutput();
-        $dir = $this->getClonePath();
-
-        if (false === is_dir($dir)) {
-            mkdir($dir, 0777, true);
-        }
-
-        $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-            $this->getCloneCommand(),
-            realpath($dir . DIRECTORY_SEPARATOR . '..')
-        );
-
-        $process->setTimeout(600);
-        $status = $process->run(function ($type, $buffer) use (&$output) {
-            if ('err' === $type) {
-                $output->writeln('<error>' . $buffer . '</error>');
-            } else {
-                $output->write($buffer);
-            }
-        });
-
-        $this->checkoutBranch();
-
-        if ($status !== 0) {
-            $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-                'git reset --hard; git pull origin ' . $this->getConfiguration()->getBranch(),
-                $dir
-            );
-            $status = $process->run(function ($type, $buffer) use (&$output) {
-                if ('err' === $type) {
-                    $output->writeln('<error>' . $buffer . '</error>');
-                } else {
-                    $output->write($buffer);
-                }
-            });
-        }
-
-        return $status;
-    }
-
-    public function checkoutBranch()
-    {
-        $output = $this->getOutput();
-        $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-            sprintf(
-                'git checkout %s',
-                $this->getConfiguration()->getBranch()
-            ),
-            $this->getClonePath()
-        );
-
-        return $process->run(function ($type, $buffer) use (&$output) {
-            if ('err' === $type) {
-                $output->writeln('<error>' . $buffer . '</error>');
-            } else {
-                $output->write($buffer);
-            }
-        });
-    }
-
-    public function build()
-    {
-        parent::build();
-
-        $this->cloneRepository();
-
-        $configuration = new Configuration\LocalStrategyConfiguration();
-        $configuration->setProject($this->getProject());
-        $configuration->setPath($this->getClonePath());
-
-        $strategy = new LocalStrategy();
-        $strategy->setConfiguration($configuration);
-        $strategy->setProject($this->getProject());
-        $strategy->setContainer($this->container);
-
-        return $strategy->build();
-    }
+	public function __toString() {
+		return 'Git repository';
+	}
 }

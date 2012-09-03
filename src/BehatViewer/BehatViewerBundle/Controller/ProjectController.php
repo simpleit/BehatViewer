@@ -10,27 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
 
 class ProjectController extends BehatViewerProjectController
 {
-    protected function getStrategies()
-    {
-        return $this->container->get('behat_viewer.strategy.provider')->getStrategies();
-    }
-
-    protected function getStrategiesForms(Entity\Project $project)
-    {
-        $strategies = $this->getStrategies();
-        $forms = array();
-
-        foreach ($strategies as $id => $strategy) {
-            $data = $id === $project->getStrategy() && null !== $project->getConfiguration()
-                ? $data = json_decode($project->getConfiguration()->getData())
-                : null;
-
-            $forms[$strategy::getLabel()] = $this->get('form.factory')->create($strategy::getForm(), $data)->createView();
-        }
-
-        return $forms;
-    }
-
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -46,7 +25,7 @@ class ProjectController extends BehatViewerProjectController
         $project = new Entity\Project();
         $project->setUser($user);
 
-        $form = $this->get('form.factory')->create(new ProjectType($this->getStrategies()), $project);
+        $form = $this->get('form.factory')->create(new ProjectType(), $project);
 
         if ('POST' === $request->getMethod()) {
             $success = $this->save($form);
@@ -68,7 +47,6 @@ class ProjectController extends BehatViewerProjectController
         return $this->getResponse(array(
             'form' => $form->createView(),
             'success' => false,
-            'strategies' => $this->getStrategiesForms($project),
             'hasproject' => (null !== $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findOneByUser($this->getUser())),
         ));
     }
@@ -134,8 +112,7 @@ class ProjectController extends BehatViewerProjectController
             'form' => $form->createView(),
             'success' => $success || $this->getRequest()->get('success', false),
             'hasproject' => true,
-            'ssh_key' => $key,
-            'strategies' => $this->getStrategiesForms($project)
+            'ssh_key' => $key
         ));
     }
 
@@ -168,21 +145,6 @@ class ProjectController extends BehatViewerProjectController
         $form->bind($this->getRequest());
         if ($form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
-
-            $configuration = $form->getData()->getConfiguration();
-            $decorated = $this->container->get('behat_viewer.strategy.provider')->getStrategyConfigurationForProject($form->getData());
-            if (null === $configuration) {
-                $configuration = new Entity\Configuration();
-                $form->getData()->setConfiguration($configuration);
-            }
-
-            $config = $this->getRequest()->get($form->getData()->getStrategy(), array());
-            if (($data = $decorated->validate($config))) {
-                $data = json_encode($data);
-            } else {
-                $data = json_encode(new StdClass);
-            }
-            $configuration->setData($data);
 
             $manager->persist($form->getData());
             $manager->flush();

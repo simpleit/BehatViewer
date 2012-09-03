@@ -1,39 +1,51 @@
 <?php
-namespace BehatViewer\BehatViewerWorkerBundle\Strategy;
+namespace BehatViewer\BehatViewerWorkerBundle\Entity;
 
 use
-    BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type\GitLocalStrategyType
+	Doctrine\ORM\Mapping as ORM,
+	Symfony\Component\Validator\Constraints as Assert,
+	BehatViewer\BehatViewerBundle\Entity\Strategy
 ;
 
-class GitLocalStrategy extends GitStrategy
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="strategy_git_local")
+ */
+class GitLocalStrategy extends Strategy
 {
-    public static function getId()
-    {
-        return 'git_local';
-    }
+	/**
+	 * @var string $path
+	 *
+	 * @Assert\NotBlank()
+	 * @ORM\Column(name="path", type="string", length=255)
+	 */
+	private $path;
 
-    public static function getLabel()
-    {
-        return 'Local git repository';
-    }
+	/**
+	 * @var string $branch
+	 *
+	 * @Assert\NotBlank()
+	 * @ORM\Column(name="branch", type="string", length=255)
+	 */
+	private $branch;
 
-    public static function getForm()
-    {
-        return new GitLocalStrategyType();
-    }
+	public function getFormType() {
+		return new \BehatViewer\BehatViewerWorkerBundle\Form\Type\GitLocalStrategyType();
+	}
 
-    public static function getNewConfiguration()
-    {
-        return new Configuration\GitLocalStrategyConfiguration();
-    }
+	public function build() {
 
-    protected function getRepositoryUrl()
-    {
-        return $this->getConfiguration()->getRepositoryPath();
-    }
+	}
 
-    protected function getCloneCommand()
-    {
-        return 'git clone --shared ' . $this->getRepositoryUrl();
-    }
+	public function getPath() {
+		return $this->path;
+	}
+
+	public function getBranch() {
+		return $this->branch;
+	}
+
+	public function __toString() {
+		return 'Local Git repository';
+	}
 }

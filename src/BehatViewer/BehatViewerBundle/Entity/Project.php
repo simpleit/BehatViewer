@@ -57,19 +57,18 @@ class Project extends Base
     private $test_command;
 
     /**
-     * @var string $strategy
-     *
-     * @Assert\NotBlank()
-     * @ORM\Column(name="strategy", type="string", length=40)
-     */
-    private $strategy;
-
-    /**
      * @var \BehatViewer\BehatViewerBundle\Entity\Configuration $configuration
      *
      * @ORM\OneToOne(targetEntity="Configuration", inversedBy="project", cascade={"persist"})
      */
     private $configuration;
+
+	/**
+	 * @var \BehatViewer\BehatViewerBundle\Entity\Strategy $strategy
+	 *
+	 * @ORM\OneToOne(targetEntity="Strategy", inversedBy="project", cascade={"persist"})
+	 */
+	private $strategy;
 
     /**
      * @var string $type
@@ -145,19 +144,23 @@ class Project extends Base
         return $this->name;
     }
 
-    public function setStrategy($strategy)
-    {
-        $this->strategy = $strategy;
-    }
+	public function setStrategy(\BehatViewer\BehatViewerBundle\Entity\Strategy $strategy)
+	{
+		$this->strategy = $strategy;
 
-    public function getStrategy()
-    {
-        return $this->strategy;
-    }
+		return $this;
+	}
+
+	public function getStrategy()
+	{
+		return $this->strategy;
+	}
 
     public function setConfiguration(\BehatViewer\BehatViewerBundle\Entity\Configuration $configuration)
     {
         $this->configuration = $configuration;
+
+		return $this;
     }
 
     public function getConfiguration()

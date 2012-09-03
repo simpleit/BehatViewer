@@ -11,24 +11,14 @@ use Symfony\Component\Form\AbstractType,
 class ProjectType extends AbstractType
 {
     /**
-     * @var array
-     */
-    protected $strategies;
-
-    /**
-     * @param array $strategies
-     */
-    public function __construct(array $strategies)
-    {
-        $this->strategies = $strategies;
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array                                        $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+		$subscriber = new \BehatViewer\BehatViewerBundle\Form\Subscriber\ProjectTypeSubscriber($builder->getFormFactory());
+		$builder->addEventSubscriber($subscriber);
+
         $builder
             ->add(
                 'name',
@@ -62,30 +52,7 @@ class ProjectType extends AbstractType
                     )
                 )
             )
-            ->add(
-                'strategy',
-                'choice',
-                array(
-                    'label' => 'Type',
-                    'required' => true,
-                    'choices' => $this->getStrategyChoices($this->strategies)
-                )
-            )
         ;
-    }
-
-    /**
-     * @param array $strategies
-     *
-     * @return array
-     */
-    protected function getStrategyChoices(array $strategies)
-    {
-        foreach ($strategies as &$strategy) {
-            $strategy = $strategy::getLabel();
-        }
-
-        return $strategies;
     }
 
     /**

@@ -9,37 +9,9 @@
         <parameter key="behat_viewer.consumer.clean.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\CleanConsumer</parameter>
         <parameter key="behat_viewer.consumer.analyze.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\AnalyzeConsumer</parameter>
         <parameter key="behat_viewer.consumer.definition.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\DefinitionConsumer</parameter>
-
-        <parameter key="behat_viewer.strategy.provider.class">BehatViewer\BehatViewerWorkerBundle\Strategy\StrategyProvider</parameter>
-        <parameter key="behat_viewer.strategy.local.class">BehatViewer\BehatViewerWorkerBundle\Strategy\LocalStrategy</parameter>
-        <parameter key="behat_viewer.strategy.git.class">BehatViewer\BehatViewerWorkerBundle\Strategy\GitStrategy</parameter>
-        <parameter key="behat_viewer.strategy.git_local.class">BehatViewer\BehatViewerWorkerBundle\Strategy\GitLocalStrategy</parameter>
-        <parameter key="behat_viewer.strategy.github.class">BehatViewer\BehatViewerWorkerBundle\Strategy\GithubStrategy</parameter>
     </parameters>
 
     <services>
-        <service id="behat_viewer.strategy.provider" class="%behat_viewer.strategy.provider.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="addStrategy">
-                <argument>local</argument>
-                <argument>%behat_viewer.strategy.local.class%</argument>
-            </call>
-            <call method="addStrategy">
-                <argument>git</argument>
-                <argument>%behat_viewer.strategy.git.class%</argument>
-            </call>
-            <call method="addStrategy">
-                <argument>git_local</argument>
-                <argument>%behat_viewer.strategy.git_local.class%</argument>
-            </call>
-            <call method="addStrategy">
-                <argument>github</argument>
-                <argument>%behat_viewer.strategy.github.class%</argument>
-            </call>
-        </service>
-
         <service id="build_consumer" class="%behat_viewer.consumer.build.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
