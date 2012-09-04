@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Command;
+namespace BehatViewer\BehatViewerAdminBundle\Command\User;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     Symfony\Component\Console\Input\InputInterface,
@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     Symfony\Component\Console\Input\InputOption,
     BehatViewer\BehatViewerBundle\Entity;
 
-class UserAddCommand extends ContainerAwareCommand
+class AddCommand extends ContainerAwareCommand
 {
     protected function configure()
     {

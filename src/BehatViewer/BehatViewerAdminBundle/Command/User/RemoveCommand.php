@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Command;
+namespace BehatViewer\BehatViewerAdminBundle\Command\User;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     Symfony\Component\Console\Input\InputInterface,
@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
 /**
  *
  */
-class UserRemoveCommand extends ContainerAwareCommand
+class RemoveCommand extends ContainerAwareCommand
 {
     /**
      *
