@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerWorkerBundle\Entity;
+namespace BehatViewer\BehatViewerBundle\Entity;
 
 use
 	Doctrine\ORM\Mapping as ORM,
@@ -55,6 +55,14 @@ class GithubStrategy extends Strategy
 
 	public function getBranch() {
 		return $this->branch;
+	}
+
+	public function getUrl() {
+		return sprintf(
+			'git://github.com/%s/%s',
+			$this->getUsername(),
+			$this->getRepository()
+		);
 	}
 
 	public function __toString() {

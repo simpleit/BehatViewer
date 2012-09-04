@@ -9,9 +9,54 @@
         <parameter key="behat_viewer.consumer.clean.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\CleanConsumer</parameter>
         <parameter key="behat_viewer.consumer.analyze.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\AnalyzeConsumer</parameter>
         <parameter key="behat_viewer.consumer.definition.class">BehatViewer\BehatViewerWorkerBundle\RabbitMQ\Consumer\DefinitionConsumer</parameter>
+
+        <parameter key="behat_viewer.builder.class">BehatViewer\BehatViewerWorkerBundle\Builder\BuilderSelector</parameter>
+        <parameter key="behat_viewer.builder.git.class">BehatViewer\BehatViewerWorkerBundle\Builder\GitBuilder</parameter>
+        <parameter key="behat_viewer.builder.git_local.class">BehatViewer\BehatViewerWorkerBundle\Builder\GitLocalBuilder</parameter>
+        <parameter key="behat_viewer.builder.github.class">BehatViewer\BehatViewerWorkerBundle\Builder\GithubBuilder</parameter>
+        <parameter key="behat_viewer.builder.local.class">BehatViewer\BehatViewerWorkerBundle\Builder\LocalBuilder</parameter>
     </parameters>
 
     <services>
+        <service id="behat_viewer.builder" class="%behat_viewer.builder.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="addBuilder">
+                <argument type="service" id="behat_viewer.builder.git"/>
+            </call>
+            <call method="addBuilder">
+                <argument type="service" id="behat_viewer.builder.git_local"/>
+            </call>
+            <call method="addBuilder">
+                <argument type="service" id="behat_viewer.builder.github"/>
+            </call>
+            <call method="addBuilder">
+                <argument type="service" id="behat_viewer.builder.local"/>
+            </call>
+        </service>
+
+        <service id="behat_viewer.builder.git" class="%behat_viewer.builder.git.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+        <service id="behat_viewer.builder.git_local" class="%behat_viewer.builder.git_local.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+        <service id="behat_viewer.builder.github" class="%behat_viewer.builder.github.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+        <service id="behat_viewer.builder.local" class="%behat_viewer.builder.local.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="build_consumer" class="%behat_viewer.consumer.build.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

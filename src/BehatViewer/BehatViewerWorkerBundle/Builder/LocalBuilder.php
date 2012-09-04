@@ -1,39 +1,19 @@
 <?php
-namespace BehatViewer\BehatViewerWorkerBundle\Strategy;
+namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 
 use
-    BehatViewer\BehatViewerWorkerBundle\Strategy\Form\Type\LocalStrategyType,
-    Symfony\Component\Console\Output\ConsoleOutput
+    Symfony\Component\Console\Output\ConsoleOutput,
+	BehatViewer\BehatViewerBundle\Entity
 ;
 
-class LocalStrategy extends Strategy
+class LocalBuilder extends Builder
 {
-    public static function getId()
+    public function build(Entity\Strategy $strategy)
     {
-        return 'local';
-    }
+        parent::build($strategy);
 
-    public static function getLabel()
-    {
-        return 'Local directory';
-    }
-
-    public static function getForm()
-    {
-        return new LocalStrategyType();
-    }
-
-    public static function getNewConfiguration()
-    {
-        return new Configuration\LocalStrategyConfiguration();
-    }
-
-    public function build()
-    {
-        parent::build();
-
-        $path = $this->getConfiguration()->getPath();
-        $file = $this->getBuildScript();
+        $path = $strategy->getPath();
+        $file = $this->getBuildScript($strategy);
         $output = $this->getOutput();
 
         $vagrant = new \BehatViewer\BehatViewerWorkerBundle\Script\VagrantScript($file);
@@ -57,11 +37,15 @@ class LocalStrategy extends Strategy
         return $status;
     }
 
-    protected function getBuildScript()
+	protected function supports(Entity\Strategy $strategy) {
+		return ($strategy instanceof Entity\LocalStrategy);
+	}
+
+    protected function getBuildScript(Entity\LocalStrategy $strategy)
     {
-        $cmd = $this->getProject()->getTestCommand();
+        $cmd = $strategy->getProject()->getTestCommand();
         $cmd = str_replace("\r\n", PHP_EOL, $cmd);
-        $path = $this->getConfiguration()->getPath();
+        $path = $strategy->getPath();
 
         $file = uniqid() . '.sh';
         $filepath = $path . DIRECTORY_SEPARATOR . $file;

@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerWorkerBundle\Entity;
+namespace BehatViewer\BehatViewerBundle\Entity;
 
 use
 	Doctrine\ORM\Mapping as ORM,
@@ -9,17 +9,17 @@ use
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="strategy_git")
+ * @ORM\Table(name="strategy_git_local")
  */
-class GitStrategy extends Strategy
+class GitLocalStrategy extends Strategy
 {
 	/**
-	 * @var string $url
+	 * @var string $path
 	 *
 	 * @Assert\NotBlank()
-	 * @ORM\Column(name="url", type="string", length=255)
+	 * @ORM\Column(name="path", type="string", length=255)
 	 */
-	private $url;
+	private $path;
 
 	/**
 	 * @var string $branch
@@ -30,15 +30,15 @@ class GitStrategy extends Strategy
 	private $branch;
 
 	public function getFormType() {
-		return new \BehatViewer\BehatViewerWorkerBundle\Form\Type\GitStrategyType();
+		return new \BehatViewer\BehatViewerWorkerBundle\Form\Type\GitLocalStrategyType();
 	}
 
 	public function build() {
 
 	}
 
-	public function getUrl() {
-		return $this->url;
+	public function getPath() {
+		return $this->path;
 	}
 
 	public function getBranch() {
@@ -46,6 +46,6 @@ class GitStrategy extends Strategy
 	}
 
 	public function __toString() {
-		return 'Git repository';
+		return 'Local Git repository';
 	}
 }

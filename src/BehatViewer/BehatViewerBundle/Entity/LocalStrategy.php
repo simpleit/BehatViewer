@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerWorkerBundle\Entity;
+namespace BehatViewer\BehatViewerBundle\Entity;
 
 use
 	Doctrine\ORM\Mapping as ORM,
@@ -31,6 +31,12 @@ class LocalStrategy extends Strategy
 
 	public function getPath() {
 		return $this->path;
+	}
+
+	public function setPath($path) {
+		$this->path = $path;
+
+		return $this;
 	}
 
 	public function __toString() {

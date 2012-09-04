@@ -37,6 +37,6 @@ class BuildCommand extends ProjectCommand
     {
         parent::execute($input, $output);
 
-        return $this->getProject()->getStrategy()->build();
+        return $this->getContainer()->get('behat_viewer.builder')->build($this->getProject()->getStrategy());
     }
 }

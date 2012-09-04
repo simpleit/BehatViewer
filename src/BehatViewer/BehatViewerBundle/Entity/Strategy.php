@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({
- * 		"local" = "BehatViewer\BehatViewerWorkerBundle\Entity\LocalStrategy",
- * 		"git" = "BehatViewer\BehatViewerWorkerBundle\Entity\GitStrategy",
- * 		"git_local" = "BehatViewer\BehatViewerWorkerBundle\Entity\GitLocalStrategy",
- * 		"github" = "BehatViewer\BehatViewerWorkerBundle\Entity\GithubStrategy"
+ * 		"local" = "BehatViewer\BehatViewerBundle\Entity\LocalStrategy",
+ * 		"git" = "BehatViewer\BehatViewerBundle\Entity\GitStrategy",
+ * 		"git_local" = "BehatViewer\BehatViewerBundle\Entity\GitLocalStrategy",
+ * 		"github" = "BehatViewer\BehatViewerBundle\Entity\GithubStrategy"
  * })
  */
 abstract class Strategy extends Base
