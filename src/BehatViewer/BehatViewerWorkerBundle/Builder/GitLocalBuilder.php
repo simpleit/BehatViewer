@@ -7,12 +7,12 @@ class GitLocalBuilder extends GitBuilder
 {
     protected function getRepositoryUrl(Entity\Strategy $strategy)
     {
-        return $strategy->getRepositoryPath();
+        return $strategy->getPath();
     }
 
     protected function getCloneCommand(Entity\Strategy $strategy)
     {
-        return 'git clone --shared ' . $strategy->getPath();
+        return 'git clone --shared ' . $this->getRepositoryUrl($strategy);
     }
 
 	protected function supports(Entity\Strategy $strategy) {

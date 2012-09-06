@@ -17,7 +17,7 @@ class GithubStrategy extends Strategy
 	 * @var string $username
 	 *
 	 * @Assert\NotBlank()
-	 * @ORM\Column(name="username", type="string", length=50)
+	 * @ORM\Column(name="username", type="string", length=50, nullable=true)
 	 */
 	private $username;
 
@@ -25,7 +25,7 @@ class GithubStrategy extends Strategy
 	 * @var string $repository
 	 *
 	 * @Assert\NotBlank()
-	 * @ORM\Column(name="repository", type="string", length=50)
+	 * @ORM\Column(name="repository", type="string", length=50, nullable=true)
 	 */
 	private $repository;
 
@@ -33,12 +33,12 @@ class GithubStrategy extends Strategy
 	 * @var string $branch
 	 *
 	 * @Assert\NotBlank()
-	 * @ORM\Column(name="branch", type="string", length=255)
+	 * @ORM\Column(name="branch", type="string", length=255, nullable=true)
 	 */
 	private $branch;
 
 	public function getFormType() {
-		return new \BehatViewer\BehatViewerWorkerBundle\Form\Type\GithubStrategyType();
+		return new \BehatViewer\BehatViewerBundle\Form\Type\GithubStrategyType();
 	}
 
 	public function build() {

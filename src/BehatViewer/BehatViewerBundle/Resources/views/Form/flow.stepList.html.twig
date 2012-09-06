@@ -1,0 +1,10 @@
+{% if flow.getStepDescriptions() is not empty %}
+    <ul class="breadcrumb">
+        {% for stepDescription in flow.getStepDescriptions() %}
+            <li{% if loop.index == flow.getCurrentStep() %} class="active"{% endif %}>
+                {{ stepDescription | trans }}
+                {% if not loop.last %}<span class="divider">&raquo;</span>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

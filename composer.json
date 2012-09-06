@@ -24,8 +24,6 @@
         "doctrine/doctrine-migrations-bundle":  "*",
         "friendsofsymfony/jsrouting-bundle":    "dev-master",
         "knplabs/knp-markdown-bundle":          "dev-composer",
-        "jubianchi/behat-viewer-extension":     "*",
-
 
         "oldsound/rabbitmq-bundle":             "dev-master"
     },
@@ -38,7 +36,8 @@
         "behat/mink-selenium2-driver":          "*",
         "behat/mink-browserkit-driver":         "*",
         "behat/mink-goutte-driver":             "*",
-        "behat/mink-zombie-driver":             "*"
+        "behat/mink-zombie-driver":             "*",
+        "jubianchi/behat-viewer-extension":     "*"
     },
     "scripts": {
         "post-install-cmd": [

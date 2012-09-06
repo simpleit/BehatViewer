@@ -35,7 +35,7 @@ class Project extends Base
     /**
      * @var string $name
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"flow_createProject_step1"})
      * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
@@ -43,7 +43,7 @@ class Project extends Base
     /**
      * @var string $slug
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"flow_createProject_step1"})
      * @ORM\Column(name="slug", type="string", length=50)
      */
     private $slug;
@@ -51,8 +51,8 @@ class Project extends Base
     /**
      * @var string $test_command
      *
-     * @Assert\NotBlank()
-     * @ORM\Column(name="test_command", type="text", length=65532)
+     * @Assert\NotBlank(groups={"flow_createProject_step3"})
+     * @ORM\Column(name="test_command", type="text", length=65532, nullable=true)
      */
     private $test_command;
 
@@ -279,4 +279,16 @@ class Project extends Base
     {
         $this->type = $type;
     }
+
+	function __get($name)
+	{
+		return $this->getStrategy()->{'get' . ucfirst($name)}();
+	}
+
+	function __set($name, $value)
+	{
+		$this->getStrategy()->{'set' . ucfirst($name)}($value);
+	}
+
+
 }

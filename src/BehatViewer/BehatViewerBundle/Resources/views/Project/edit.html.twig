@@ -1,16 +1,15 @@
 {% extends 'BehatViewerBundle:Project:create.html.twig' %}
 
-{% block action %}{{ path('behatviewer.project.edit', {'username': project.user.username, 'project': project.slug}) }}{% endblock %}
+{% block action %}{{ path(app.request.get('_route'), {'username': project.user.username, 'project': project.slug}) }}{% endblock %}
 
 {% block title %}
-    Project configuration
+    Project configuration : {{ project.name }}
+{% endblock %}
+
+{% block before %}
+    {% include 'BehatViewerBundle:Project:tabs.html.twig' %}
 {% endblock %}
 
 {% block extrabuttons %}
-    <a href="{{ path('behatviewer.homepage') }}" class="pull-left btn">Cancel</a>
-{% endblock %}
-
-{% block buttons %}
-    {{ parent() }}
     <a href="{{ path("behatviewer.project.delete", {"username": project.user.username, "project": project.slug}) }}" class="btn btn-danger">Delete</a>
 {% endblock %}

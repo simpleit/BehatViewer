@@ -16,9 +16,6 @@ class ProjectType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-		$subscriber = new \BehatViewer\BehatViewerBundle\Form\Subscriber\ProjectTypeSubscriber($builder->getFormFactory());
-		$builder->addEventSubscriber($subscriber);
-
         $builder
             ->add(
                 'name',
@@ -40,19 +37,7 @@ class ProjectType extends AbstractType
                     )
                 )
             )
-            ->add(
-                'test_command',
-                'textarea',
-                array(
-                    'label' => 'Test command',
-                    'attr' => array(
-                        'rows' => 10,
-                        'cols' => 70,
-                        'style' => 'width: auto'
-                    )
-                )
-            )
-        ;
+		;
     }
 
     /**

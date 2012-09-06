@@ -20,21 +20,21 @@ var Notifier;
             };
 
             Notifier = function(options) {
-                this.settings = $.extend({}, defaults, options);
+                this.settings = $.extend(defaults, options || {});
             };
 
             Notifier.prototype = new Object();
             Notifier.prototype.constructor = Notifier;
 
-            Notifier.prototype.notify = function (text, type) {
+            Notifier.prototype.notify = function (text, type, opt) {
                 noty(
                     $.extend(
-                        {},
                         this.settings.noty,
                         {
                             'type': type || this.settings.noty.type,
                             'text': '[ ' + moment().format('HH:mm:ss') + ' ] ' + text
-                        }
+                        },
+                        opt || {}
                     )
                 );
             };

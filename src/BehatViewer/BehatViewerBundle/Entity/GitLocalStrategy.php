@@ -17,7 +17,7 @@ class GitLocalStrategy extends Strategy
 	 * @var string $path
 	 *
 	 * @Assert\NotBlank()
-	 * @ORM\Column(name="path", type="string", length=255)
+	 * @ORM\Column(name="path", type="string", length=255, nullable=true)
 	 */
 	private $path;
 
@@ -25,16 +25,22 @@ class GitLocalStrategy extends Strategy
 	 * @var string $branch
 	 *
 	 * @Assert\NotBlank()
-	 * @ORM\Column(name="branch", type="string", length=255)
+	 * @ORM\Column(name="branch", type="string", length=255, nullable=true)
 	 */
 	private $branch;
 
 	public function getFormType() {
-		return new \BehatViewer\BehatViewerWorkerBundle\Form\Type\GitLocalStrategyType();
+		return new \BehatViewer\BehatViewerBundle\Form\Type\GitLocalStrategyType();
 	}
 
 	public function build() {
 
+	}
+
+	public function setPath($path) {
+		$this->path = $path;
+
+		return $this;
 	}
 
 	public function getPath() {
@@ -43,6 +49,12 @@ class GitLocalStrategy extends Strategy
 
 	public function getBranch() {
 		return $this->branch;
+	}
+
+	public function setBranch($branch) {
+		$this->branch = $branch;
+
+		return $this;
 	}
 
 	public function __toString() {

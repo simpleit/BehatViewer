@@ -17,12 +17,12 @@ class LocalStrategy extends Strategy
 	 * @var string $path
 	 *
 	 * @Assert\NotBlank()
-	 * @ORM\Column(name="path", type="string", length=255)
+	 * @ORM\Column(name="path", type="string", length=255, nullable=true)
 	 */
 	private $path;
 
 	public function getFormType() {
-		return new \BehatViewer\BehatViewerWorkerBundle\Form\Type\LocalStrategyType();
+		return new \BehatViewer\BehatViewerBundle\Form\Type\LocalStrategyType();
 	}
 
 	public function build() {

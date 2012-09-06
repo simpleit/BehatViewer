@@ -1,0 +1,7 @@
+{% set route = app.request.get('_route') %}
+
+<ul class="nav nav-tabs">
+    <li{% if route == 'behatviewer.project.edit' %} class="active"{% endif %}><a href="{{ path("behatviewer.project.edit", {"project": project.slug, "username": project.user.username }) }}">Infos</a></li>
+    <li{% if route == 'behatviewer.project.edit.repository' %} class="active"{% endif %}><a href="{{ path("behatviewer.project.edit.repository", {"project": project.slug, "username": project.user.username }) }}">Repository</a></li>
+    <li{% if route == 'behatviewer.project.edit.script' %} class="active"{% endif %}><a href="{{ path("behatviewer.project.edit.script", {"project": project.slug, "username": project.user.username }) }}">Script</a></li>
+</ul>
