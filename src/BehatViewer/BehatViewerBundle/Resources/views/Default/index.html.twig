@@ -58,6 +58,12 @@
                         <a class="btn" href="{{ path("behatviewer.project", {"username": project.user.username, "project": project.slug}) }}">Details &raquo;</a>
                     </div>
                 </div>
+
+                {% if loop.index is divisibleby(3) %}
+                    </div>
+                    <br/>
+                    <div class="row-fluid">
+                {% endif %}
             {% endfor %}
         </div>
     </div>
