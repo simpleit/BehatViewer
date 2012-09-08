@@ -51,7 +51,7 @@ class GitBuilder extends Builder
 
         if ($status !== 0) {
             $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-                'git reset --hard; git pull origin ' . $strategy->getBranch(),
+                'git fetch origin; git reset --hard origin/' . $strategy->getBranch() . '; git pull origin',
                 $dir
             );
             $status = $process->run(function ($type, $buffer) use (&$output) {
