@@ -9,10 +9,6 @@ Feature: Project
 
         Given I fill in "Project name" with "Foo Bar"
           And I fill in "Identifier" with "foo-bar"
-          And I fill in "Test command" with "app/console foo bar"
-          And I select "Local directory" from "Type"
-          And I fill in "Path" with "/foo/bar"
-          And I fill in "Base URL" with "http://foo.bar/baz"
           And I press "Save changes"
          Then I should see "Settings were successfully saved"
           But I should not see "No project configured"

@@ -126,11 +126,23 @@ class ProjectController extends BehatViewerProjectController
 	 *
 	 * @Configuration\Route("/{username}/{project}/edit/script", name="behatviewer.project.edit.script")
 	 * @Configuration\Template("BehatViewerBundle:Project:edit.script.html.twig")
-	 * @Security\Secure(roles="ROLE_USER")
+	 * @Security\Secure(roles="ROLE_PREMIUM")
 	 * @Security\SecureParam(name="project", permissions="EDIT")
 	 */
 	public function editScriptAction(Entity\User $user, Entity\Project $project)
 	{
+		if(null === $project->getStrategy()) {
+			return $this->redirect(
+				$this->generateUrl(
+					'behatviewer.project.edit.repository',
+					array(
+						'username' => $user->getUsername(),
+						'project' => $project->getSlug()
+					)
+				)
+			);
+		}
+
 		$request = $this->getRequest();
 		$success = false;
 
@@ -155,7 +167,7 @@ class ProjectController extends BehatViewerProjectController
 	 *
 	 * @Configuration\Route("/{username}/{project}/edit/repository", name="behatviewer.project.edit.repository")
 	 * @Configuration\Template("BehatViewerBundle:Project:edit.html.twig")
-	 * @Security\Secure(roles="ROLE_USER")
+	 * @Security\Secure(roles="ROLE_PREMIUM")
 	 * @Security\SecureParam(name="project", permissions="EDIT")
 	 */
 	public function editRepositoryAction(Entity\User $user, Entity\Project $project)

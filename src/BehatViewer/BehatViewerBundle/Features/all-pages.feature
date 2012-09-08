@@ -13,7 +13,7 @@ Feature: All pages
             | /login                    | 200    |
             | /profile                  | 200    |
             | /logout                   | 200    |
-            | /config                   | 200    |
+            | /admin/config             | 200    |
 
     @reset
     Scenario Outline: Accessing not existing resources
@@ -38,7 +38,7 @@ Feature: All pages
             | url                       | status |
             | /login                    | 200    |
             | /profile                  | 200    |
-            | /config                   | 200    |
+            | /admin/config             | 200    |
             | /projects                 | 200    |
             | /password                 | 200    |
             | /project/create           | 200    |
