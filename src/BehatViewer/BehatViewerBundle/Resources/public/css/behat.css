@@ -288,3 +288,8 @@ h6 { font-size: 8px;  line-height: 17px; }
     width: 100%;
     z-index: 9999;
 }
+
+.thumbnail {
+    background-color: #FFF;
+    margin-top: 10px;
+}

@@ -38,7 +38,7 @@ var FeatureController;
                 $.get(
                     Routing.generate('behatviewer.screenshot', {"id": id}),
                     function(data) {
-                        $('#' + $(e.target).attr('data-toggle')).append('<img src="' + data + '" style="width: 70%" />');
+                        $('#' + $(e.target).attr('data-toggle')).append('<img src="' + data + '"/>');
                         t();
                     }
                 );
