@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block before %}
-    {% if is_granted('ROLE_USER') %}
+    {% if is_granted('EDIT') %}
         <form method="post" action="{{ path('behatviewer.history.delete.selected', {'username': project.user.username, 'project': project.slug}) }}">
     {% endif %}
 {% endblock %}
@@ -19,7 +19,7 @@
 
 {% block thead %}
     <tr>
-        {% if is_granted('ROLE_USER') %}
+        {% if is_granted('EDIT', project) %}
             <th class="{sorter: false}"><input type="checkbox" /></th>
         {% endif %}
         <th>#</th>
@@ -38,13 +38,13 @@
 {% endblock %}
 
 {% block after %}
-    {% if is_granted('ROLE_USER') %}
+    {% if is_granted('EDIT', project) %}
         <div class="btn-group">
             <button type="submit" class="btn btn-danger"><i class="icon-trash"></i> Delete selected</button>
         </div>
     {% endif %}
 
-    {% if is_granted('ROLE_USER') %}
+    {% if is_granted('EDIT', project) %}
         </form>
     {% endif %}
 

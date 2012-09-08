@@ -7,7 +7,7 @@
 {% endif %}
 
 <tr class="navig">
-    {% if is_granted('ROLE_USER') %}
+    {% if is_granted('EDIT', build.project) %}
         <td style="width: 15px">
             <input type="checkbox" value="{{ build.id }}" name="delete[]" id="Build_delete_{{ build.id }}"/>
         </td>
@@ -44,7 +44,7 @@
     <td class="action" style="min-width: 150px; width: 10%">
         <div class="btn-group" id="toolbar">
             <a href="{{ path('behatviewer.history.entry', {"username": project.user.username, "project": project.slug, "build": build.id}) }}" class="btn">Details</a>
-            {% if is_granted('ROLE_USER') %}
+            {% if is_granted('EDIT', build.project) %}
                 <a href="{{ path('behatviewer.history.delete', {"username": project.user.username, "project": project.slug, "build": build.id}) }}" class="btn btn-danger">Delete</a>
             {% endif %}
         </div>
