@@ -8,6 +8,15 @@
 
 {% block before %}
     {% include 'BehatViewerBundle:Project:tabs.html.twig' %}
+
+    {% if project.strategy is null and app.request.get('_route') == 'behatviewer.project.edit'%}
+        <div class="alert alert-block alert-info">
+            With your current configuration you will only be able to <strong>send your report using the Behat Viewer API.</strong>
+            {% if is_granted('ROLE_PREMIUM') %}
+                <br/>If you want to use Behat Viewer to build your project, <a href="{{ path("behatviewer.project.edit.repository", {"project": project.slug, "username": project.user.username }) }}">configure a repository</a>.
+            {% endif %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block extrabuttons %}
