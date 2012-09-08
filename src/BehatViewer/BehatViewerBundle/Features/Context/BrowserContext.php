@@ -161,4 +161,15 @@ class BrowserContext extends MinkContext implements KernelAwareInterface
             throw new ExpectationException($message, $this->getSession());
         }
     }
+
+	/**
+	 * Set login / password for next HTTP authentication
+	 *
+	 * @When /^I set basic authentication with "([^"]*)" and "([^"]*)"$/
+	 */
+	public function iSetBasicAuthenticationWithAnd($user, $password)
+	{
+		$this->getMink()->getSession()->setBasicAuth($user, $password);
+	}
+
 }
