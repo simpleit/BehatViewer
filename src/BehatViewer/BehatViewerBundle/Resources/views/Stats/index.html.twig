@@ -50,19 +50,27 @@
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.features %}
-                            {% set errors = build.stat.featuresFailed %}
-                            {% set success = (((total - errors) / total) * 100)|round(2) %}
+                            {% if total > 0 %}
+                                {% set errors = build.stat.featuresFailed %}
+                                {% set success = (((total - errors) / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set success = 0 %}
+                            {% endif %}
 
                             {{ sep }}{{ success }}
-                        {% set sep = ', ' %}
+                            {% set sep = ', ' %}
                         {% endfor %}
                     ],
                     error: [
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.features %}
-                            {% set errors = build.stat.featuresFailed %}
-                            {% set error = ((errors / total) * 100)|round(2) %}
+                            {% if total > 0 %}
+                                {% set errors = build.stat.featuresFailed %}
+                                {% set error = ((errors / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set error = 0 %}
+                            {% endif %}
 
                             {{ sep }}{{ error }}
                             {% set sep = ', ' %}
@@ -90,7 +98,13 @@
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.scenarios %}
-                            {{ sep }}{{ ((build.stat.scenariosPassed / total) * 100)|round(2) }}
+                            {% if total > 0 %}
+                                {% set passed = ((build.stat.scenariosPassed / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set passed = 0 %}
+                            {% endif %}
+
+                            {{ sep }}{{ passed }}
                             {% set sep = ', ' %}
                         {% endfor %}
                     ],
@@ -98,7 +112,13 @@
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.scenarios %}
-                            {{ sep }}{{ ((build.stat.scenariosFailed / total) * 100)|round(2) }}
+                            {% if total > 0 %}
+                                {% set failed = ((build.stat.scenariosFailed / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set failed = 0%}
+                            {% endif %}
+
+                            {{ sep }}{{ failed }}
                             {% set sep = ', ' %}
                         {% endfor %}
                     ]
@@ -115,7 +135,13 @@
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.steps %}
-                            {{ sep }}{{ ((build.stat.stepsPassed / total) * 100)|round(2) }}
+                            {% if total > 0 %}
+                                {% set passed = ((build.stat.stepsPassed / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set passed = 0 %}
+                            {% endif %}
+
+                            {{ sep }}{{ passed }}
                             {% set sep = ', ' %}
                         {% endfor %}
                     ],
@@ -123,7 +149,13 @@
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.steps %}
-                            {{ sep }}{{ ((build.stat.stepsFailed / total) * 100)|round(2) }}
+                            {% if total > 0 %}
+                                {% set failed = ((build.stat.stepsFailed / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set failed = 0 %}
+                            {% endif %}
+
+                            {{ sep }}{{ failed }}
                             {% set sep = ', ' %}
                         {% endfor %}
                     ],
@@ -131,7 +163,13 @@
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.steps %}
-                            {{ sep }}{{ ((build.stat.stepsSkipped / total) * 100)|round(2) }}
+                            {% if total > 0 %}
+                                {% set skipped = ((build.stat.stepsSkipped / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set skipped = 0 %}
+                            {% endif %}
+
+                            {{ sep }}{{ skipped }}
                             {% set sep = ', ' %}
                         {% endfor %}
                     ],
@@ -139,7 +177,13 @@
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.steps %}
-                            {{ sep }}{{ ((build.stat.stepsPending / total) * 100)|round(2) }}
+                            {% if total > 0 %}
+                                {% set pending = ((build.stat.stepsPending / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set pending = 0 %}
+                            {% endif %}
+
+                            {{ sep }}{{ pending }}
                             {% set sep = ', ' %}
                         {% endfor %}
                     ],
@@ -147,7 +191,13 @@
                         {% set sep = '' %}
                         {% for build in builds %}
                             {% set total = build.stat.steps %}
-                            {{ sep }}{{ ((build.stat.stepsUndefined / total) * 100)|round(2) }}
+                            {% if total > 0 %}
+                                {% set undefined = ((build.stat.stepsUndefined / total) * 100)|round(2) %}
+                            {% else %}
+                                {% set undefined = 0 %}
+                            {% endif %}
+
+                            {{ sep }}{{ undefined }}
                             {% set sep = ', ' %}
                         {% endfor %}
                     ]
