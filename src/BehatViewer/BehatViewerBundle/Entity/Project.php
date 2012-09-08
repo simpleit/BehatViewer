@@ -63,12 +63,12 @@ class Project extends Base
      */
     private $configuration;
 
-	/**
-	 * @var \BehatViewer\BehatViewerBundle\Entity\Strategy $strategy
-	 *
-	 * @ORM\OneToOne(targetEntity="Strategy", inversedBy="project", cascade={"persist"})
-	 */
-	private $strategy;
+    /**
+     * @var \BehatViewer\BehatViewerBundle\Entity\Strategy $strategy
+     *
+     * @ORM\OneToOne(targetEntity="Strategy", inversedBy="project", cascade={"persist"})
+     */
+    private $strategy;
 
     /**
      * @var string $type
@@ -144,23 +144,23 @@ class Project extends Base
         return $this->name;
     }
 
-	public function setStrategy(\BehatViewer\BehatViewerBundle\Entity\Strategy $strategy)
-	{
-		$this->strategy = $strategy;
+    public function setStrategy(\BehatViewer\BehatViewerBundle\Entity\Strategy $strategy)
+    {
+        $this->strategy = $strategy;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getStrategy()
-	{
-		return $this->strategy;
-	}
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
 
     public function setConfiguration(\BehatViewer\BehatViewerBundle\Entity\Configuration $configuration)
     {
         $this->configuration = $configuration;
 
-		return $this;
+        return $this;
     }
 
     public function getConfiguration()
@@ -280,15 +280,14 @@ class Project extends Base
         $this->type = $type;
     }
 
-	function __get($name)
-	{
-		return $this->getStrategy()->{'get' . ucfirst($name)}();
-	}
+    public function __get($name)
+    {
+        return $this->getStrategy()->{'get' . ucfirst($name)}();
+    }
 
-	function __set($name, $value)
-	{
-		$this->getStrategy()->{'set' . ucfirst($name)}($value);
-	}
-
+    public function __set($name, $value)
+    {
+        $this->getStrategy()->{'set' . ucfirst($name)}($value);
+    }
 
 }

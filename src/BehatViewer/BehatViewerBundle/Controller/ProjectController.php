@@ -94,7 +94,7 @@ class ProjectController extends BehatViewerProjectController
         $request = $this->getRequest();
         $success = false;
 
-		$form = $this->get('form.factory')->create(new ProjectType(), $project);
+        $form = $this->get('form.factory')->create(new ProjectType(), $project);
 
         if ('POST' === $request->getMethod()) {
             $success = $this->save($form);
@@ -118,104 +118,104 @@ class ProjectController extends BehatViewerProjectController
         ));
     }
 
-	/**
-	 * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-	 * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-	 *
-	 * @return array
-	 *
-	 * @Configuration\Route("/{username}/{project}/edit/script", name="behatviewer.project.edit.script")
-	 * @Configuration\Template("BehatViewerBundle:Project:edit.script.html.twig")
-	 * @Security\Secure(roles="ROLE_PREMIUM")
-	 * @Security\SecureParam(name="project", permissions="EDIT")
-	 */
-	public function editScriptAction(Entity\User $user, Entity\Project $project)
-	{
-		if(null === $project->getStrategy()) {
-			return $this->redirect(
-				$this->generateUrl(
-					'behatviewer.project.edit.repository',
-					array(
-						'username' => $user->getUsername(),
-						'project' => $project->getSlug()
-					)
-				)
-			);
-		}
+    /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     *
+     * @return array
+     *
+     * @Configuration\Route("/{username}/{project}/edit/script", name="behatviewer.project.edit.script")
+     * @Configuration\Template("BehatViewerBundle:Project:edit.script.html.twig")
+     * @Security\Secure(roles="ROLE_PREMIUM")
+     * @Security\SecureParam(name="project", permissions="EDIT")
+     */
+    public function editScriptAction(Entity\User $user, Entity\Project $project)
+    {
+        if (null === $project->getStrategy()) {
+            return $this->redirect(
+                $this->generateUrl(
+                    'behatviewer.project.edit.repository',
+                    array(
+                        'username' => $user->getUsername(),
+                        'project' => $project->getSlug()
+                    )
+                )
+            );
+        }
 
-		$request = $this->getRequest();
-		$success = false;
+        $request = $this->getRequest();
+        $success = false;
 
-		$form = $this->get('form.factory')->create(new ProjectScriptType(), $project);
+        $form = $this->get('form.factory')->create(new ProjectScriptType(), $project);
 
-		if ('POST' === $request->getMethod()) {
-			$success = $this->save($form);
-		}
+        if ('POST' === $request->getMethod()) {
+            $success = $this->save($form);
+        }
 
-		return $this->getResponse(array(
-			'form' => $form->createView(),
-			'success' => $success || $this->getRequest()->get('success', false),
-			'hasproject' => true
-		));
-	}
+        return $this->getResponse(array(
+            'form' => $form->createView(),
+            'success' => $success || $this->getRequest()->get('success', false),
+            'hasproject' => true
+        ));
+    }
 
-	/**
-	 * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-	 * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-	 *
-	 * @return array
-	 *
-	 * @Configuration\Route("/{username}/{project}/edit/repository", name="behatviewer.project.edit.repository")
-	 * @Configuration\Template("BehatViewerBundle:Project:edit.html.twig")
-	 * @Security\Secure(roles="ROLE_PREMIUM")
-	 * @Security\SecureParam(name="project", permissions="EDIT")
-	 */
-	public function editRepositoryAction(Entity\User $user, Entity\Project $project)
-	{
-		$request = $this->getRequest();
-		$success = false;
-		$strategy = $project->getStrategy();
+    /**
+     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     *
+     * @return array
+     *
+     * @Configuration\Route("/{username}/{project}/edit/repository", name="behatviewer.project.edit.repository")
+     * @Configuration\Template("BehatViewerBundle:Project:edit.html.twig")
+     * @Security\Secure(roles="ROLE_PREMIUM")
+     * @Security\SecureParam(name="project", permissions="EDIT")
+     */
+    public function editRepositoryAction(Entity\User $user, Entity\Project $project)
+    {
+        $request = $this->getRequest();
+        $success = false;
+        $strategy = $project->getStrategy();
 
-		if(null !== $strategy) {
-			$form = $this->get('form.factory')->create($strategy->getFormType(), $strategy);
-		} else {
-			$form = $this->get('form.factory')->create(new ProjectRepositoryType());
-		}
+        if (null !== $strategy) {
+            $form = $this->get('form.factory')->create($strategy->getFormType(), $strategy);
+        } else {
+            $form = $this->get('form.factory')->create(new ProjectRepositoryType());
+        }
 
-		if ('POST' === $request->getMethod()) {
-			$form->bind($request);
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
 
-			$manager = $this->getDoctrine()->getManager();
+            $manager = $this->getDoctrine()->getManager();
 
-			if(null === $strategy || $form instanceof ProjectRepositoryType) {
-				$strategies = array(
-					'git' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
-					'git_local' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
-					'github' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
-					'local' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy'
-				);
+            if (null === $strategy || $form instanceof ProjectRepositoryType) {
+                $strategies = array(
+                    'git' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
+                    'git_local' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
+                    'github' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
+                    'local' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy'
+                );
 
-				$strategy = $strategies[$form->get('strategy')->getData()];
-				$strategy = new $strategy();
-				$project->setStrategy($strategy);
-				$strategy->setProject($project);
+                $strategy = $strategies[$form->get('strategy')->getData()];
+                $strategy = new $strategy();
+                $project->setStrategy($strategy);
+                $strategy->setProject($project);
 
-				$form = $this->get('form.factory')->create($strategy->getFormType(), $strategy);
-				$manager->persist($strategy);
-			} else {
-				$manager->persist($form->getData());
-			}
+                $form = $this->get('form.factory')->create($strategy->getFormType(), $strategy);
+                $manager->persist($strategy);
+            } else {
+                $manager->persist($form->getData());
+            }
 
-			$manager->flush();
-			$success = (null !== $strategy);
-		}
+            $manager->flush();
+            $success = (null !== $strategy);
+        }
 
-		return $this->getResponse(array(
-			'form' => $form->createView(),
-			'success' => $success || $this->getRequest()->get('success', false),
-			'hasproject' => true
-		));
-	}
+        return $this->getResponse(array(
+            'form' => $form->createView(),
+            'success' => $success || $this->getRequest()->get('success', false),
+            'hasproject' => true
+        ));
+    }
 
     /**
      * @param \BehatViewer\BehatViewerBundle\Entity\User    $user

@@ -16,21 +16,21 @@ class ProjectRepositoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-		$builder
-			->add(
-				'strategy',
-				'choice',
-				array(
-					'label' => 'Type',
-					'choices' => array(
-						'git' => 'Git repository',
-						'local' => 'Local directory',
-						'git_local' => 'Local Git repository',
-						'github' => 'Github repository'
-					)
-				)
-			)
-		;
+        $builder
+            ->add(
+                'strategy',
+                'choice',
+                array(
+                    'label' => 'Type',
+                    'choices' => array(
+                        'git' => 'Git repository',
+                        'local' => 'Local directory',
+                        'git_local' => 'Local Git repository',
+                        'github' => 'Github repository'
+                    )
+                )
+            )
+        ;
     }
 
     /**

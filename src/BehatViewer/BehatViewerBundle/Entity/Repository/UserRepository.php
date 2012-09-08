@@ -10,17 +10,17 @@ namespace BehatViewer\BehatViewerBundle\Entity\Repository;
  */
 class UserRepository extends EntityRepository
 {
-	public function loadUserByUsername($username)
-	{
-		$q = $this
-			->createQueryBuilder('u')
-			->select('u, g')
-			->leftJoin('u.groups', 'g')
-			->where('u.username = :username OR u.email = :email')
-			->setParameter('username', $username)
-			->setParameter('email', $username)
-			->getQuery();
+    public function loadUserByUsername($username)
+    {
+        $q = $this
+            ->createQueryBuilder('u')
+            ->select('u, g')
+            ->leftJoin('u.groups', 'g')
+            ->where('u.username = :username OR u.email = :email')
+            ->setParameter('username', $username)
+            ->setParameter('email', $username)
+            ->getQuery();
 
-		return $q->getResult();
-	}
+        return $q->getResult();
+    }
 }

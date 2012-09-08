@@ -19,17 +19,17 @@ class LocalStrategyType extends AbstractType
         return 'local';
     }
 
-	/**
-	 * @param array $options
-	 *
-	 * @return array
-	 */
-	public function getDefaultOptions(array $options)
-	{
-		return array(
-			'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\LocalStrategy'
-		);
-	}
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\LocalStrategy'
+        );
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder

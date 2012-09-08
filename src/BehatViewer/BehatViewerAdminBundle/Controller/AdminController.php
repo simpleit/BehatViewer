@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     BehatViewer\BehatViewerBundle\Entity,
     BehatViewer\BehatViewerBundle\Form\Type\CreateUserType,
     BehatViewer\BehatViewerBundle\Form\Type\EditUserType,
-	BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
+    BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
 /**
  * @Configuration\Route("/admin")

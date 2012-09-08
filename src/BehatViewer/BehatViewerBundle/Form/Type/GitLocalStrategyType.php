@@ -19,17 +19,17 @@ class GitLocalStrategyType extends AbstractType
         return 'git_local';
     }
 
-	/**
-	 * @param array $options
-	 *
-	 * @return array
-	 */
-	public function getDefaultOptions(array $options)
-	{
-		return array(
-			'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\GitLocalStrategy'
-		);
-	}
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\GitLocalStrategy'
+        );
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder

@@ -15,7 +15,8 @@ class GitLocalBuilder extends GitBuilder
         return 'git clone --shared ' . $this->getRepositoryUrl($strategy);
     }
 
-	protected function supports(Entity\Strategy $strategy) {
-		return ($strategy instanceof Entity\GitLocalStrategy);
-	}
+    protected function supports(Entity\Strategy $strategy)
+    {
+        return ($strategy instanceof Entity\GitLocalStrategy);
+    }
 }

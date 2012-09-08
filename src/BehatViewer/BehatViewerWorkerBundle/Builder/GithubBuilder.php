@@ -14,7 +14,8 @@ class GithubBuilder extends GitBuilder
         );
     }
 
-	protected function supports(Entity\Strategy $strategy) {
-		return ($strategy instanceof Entity\GithubStrategy);
-	}
+    protected function supports(Entity\Strategy $strategy)
+    {
+        return ($strategy instanceof Entity\GithubStrategy);
+    }
 }

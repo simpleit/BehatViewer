@@ -19,17 +19,17 @@ class GitStrategyType extends AbstractType
         return 'git';
     }
 
-	/**
-	 * @param array $options
-	 *
-	 * @return array
-	 */
-	public function getDefaultOptions(array $options)
-	{
-		return array(
-			'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\GitStrategy'
-		);
-	}
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\GitStrategy'
+        );
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder

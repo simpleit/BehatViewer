@@ -19,17 +19,17 @@ class GithubStrategyType extends AbstractType
         return 'github';
     }
 
-	/**
-	 * @param array $options
-	 *
-	 * @return array
-	 */
-	public function getDefaultOptions(array $options)
-	{
-		return array(
-			'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\GithubStrategy'
-		);
-	}
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\GithubStrategy'
+        );
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilder $builder

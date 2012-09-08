@@ -5,5 +5,5 @@ use BehatViewer\BehatViewerBundle\Entity;
 
 interface BuilderInterface
 {
-    function build(Entity\Strategy $strategy);
+    public function build(Entity\Strategy $strategy);
 }

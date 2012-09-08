@@ -5,10 +5,10 @@ use BehatViewer\BehatViewerBundle\Entity;
 
 class GitBuilder extends Builder
 {
-	protected function getRepositoryUrl(Entity\Strategy $strategy)
-	{
-		return $strategy->getUrl();
-	}
+    protected function getRepositoryUrl(Entity\Strategy $strategy)
+    {
+        return $strategy->getUrl();
+    }
 
     protected function getCloneCommand(Entity\Strategy $strategy)
     {
@@ -20,7 +20,7 @@ class GitBuilder extends Builder
         return sprintf(
             $this->container->get('kernel')->getRootDir() . '/data/repos/%s/%s',
             $strategy->getProject()->getUser()->getUsername(),
-			$strategy->getProject()->getSlug()
+            $strategy->getProject()->getSlug()
         );
     }
 
@@ -72,7 +72,7 @@ class GitBuilder extends Builder
         $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
             sprintf(
                 'git checkout %s',
-				$strategy->getBranch()
+                $strategy->getBranch()
             ),
             $this->getClonePath($strategy)
         );
@@ -93,13 +93,14 @@ class GitBuilder extends Builder
         $this->cloneRepository($strategy);
 
         $local = new Entity\LocalStrategy();
-		$local->setProject($strategy->getProject());
-		$local->setPath($this->getClonePath($strategy));
+        $local->setProject($strategy->getProject());
+        $local->setPath($this->getClonePath($strategy));
 
-		return $this->container->get('behat_viewer.builder')->build($local);
+        return $this->container->get('behat_viewer.builder')->build($local);
     }
 
-	protected function supports(Entity\Strategy $strategy) {
-		return ($strategy instanceof Entity\GitStrategy);
-	}
+    protected function supports(Entity\Strategy $strategy)
+    {
+        return ($strategy instanceof Entity\GitStrategy);
+    }
 }

@@ -11,43 +11,45 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Role implements RoleInterface
 {
-	/**
-	 * @ORM\Column(name="id", type="integer")
-	 * @ORM\Id()
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id()
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
-	/**
-	 * @ORM\Column(name="name", type="string", length=30)
-	 */
-	private $name;
+    /**
+     * @ORM\Column(name="name", type="string", length=30)
+     */
+    private $name;
 
-	/**
-	 * @ORM\Column(name="role", type="string", length=20, unique=true)
-	 */
-	private $role;
+    /**
+     * @ORM\Column(name="role", type="string", length=20, unique=true)
+     */
+    private $role;
 
-	/**
-	 * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
-	 */
-	private $users;
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
+     */
+    private $users;
 
-	public function __construct()
-	{
-		$this->users = new ArrayCollection();
-	}
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
-	public function getId() {
-		return $this->id;
-	}
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	public function getName() {
-		return $this->name;
-	}
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	public function getRole()
-	{
-		return $this->role;
-	}
+    public function getRole()
+    {
+        return $this->role;
+    }
 }

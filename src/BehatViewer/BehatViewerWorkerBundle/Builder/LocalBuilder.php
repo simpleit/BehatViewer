@@ -3,7 +3,7 @@ namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 
 use
     Symfony\Component\Console\Output\ConsoleOutput,
-	BehatViewer\BehatViewerBundle\Entity
+    BehatViewer\BehatViewerBundle\Entity
 ;
 
 class LocalBuilder extends Builder
@@ -37,9 +37,10 @@ class LocalBuilder extends Builder
         return $status;
     }
 
-	protected function supports(Entity\Strategy $strategy) {
-		return ($strategy instanceof Entity\LocalStrategy);
-	}
+    protected function supports(Entity\Strategy $strategy)
+    {
+        return ($strategy instanceof Entity\LocalStrategy);
+    }
 
     protected function getBuildScript(Entity\LocalStrategy $strategy)
     {

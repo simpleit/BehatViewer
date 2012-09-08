@@ -20,7 +20,7 @@ class DefaultController extends BehatViewerController
      */
     public function indexAction()
     {
-		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
         $projects = $repository->findByType(EnumProjectTypeType::TYPE_PUBLIC);
 
         if (0 === count($projects)) {

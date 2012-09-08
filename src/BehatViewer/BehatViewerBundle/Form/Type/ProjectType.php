@@ -37,7 +37,7 @@ class ProjectType extends AbstractType
                     )
                 )
             )
-		;
+        ;
     }
 
     /**

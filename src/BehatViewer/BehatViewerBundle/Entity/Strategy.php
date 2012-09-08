@@ -3,7 +3,7 @@
 namespace BehatViewer\BehatViewerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-	BehatViewer\BehatViewerBundle\Entity\Project;
+    BehatViewer\BehatViewerBundle\Entity\Project;
 
 /**
  * BehatViewer\BehatViewerBundle\Entity\BuildStat
@@ -52,6 +52,6 @@ abstract class Strategy extends Base
         return $this->project;
     }
 
-	abstract public function getFormType();
-	abstract public function build();
+    abstract public function getFormType();
+    abstract public function build();
 }

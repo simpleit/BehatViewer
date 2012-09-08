@@ -16,20 +16,20 @@ class ProjectScriptType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-		$builder
-			->add(
-				'test_command',
-				'textarea',
-				array(
-					'label' => 'Test command',
-					'attr' => array(
-						'rows' => 10,
-						'cols' => 70,
-						'style' => 'width: auto'
-					)
-				)
-			)
-		;
+        $builder
+            ->add(
+                'test_command',
+                'textarea',
+                array(
+                    'label' => 'Test command',
+                    'attr' => array(
+                        'rows' => 10,
+                        'cols' => 70,
+                        'style' => 'width: auto'
+                    )
+                )
+            )
+        ;
     }
 
     /**

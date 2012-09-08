@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Validator\Constraints as Assert,
     Symfony\Bridge\Doctrine\Validator\Constraints,
     Symfony\Component\Security\Acl\Domain\UserSecurityIdentity,
-	Doctrine\Common\Collections\ArrayCollection;
+    Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table(
@@ -69,14 +69,15 @@ class User extends Base implements AdvancedUserInterface
      */
     private $projects;
 
-	/**
-	 * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
-	 *
-	 */
-	private $roles;
+    /**
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     *
+     */
+    private $roles;
 
-	public function __construct() {
-		$this->roles = new ArrayCollection();
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
     }
@@ -180,7 +181,7 @@ class User extends Base implements AdvancedUserInterface
 
     public function getRoles()
     {
-		return $this->roles->toArray();
+        return $this->roles->toArray();
     }
 
     public function eraseCredentials()
