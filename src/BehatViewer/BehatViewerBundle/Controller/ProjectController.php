@@ -191,7 +191,7 @@ class ProjectController extends BehatViewerProjectController
                 $strategies = array(
                     'git' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
                     'git_local' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
-                    'github' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
+                    'github' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GithubStrategy',
                     'local' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy'
                 );
 
