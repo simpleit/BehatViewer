@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
 /**
  *
  */
-class RemoveCommand extends ContainerAwareCommand
+class DeleteCommand extends ContainerAwareCommand
 {
     /**
      *
@@ -28,7 +28,7 @@ class RemoveCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return \Symfony\Bundle\DoctrineBundle\Registry
+     * @return \Doctrine\Bundle\DoctrineBundle\Registry
      */
     public function getDoctrine()
     {
@@ -43,13 +43,15 @@ class RemoveCommand extends ContainerAwareCommand
         return $this->getDoctrine()->getEntityManager();
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface   $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @throws \RuntimeException
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+	/**
+	 * @param \Symfony\Component\Console\Input\InputInterface $input
+	 * @param \Symfony\Component\Console\Output\OutputInterface $output
+	 *
+	 * @throws \RuntimeException
+	 *
+	 * @return int
+	 */
+	protected function execute(InputInterface $input, OutputInterface $output)
     {
         $username = $input->getArgument('user');
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:User');
@@ -59,9 +61,11 @@ class RemoveCommand extends ContainerAwareCommand
             $this->getEntityManager()->remove($user);
             $this->getEntityManager()->flush();
 
-            $output->writeln(sprintf('User <info>%s</info> <comment>(%s)</comment> was successfully removed', $username, $user->getSalt()));
+            $output->writeln(sprintf('User <info>%s</info> <comment>(%s)</comment> was successfully deleted', $username, $user->getSalt()));
         } else {
             throw new \RuntimeException(sprintf('user %s does not exist', $username));
         }
+
+		return 0;
     }
 }

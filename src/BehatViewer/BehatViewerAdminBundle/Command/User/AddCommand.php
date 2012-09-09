@@ -19,7 +19,7 @@ class AddCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return \Symfony\Bundle\DoctrineBundle\Registry
+     * @return \Doctrine\Bundle\DoctrineBundle\Registry
      */
     public function getDoctrine()
     {
@@ -34,11 +34,13 @@ class AddCommand extends ContainerAwareCommand
         return $this->getDoctrine()->getEntityManager();
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface   $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+	/**
+	 * @param \Symfony\Component\Console\Input\InputInterface $input
+	 * @param \Symfony\Component\Console\Output\OutputInterface $output
+	 *
+	 * @return int
+	 */
+	protected function execute(InputInterface $input, OutputInterface $output)
     {
         $self = $this;
         $user = new Entity\User();
@@ -86,9 +88,13 @@ class AddCommand extends ContainerAwareCommand
 
         $user->setEmail($this->getHelper('dialog')->ask($output, 'Please enter an <info>email</info>: '));
 
+		$user->setToken(md5(uniqid()));
+
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
 
         $output->writeln(sprintf('User <info>%s</info> successfully created <comment>(%s)</comment>', $user->getUsername(), $user->getSalt()));
+
+		return 0;
     }
 }
