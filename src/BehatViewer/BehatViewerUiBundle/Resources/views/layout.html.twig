@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Behat Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Behat Viewer - Behat report browser">
+    <meta name="author" content="Julien Bianchi <contact@jubianchi.fr>">
+
+
+    <link href="{{ asset('bundles/behatviewerui/css/bootstrap.css') }}" type="text/css" rel="stylesheet"/>
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ asset('bundles/behatviewerui/css/bootstrap-responsive.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('bundles/behatviewerui/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/behatviewerui/css/chosen.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('bundles/behatviewerui/css/jquery.noty.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('bundles/behatviewerui/css/noty_theme_twitter.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('bundles/behatviewerui/css/behat.css') }}" type="text/css" rel="stylesheet"/>
+    {% block stylesheet %}{% endblock %}
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+{% block header %}
+    {% include 'BehatViewerUiBundle::header.html.twig' %}
+{% endblock %}
+
+<div id="notification" class="container-fluid">
+    {% block notification %}{% endblock %}
+</div>
+
+<div class="container-fluid" id="container">
+    {% block container %}{% endblock %}
+</div>
+
+{% block footer %}
+    {% include 'BehatViewerUiBundle::footer.html.twig' %}
+{% endblock %}
+
+<script type="text/javascript" src="{{ asset('bundles/behatviewerui/js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/behatviewerui/js/jsc/JSC.js') }}"></script>
+<script type="text/javascript">
+    JSC.base = 'http://{{ domain }}/bundles/behatviewer/js';
+    JSC.debug = {% if app.debug %}true{% else %}false{% endif %}
+
+    JSC.require(
+        [
+            'bootstrap',
+            'bootstrap.fixed-table',
+            'jquery.noty',
+            'jquery.promise',
+            'behat-viewer/app'
+        ]
+    );
+</script>
+
+{% block javascript %}{% endblock %}
+
+</body>
+</html>
