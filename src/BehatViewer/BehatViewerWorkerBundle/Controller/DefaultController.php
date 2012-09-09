@@ -28,11 +28,19 @@ class DefaultController extends BehatViewerController
 		curl_setopt($curl, CURLOPT_USERPWD, $rabbitUser . ':' . $rabbitPassword);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-		$result = curl_exec($curl);
+		$workers = curl_exec($curl);
+		curl_close($curl);
+
+		$curl = curl_init('http://' . $rabbitHost . ':' . $rabbitPort . '/api/overview');
+		curl_setopt($curl, CURLOPT_USERPWD, $rabbitUser . ':' . $rabbitPassword);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+		$overview = curl_exec($curl);
 		curl_close($curl);
 
 		return $this->getResponse(array(
-			'items' => json_decode($result)
+			'items' => json_decode($workers),
+			'overview' => json_decode($overview),
 		));
 	}
 }
