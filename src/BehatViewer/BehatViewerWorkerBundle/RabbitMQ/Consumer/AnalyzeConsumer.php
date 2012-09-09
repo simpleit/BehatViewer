@@ -14,7 +14,7 @@ class AnalyzeConsumer extends Consumer
 		$project = $repository->findOneBySlug($options['project']);
 
 		$data = json_decode($options['payload'], true);
-		$analyzer = $this->getContainer()->get('behat_viewer.analyzer');
+		$analyzer = $this->container->get('behat_viewer.analyzer');
 		$analyzer->analyze($project, $data);
 
         return true;
