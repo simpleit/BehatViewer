@@ -1,0 +1,33 @@
+{% extends 'BehatViewerBundle::layout.table.html.twig' %}
+
+{% block title %}
+    <h1 class="page-header">
+        Workers status
+    </h1>
+{% endblock %}
+
+{% block thead %}
+    <tr>
+        <th>Node</th>
+        <th>User</th>
+        <th>Peer</th>
+        <th>Virtual Host</th>
+        <th>Status</th>
+    </tr>
+{% endblock %}
+
+{% block tbody %}
+    {% for worker in items %}
+        <tr>
+            <td>{{ worker.node }}</td>
+            <td>{{ worker.user }}</td>
+            <td>{{ worker.peer_address }}:{{ worker.peer_port }}</td>
+            <td>{{ worker.vhost }}</td>
+            <td>
+                {% set class = worker.state == "running" ? "success" : "info" %}
+
+                <span class="label label-{{ class }}">{{ worker.state }}</span>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

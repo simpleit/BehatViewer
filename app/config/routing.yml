@@ -6,6 +6,10 @@
 BehatViewerBundleJsRouting:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+BehatViewerWorkerBundle:
+    resource: "@BehatViewerWorkerBundle/Controller/"
+    type:     annotation
+
 BehatViewerApiBundle:
     resource: "@BehatViewerApiBundle/Controller/"
     type:     annotation
