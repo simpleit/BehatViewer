@@ -22,7 +22,10 @@ class ActionController extends BehatViewerController
      */
     public function analyzeAction(Entity\User $user, Entity\Project $project)
     {
-        $msg = array('payload' => $this->getRequest()->get('payload'));
+        $msg = array(
+			'payload' => $this->getRequest()->get('payload'),
+			'project' => $project->getSlug()
+		);
         $this->get('old_sound_rabbit_mq.analyze_producer')->publish(serialize($msg));
 
         return new \Symfony\Component\HttpFoundation\Response();
