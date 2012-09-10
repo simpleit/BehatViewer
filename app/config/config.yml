@@ -29,6 +29,7 @@ twig:
       piwik:
         enabled: %piwik_enabled%
         host: %piwik_host%
+        site_id: %piwik_site_id%
 
 # Assetic Configuration
 assetic:

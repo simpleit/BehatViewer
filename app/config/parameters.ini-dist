@@ -22,6 +22,7 @@
 
     piwik_enabled    = %piwik_enabled%
     piwik_host       = %piwik_host%
+    piwik_site_id    = %piwik_site_id%
 
     locale            = en
 
