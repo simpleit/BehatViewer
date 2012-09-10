@@ -78,6 +78,7 @@ class User extends Base implements AdvancedUserInterface
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->projects = new ArrayCollection();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
     }
@@ -200,4 +201,8 @@ class User extends Base implements AdvancedUserInterface
     {
         return UserSecurityIdentity::fromAccount($this);
     }
+
+	public function getProjects() {
+		return $this->projects;
+	}
 }

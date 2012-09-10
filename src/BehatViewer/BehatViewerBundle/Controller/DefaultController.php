@@ -21,28 +21,39 @@ class DefaultController extends BehatViewerController
     public function indexAction()
     {
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
-        $projects = $repository->findByType(EnumProjectTypeType::TYPE_PUBLIC);
+        $projects = $repository->findByUser($this->getUser());
 
         if (0 === count($projects)) {
             throw new \BehatViewer\BehatViewerBundle\Exception\NoProjectConfiguredException();
         }
 
-        if (1 === count($projects)) {
-            return $this->redirect(
-                $this->generateUrl(
-                    'behatviewer.project',
-                    array(
-                        'project' => $projects[0]->getSlug(),
-                        'username' => $projects[0]->getUser()->getUsername()
-                    )
-                )
-            );
-        }
-
         return $this->getResponse(array(
-            'projects' => $projects
+            'projects' => $projects,
+			'user' => $this->getUser()
         ));
     }
+
+	/**
+	 * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+	 *
+	 * @throws \BehatViewer\BehatViewerBundle\Exception\NoProjectConfiguredException
+	 *
+	 * @Configuration\Route("/{username}", name="behatviewer.userproject")
+	 * @Configuration\Template("BehatViewerBundle:Default:index.html.twig")
+	 */
+	public function userAction(Entity\User $user)
+	{
+		$repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
+		if($user === $this->getUser()) {
+			return $this->forward('BehatViewerBundle:Default:index');
+		}
+
+		$projects = $repository->findByUserAndType($user, EnumProjectTypeType::TYPE_PUBLIC);
+
+		return $this->getResponse(array(
+			'projects' => $projects
+		));
+	}
 
     /**
      * @param \BehatViewer\BehatViewerBundle\Entity\Project $project

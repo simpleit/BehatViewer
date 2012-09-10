@@ -4,14 +4,18 @@
 <h1 class="page-header">
     Projects
 
-    {% if user.id is defined %}
-    <div class="pull-right">
-        <div class="btn-group">
-            <a class="btn" href="{{ path('behatviewer.project.create') }}">
-                <i class="icon-plus"></i> <span>Add project</span>
-            </a>
+    {% if app.request.get("_route") == "behatviewer.userproject" %}
+        owned by {{ user.username }} <small>({{ user.projects|count }} project(s))</small>
+    {% endif %}
+
+    {% if app.user == user %}
+        <div class="pull-right">
+            <div class="btn-group">
+                <a class="btn" href="{{ path('behatviewer.project.create') }}">
+                    <i class="icon-plus"></i> <span>Add project</span>
+                </a>
+            </div>
         </div>
-    </div>
     {% endif %}
 </h1>
 
@@ -55,6 +59,10 @@
                     {% endif %}
 
                     <div class="btn-group pull-right">
+                        {% if is_granted('EDIT', project) %}
+                            <a href="{{ path('behatviewer.project.delete', {"project": project.slug, "username": project.user.username}) }}" class="btn btn-danger"><i class="icon-trash"></i></a>
+                            <a href="{{ path('behatviewer.project.edit', {"project": project.slug, "username": project.user.username}) }}" class="btn"><i class="icon-edit"></i></a>
+                        {% endif %}
                         <a class="btn" href="{{ path("behatviewer.project", {"username": project.user.username, "project": project.slug}) }}">Details &raquo;</a>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ Feature: All pages
 
           Examples:
             | url                       | status |
+            | /user                     | 404    |
             | /user/project             | 404    |
             | /user/project/history     | 404    |
             | /user/project/stats       | 404    |
@@ -42,7 +43,10 @@ Feature: All pages
             | /projects                 | 200    |
             | /password                 | 200    |
             | /project/create           | 200    |
+            | /user                     | 200    |
+            | /user/foo-bar             | 200    |
             | /user/foo-bar/edit        | 200    |
+            | /user/foo-bar/delete      | 200    |
 
     @reset
     Scenario Outline: Logged in user without data

@@ -11,22 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
 class UserController extends BehatViewerController
 {
     /**
-     * @Configuration\Route("/projects", name="behatviewer.projects")
-     * @Configuration\Template("BehatViewerBundle:Project:list.html.twig")
-     * @Security\Secure(roles="ROLE_USER")
-     */
-    public function listAction()
-    {
-        $projects = $this->getDoctrine()
-            ->getRepository('BehatViewerBundle:Project')
-            ->findByUser($this->getUser());
-
-        return $this->getResponse(array(
-            'items' => $projects
-        ));
-    }
-
-    /**
      * @Configuration\Route("/login", name="behatviewer.login")
      * @Configuration\Template()
      */

@@ -1,12 +1,16 @@
 <div class="pull-right">
-  <div class="btn-group">
-    <button data-toggle="dropdown" class="btn dropdown-toggle">
-      <i class="icon-eye-open"></i> Switch view
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="{{ path("behatviewer.project.switch", {"type": "list", "project": project.slug, "username": project.user.username}) }}" title="List view"><i class="icon-tasks"></i> List</a></li>
-      <li><a href="{{ path("behatviewer.project.switch", {"type": "thumb", "project": project.slug, "username": project.user.username}) }}" title="Dashboard"><i class="icon-dashboard"></i> Dashboard</a></li>
-    </ul>
-  </div>
+    <div class="btn-group">
+        {% if is_granted('EDIT', project) %}
+            <a href="{{ path('behatviewer.project.delete', {"project": project.slug, "username": project.user.username}) }}" class="btn btn-danger"><i class="icon-trash"></i></a>
+            <a href="{{ path('behatviewer.project.edit', {"project": project.slug, "username": project.user.username}) }}" class="btn"><i class="icon-edit"></i></a>
+        {% endif %}
+        <button data-toggle="dropdown" class="btn dropdown-toggle">
+            <i class="icon-eye-open"></i>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" style="left: -40px">
+            <li><a href="{{ path("behatviewer.project.switch", {"type": "list", "project": project.slug, "username": project.user.username}) }}" title="List view"><i class="icon-tasks"></i> List</a></li>
+            <li><a href="{{ path("behatviewer.project.switch", {"type": "thumb", "project": project.slug, "username": project.user.username}) }}" title="Dashboard"><i class="icon-dashboard"></i> Dashboard</a></li>
+        </ul>
+    </div>
 </div>

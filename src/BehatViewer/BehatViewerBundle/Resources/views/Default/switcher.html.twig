@@ -1,10 +1,10 @@
 <div class="pull-right">
   <div class="btn-group">
     <button data-toggle="dropdown" class="btn dropdown-toggle">
-      <i class="icon-eye-open"></i> Switch view
+      <i class="icon-eye-open"></i>
       <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" style="left: -105px">
       <li><a href="{{ path("behatviewer.project.switch", {"type": "list", "project": project.slug, "username": user.username}) }}" title="List view"><i class="icon-tasks"></i> List</a></li>
       <li><a href="{{ path("behatviewer.project.switch", {"type": "thumb", "project": project.slug, "username": user.username}) }}" title="Dashboard"><i class="icon-dashboard"></i> Dashboard</a></li>
     </ul>
