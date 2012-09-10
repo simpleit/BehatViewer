@@ -21,7 +21,12 @@ class DefaultController extends BehatViewerController
     public function indexAction()
     {
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
-        $projects = $repository->findByUser($this->getUser());
+
+		if(null !== ($user = $this->getUser())) {
+			$projects = $repository->findByUser($this->getUser());
+		} else {
+			$projects = $repository->findByType(EnumProjectTypeType::TYPE_PUBLIC);
+		}
 
         if (0 === count($projects)) {
             throw new \BehatViewer\BehatViewerBundle\Exception\NoProjectConfiguredException();
