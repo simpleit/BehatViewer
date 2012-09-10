@@ -1,6 +1,8 @@
 behatviewer.homepage:
     pattern: /
     defaults: { _controller: BehatViewerBundle:Default:index }
+    options:
+      expose: true
 
 behatviewer.login:
     pattern: /login
