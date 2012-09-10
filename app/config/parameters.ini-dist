@@ -20,6 +20,9 @@
     rabbitmq_password  = %rabbitmq_password%
     rabbitmq_vhost     = /
 
+    piwik_enabled    = %piwik_enabled%
+    piwik_host       = %piwik_host%
+
     locale            = en
 
     secret            = %secret%

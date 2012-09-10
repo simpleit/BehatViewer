@@ -25,6 +25,10 @@ twig:
     form:
         resources:
             - "BehatViewerBundle:Form:fields.html.twig"
+    globals:
+      piwik:
+        enabled: %piwik_enabled%
+        host: %piwik_host%
 
 # Assetic Configuration
 assetic:

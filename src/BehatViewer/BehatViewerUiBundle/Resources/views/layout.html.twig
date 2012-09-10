@@ -36,7 +36,7 @@
 
 
 {% block header %}
-    {% include 'BehatViewerUiBundle::header.html.twig' %}
+{% include 'BehatViewerUiBundle::header.html.twig' %}
 {% endblock %}
 
 <div id="notification" class="container-fluid">
@@ -48,7 +48,7 @@
 </div>
 
 {% block footer %}
-    {% include 'BehatViewerUiBundle::footer.html.twig' %}
+{% include 'BehatViewerUiBundle::footer.html.twig' %}
 {% endblock %}
 
 <script type="text/javascript" src="{{ asset('bundles/behatviewerui/js/jquery.js') }}"></script>
@@ -60,15 +60,37 @@
     JSC.debug = {% if app.debug %}true{% else %}false{% endif %}
 
     JSC.require(
-        [
-            'bootstrap',
-            'bootstrap.fixed-table',
-            'jquery.noty',
-            'jquery.promise',
-            'behat-viewer/app'
-        ]
+            [
+                'bootstrap',
+                'bootstrap.fixed-table',
+                'jquery.noty',
+                'jquery.promise',
+                'behat-viewer/app'
+            ]
     );
 </script>
+
+
+{% if piwik.enabled %}
+    <script type="text/javascript">
+        var pkProtocol = (("https:" == document.location.protocol) ? "https" : "http") + '://';
+        var pkBaseURL = pkProtocol + "{{ piwik.host }}/";
+        document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2);
+            piwikTracker.trackPageView();
+            piwikTracker.enableLinkTracking();
+        } catch( err ) {}
+    </script>
+    <noscript>
+        <p>
+            <img src="http://{{ piwik.host }}/piwik.php?idsite=2" style="border:0" alt="" />
+        </p>
+    </noscript>
+{% endif %}
+
 
 {% block javascript %}{% endblock %}
 
