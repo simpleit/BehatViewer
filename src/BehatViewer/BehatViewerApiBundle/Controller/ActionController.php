@@ -7,9 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     BehatViewer\BehatViewerBundle\Entity,
     BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
-/**
- * @Configuration\Route("/api")
- */
 class ActionController extends BehatViewerController
 {
     /**

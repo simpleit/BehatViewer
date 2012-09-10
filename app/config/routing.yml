@@ -9,14 +9,17 @@ BehatViewerBundleJsRouting:
 BehatViewerWorkerBundle:
     resource: "@BehatViewerWorkerBundle/Controller/"
     type:     annotation
+    prefix:   /worker
 
 BehatViewerApiBundle:
     resource: "@BehatViewerApiBundle/Controller/"
     type:     annotation
+    prefix:   /api
 
 BehatViewerAdminBundle:
     resource: "@BehatViewerAdminBundle/Controller/"
     type:     annotation
+    prefix:   /admin
 
 BehatViewerBundle:
     resource: "@BehatViewerBundle/Controller/"

@@ -6,9 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     BehatViewer\BehatViewerBundle\DBAL\Type\EnumProjectTypeType,
 	BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
-/**
- * @Configuration\Route("/worker")
- */
 class DefaultController extends BehatViewerController
 {
     /**

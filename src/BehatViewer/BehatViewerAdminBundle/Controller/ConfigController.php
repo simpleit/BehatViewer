@@ -6,9 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
-/**
- * @Configuration\Route("/admin")
- */
 class ConfigController extends BehatViewerController
 {
     /**

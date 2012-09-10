@@ -9,9 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     BehatViewer\BehatViewerBundle\Form\Type\EditUserType,
     BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
-/**
- * @Configuration\Route("/admin")
- */
 class AdminController extends BehatViewerController
 {
     /**
