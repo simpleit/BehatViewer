@@ -15,8 +15,6 @@ class HistoryController extends BehatViewerProjectController
      *
      * @return array
      *
-     * @Configuration\Route("/{username}/{project}/history", name="behatviewer.history", defaults={"page" = 1})
-     * @Configuration\Route("/{username}/{project}/history/page/{page}", name="behatviewer.history.page", requirements={"page" = "\d+"})
      * @Configuration\Template()
      */
     public function indexAction(Entity\User $user, Entity\Project $project, $page = 1)
@@ -61,8 +59,6 @@ class HistoryController extends BehatViewerProjectController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Configuration\Route("/{username}/{project}/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.entry")
-     * @Configuration\Route("/{username}/{project}/{build}/{type}", requirements={"type" = "list|thumb", "build" = "\d+"}, name="behatviewer.history.entry.switch")
      * @Configuration\Template()
      */
     public function entryAction(Entity\User $user, Entity\Project $project, Entity\Build $build = null, $type = null)
@@ -95,7 +91,6 @@ class HistoryController extends BehatViewerProjectController
      *
      * @return \Symfony\Component\HttpFoundation\Response|array
      *
-     * @Configuration\Route("/{username}/{project}/history/delete/{build}", requirements={"build" = "\d+"}, name="behatviewer.history.delete")
      * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
      * @Security\Secure(roles="ROLE_USER")
      * @Security\SecureParam(name="project", permissions="EDIT")
@@ -116,7 +111,6 @@ class HistoryController extends BehatViewerProjectController
      * @return array
      *
      * @Configuration\Method({"POST"})
-     * @Configuration\Route("/{username}/{project}/history/delete", name="behatviewer.history.delete.selected")
      * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
      * @Security\Secure(roles="ROLE_USER")
      * @Security\SecureParam(name="project", permissions="EDIT")

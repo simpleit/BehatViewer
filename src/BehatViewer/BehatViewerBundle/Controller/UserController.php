@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
 class UserController extends BehatViewerController
 {
     /**
-     * @Configuration\Route("/login", name="behatviewer.login")
      * @Configuration\Template()
      */
     public function indexAction()
@@ -37,7 +36,6 @@ class UserController extends BehatViewerController
     }
 
     /**
-     * @Configuration\Route("/login/check", name="behatviewer.logincheck")
      * @Configuration\Template()
      */
     public function checkAction()
@@ -46,7 +44,6 @@ class UserController extends BehatViewerController
     }
 
     /**
-     * @Configuration\Route("/profile", name="behatviewer.profile")
      * @Configuration\Template()
      * @Security\Secure(roles="ROLE_USER")
      */
@@ -93,7 +90,6 @@ class UserController extends BehatViewerController
     }
 
     /**
-     * @Configuration\Route("/password", name="behatviewer.password")
      * @Configuration\Template()
      * @Security\Secure(roles="ROLE_USER")
      */

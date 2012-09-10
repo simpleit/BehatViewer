@@ -14,7 +14,6 @@ class StatsController extends BehatViewerProjectController
      *
      * @return array
      *
-     * @Configuration\Route("/{username}/{project}/stats", name="behatviewer.stats")
      * @Configuration\Template()
      * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */

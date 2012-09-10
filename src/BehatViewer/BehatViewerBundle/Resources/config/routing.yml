@@ -1,0 +1,123 @@
+behatviewer.homepage:
+    pattern: /
+    defaults: { _controller: BehatViewerBundle:Default:index }
+
+behatviewer.login:
+    pattern: /login
+    defaults: { _controller: BehatViewerBundle:User:index }
+
+behatviewer.login.check:
+    pattern: /login/check
+    defaults: { _controller: BehatViewerBundle:User:check }
+
+behatviewer.profile:
+    pattern: /profile
+    defaults: { _controller: BehatViewerBundle:User:profile }
+
+behatviewer.password:
+    pattern: /password
+    defaults: { _controller: BehatViewerBundle:User:password }
+
+behatviewer.userproject:
+    pattern: /{username}
+    defaults: { _controller: BehatViewerBundle:Default:user }
+
+behatviewer.definitions:
+    pattern: /{username}/{project}/definitions
+    defaults: { _controller: BehatViewerBundle:Definitions:index }
+
+behatviewer.feature:
+    pattern: /{username}/{project}/{build}/{feature}
+    defaults: { _controller: BehatViewerBundle:Feature:index }
+    requirements:
+        build: \d+
+
+behatviewer.feature.source:
+    pattern: /{username}/{project}/{build}/{feature}/source
+    defaults: { _controller: BehatViewerBundle:Feature:source }
+    requirements:
+        build: \d+
+
+behatviewer.screenshot:
+    pattern: /screenshot/{id}
+    defaults: { _controller: BehatViewerBundle:Feature:screenshot }
+    options: { expose: true }
+    requirements:
+        build: \d+
+
+behatviewer.history:
+    pattern: /{username}/{project}/history
+    defaults: { _controller: BehatViewerBundle:History:index, page: 1 }
+
+behatviewer.history.page:
+    pattern: /{username}/{project}/history/{page}
+    defaults: { _controller: BehatViewerBundle:History:index }
+    requirements:
+        page: \d+
+
+behatviewer.history.entry:
+    pattern: /{username}/{project}/{build}
+    defaults: { _controller: BehatViewerBundle:History:entry }
+    requirements:
+        build: \d+
+
+behatviewer.history.entry.switch:
+    pattern: /{username}/{project}/{build}/{type}
+    defaults: { _controller: BehatViewerBundle:History:entry }
+    requirements:
+        type: list|thumb
+        build: \d+
+
+behatviewer.history.delete:
+    pattern: /{username}/{project}/history/delete/{build}
+    defaults: { _controller: BehatViewerBundle:History:delete }
+    requirements:
+        build: \d+
+
+behatviewer.history.delete.selected:
+    pattern: /{username}/{project}/history/delete
+    defaults: { _controller: BehatViewerBundle:History:deleteSelected }
+
+behatviewer.project.create:
+    pattern: /project/create
+    defaults: { _controller: BehatViewerBundle:Project:create }
+
+behatviewer.project:
+    pattern: /{username}/{project}
+    defaults: { _controller: BehatViewerBundle:Project:index }
+
+behatviewer.project.switch:
+    pattern: /{username}/{project}/{type}
+    defaults: { _controller: BehatViewerBundle:Project:index }
+    requirements:
+        type: list|thumb
+
+behatviewer.project.edit:
+    pattern: /{username}/{project}/edit
+    defaults: { _controller: BehatViewerBundle:Project:edit }
+
+behatviewer.project.edit.script:
+    pattern: /{username}/{project}/edit/script
+    defaults: { _controller: BehatViewerBundle:Project:editScript }
+
+behatviewer.project.edit.repository:
+    pattern: /{username}/{project}/edit/repository
+    defaults: { _controller: BehatViewerBundle:Project:editRepository }
+
+behatviewer.project.delete:
+    pattern: /{username}/{project}/delete
+    defaults: { _controller: BehatViewerBundle:Project:delete }
+
+behatviewer.stats:
+    pattern: /{username}/{project}/stats
+    defaults: { _controller: BehatViewerBundle:Stats:index }
+
+behatviewer.tag:
+    pattern: /{username}/{project}/tag/{slug}
+    defaults: { _controller: BehatViewerBundle:Tag:index }
+
+behatviewer.tag.build:
+    pattern: /{username}/{project}/{build}/tag/{slug}
+    defaults: { _controller: BehatViewerBundle:Tag:index }
+    requirements:
+        build: \d+

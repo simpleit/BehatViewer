@@ -16,7 +16,6 @@ class FeatureController extends BehatViewerBuildController
      *
      * @return array
      *
-     * @Configuration\Route("/{username}/{project}/{build}/{feature}", name="behatviewer.feature", requirements={"build" = "\d+"})
      * @Configuration\Template()
      * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */
@@ -37,7 +36,6 @@ class FeatureController extends BehatViewerBuildController
      *
      * @return array
      *
-     * @Configuration\Route("/{username}/{project}/{build}/{feature}/source", name="behatviewer.feature.source", requirements={"id" = "\d+"})
      * @Configuration\Template()
      * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */
@@ -57,8 +55,6 @@ class FeatureController extends BehatViewerBuildController
      * @param \BehatViewer\BehatViewerBundle\Entity\Step $step
      *
      * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Configuration\Route("/screenshot/{id}", name="behatviewer.screenshot", options={"expose"=true}, requirements={"id" = "\d+"})
      */
     public function screenshotAction(Entity\Step $step)
     {

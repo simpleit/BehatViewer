@@ -15,7 +15,6 @@ class DefaultController extends BehatViewerController
      *
      * @throws \BehatViewer\BehatViewerBundle\Exception\NoProjectConfiguredException
      *
-     * @Configuration\Route("/", name="behatviewer.homepage", options={"expose"=true})
      * @Configuration\Template()
      */
     public function indexAction()
@@ -43,7 +42,6 @@ class DefaultController extends BehatViewerController
 	 *
 	 * @throws \BehatViewer\BehatViewerBundle\Exception\NoProjectConfiguredException
 	 *
-	 * @Configuration\Route("/{username}", name="behatviewer.userproject")
 	 * @Configuration\Template("BehatViewerBundle:Default:index.html.twig")
 	 */
 	public function userAction(Entity\User $user)
@@ -59,33 +57,4 @@ class DefaultController extends BehatViewerController
 			'projects' => $projects
 		));
 	}
-
-    /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Configuration\Route("/{username}/{project}/analyze", name="behatviewer.analyze")
-     * @Configuration\Method({"PUT"})
-     */
-    public function analyzeAction(Entity\Project $project)
-    {
-        $data = json_decode($this->getRequest()->getContent(), true);
-
-        $analyzer = $this->get('behat_viewer.analyzer');
-        $analyzer->analyze($project, $data);
-
-        return  new \Symfony\Component\HttpFoundation\Response();
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Configuration\Route("/thumb", name="behatviewer.homepage.thumb")
-     * @Configuration\Template("BehatViewerBundle:Default:index.html.twig")
-     */
-    public function indexthumbAction()
-    {
-        return $this->indexAction();
-    }
 }

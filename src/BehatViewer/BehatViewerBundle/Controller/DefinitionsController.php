@@ -14,7 +14,6 @@ class DefinitionsController extends BehatViewerProjectController
      *
      * @return array
      *
-     * @Configuration\Route("/{username}/{project}/definitions", name="behatviewer.definitions")
      * @Configuration\Template()
      * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */

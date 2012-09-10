@@ -16,8 +16,6 @@ class TagController extends BehatViewerProjectController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Configuration\Route("/{username}/{project}/tag/{slug}", name="behatviewer.tag", defaults={"build" = null})
-     * @Configuration\Route("/{username}/{project}/{build}/tag/{slug}", name="behatviewer.tag.build", requirements={"build_id" = "\d+"})
      * @Configuration\Template("BehatViewerBundle:History:index.html.twig")
      */
     public function indexAction(Entity\User $user, Entity\Project $project, Entity\Tag $tag, Entity\Build $build = null, $type = null)

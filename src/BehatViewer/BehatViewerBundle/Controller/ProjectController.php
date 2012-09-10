@@ -15,7 +15,6 @@ class ProjectController extends BehatViewerProjectController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Configuration\Route("/project/create", name="behatviewer.project.create")
      * @Configuration\Template()
      * @Security\Secure(roles="ROLE_USER")
      */
@@ -60,8 +59,6 @@ class ProjectController extends BehatViewerProjectController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Configuration\Route("/{username}/{project}", name="behatviewer.project")
-     * @Configuration\Route("/{username}/{project}/{type}", requirements={"type" = "list|thumb"}, name="behatviewer.project.switch")
      * @Configuration\Template()
      * @Security\PreAuthorize("hasPermission(#project, 'VIEW') or #project.getType() == 'public'")
      */
@@ -84,7 +81,6 @@ class ProjectController extends BehatViewerProjectController
      *
      * @return array
      *
-     * @Configuration\Route("/{username}/{project}/edit", name="behatviewer.project.edit")
      * @Configuration\Template("BehatViewerBundle:Project:edit.html.twig")
      * @Security\Secure(roles="ROLE_USER")
      * @Security\SecureParam(name="project", permissions="EDIT")
@@ -124,7 +120,6 @@ class ProjectController extends BehatViewerProjectController
      *
      * @return array
      *
-     * @Configuration\Route("/{username}/{project}/edit/script", name="behatviewer.project.edit.script")
      * @Configuration\Template("BehatViewerBundle:Project:edit.script.html.twig")
      * @Security\Secure(roles="ROLE_PREMIUM")
      * @Security\SecureParam(name="project", permissions="EDIT")
@@ -165,7 +160,6 @@ class ProjectController extends BehatViewerProjectController
      *
      * @return array
      *
-     * @Configuration\Route("/{username}/{project}/edit/repository", name="behatviewer.project.edit.repository")
      * @Configuration\Template("BehatViewerBundle:Project:edit.html.twig")
      * @Security\Secure(roles="ROLE_PREMIUM")
      * @Security\SecureParam(name="project", permissions="EDIT")
@@ -223,7 +217,6 @@ class ProjectController extends BehatViewerProjectController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Configuration\Route("/{username}/{project}/delete", name="behatviewer.project.delete")
      * @Security\Secure(roles="ROLE_USER")
      * @Security\SecureParam(name="project", permissions="DELETE")
      */
