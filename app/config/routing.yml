@@ -1,13 +1,5 @@
-# Internal routing configuration to handle ESI
-#_internal:
-#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#   prefix:   /_internal
-
 BehatViewerBundleJsRouting:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-BehatViewerRouting:
-    resource: "@BehatViewerBundle/Resources/config/routing.yml"
 
 BehatViewerWorkerBundle:
     resource: "@BehatViewerWorkerBundle/Controller/"
@@ -24,9 +16,12 @@ BehatViewerAdminBundle:
     type:     annotation
     prefix:   /admin
 
+behatviewer.logout:
+    pattern:   /logout
+
+BehatViewerRouting:
+    resource: "@BehatViewerBundle/Resources/config/routing.yml"
+
 BehatViewerBundle:
     resource: "@BehatViewerBundle/Controller/"
     type:     annotation
-
-behatviewer.logout:
-    pattern:   /logout
