@@ -13,7 +13,8 @@ class BehatViewerContext extends BehatContext implements KernelAwareInterface
     {
         $this->parameters = $parameters;
     }
-    /**
+
+	/**
      * @var \Symfony\Component\HttpKernel\KernelInterface
      */
     protected $kernel;

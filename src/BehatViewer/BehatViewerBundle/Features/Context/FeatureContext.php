@@ -3,7 +3,11 @@ namespace BehatViewer\BehatViewerBundle\Features\Context;
 
 use Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand,
     Behat\Behat\Event\SuiteEvent,
-    Symfony\Component\HttpKernel\KernelInterface;
+    Symfony\Component\HttpKernel\KernelInterface,
+	BehatViewer\BehatViewerUiBundle\Features\Context\BehatViewerUiContext,
+	Behat\Symfony2Extension\Context\KernelAwareInterface;
+
+//require_once __DIR__ . '/../../../BehatViewerUiBundle/Features/Context/BehatViewerUiContext.php';
 
 class FeatureContext extends BehatViewerContext
 {
@@ -14,16 +18,19 @@ class FeatureContext extends BehatViewerContext
         $this->useContext('fixture', new FixtureContext($parameters));
         $this->useContext('browser', new BrowserContext($parameters));
         $this->useContext('table', new TableContext($parameters));
-        $this->useContext('message', new BootstrapMessageContext($parameters));
-        $this->useContext('user', new UserContext($parameters));
-    }
+		$this->useContext('user', new UserContext($parameters));
+
+		$this->useContext('message', new BehatViewerUiContext($parameters));
+	}
 
     public function setKernel(KernelInterface $kernel)
     {
         parent::setKernel($kernel);
 
         foreach ($this->getSubcontexts() as $context) {
-            $context->setKernel($kernel);
+            if($context instanceof KernelAwareInterface) {
+				$context->setKernel($kernel);
+			}
         }
     }
 
