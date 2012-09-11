@@ -5,6 +5,7 @@ Feature: History
     Scenario: Single project and no build
         Given I am a logged in user
           And I am on the homepage
+          And I follow "Details"
           And I follow "History"
          Then I should see "Builds for Foo Bar"
           And I should see an alert message with title "No build" and text "This project has not been built yet. To build it, please run app/console behat-viewer:build foo-bar."
@@ -27,8 +28,8 @@ Feature: History
             | Details       |
             | Action        |
           And the data in the 1st row of the "table" table should match:
-            |  | # | Date                | Completion      | Progress | Details                                 | Action         |
-            |  | 1 | 1970-01-01 00:00:00 | 87.5%           |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details Delete |
+            |  | # | Date                | Completion      | Progress | Details                                 | Action    |
+            |  | 1 | 1970-01-01 00:00:00 | 87.5%           |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details » |
           And I should not see a "Delete selected" button
 
     @reset @fixture:single-project.sql @fixture:single-build.sql @fixture:second-build.sql
@@ -40,11 +41,11 @@ Feature: History
          Then I should see "Builds for Foo Bar"
           And I should see a "table" element
           And the data in the 1st row of the "table" table should match:
-            |  | # | Date                | Completion    | Progress | Details                                                    | Action         |
-            |  | 2 | 1970-01-01 00:00:00 | 75%           |          | Passed: 6/8 (75%) Failed: 1/8 (12.5%) Skipped: 1/8 (12.5%) | Details Delete |
+            |  | # | Date                | Completion    | Progress | Details                                                    | Action    |
+            |  | 2 | 1970-01-01 00:00:00 | 75%           |          | Passed: 6/8 (75%) Failed: 1/8 (12.5%) Skipped: 1/8 (12.5%) | Details » |
           And the data in the 2nd row of the "table" table should match:
-            |  | # | Date                | Completion      | Progress | Details                                 | Action         |
-            |  | 1 | 1970-01-01 00:00:00 | 87.5%           |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details Delete |
+            |  | # | Date                | Completion      | Progress | Details                                 | Action    |
+            |  | 1 | 1970-01-01 00:00:00 | 87.5%           |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details » |
           And I should not see a "Delete selected" button
 
     @reset @fixture:single-project.sql @fixture:single-build.sql @fixture:second-build.sql
@@ -56,17 +57,18 @@ Feature: History
          Then I should see "Builds for Foo Bar"
           And I should see a "table" element
           And the data in the 1st row of the "table" table should match:
-            |  | # | Date                | Completion    | Progress | Details                                                    | Action         |
-            |  | 2 | 1970-01-01 00:00:00 | 75%           |          | Passed: 6/8 (75%) Failed: 1/8 (12.5%) Skipped: 1/8 (12.5%) | Details Delete |
+            |  | # | Date                | Completion    | Progress | Details                                                    | Action    |
+            |  | 2 | 1970-01-01 00:00:00 | 75%           |          | Passed: 6/8 (75%) Failed: 1/8 (12.5%) Skipped: 1/8 (12.5%) | Details » |
           And the data in the 2nd row of the "table" table should match:
-            |  | # | Date                | Completion      | Progress | Details                                 | Action         |
-            |  | 1 | 1970-01-01 00:00:00 | 87.5%           |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details Delete |
+            |  | # | Date                | Completion      | Progress | Details                                 | Action    |
+            |  | 1 | 1970-01-01 00:00:00 | 87.5%           |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details » |
           And I should see a "Delete selected" button
 
     @reset @javascript @fixture:single-project.sql @fixture:many-builds.sql
     Scenario: Pagination
         Given I am a logged in user
           And I am on the homepage
+          And I follow "Details"
           And I follow "History"
          Then I should see a ".prev.disabled" element
           And I should see a ".next" element
@@ -94,12 +96,12 @@ Feature: History
         And I follow "Details"
         And I follow "History"
         And the data in the 1st row of the "table" table should match:
-          |  | # | Date                               | Completion | Progress | Details                                                    | Action        |
-          |  | 2 | 43 years ago (1970-01-01 00:00:00) | 75%        |          | Passed: 6/8 (75%) Failed: 1/8 (12.5%) Skipped: 1/8 (12.5%) | Details Delete |
+          |  | # | Date                               | Completion | Progress | Details                                                    | Action    |
+          |  | 2 | 43 years ago (1970-01-01 00:00:00) | 75%        |          | Passed: 6/8 (75%) Failed: 1/8 (12.5%) Skipped: 1/8 (12.5%) | Details » |
         And the data in the 2nd row of the "table" table should match:
-          |  | # | Date                               | Completion | Progress | Details                                 | Action        |
-          |  | 1 | 43 years ago (1970-01-01 00:00:00) | 87.5%      |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details Delete |
+          |  | # | Date                               | Completion | Progress | Details                                 | Action    |
+          |  | 1 | 43 years ago (1970-01-01 00:00:00) | 87.5%      |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details » |
         And I click on the 1st "Delete" link
        Then the data in the 1st row of the "table" table should match:
-          |  | # | Date                               | Completion | Progress | Details                                 | Action        |
-          |  | 1 | 43 years ago (1970-01-01 00:00:00) | 87.5%      |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details Delete |
+          |  | # | Date                               | Completion | Progress | Details                                 | Action    |
+          |  | 1 | 43 years ago (1970-01-01 00:00:00) | 87.5%      |          | Passed: 7/8 (87.5%) Failed: 1/8 (12.5%) | Details » |

@@ -40,11 +40,8 @@ Feature: All pages
             | /login                    | 200    |
             | /profile                  | 200    |
             | /admin/config             | 200    |
-            | /projects                 | 200    |
             | /password                 | 200    |
             | /project/create           | 200    |
-            | /user                     | 200    |
-            | /user/foo-bar             | 200    |
             | /user/foo-bar/edit        | 200    |
             | /user/foo-bar/delete      | 200    |
 
@@ -61,22 +58,22 @@ Feature: All pages
             | /                         | 200    |
             | /project/create           | 200    |
 
-  @reset @fixture:single-project.sql
-  Scenario Outline: Logged in user with data
-      Given I am a logged in user
-        And I am on "<url>"
-       Then the response status code should be <status>
-        And I should not see "No project configured"
-        And I should not see "Before using Behat Viewer, you should configure your project."
+    @reset @fixture:single-project.sql
+    Scenario Outline: Logged in user with data
+        Given I am a logged in user
+          And I am on "<url>"
+         Then the response status code should be <status>
+          And I should not see "No project configured"
+          And I should not see "Before using Behat Viewer, you should configure your project."
 
-      Examples:
-        | url                            | status |
-        | /                              | 200    |
-        | /user/doesnotexist             | 404    |
-        | /user/foo-bar                  | 200    |
-        | /user/doesnotexist/history     | 404    |
-        | /user/foo-bar/history          | 200    |
-        | /user/doesnotexist/stats       | 404    |
-        | /user/foo-bar/stats            | 200    |
-        | /user/doesnotexist/definitions | 404    |
-        | /user/foo-bar/definitions      | 200    |
+          Examples:
+            | url                            | status |
+            | /                              | 200    |
+            | /user/doesnotexist             | 404    |
+            | /user/foo-bar                  | 200    |
+            | /user/doesnotexist/history     | 404    |
+            | /user/foo-bar/history          | 200    |
+            | /user/doesnotexist/stats       | 404    |
+            | /user/foo-bar/stats            | 200    |
+            | /user/doesnotexist/definitions | 404    |
+            | /user/foo-bar/definitions      | 200    |

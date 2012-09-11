@@ -5,8 +5,6 @@ Feature: Create project
   Scenario: Create a new project
     Given I am a logged in user
       And I am on the homepage
-      And I follow "Logged in as user"
-      And I follow "Projects"
       And I follow "Add project"
      Then I should see "New project"
 
@@ -19,8 +17,6 @@ Feature: Create project
   Scenario: Project with duplicate name and identifier
     Given I am a logged in user
       And I am on the homepage
-      And I follow "Logged in as user"
-      And I follow "Projects"
       And I follow "Add project"
      Then I should see "New project"
 
