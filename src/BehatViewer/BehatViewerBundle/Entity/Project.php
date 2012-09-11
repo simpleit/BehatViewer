@@ -11,11 +11,11 @@ use Doctrine\ORM\Mapping as ORM,
  * BehatViewer\BehatViewerBundle\Entity\Project
  *
  * @ORM\Table(
- * 		name="project",
- * 		uniqueConstraints={
- * 			@ORM\UniqueConstraint(name="user__name", columns={"user_id", "name"}),
- * 			@ORM\UniqueConstraint(name="user__slug", columns={"user_id", "slug"})
- * 		}
+ *         name="project",
+ *         uniqueConstraints={
+ *             @ORM\UniqueConstraint(name="user__name", columns={"user_id", "name"}),
+ *             @ORM\UniqueConstraint(name="user__slug", columns={"user_id", "slug"})
+ *         }
  * )
  * @ORM\Entity(repositoryClass="BehatViewer\BehatViewerBundle\Entity\Repository\ProjectRepository")
  * @Constraints\UniqueEntity(fields={"name", "user"}, message="You already own a project with the same name")

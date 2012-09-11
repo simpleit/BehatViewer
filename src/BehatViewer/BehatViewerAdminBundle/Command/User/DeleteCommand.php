@@ -43,15 +43,15 @@ class DeleteCommand extends ContainerAwareCommand
         return $this->getDoctrine()->getEntityManager();
     }
 
-	/**
-	 * @param \Symfony\Component\Console\Input\InputInterface $input
-	 * @param \Symfony\Component\Console\Output\OutputInterface $output
-	 *
-	 * @throws \RuntimeException
-	 *
-	 * @return int
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+    /**
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
+     * @throws \RuntimeException
+     *
+     * @return int
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $username = $input->getArgument('user');
         $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:User');
@@ -66,6 +66,6 @@ class DeleteCommand extends ContainerAwareCommand
             throw new \RuntimeException(sprintf('user %s does not exist', $username));
         }
 
-		return 0;
+        return 0;
     }
 }

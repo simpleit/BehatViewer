@@ -102,7 +102,7 @@ class CreateProjectType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'flowStep' 		  => 1,
+            'flowStep'        => 1,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'intention'       => 'project_item',

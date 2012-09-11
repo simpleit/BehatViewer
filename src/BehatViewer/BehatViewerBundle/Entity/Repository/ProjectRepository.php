@@ -20,16 +20,16 @@ class ProjectRepository extends EntityRepository
             ->getResult();
     }
 
-	public function findByUserAndType(Entity\User $user, $type)
-	{
-		return $this->createQueryBuilder('p')
-			->where('p.user = :user')
-			->andWhere('p.type = :type')
-			->setParameter('user', $user)
-			->setParameter('type', $type)
-			->getQuery()
-			->getResult();
-	}
+    public function findByUserAndType(Entity\User $user, $type)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->andWhere('p.type = :type')
+            ->setParameter('user', $user)
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getResult();
+    }
 
     public function findOneByUsernameAndSlug($username, $slug)
     {

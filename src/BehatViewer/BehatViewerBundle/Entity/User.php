@@ -11,11 +11,11 @@ use Doctrine\ORM\Mapping as ORM,
 
 /**
  * @ORM\Table(
- * 		name="user",
- * 		uniqueConstraints={
- * 			@ORM\UniqueConstraint(name="username", columns={"username"}),
- * 			@ORM\UniqueConstraint(name="email", columns={"email"})
- * 		}
+ *         name="user",
+ *         uniqueConstraints={
+ *             @ORM\UniqueConstraint(name="username", columns={"username"}),
+ *             @ORM\UniqueConstraint(name="email", columns={"email"})
+ *         }
  * )
  * @ORM\Entity(repositoryClass="BehatViewer\BehatViewerBundle\Entity\Repository\UserRepository")
  * @Constraints\UniqueEntity("username")
@@ -202,7 +202,8 @@ class User extends Base implements AdvancedUserInterface
         return UserSecurityIdentity::fromAccount($this);
     }
 
-	public function getProjects() {
-		return $this->projects;
-	}
+    public function getProjects()
+    {
+        return $this->projects;
+    }
 }
