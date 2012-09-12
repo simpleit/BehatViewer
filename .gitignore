@@ -41,5 +41,7 @@ build.sh
 composer.phar
 
 bin/behat
+bin/doctrine
+bin/doctrine.php
 app/SymfonyRequirements.php
 

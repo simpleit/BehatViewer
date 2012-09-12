@@ -1,9 +1,11 @@
 {
-    "hash": "c7b4cf16cdfe208ba880993939b1f04c",
+    "hash": "171a59c5dbc8f706fd1c0e49e43ef72a",
     "packages": [
         {
             "package": "doctrine/common",
-            "version": "2.2.3"
+            "version": "2.3.x-dev",
+            "source-reference": "605b1b8b5a7bc8daf9111fb35483e5708e30de35",
+            "commit-date": "1346249247"
         },
         {
             "package": "doctrine/data-fixtures",
@@ -13,9 +15,9 @@
         },
         {
             "package": "doctrine/dbal",
-            "version": "2.2.x-dev",
-            "source-reference": "da4b7b4d965db0c1c1d23333e87ee5ae8994e249",
-            "commit-date": "1344978731"
+            "version": "2.3.x-dev",
+            "source-reference": "239630b61f03f39d198441eced1bfffb7b0e61d1",
+            "commit-date": "1346866589"
         },
         {
             "package": "doctrine/doctrine-bundle",
@@ -26,8 +28,8 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "3600872919186e1a40e8fd556e65f6dca6337cc9",
-            "commit-date": "1346617185"
+            "source-reference": "d3c930599723c8343472a5791b0f5909a4111a73",
+            "commit-date": "1347289964"
         },
         {
             "package": "doctrine/doctrine-fixtures-bundle",
@@ -44,14 +46,20 @@
         {
             "package": "doctrine/migrations",
             "version": "dev-master",
-            "source-reference": "b86b4cc0a39714f0aa53b908d495beacfa0e4011",
-            "commit-date": "1343202693"
+            "source-reference": "17f4b56bf0af0274cabdf3ae9b644059246d66b7",
+            "commit-date": "1347005884"
         },
         {
             "package": "doctrine/orm",
-            "version": "2.2.x-dev",
-            "source-reference": "11faa7e49d77e559e4e376d3b927d2e742fbcf8b",
-            "commit-date": "1346246267"
+            "version": "2.3.x-dev",
+            "source-reference": "4d9f24b2eef3af3a3e76c773994c19bbb0706f88",
+            "commit-date": "1346869007"
+        },
+        {
+            "package": "friendsofsymfony/jsrouting-bundle",
+            "version": "dev-master",
+            "alias-pretty-version": "1.0.x-dev",
+            "alias-version": "1.0.9999999.9999999-dev"
         },
         {
             "package": "friendsofsymfony/jsrouting-bundle",
@@ -69,7 +77,9 @@
         },
         {
             "package": "jms/di-extra-bundle",
-            "version": "1.0.1"
+            "version": "1.1.x-dev",
+            "source-reference": "af219527024c584d7311aa855d7522429c5bdb67",
+            "commit-date": "1346947722"
         },
         {
             "package": "jms/metadata",
@@ -77,7 +87,9 @@
         },
         {
             "package": "jms/security-extra-bundle",
-            "version": "1.1.0"
+            "version": "1.2.x-dev",
+            "source-reference": "9ab6aceda50fc7a2b07d741ba4b3f0695508afcb",
+            "commit-date": "1346947943"
         },
         {
             "package": "knplabs/knp-markdown-bundle",
@@ -94,8 +106,8 @@
         {
             "package": "kriswallsmith/assetic",
             "version": "dev-master",
-            "source-reference": "86b637e9f64ddcbd17d9eda944384812b5836254",
-            "commit-date": "1346695911"
+            "source-reference": "dfbb776288baf9319d1693195af2cb6e00729901",
+            "commit-date": "1347039484"
         },
         {
             "package": "monolog/monolog",
@@ -106,8 +118,8 @@
         {
             "package": "monolog/monolog",
             "version": "dev-master",
-            "source-reference": "a929570bb7688b39fefe4106f0ecf0ac35f37647",
-            "commit-date": "1346873566"
+            "source-reference": "0f3dc95c4a0ed7d17bec237d07af3da6c0c1071a",
+            "commit-date": "1347363321"
         },
         {
             "package": "oldsound/rabbitmq-bundle",
@@ -117,15 +129,21 @@
         },
         {
             "package": "sensio/distribution-bundle",
-            "version": "dev-master",
-            "source-reference": "v2.1.0",
-            "commit-date": "1346859132"
+            "version": "2.1.x-dev",
+            "source-reference": "2eee3cb4cd761c851f0d766649fb9ff6f4c97002",
+            "commit-date": "1347340208"
         },
         {
             "package": "sensio/framework-extra-bundle",
-            "version": "dev-master",
+            "version": "2.1.x-dev",
             "source-reference": "v2.1.0",
             "commit-date": "1346234539"
+        },
+        {
+            "package": "sensio/generator-bundle",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "sensio/generator-bundle",
@@ -142,8 +160,14 @@
         {
             "package": "swiftmailer/swiftmailer",
             "version": "dev-master",
-            "source-reference": "e12e4ef3a9d6dd60fb734a01984a6e6627aea764",
-            "commit-date": "1345630910"
+            "source-reference": "c97353b1ebffe25a224146f69d17efe24c093def",
+            "commit-date": "1347083952"
+        },
+        {
+            "package": "symfony/assetic-bundle",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/assetic-bundle",
@@ -154,8 +178,20 @@
         {
             "package": "symfony/monolog-bundle",
             "version": "dev-master",
-            "source-reference": "v2.1.0-RC2",
-            "commit-date": "1345557954"
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/monolog-bundle",
+            "version": "dev-master",
+            "source-reference": "b7318480e6f8bf5579d6b3cd856850302e7ba8d8",
+            "commit-date": "1347283885"
+        },
+        {
+            "package": "symfony/swiftmailer-bundle",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/swiftmailer-bundle",
@@ -166,8 +202,14 @@
         {
             "package": "symfony/symfony",
             "version": "2.1.x-dev",
-            "source-reference": "e7059b44c78ca8e1e892adb4d93b5a482f4eb9b3",
-            "commit-date": "1346926323"
+            "source-reference": "f23fd03732e115fd15ec675c0ada4cba20a035d1",
+            "commit-date": "1347354770"
+        },
+        {
+            "package": "twig/extensions",
+            "version": "dev-master",
+            "alias-pretty-version": "1.0.x-dev",
+            "alias-version": "1.0.9999999.9999999-dev"
         },
         {
             "package": "twig/extensions",
@@ -184,8 +226,8 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "459720ff3b74ee0c0d159277c6f2f5df89d8a4f6",
-            "commit-date": "1346397138"
+            "source-reference": "68b8c4619c5bbe82bd345fe56070dec8c356610a",
+            "commit-date": "1347025342"
         },
         {
             "package": "videlalvaro/php-amqplib",
@@ -194,125 +236,12 @@
             "commit-date": "1345726400"
         }
     ],
-    "packages-dev": [
-        {
-            "package": "alexandresalome/php-selenium",
-            "version": "dev-master",
-            "source-reference": "1.0.1",
-            "commit-date": "1341920360"
-        },
-        {
-            "package": "behat/behat",
-            "version": "v2.4.0"
-        },
-        {
-            "package": "behat/gherkin",
-            "version": "v2.2.4"
-        },
-        {
-            "package": "behat/mink",
-            "version": "v1.4.0"
-        },
-        {
-            "package": "behat/mink-browserkit-driver",
-            "version": "dev-master",
-            "source-reference": "97fa7d67ab5afb13d74515c15ef5c0cab12c0bc0",
-            "commit-date": "1341477260"
-        },
-        {
-            "package": "behat/mink-extension",
-            "version": "dev-master",
-            "source-reference": "0b8a4d7d10dd83211accaa1299d57f521d912c1c",
-            "commit-date": "1346250202"
-        },
-        {
-            "package": "behat/mink-goutte-driver",
-            "version": "dev-master",
-            "source-reference": "703a365a0f6c15f91f35c1cc30531b9de7f23a6d",
-            "commit-date": "1345633817"
-        },
-        {
-            "package": "behat/mink-sahi-driver",
-            "version": "dev-master",
-            "source-reference": "0a6c2b42c712a62d744051eb90aac0163c6a893a",
-            "commit-date": "1341477311"
-        },
-        {
-            "package": "behat/mink-selenium-driver",
-            "version": "dev-master",
-            "source-reference": "v1.0.1",
-            "commit-date": "1341523098"
-        },
-        {
-            "package": "behat/mink-selenium2-driver",
-            "version": "dev-master",
-            "source-reference": "aad26bdb19f904b1990048750fc33c7b6f7f2e0e",
-            "commit-date": "1343748582"
-        },
-        {
-            "package": "behat/mink-zombie-driver",
-            "version": "dev-master",
-            "source-reference": "610c484c2a736533e076c05ddaa6098f42906c60",
-            "commit-date": "1344599890"
-        },
-        {
-            "package": "behat/sahi-client",
-            "version": "v1.0.1"
-        },
-        {
-            "package": "behat/symfony2-extension",
-            "version": "v1.0.0"
-        },
-        {
-            "package": "fabpot/goutte",
-            "version": "dev-master",
-            "source-reference": "1d72f22b21b37a8d38ea48e17b34c3afc73dfc46",
-            "commit-date": "1346234818"
-        },
-        {
-            "package": "guzzle/common",
-            "version": "v2.8.6"
-        },
-        {
-            "package": "guzzle/http",
-            "version": "v2.8.6"
-        },
-        {
-            "package": "guzzle/parser",
-            "version": "v2.8.6"
-        },
-        {
-            "package": "instaclick/php-webdriver",
-            "version": "dev-master",
-            "source-reference": "v1.0.6",
-            "commit-date": "1345642676"
-        },
-        {
-            "package": "jubianchi/behat-viewer-extension",
-            "version": "dev-master",
-            "source-reference": "5d0383c6f491ac3354ea78646235a5b583ddcd23",
-            "commit-date": "1345238580"
-        },
-        {
-            "package": "kriswallsmith/buzz",
-            "version": "dev-master",
-            "source-reference": "988bf14201ffbed940f23b42f87302e6adec4c21",
-            "commit-date": "1345206213"
-        }
-    ],
+    "packages-dev": null,
     "aliases": [
 
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "doctrine/doctrine-bundle": 20,
-        "twig/extensions": 20,
-        "symfony/assetic-bundle": 20,
-        "symfony/swiftmailer-bundle": 20,
-        "symfony/monolog-bundle": 20,
-        "sensio/distribution-bundle": 20,
-        "sensio/framework-extra-bundle": 20,
-        "sensio/generator-bundle": 20,
         "friendsofsymfony/jsrouting-bundle": 20,
         "knplabs/knp-markdown-bundle": 20,
         "oldsound/rabbitmq-bundle": 20,
