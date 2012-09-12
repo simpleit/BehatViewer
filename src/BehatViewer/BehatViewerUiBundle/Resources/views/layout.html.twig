@@ -39,19 +39,18 @@
 {% include 'BehatViewerUiBundle::header.html.twig' %}
 {% endblock %}
 
-<div class="centered-div">
-    <div id="notification" class="container-fluid">
-        {% block notification %}{% endblock %}
-    </div>
 
-    <div id="container">
-        {% block container %}{% endblock %}
-    </div>
-
-    {% block footer %}
-    {% include 'BehatViewerUiBundle::footer.html.twig' %}
-    {% endblock %}
+<div id="notification" class="container-fluid">
+    {% block notification %}{% endblock %}
 </div>
+
+<div class="container-fluid" id="container">
+    {% block container %}{% endblock %}
+</div>
+
+{% block footer %}
+    {% include 'BehatViewerUiBundle::footer.html.twig' %}
+{% endblock %}
 
 <script type="text/javascript" src="{{ asset('bundles/behatviewerui/js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

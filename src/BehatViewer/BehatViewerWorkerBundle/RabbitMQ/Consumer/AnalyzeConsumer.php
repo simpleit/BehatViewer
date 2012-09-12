@@ -10,12 +10,12 @@ class AnalyzeConsumer extends Consumer
     {
         $options = $this->getOptions($msg);
 
-		$repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Project');
-		$project = $repository->findOneBySlug($options['project']);
+        $repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Project');
+        $project = $repository->findOneBySlug($options['project']);
 
-		$data = json_decode($options['payload'], true);
-		$analyzer = $this->container->get('behat_viewer.analyzer');
-		$analyzer->analyze($project, $data);
+        $data = json_decode($options['payload'], true);
+        $analyzer = $this->container->get('behat_viewer.analyzer');
+        $analyzer->analyze($project, $data);
 
         return true;
     }
