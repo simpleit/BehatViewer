@@ -6,11 +6,10 @@
     {% endif %}
 {% endblock %}
 
-{% block width %}50%{% endblock %}
 {% block action %}{{ path('behatviewer.profile') }}{% endblock %}
 
 {%block title %}
-    <img data-rel="avatar" data-size="48" class="gravatar" src="{{ app.user.email|gravatar(48)}}" />
+    <img data-rel="avatar" style="width: 48px; height: 48px" class="gravatar" src="{{ app.user.email|gravatar(48)}}" />
     Your profile : <span data-rel="username">{{ app.user.username }}</span>
 {% endblock %}
 
