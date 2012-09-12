@@ -2,8 +2,7 @@
 
 {% block container %}
 <form action="{{ path('behatviewer.login.check') }}" method="post" class="form-horizontal">
-    <div style="background-color: #888; border: none;" class="well modal-example">
-        <div style="position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1; max-width: 100%;" class="modal">
+        <div style="position: relative; top: auto; left: auto; margin: 20px auto 30px; z-index: 1; max-width: 100%;" class="modal">
             <div class="modal-header">
                 <h3>Login</h3>
             </div>
@@ -36,7 +35,6 @@
             <div class="modal-footer">
                 <input type="submit" class="btn btn-primary" value="Log in" />
             </div>
-        </div>
     </div>
 </form>
 {% endblock %}

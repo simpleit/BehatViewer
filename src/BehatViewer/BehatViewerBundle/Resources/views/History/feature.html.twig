@@ -5,7 +5,7 @@
     {% set passedpcnt = ((passed / steps) * 100)|round(3) %}
 {% endif %}
 
-<div class="span4 clearfix">
+<div class="span4 clearfix well">
     <h2>{{ feature.name }} {% if steps > 0 %}({{ passedpcnt|round }}%){% else %}(No scenarios){% endif %}</h2>
 
     {%

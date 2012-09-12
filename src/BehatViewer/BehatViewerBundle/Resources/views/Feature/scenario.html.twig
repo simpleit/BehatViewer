@@ -45,7 +45,10 @@
     </p>
 </div>
 
-
-{% for step in scenario.steps %}
-{% include "BehatViewerBundle::Feature/step.html.twig" %}
-{% endfor %}
+<table class="table table-striped">
+    <tbody>
+        {% for step in scenario.steps %}
+        {% include "BehatViewerBundle::Feature/step.html.twig" %}
+        {% endfor %}
+    </tbody>
+</table>
