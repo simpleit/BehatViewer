@@ -1,9 +1,11 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Form\Type;
+namespace BehatViewer\BehatViewerAdminBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface,
     Symfony\Component\Form\CallbackValidator,
-    Symfony\Component\Form\Form;
+    Symfony\Component\Form\Form,
+	BehatViewer\BehatViewerBundle\Form\Type\UserType;
+use Doctrine\ORM\EntityRepository;
 
 /**
  *
@@ -69,6 +71,21 @@ class CreateUserType extends UserType
                 )
             )
         ;
+
+		$builder->add(
+			'roles',
+			'entity',
+			array(
+				'label' => 'Roles',
+				'multiple' => true,
+				'property_path' => 'rolesCollection',
+				'class'=>'BehatViewer\BehatViewerBundle\Entity\Role',
+				'query_builder' => function(EntityRepository $er) {
+					return $er->createQueryBuilder('r')
+						->orderBy('r.name', 'ASC');
+				}
+			)
+		);
 
         $builder->addValidator(new CallbackValidator(function(Form $form) {
             $password = $form->get('password');

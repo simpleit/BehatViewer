@@ -5,8 +5,8 @@ namespace BehatViewer\BehatViewerAdminBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Entity,
-    BehatViewer\BehatViewerBundle\Form\Type\CreateUserType,
-    BehatViewer\BehatViewerBundle\Form\Type\EditUserType,
+    BehatViewer\BehatViewerAdminBundle\Form\Type\CreateUserType,
+    BehatViewer\BehatViewerAdminBundle\Form\Type\EditUserType,
     BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
 class AdminController extends BehatViewerController
@@ -14,7 +14,7 @@ class AdminController extends BehatViewerController
     /**
      * @return array
      *
-     * @Configuration\Route("/users/create", name="behatviewer.usercreate")
+     * @Configuration\Route("/users/create", name="behatviewer.admin.user.create")
      * @Configuration\Template()
      * @Security\Secure(roles="ROLE_ADMIN")
      */
@@ -26,7 +26,7 @@ class AdminController extends BehatViewerController
 
         if ('POST' === $request->getMethod()) {
             if ($this->save($form, $user)) {
-                return  $this->redirect($this->generateUrl('behatviewer.useredit', array('username' => $user->getUsername())));
+                return  $this->redirect($this->generateUrl('behatviewer.admin.user.edit', array('username' => $user->getUsername())));
             }
         }
 
@@ -40,7 +40,7 @@ class AdminController extends BehatViewerController
     /**
      * @return array
      *
-     * @Configuration\Route("/users", name="behatviewer.users")
+     * @Configuration\Route("/users", name="behatviewer.admin.user")
      * @Configuration\Template()
      * @Security\Secure(roles="ROLE_ADMIN")
      */
@@ -59,7 +59,7 @@ class AdminController extends BehatViewerController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Configuration\Route("/users/disable/{username}", name="behatviewer.userdisable")
+     * @Configuration\Route("/users/disable/{username}", name="behatviewer.admin.user.disable")
      * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function userDisableAction(Entity\User $user)
@@ -77,7 +77,7 @@ class AdminController extends BehatViewerController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Configuration\Route("/users/enable/{username}", name="behatviewer.userenable")
+     * @Configuration\Route("/users/enable/{username}", name="behatviewer.admin.user.enable")
      * @Security\Secure(roles="ROLE_ADMIN")
      */
     public function userEnableAction(Entity\User $user)
@@ -95,7 +95,7 @@ class AdminController extends BehatViewerController
      *
      * @return array
      *
-     * @Configuration\Route("/users/{username}", name="behatviewer.useredit", requirements={"id" = "\d+"})
+     * @Configuration\Route("/users/{username}", name="behatviewer.admin.user.edit", requirements={"id" = "\d+"})
      * @Configuration\Template()
      * @Security\Secure(roles="ROLE_ADMIN")
      */

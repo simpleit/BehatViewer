@@ -1,6 +1,6 @@
 <?php
 
-namespace BehatViewer\BehatViewerBundle\Form\Type;
+namespace BehatViewer\BehatViewerAdminBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface,
     Symfony\Component\Form\CallbackValidator,

@@ -1,0 +1,17 @@
+{% extends 'BehatViewerUiBundle::Components/navbar.html.twig' %}
+
+{%
+    set links = [
+        {
+            'label': 'Users',
+            'route': 'behatviewer.admin.user'
+        },
+        {
+            'label': 'Help',
+            'route': 'behatviewer.help'
+        }
+    ]
+%}
+
+
+

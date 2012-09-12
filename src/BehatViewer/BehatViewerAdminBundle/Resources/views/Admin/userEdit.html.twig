@@ -6,16 +6,15 @@
     {% endif %}
 {% endblock %}
 
-{% block width %}50%{% endblock %}
-{% block action %}{{ path('behatviewer.useredit', {'username': user.username}) }}{% endblock %}
+{% block action %}{{ path('behatviewer.admin.user.edit', {'username': user.username}) }}{% endblock %}
 
 {%block title %}
-    <img data-rel="avatar" data-size="48" class="gravatar" src="{{ user.email|gravatar(48)}}" />
+    <img data-rel="avatar" style="width: 48px; height: 48px" class="gravatar" src="{{ user.email|gravatar(48)}}" />
     Edit user <span data-rel="username">{{ user.username }}</span>
 {% endblock %}
 
 {% block extrabuttons %}
-    <a class="pull-left btn" href="{{ path('behatviewer.users') }}">&laquo; Back to users list</a>
+    <a class="pull-right btn" href="{{ path('behatviewer.admin.user') }}">Back to users list</a>
 {% endblock %}
 
 {% block javascript %}

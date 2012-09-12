@@ -1,3 +1,8 @@
 {% extends 'BehatViewerAdminBundle:Admin:userEdit.html.twig' %}
 
-{% block action %}{{ path('behatviewer.usercreate') }}{% endblock %}
+{%block title %}
+    <img data-rel="avatar" style="width: 48px; height: 48px" class="gravatar" src="{{ user.email|gravatar(48)}}" />
+    Create user <span data-rel="username">{{ user.username }}</span>
+{% endblock %}
+
+{% block action %}{{ path('behatviewer.admin.user.create') }}{% endblock %}

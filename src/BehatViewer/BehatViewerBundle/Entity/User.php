@@ -182,8 +182,20 @@ class User extends Base implements AdvancedUserInterface
 
     public function getRoles()
     {
-        return $this->roles->toArray();
+        return $this->getRolesCollection()->toArray();
     }
+
+	public function getRolesCollection()
+	{
+		return $this->roles;
+	}
+
+	public function setRolesCollection(ArrayCollection $roles)
+	{
+		$this->roles = $roles;
+
+		return $this;
+	}
 
     public function eraseCredentials()
     {

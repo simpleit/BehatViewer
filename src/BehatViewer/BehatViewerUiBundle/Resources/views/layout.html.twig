@@ -34,11 +34,10 @@
 
 <body>
 
-
+{% set bundle = (bundle is defined ? bundle : 'BehatViewerUiBundle') %}
 {% block header %}
-{% include 'BehatViewerUiBundle::header.html.twig' %}
+    {% include bundle ~ '::header.html.twig' %}
 {% endblock %}
-
 
 <div id="notification" class="container-fluid">
     {% block notification %}{% endblock %}

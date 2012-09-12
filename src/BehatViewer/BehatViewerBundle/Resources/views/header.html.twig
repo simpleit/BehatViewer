@@ -1,0 +1,69 @@
+{% extends 'BehatViewerUiBundle::Components/navbar.html.twig' %}
+
+{% set show = (project is defined and project != null) %}
+
+{% if project is defined %}
+    {% set params = {'username': project.user.username, 'project': project.slug} %}
+{% else %}
+    {% set params = {} %}
+{% endif %}
+
+{%
+    set links = [
+        {
+            'label': 'Features',
+            'route': 'behatviewer.project',
+            'show': show,
+            'params': params
+        },
+        {
+            'label': 'History',
+            'route': 'behatviewer.history',
+            'show': show,
+            'params': params
+        },
+        {
+            'label': 'Stats',
+            'route': 'behatviewer.stats',
+            'show': show,
+            'params': params
+        },
+        {
+            'label': 'Definitions',
+            'route': 'behatviewer.definitions',
+            'show': show,
+            'params': params
+        },
+        {
+            'label': 'Help',
+            'route': 'behatviewer.help'
+        }
+    ]
+%}
+
+{%
+    set userlinks = [
+        {
+            'label': '<i class="icon-user"></i> Profile',
+            'route': 'behatviewer.profile',
+            'show': is_granted('ROLE_USER')
+        },
+        {
+            'divider': true,
+            'show': is_granted('ROLE_ADMIN')
+        },
+        {
+            'label': '<i class="icon-cogs"></i> Admin',
+            'route': 'behatviewer.admin.user',
+            'show': is_granted('ROLE_ADMIN'),
+        }
+    ]
+%}
+
+{% block extraright %}
+    {% if build is defined and build != null and build.id != project.lastBuild.id %}
+        <li>
+            <button id="last-build" href="{{ path('behatviewer.history.entry', {'username': project.user.username, 'project': project.slug, 'build': project.lastBuild.id}) }}" class="btn btn-primary">Last build &raquo;</button>
+        </li>
+    {% endif %}
+{%  endblock %}

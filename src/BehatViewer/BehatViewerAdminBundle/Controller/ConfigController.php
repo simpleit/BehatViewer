@@ -11,7 +11,7 @@ class ConfigController extends BehatViewerController
     /**
      * @return array
      *
-     * @Configuration\Route("/config", name="behatviewer.config")
+     * @Configuration\Route("/config", name="behatviewer.admin.config")
      * @Configuration\Template()
      * @Security\Secure(roles="ROLE_ADMIN")
      */
