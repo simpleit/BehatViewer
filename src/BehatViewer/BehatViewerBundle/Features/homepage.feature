@@ -7,7 +7,7 @@ Feature: Homepage
          Then I should be on "/login"
           And I should see "Login"
 
-    @reset @fixture:single-project.sql @fixture:second-project.sql @fixture:single-build.sql
+    @reset @fixture:user.sql @fixture:single-project.sql @fixture:second-project.sql @fixture:single-build.sql
     Scenario: Anonymous user
         Given I am on the homepage
          Then I should see "user/Foo Bar (50%)"

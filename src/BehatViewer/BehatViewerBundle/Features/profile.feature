@@ -11,7 +11,7 @@ Feature: Profile
           And I should see "Your profile : user"
           And I should see "API Token"
           And I should see "Change password"
-          And I should a button with text "Click here to change your password"
+          And I should see a button with text "Click here to change your password »"
 
         Given I fill in "Username" with "viewer"
           And I press "Save changes"

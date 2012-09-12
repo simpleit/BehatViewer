@@ -60,8 +60,8 @@
 
                     <div class="btn-group pull-right">
                         {% if is_granted('EDIT', project) %}
-                            <a href="{{ path('behatviewer.project.delete', {"project": project.slug, "username": project.user.username}) }}" class="btn btn-danger"><i class="icon-trash"></i></a>
-                            <a href="{{ path('behatviewer.project.edit', {"project": project.slug, "username": project.user.username}) }}" class="btn"><i class="icon-edit"></i></a>
+                            <a href="{{ path('behatviewer.project.delete', {"project": project.slug, "username": project.user.username}) }}" class="btn btn-danger" title="Delete"><i class="icon-trash"></i></a>
+                            <a href="{{ path('behatviewer.project.edit', {"project": project.slug, "username": project.user.username}) }}" class="btn" title="edit"><i class="icon-edit"></i></a>
                         {% endif %}
                         <a class="btn" href="{{ path("behatviewer.project", {"username": project.user.username, "project": project.slug}) }}">Details &raquo;</a>
                     </div>

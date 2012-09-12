@@ -16,10 +16,10 @@
             {% block after %}{% endblock %}
 
             <div class="form-actions">
-                {% block extrabuttons %}{% endblock %}
                 {% block buttons %}
                     <input class="btn btn-success" type="submit" value="{% block submit %}Save changes{% endblock %}"/>
                 {% endblock %}
+                {% block extrabuttons %}{% endblock %}
             </div>
         </div>
 

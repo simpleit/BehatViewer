@@ -19,7 +19,7 @@ class BehatViewerUiMessageContext extends RawMinkContext
 	}
 
     /**
-     * @Then /^I should see an? (?P<type>(?:alert|success|error|information|warning)) message$/
+     * @Then /^I should see an? (?P<type>(?:alert |success |error |information |warning ))message$/
      */
     public function iShouldSeeAnAlertMessage($type)
     {
@@ -29,7 +29,7 @@ class BehatViewerUiMessageContext extends RawMinkContext
     }
 
 	/**
-	 * @Then /^I should not see an? (?P<type>(?:alert|success|error|information|warning)) message$/
+	 * @Then /^I should not see an? (?P<type>(?:alert |success |error |information |warning ))message$/
 	 */
 	public function iShouldNotSeeAnAlertMessage($type)
 	{
@@ -39,7 +39,7 @@ class BehatViewerUiMessageContext extends RawMinkContext
 	}
 
     /**
-     * @Then /^I should see an? (?P<type>(?:alert|success|error|information|warning)) message with title "(?P<title>[^"]*)" and text "(?P<text>[^"]*)"$/
+     * @Then /^I should see an? (?P<type>(?:alert |success |error |information |warning ))message with title "(?P<title>[^"]*)" and text "(?P<text>[^"]*)"$/
      */
     public function iShouldSeeAnAlertMessageWithTitleAndText($type, $title, $text)
     {
@@ -63,7 +63,7 @@ class BehatViewerUiMessageContext extends RawMinkContext
     }
 
 	/**
-	 * @Then /^I should not see an? (?P<type>(?:alert|success|error|information|warning)) message with title "(?P<title>[^"]*)" and text "(?P<text>[^"]*)"$/
+	 * @Then /^I should not see an? (?P<type>(?:alert |success |error |information |warning ))message with title "(?P<title>[^"]*)" and text "(?P<text>[^"]*)"$/
 	 */
 	public function iShouldNotSeeAnAlertMessageWithTitleAndText($type, $title, $text)
 	{

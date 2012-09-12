@@ -19,7 +19,7 @@ class BehatViewerUiButtonContext extends RawMinkContext
 	}
 
     /**
-     * @Then /^I should see an?(?P<type>(?: |default|success|error|information|warning)) button$/
+     * @Then /^I should see an? (?P<type>(?:|default |success |error |information |warning ))button$/
      */
     public function iShouldSeeAButton($type = null)
 	{
@@ -29,7 +29,7 @@ class BehatViewerUiButtonContext extends RawMinkContext
     }
 
 	/**
-	 * @Then /^I should not see an?(?P<type>(?: |default|success|error|information|warning)) button$/
+	 * @Then /^I should not see an? (?P<type>(?:|default |success |error |information |warning ))button$/
 	 */
 	public function iShouldNotSeeAButton($type = null)
 	{
@@ -39,7 +39,7 @@ class BehatViewerUiButtonContext extends RawMinkContext
 	}
 
 	/**
-	 * @Then /^I should see an?(?P<type>(?: |default|success|error|information|warning)) button with text "(?P<text>[^"]*)"$/
+	 * @Then /^I should see an? (?P<type>(?:|default |success |error |information |warning ))button with text "(?P<text>[^"]*)"$/
 	 */
 	public function iShouldSeeAButtonWithText($type = null, $text)
 	{
@@ -64,7 +64,7 @@ class BehatViewerUiButtonContext extends RawMinkContext
 	}
 
 	/**
-	 * @Then /^I should not see an?(?P<type>(?: |default|success|error|information|warning)) button with text "(?P<text>[^"]*)"$/
+	 * @Then /^I should not see an? (?P<type>(?:|default |success |error |information |warning ))button with text "(?P<text>[^"]*)"$/
 	 */
 	public function iShouldNotSeeAButtonWithText($type, $text)
 	{
