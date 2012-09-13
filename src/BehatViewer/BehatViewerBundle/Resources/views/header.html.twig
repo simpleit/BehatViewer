@@ -2,7 +2,7 @@
 
 {% set show = (project is defined and project != null) %}
 
-{% if project is defined %}
+{% if show %}
     {% set params = {'username': project.user.username, 'project': project.slug} %}
 {% else %}
     {% set params = {} %}
