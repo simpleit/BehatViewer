@@ -26,10 +26,16 @@ twig:
         resources:
             - "BehatViewerBundle:Form:fields.html.twig"
     globals:
-      piwik:
-        enabled: %piwik_enabled%
-        host: %piwik_host%
-        site_id: %piwik_site_id%
+        piwik:
+            enabled: %piwik_enabled%
+            host: %piwik_host%
+            site_id: %piwik_site_id%
+        pusher:
+            host: %pusher_host%
+            port: %pusher_port%
+            key: %pusher_key%
+            secret: %pusher_secret%
+            channel: %pusher_channel%
 
 # Assetic Configuration
 assetic:
@@ -70,3 +76,10 @@ swiftmailer:
 knp_markdown:
     parser:
         service: behat_viewer.markdown_parser
+
+behat_viewer_pusher:
+    host: %pusher_host%
+    port: %pusher_port%
+    key: %pusher_key%
+    secret: %pusher_secret%
+    channel: %pusher_channel%

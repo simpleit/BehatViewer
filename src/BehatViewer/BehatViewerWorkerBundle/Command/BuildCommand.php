@@ -6,7 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Input\InputArgument,
-    BehatViewer\BehatViewerBundle\Command\ProjectCommand;
+    BehatViewer\BehatViewerBundle\Command\ProjectCommand,
+	BehatViewer\BehatViewerWorkerBundle\Console\Output\CompositeOutput;
 
 /**
  *
@@ -35,8 +36,41 @@ class BuildCommand extends ProjectCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+		$pusherOutput = $this->getContainer()->get('behat_viewer.pusher.output');
+		$output = new CompositeOutput(array(
+			$output,
+			$pusherOutput
+		));
+
         parent::execute($input, $output);
 
-        return $this->getContainer()->get('behat_viewer.builder')->build($this->getProject()->getStrategy());
+		$job = new \BehatViewer\BehatViewerWorkerBundle\Entity\Job();
+		$job->setDate(new \DateTime());
+		$job->setProject($this->getProject());
+		$job->setStatus(\BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_RUNNING);
+		$this->getDoctrine()->getManager()->persist($job);
+		$this->getDoctrine()->getManager()->flush();
+
+		$jobOutput = new \BehatViewer\BehatViewerWorkerBundle\Console\Output\PersistentOutput($job);
+		$jobOutput->setContainer($this->getContainer());
+
+		$output->addOutput($jobOutput);
+
+		$pusherOutput->setChannel('job-' . $job->getId());
+
+        $status = $this->getContainer()->get('behat_viewer.builder')->build(
+			$this->getProject()->getStrategy(),
+			$output
+		);
+
+		$result = $status === 0
+			? \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_SUCCESS
+			: \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
+
+		$job->setStatus($result);
+		$this->getDoctrine()->getManager()->persist($job);
+		$this->getDoctrine()->getManager()->flush();
+
+		return $status;
     }
 }

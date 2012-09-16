@@ -24,6 +24,12 @@
     piwik_host       = %piwik_host%
     piwik_site_id    = %piwik_site_id%
 
+    pusher_host      = %pusher_host%
+    pusher_port      = %pusher_port%
+    pusher_key       = %pusher_key%
+    pusher_secret    = %secret%
+    pusher_channel   = %pusher_channel%
+
     locale            = en
 
     secret            = %secret%

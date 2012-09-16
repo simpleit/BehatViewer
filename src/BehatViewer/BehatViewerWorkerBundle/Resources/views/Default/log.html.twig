@@ -1,0 +1,59 @@
+{% extends 'BehatViewerWorkerBundle::layout.html.twig' %}
+
+{% block title %}
+    <h1 class="page-header">
+        Logs
+    </h1>
+{% endblock %}
+
+{% block container %}
+    <h1 class="page-header">
+        Log for job #{{ job.id }} <small>(Started <span data-rel="moment">{{ job.date|date("Y-m-d H:i:s")}}</span>)</small>
+    </h1>
+
+    <pre id="log" style="background: #1B1B1B; webkit-border-radius: 5px; color: white">{% autoescape false %}{{ job.log }}{% endautoescape %}</pre>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $(function() {
+            {% if job.status == 'running' %}
+                Thunder.connect('{{ pusher.host }}:{{ pusher.port }}', '{{ pusher.key }}', ['job-{{ job.id }}']);
+                Thunder.listen(function(ev) {
+                    $('#log').append(ev.msg);
+
+                    console.log(
+                            $('#log').position().top,
+                            $('#log').height(),
+                            $('footer').height()
+                    );
+
+                    $('html, body')
+                            .stop(true, true)
+                            .animate(
+                            {
+                                scrollTop: $('footer').position().top - ($('#log').position().top + 400)
+                            },
+                            'slow'
+                    )
+                    ;
+                });
+            {% endif %}
+
+            $('[data-rel="moment"]').each(function() {
+                var date = $(this).text().trim(),
+                        text = '';
+
+                if(typeof format != 'undefined' && date != '') {
+                    text = format.replace('%s', date);
+                }
+
+                $(this).html(
+                        moment(date, "YYYY-MM-DD h:mm:ss").fromNow() + text
+                );
+            });
+        });
+    </script>
+{% endblock %}

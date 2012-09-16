@@ -39,6 +39,8 @@ class AppKernel extends Kernel
 
 			new BehatViewer\BehatViewerWorkerBundle\BehatViewerWorkerBundle(),
 				new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+
+			new BehatViewer\BehatViewerPusherBundle\BehatViewerPusherBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev'))) {

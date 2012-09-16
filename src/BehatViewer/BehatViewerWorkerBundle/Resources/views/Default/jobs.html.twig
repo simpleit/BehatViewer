@@ -1,0 +1,44 @@
+{% extends 'BehatViewerUiBundle::layout.table.html.twig' %}
+
+{% block title %}<h1 class="page-header">Jobs</h1>{% endblock %}
+
+{% block sort %}{sortlist: [[0,1]]}{% endblock %}
+
+{% block thead %}
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Project</th>
+        <th>Status</th>
+        <th class="{sorter: false}">Action</th>
+    </tr>
+{% endblock %}
+
+{% block tbody %}
+    {% for job in items %}
+        <tr>
+            <td>
+                {{ job.id }}
+            </td>
+            <td>{{ job.project.user.username }}</td>
+            <td>{{ job.project.name }}</td>
+            <td>
+                {% set class = (job.status == 'running' ? 'info' : (job.status == 'success' ? 'success' : (job.status == 'pending' ? '' : 'important'))) %}
+                <span class="label {% if class %}label-{{ class }}{% endif %}">{{ job.status }}</span>
+            </td>
+            <td>
+                <div class="btn-group" id="toolbar">
+                    <a href="{{ path('behatviewer.worker.job.log', {"id": job.id}) }}" class="btn">View</a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+
+{% block alert %}
+    <div class="alert alert-block alert-info">
+        <h4 class="alert-heading">No feature</h4>
+
+        <p>This project has not been built yet. Click on the build button to launch test suite.</p>
+    </div>
+{% endblock %}

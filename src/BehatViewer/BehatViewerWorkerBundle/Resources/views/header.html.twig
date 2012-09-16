@@ -4,7 +4,11 @@
     set links = [
         {
             'label': 'Workers',
-            'route': 'behatviewer.workers'
+            'route': 'behatviewer.worker'
+        },
+        {
+            'label': 'Jobs',
+            'route': 'behatviewer.worker.job'
         },
         {
             'label': 'Help',
@@ -13,5 +17,26 @@
     ]
 %}
 
-
-
+{%
+    set userlinks = [
+        {
+            'label': '<i class="icon-user"></i> Profile',
+            'route': 'behatviewer.profile',
+            'show': is_granted('ROLE_USER')
+        },
+        {
+            'divider': true,
+            'show': is_granted('ROLE_ADMIN')
+        },
+        {
+            'label': '<i class="icon-cogs"></i> Admin',
+            'route': 'behatviewer.admin.user',
+            'show': is_granted('ROLE_ADMIN'),
+        },
+        {
+            'label': '<i class="icon-cogs"></i> Workers',
+            'route': 'behatviewer.worker',
+            'show': is_granted('ROLE_ADMIN'),
+        }
+    ]
+%}

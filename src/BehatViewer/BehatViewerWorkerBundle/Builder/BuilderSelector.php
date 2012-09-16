@@ -4,7 +4,7 @@ namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 use
     Symfony\Component\DependencyInjection\ContainerAware,
     BehatViewer\BehatViewerBundle\Entity,
-    Symfony\Component\Console\Output\ConsoleOutput
+	Symfony\Component\Console\Output\OutputInterface
 ;
 
 class BuilderSelector extends Builder
@@ -17,11 +17,11 @@ class BuilderSelector extends Builder
      *
      * @return int
      */
-    public function build(Entity\Strategy $strategy)
+    public function build(Entity\Strategy $strategy, OutputInterface $output)
     {
         foreach ($this->getBuilders() as $builder) {
             if (true === $builder->supports($strategy)) {
-                return $builder->build($strategy);
+				return $builder->build($strategy, $output);
             }
         }
 

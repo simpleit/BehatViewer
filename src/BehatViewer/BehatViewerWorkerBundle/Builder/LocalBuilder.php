@@ -5,16 +5,16 @@ use
     Symfony\Component\Console\Output\ConsoleOutput,
     BehatViewer\BehatViewerBundle\Entity
 ;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class LocalBuilder extends Builder
 {
-    public function build(Entity\Strategy $strategy)
+    public function build(Entity\Strategy $strategy, OutputInterface $output)
     {
-        parent::build($strategy);
+        parent::build($strategy, $output);
 
         $path = $strategy->getPath();
         $file = $this->getBuildScript($strategy);
-        $output = $this->getOutput();
 
         $vagrant = new \BehatViewer\BehatViewerWorkerBundle\Script\VagrantScript($file);
         $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(

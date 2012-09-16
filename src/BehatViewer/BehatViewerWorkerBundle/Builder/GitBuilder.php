@@ -2,6 +2,7 @@
 namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 
 use BehatViewer\BehatViewerBundle\Entity;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class GitBuilder extends Builder
 {
@@ -24,9 +25,8 @@ class GitBuilder extends Builder
         );
     }
 
-    protected function cloneRepository(Entity\Strategy $strategy)
+    protected function cloneRepository(Entity\Strategy $strategy, OutputInterface $output)
     {
-        $output = $this->getOutput();
         $dir = $this->getClonePath($strategy);
 
         if (false === is_dir($dir)) {
@@ -39,6 +39,7 @@ class GitBuilder extends Builder
         );
 
         $process->setTimeout(600);
+
         $status = $process->run(function ($type, $buffer) use (&$output) {
             if ('err' === $type) {
                 $output->writeln('<error>' . $buffer . '</error>');
@@ -47,7 +48,7 @@ class GitBuilder extends Builder
             }
         });
 
-        $this->checkoutBranch($strategy);
+        $this->checkoutBranch($strategy, $output);
 
         if ($status !== 0) {
             $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
@@ -66,9 +67,8 @@ class GitBuilder extends Builder
         return $status;
     }
 
-    protected function checkoutBranch(Entity\Strategy $strategy)
+    protected function checkoutBranch(Entity\Strategy $strategy, OutputInterface $output)
     {
-        $output = $this->getOutput();
         $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
             sprintf(
                 'git checkout %s',
@@ -86,17 +86,17 @@ class GitBuilder extends Builder
         });
     }
 
-    public function build(Entity\Strategy $strategy)
+    public function build(Entity\Strategy $strategy, OutputInterface $output)
     {
-        parent::build($strategy);
+        parent::build($strategy, $output);
 
-        $this->cloneRepository($strategy);
+        $this->cloneRepository($strategy, $output);
 
         $local = new Entity\LocalStrategy();
         $local->setProject($strategy->getProject());
         $local->setPath($this->getClonePath($strategy));
 
-        return $this->container->get('behat_viewer.builder')->build($local);
+        return $this->container->get('behat_viewer.builder')->build($local, $output);
     }
 
     protected function supports(Entity\Strategy $strategy)

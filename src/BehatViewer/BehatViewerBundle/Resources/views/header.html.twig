@@ -56,6 +56,11 @@
             'label': '<i class="icon-cogs"></i> Admin',
             'route': 'behatviewer.admin.user',
             'show': is_granted('ROLE_ADMIN'),
+        },
+        {
+            'label': '<i class="icon-cogs"></i> Workers',
+            'route': 'behatviewer.worker',
+            'show': is_granted('ROLE_ADMIN'),
         }
     ]
 %}

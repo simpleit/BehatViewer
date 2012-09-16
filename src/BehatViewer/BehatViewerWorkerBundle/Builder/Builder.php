@@ -4,25 +4,15 @@ namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 use
     Symfony\Component\DependencyInjection\ContainerAware,
     BehatViewer\BehatViewerBundle\Entity,
-    Symfony\Component\Console\Output\ConsoleOutput
+    Symfony\Component\Console\Output\OutputInterface
 ;
 
 abstract class Builder extends ContainerAware implements BuilderInterface
 {
-    /** @var \Symfony\Component\Console\Output\ConsoleOutput */
-    private $output;
-
-    public function __construct(ConsoleOutput $output = null)
-    {
-        $this->setOutput($output);
-    }
-
     /**
-     * @abstract
-     *
      * @return int
      */
-    public function build(Entity\Strategy $strategy)
+    public function build(Entity\Strategy $strategy, OutputInterface $output)
     {
         if (false === $this->supports($strategy)) {
             throw new \RuntimeException(
@@ -34,7 +24,7 @@ abstract class Builder extends ContainerAware implements BuilderInterface
             );
         }
 
-        $this->getOutput()->writeln(
+		$output->writeln(
             sprintf(
                 '<info>Starting builder</info> <comment>%s</comment>',
                 get_class($this)
@@ -45,25 +35,7 @@ abstract class Builder extends ContainerAware implements BuilderInterface
     }
 
     /**
-     * @abstract
-     *
      * @return bool
      */
     abstract protected function supports(Entity\Strategy $strategy);
-
-    public function setOutput(ConsoleOutput $output = null)
-    {
-        $this->output = $output;
-
-        return $this;
-    }
-
-    public function getOutput()
-    {
-        if (null === $this->output) {
-            $this->output = new ConsoleOutput();
-        }
-
-        return $this->output;
-    }
 }

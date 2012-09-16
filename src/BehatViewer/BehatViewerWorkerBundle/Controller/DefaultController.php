@@ -11,7 +11,7 @@ class DefaultController extends BehatViewerController
     /**
      * @return array
      *
-     * @Configuration\Route("/", name="behatviewer.workers")
+     * @Configuration\Route("/", name="behatviewer.worker")
      * @Configuration\Template()
      */
     public function indexAction()
@@ -40,4 +40,32 @@ class DefaultController extends BehatViewerController
             'overview' => json_decode($overview),
         ));
     }
+
+	/**
+	 * @return array
+	 *
+	 * @Configuration\Route("/log", name="behatviewer.worker.job")
+	 * @Configuration\Template()
+	 */
+	public function jobsAction()
+	{
+		$jobs = $this->getDoctrine()->getRepository('BehatViewerWorkerBundle:Job')->findAll();
+
+		return $this->getResponse(array(
+			'items' => $jobs
+		));
+	}
+
+	/**
+	 * @return array
+	 *
+	 * @Configuration\Route("/log/{id}", name="behatviewer.worker.job.log")
+	 * @Configuration\Template()
+	 */
+	public function logAction(\BehatViewer\BehatViewerWorkerBundle\Entity\Job $job)
+	{
+		return $this->getResponse(array(
+			'job' => $job
+		));
+	}
 }

@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('behat_viewer');
+        $rootNode = $treeBuilder->root('behat_viewer_worker');
 
         return $treeBuilder;
     }
