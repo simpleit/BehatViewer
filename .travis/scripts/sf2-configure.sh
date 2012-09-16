@@ -21,4 +21,9 @@ sed s/%database_name%/$DBNAME/ "$ROOTDIR/app/config/parameters.ini-dist" \
     | sed s/%rabbitmq_password%// \
     | sed s/%piwik_enabled%/false/ \
     | sed s/%piwik_host%// \
-    | sed s/%piwik_site_id%// > "$ROOTDIR/app/config/parameters.ini"
+    | sed s/%piwik_site_id%// \
+    | sed s/%pusher_host%// \
+    | sed s/%pusher_port%// \
+    | sed s/%pusher_key%// \
+    | sed s/%pusher_secret%// \
+    | sed s/%pusher_channel%// \
