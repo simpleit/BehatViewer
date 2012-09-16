@@ -26,4 +26,4 @@ sed s/%database_name%/$DBNAME/ "$ROOTDIR/app/config/parameters.ini-dist" \
     | sed s/%pusher_port%/8080/ \
     | sed s/%pusher_key%/key/ \
     | sed s/%pusher_secret%/%secret%/ \
-    | sed s/%pusher_channel%// > "$ROOTDIR/app/config/parameters.ini"
+    | sed s/%pusher_channel%/behatviewer/ > "$ROOTDIR/app/config/parameters.ini"
