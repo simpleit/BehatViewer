@@ -71,6 +71,8 @@ class BuildCommand extends ProjectCommand
 		} catch(\Exception $exception) {
 			$result = \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
 			$status = $exception->getCode() ?: 1;
+
+			$this->getApplication()->renderException($exception, $output);
 		}
 
 		$job->setStatus($result);
