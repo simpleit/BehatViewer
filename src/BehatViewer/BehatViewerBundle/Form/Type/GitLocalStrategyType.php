@@ -27,7 +27,7 @@ class GitLocalStrategyType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\GitLocalStrategy'
+            'data_class'      => 'BehatViewer\BehatViewerCoreBundle\Entity\GitLocalStrategy'
         );
     }
 

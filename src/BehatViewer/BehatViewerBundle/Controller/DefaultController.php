@@ -2,8 +2,8 @@
 namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
-    BehatViewer\BehatViewerBundle\Entity,
-    BehatViewer\BehatViewerBundle\DBAL\Type\EnumProjectTypeType;
+    BehatViewer\BehatViewerCoreBundle\Entity,
+    BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumProjectTypeType;
 
 /**
  *
@@ -19,7 +19,7 @@ class DefaultController extends BehatViewerController
      */
     public function indexAction()
     {
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Project');
 
         if (null !== ($user = $this->getUser())) {
             $projects = $repository->findByUser($this->getUser());
@@ -46,7 +46,7 @@ class DefaultController extends BehatViewerController
      */
     public function userAction(Entity\User $user)
     {
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Project');
         if ($user === $this->getUser()) {
             return $this->forward('BehatViewerBundle:Default:index');
         }

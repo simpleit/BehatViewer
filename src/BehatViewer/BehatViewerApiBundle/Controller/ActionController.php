@@ -4,14 +4,14 @@ namespace BehatViewer\BehatViewerApiBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
-    BehatViewer\BehatViewerBundle\Entity,
+    BehatViewer\BehatViewerCoreBundle\Entity,
     BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
 class ActionController extends BehatViewerController
 {
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -29,8 +29,8 @@ class ActionController extends BehatViewerController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -54,7 +54,7 @@ class ActionController extends BehatViewerController
         if (null !== ($payload = $this->getRequest()->get('payload'))) {
             $ghrepository = $payload->repository;
 
-            $repository = $this->getDoctrine()->getManager()->getRepository('BehatViewerBundle:Project');
+            $repository = $this->getDoctrine()->getManager()->getRepository('BehatViewerCoreBundle:Project');
             $project = $repository->findOneByUsernameAndSlug($this->getUser()->getUsername(), $ghrepository->name);
 
             if (null !== $project) {

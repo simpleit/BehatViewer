@@ -1,7 +1,7 @@
 <?php
 namespace BehatViewer\BehatViewerReportBundle\Analyzer;
 
-use BehatViewer\BehatViewerBundle\Entity;
+use BehatViewer\BehatViewerCoreBundle\Entity;
 
 /**
  *
@@ -9,8 +9,8 @@ use BehatViewer\BehatViewerBundle\Entity;
 class ReportAnalyzer extends Analyzer
 {
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-     * @param array                                         $data
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
+     * @param array                                             $data
      */
     public function analyze(Entity\Project $project, array $data)
     {
@@ -27,23 +27,23 @@ class ReportAnalyzer extends Analyzer
     /**
      * @param array $data
      *
-     * @return \BehatViewer\BehatViewerBundle\Entity\Build
+     * @return \BehatViewer\BehatViewerCoreBundle\Entity\Build
      */
     protected function getBuildFromData(array $data)
     {
         $build = new Entity\Build();
         $build->setDate(new \DateTime('now'));
-        $build->setStatus(\BehatViewer\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_PASSED);
+        $build->setStatus(\BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumStatusType::STATUS_PASSED);
 
         foreach ($data as $featureData) {
             $feature = $this->getFeatureFromData($featureData);
-            $feature->setStatus(\BehatViewer\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_PASSED);
+            $feature->setStatus(\BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumStatusType::STATUS_PASSED);
 
             $this->dispatchEvent('foundFeature', $featureData);
 
             foreach ($featureData['scenarios'] as $scenarioData) {
                 $scenario = $this->getScenarioFromData($scenarioData);
-                $scenario->setStatus(\BehatViewer\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_PASSED);
+                $scenario->setStatus(\BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumStatusType::STATUS_PASSED);
 
                 $this->dispatchEvent('foundScenario', $scenarioData);
 
@@ -54,9 +54,9 @@ class ReportAnalyzer extends Analyzer
 
                     $step->setScenario($scenario);
 
-                    if ($step->getStatus() !== \BehatViewer\BehatViewerBundle\DBAL\Type\EnumStepStatusType::STATUS_PASSED) {
-                        $scenario->setStatus(\BehatViewer\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
-                        $build->setStatus(\BehatViewer\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
+                    if ($step->getStatus() !== \BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumStepStatusType::STATUS_PASSED) {
+                        $scenario->setStatus(\BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
+                        $build->setStatus(\BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
                     }
 
                     $scenario->addStep($step);
@@ -64,8 +64,8 @@ class ReportAnalyzer extends Analyzer
 
                 $scenario->setFeature($feature);
 
-                if ($scenario->getStatus() !== \BehatViewer\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_PASSED) {
-                    $feature->setStatus(\BehatViewer\BehatViewerBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
+                if ($scenario->getStatus() !== \BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumStatusType::STATUS_PASSED) {
+                    $feature->setStatus(\BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumStatusType::STATUS_FAILED);
                 }
 
                 $feature->addScenario($scenario);
@@ -83,7 +83,7 @@ class ReportAnalyzer extends Analyzer
     /**
      * @param array $data
      *
-     * @return \BehatViewer\BehatViewerBundle\Entity\Feature
+     * @return \BehatViewer\BehatViewerCoreBundle\Entity\Feature
      */
     protected function getFeatureFromData(array $data)
     {
@@ -108,7 +108,7 @@ class ReportAnalyzer extends Analyzer
     /**
      * @param array $data
      *
-     * @return \BehatViewer\BehatViewerBundle\Entity\Scenario
+     * @return \BehatViewer\BehatViewerCoreBundle\Entity\Scenario
      */
     protected function getScenarioFromData(array $data)
     {
@@ -126,7 +126,7 @@ class ReportAnalyzer extends Analyzer
     /**
      * @param array $data
      *
-     * @return \BehatViewer\BehatViewerBundle\Entity\Step
+     * @return \BehatViewer\BehatViewerCoreBundle\Entity\Step
      */
     protected function getStepFromData(array $data)
     {
@@ -155,7 +155,7 @@ class ReportAnalyzer extends Analyzer
     protected function getTagsFromData(array $data)
     {
         $tags = array();
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Tag');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Tag');
 
         if (sizeof($data)) {
             $this->dispatchEvent('foundTags', $data);

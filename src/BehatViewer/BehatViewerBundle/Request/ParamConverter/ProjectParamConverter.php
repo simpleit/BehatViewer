@@ -7,7 +7,7 @@ class ProjectParamConverter extends BehatViewerParamConverter
 {
     public function getObject(Request $request, array $options)
     {
-        $repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Project');
+        $repository = $this->container->get('doctrine')->getRepository('BehatViewerCoreBundle:Project');
 
         $slug = $request->get($options['mapping']['project']);
 
@@ -23,7 +23,7 @@ class ProjectParamConverter extends BehatViewerParamConverter
 
     protected function getClass()
     {
-        return 'BehatViewer\\BehatViewerBundle\\Entity\\Project';
+        return 'BehatViewer\\BehatViewerCoreBundle\\Entity\\Project';
     }
 
     protected function getDefaultOptions()

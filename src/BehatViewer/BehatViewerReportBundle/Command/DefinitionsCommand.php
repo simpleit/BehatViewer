@@ -5,7 +5,7 @@ use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Component\Console\Input\InputOption,
-    BehatViewer\BehatViewerBundle\Entity,
+    BehatViewer\BehatViewerCoreBundle\Entity,
     BehatViewer\BehatViewerAdminBundle\Command\Project\ProjectCommand;
 
 /**
@@ -36,7 +36,7 @@ class DefinitionsCommand extends ProjectCommand
 
         $project = $this->getProject();
 
-        $this->getDoctrine()->getRepository('BehatViewerBundle:Definition')->truncateForProject($project);
+        $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Definition')->truncateForProject($project);
 
         if (true === $input->getOption('clean')) {
             return 0;
@@ -149,10 +149,10 @@ class DefinitionsCommand extends ProjectCommand
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-     * @param string                                        $snippet
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
+     * @param string                                            $snippet
      *
-     * @return \BehatViewer\BehatViewerBundle\Entity\Definition
+     * @return \BehatViewer\BehatViewerCoreBundle\Entity\Definition
      */
     protected function getStepDefinition(Entity\Project $project, $snippet)
     {

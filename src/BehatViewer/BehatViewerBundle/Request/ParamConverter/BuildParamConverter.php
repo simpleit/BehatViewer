@@ -7,7 +7,7 @@ class BuildParamConverter extends BehatViewerParamConverter
 {
     public function getObject(Request $request, array $options)
     {
-        $repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Build');
+        $repository = $this->container->get('doctrine')->getRepository('BehatViewerCoreBundle:Build');
 
         $id = $request->get($options['mapping']['id']);
 
@@ -16,7 +16,7 @@ class BuildParamConverter extends BehatViewerParamConverter
 
     protected function getClass()
     {
-        return 'BehatViewer\\BehatViewerBundle\\Entity\\Build';
+        return 'BehatViewer\\BehatViewerCoreBundle\\Entity\\Build';
     }
 
     protected function getDefaultOptions()

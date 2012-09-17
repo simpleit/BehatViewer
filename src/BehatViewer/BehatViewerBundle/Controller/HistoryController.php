@@ -4,14 +4,14 @@ namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
-    BehatViewer\BehatViewerBundle\Entity;
+    BehatViewer\BehatViewerCoreBundle\Entity;
 
 class HistoryController extends BehatViewerProjectController
 {
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-     * @param int                                           $page
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
+     * @param int                                               $page
      *
      * @return array
      *
@@ -22,7 +22,7 @@ class HistoryController extends BehatViewerProjectController
         $builds = array();
         $pages = $page <= 0 ? 1 : $page;
         if ($project !== null) {
-            $total = $this->getDoctrine()->getRepository('BehatViewerBundle:Build')->findBy(
+            $total = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Build')->findBy(
                 array(
                     'project' => $project->getId()
                 )
@@ -32,7 +32,7 @@ class HistoryController extends BehatViewerProjectController
             $page = $page < 1 ? 1 : $page;
             $page = $page > $pages ? $pages : $page;
 
-            $builds = $this->getDoctrine()->getRepository('BehatViewerBundle:Build')->findBy(
+            $builds = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Build')->findBy(
                 array(
                     'project' => $project->getId()
                 ),
@@ -52,10 +52,10 @@ class HistoryController extends BehatViewerProjectController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User       $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project    $project
-     * @param \BehatViewer\BehatViewerBundle\Entity\Build|null $build
-     * @param string|null                                      $type
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User       $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project    $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Build|null $build
+     * @param string|null                                          $type
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -63,7 +63,7 @@ class HistoryController extends BehatViewerProjectController
      */
     public function entryAction(Entity\User $user, Entity\Project $project, Entity\Build $build = null, $type = null)
     {
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Build');
         $build = $repository->findOneByProjectAndId($project, $build);
 
         if (null === $type) {
@@ -85,9 +85,9 @@ class HistoryController extends BehatViewerProjectController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User       $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project    $project
-     * @param \BehatViewer\BehatViewerBundle\Entity\Build|null $build
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User       $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project    $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Build|null $build
      *
      * @return \Symfony\Component\HttpFoundation\Response|array
      *
@@ -105,8 +105,8 @@ class HistoryController extends BehatViewerProjectController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @return array
      *
@@ -118,7 +118,7 @@ class HistoryController extends BehatViewerProjectController
     public function deleteSelectedAction(Entity\User $user, Entity\Project $project)
     {
         $manager = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Build');
 
         foreach ($this->getRequest()->get('delete', array()) as $id) {
             $build = $repository->findOneById($id);

@@ -7,7 +7,7 @@ class UserParamConverter extends BehatViewerParamConverter
 {
     protected function getObject(Request $request, array $options)
     {
-        $repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:User');
+        $repository = $this->container->get('doctrine')->getRepository('BehatViewerCoreBundle:User');
         $username = $request->get($options['mapping']['username']);
 
         return $repository->findOneByUsername($username);
@@ -15,7 +15,7 @@ class UserParamConverter extends BehatViewerParamConverter
 
     protected function getClass()
     {
-        return 'BehatViewer\\BehatViewerBundle\\Entity\\User';
+        return 'BehatViewer\\BehatViewerCoreBundle\\Entity\\User';
     }
 
     protected function getDefaultOptions()

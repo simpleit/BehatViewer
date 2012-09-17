@@ -3,7 +3,7 @@ namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
-    BehatViewer\BehatViewerBundle\Entity,
+    BehatViewer\BehatViewerCoreBundle\Entity,
     BehatViewer\BehatViewerBundle\Form\Type\ProjectType,
     BehatViewer\BehatViewerBundle\Form\Type\ProjectScriptType,
     BehatViewer\BehatViewerBundle\Form\Type\ProjectRepositoryType,
@@ -45,17 +45,19 @@ class ProjectController extends BehatViewerProjectController
             }
         }
 
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Project');
+
         return $this->getResponse(array(
             'form' => $form->createView(),
             'success' => false,
-            'hasproject' => (null !== $this->getDoctrine()->getRepository('BehatViewerBundle:Project')->findOneByUser($this->getUser())),
+            'hasproject' => (null !== $repository->findOneByUser($this->getUser())),
         ));
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-     * @param string|null                                   $type
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
+     * @param string|null                                       $type
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -76,8 +78,8 @@ class ProjectController extends BehatViewerProjectController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @return array
      *
@@ -115,8 +117,8 @@ class ProjectController extends BehatViewerProjectController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @return array
      *
@@ -155,8 +157,8 @@ class ProjectController extends BehatViewerProjectController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @return array
      *
@@ -183,10 +185,10 @@ class ProjectController extends BehatViewerProjectController
 
             if (null === $strategy || $form instanceof ProjectRepositoryType) {
                 $strategies = array(
-                    'git' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
-                    'git_local' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy',
-                    'github' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GithubStrategy',
-                    'local' => '\\BehatViewer\\BehatViewerBundle\\Entity\\GitStrategy'
+                    'git' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GitStrategy',
+                    'git_local' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GitStrategy',
+                    'github' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GithubStrategy',
+                    'local' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GitStrategy'
                 );
 
                 $strategy = $strategies[$form->get('strategy')->getData()];
@@ -212,8 +214,8 @@ class ProjectController extends BehatViewerProjectController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *

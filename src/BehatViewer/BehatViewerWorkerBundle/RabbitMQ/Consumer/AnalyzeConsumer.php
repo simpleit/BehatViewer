@@ -10,7 +10,7 @@ class AnalyzeConsumer extends Consumer
     {
         $options = $this->getOptions($msg);
 
-        $repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Project');
+        $repository = $this->container->get('doctrine')->getRepository('BehatViewerCoreBundle:Project');
         $project = $repository->findOneBySlug($options['project']);
 
         $data = json_decode($options['payload'], true);

@@ -7,8 +7,7 @@ use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\EventDispatcher\EventSubscriberInterface,
     Symfony\Component\EventDispatcher\Event,
     Symfony\Component\Console\Formatter\OutputFormatterStyle,
-    Symfony\Component\Console\Input\InputOption,
-    BehatViewer\BehatViewerBundle\Entity;
+    Symfony\Component\Console\Input\InputOption;
 
 /**
  *

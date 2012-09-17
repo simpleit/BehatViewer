@@ -9,26 +9,26 @@ use BehatViewer\BehatViewerAdminBundle\Command\Command,
 abstract class ProjectCommand extends Command
 {
     /**
-     * @var \BehatViewer\BehatViewerBundle\Entity\Project
+     * @var \BehatViewer\BehatViewerCoreBundle\Entity\Project
      */
     private $project;
 
     protected function configure()
     {
         $this
-			->addArgument('username', InputArgument::REQUIRED, 'The owner username')
-			->addArgument('project', InputArgument::REQUIRED, 'The project identifier')
-		;
+            ->addArgument('username', InputArgument::REQUIRED, 'The owner username')
+            ->addArgument('project', InputArgument::REQUIRED, 'The project identifier')
+        ;
     }
 
     protected function validate(InputInterface $input)
     {
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Project');
 
         $this->project = $repository->findOneByUsernameAndSlug(
-			$input->getArgument('username'),
-			$input->getArgument('project')
-		);
+            $input->getArgument('username'),
+            $input->getArgument('project')
+        );
 
         if (null === $this->project) {
             throw new \InvalidArgumentException('Unknown project ' . $input->getArgument('project'));
@@ -41,7 +41,7 @@ abstract class ProjectCommand extends Command
     }
 
     /**
-     * @return \BehatViewer\BehatViewerBundle\Entity\Project
+     * @return \BehatViewer\BehatViewerCoreBundle\Entity\Project
      */
     public function getProject()
     {

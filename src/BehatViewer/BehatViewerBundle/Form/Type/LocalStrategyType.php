@@ -27,7 +27,7 @@ class LocalStrategyType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\LocalStrategy'
+            'data_class'      => 'BehatViewer\BehatViewerCoreBundle\Entity\LocalStrategy'
         );
     }
 

@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\EventDispatcher\Event,
     Symfony\Component\Console\Formatter\OutputFormatterStyle,
     Symfony\Component\Console\Input\InputOption,
-    BehatViewer\BehatViewerBundle\Entity;
+    BehatViewer\BehatViewerCoreBundle\Entity;
 
 /**
  *
@@ -48,7 +48,7 @@ class CleanCommand extends ProjectCommand
             )
         );
 
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Build');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Build');
         $count = $repository->removeWeekBuildsForProject($project);
 
         $this->log(

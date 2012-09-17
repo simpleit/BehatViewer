@@ -79,7 +79,7 @@ class CreateUserType extends UserType
                 'label' => 'Roles',
                 'multiple' => true,
                 'property_path' => 'rolesCollection',
-                'class'=>'BehatViewer\BehatViewerBundle\Entity\Role',
+                'class'=>'BehatViewer\BehatViewerCoreBundle\Entity\Role',
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('r')
                         ->orderBy('r.name', 'ASC');

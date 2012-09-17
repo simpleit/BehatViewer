@@ -3,7 +3,7 @@
 namespace BehatViewer\BehatViewerBundle;
 
 use Symfony\Component\DependencyInjection\ContainerAware,
-    BehatViewer\BehatViewerBundle\Entity;
+    BehatViewer\BehatViewerCoreBundle\Entity;
 
 /**
  *

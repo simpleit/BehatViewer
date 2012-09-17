@@ -3,16 +3,15 @@
 namespace BehatViewer\BehatViewerWorkerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-    BehatViewer\BehatViewerBundle\Entity\Base;
-use BehatViewer\BehatViewerBundle\Entity\Project;
+    BehatViewer\BehatViewerCoreBundle\Entity;
 
 /**
- * BehatViewer\BehatViewerBundle\Entity\Job
+ * BehatViewer\BehatViewerWorkerBundle\Entity\Job
  *
  * @ORM\Table(name="job")
  * @ORM\Entity(repositoryClass="BehatViewer\BehatViewerWorkerBundle\Entity\Repository\JobRepository")
  */
-class Job extends Base
+class Job extends Entity\Base
 {
     /**
      * @var integer $id
@@ -31,9 +30,9 @@ class Job extends Base
     private $date;
 
     /**
-     * @var \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @var \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
-     * @ORM\ManyToOne(targetEntity="BehatViewer\BehatViewerBundle\Entity\Project", inversedBy="builds")
+     * @ORM\ManyToOne(targetEntity="BehatViewer\BehatViewerCoreBundle\Entity\Project", inversedBy="builds")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $project;
@@ -74,7 +73,11 @@ class Job extends Base
         return $this->project;
     }
 
+<<<<<<< HEAD
     public function setProject(Project $project)
+=======
+    public function setProject(Entity\Project $project)
+>>>>>>> Moving code to Core bundle
     {
         $this->project = $project;
 

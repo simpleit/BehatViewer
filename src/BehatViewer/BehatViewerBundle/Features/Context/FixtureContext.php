@@ -25,16 +25,16 @@ class FixtureContext extends BehatViewerContext
     public function BeforeScenarioReset(\Behat\Behat\Event\EventInterface $event)
     {
         $entities = array(
-            'BehatViewerBundle:Step',
-            'BehatViewerBundle:Scenario',
-            'BehatViewerBundle:Feature',
-            'BehatViewerBundle:FeatureStat',
-            'BehatViewerBundle:Build',
-            'BehatViewerBundle:BuildStat',
-            'BehatViewerBundle:Definition',
-            'BehatViewerBundle:Project',
-            'BehatViewerBundle:User',
-            'BehatViewerBundle:Role',
+            'BehatViewerCoreBundle:Step',
+            'BehatViewerCoreBundle:Scenario',
+            'BehatViewerCoreBundle:Feature',
+            'BehatViewerCoreBundle:FeatureStat',
+            'BehatViewerCoreBundle:Build',
+            'BehatViewerCoreBundle:BuildStat',
+            'BehatViewerCoreBundle:Definition',
+            'BehatViewerCoreBundle:Project',
+            'BehatViewerCoreBundle:User',
+            'BehatViewerCoreBundle:Role',
         );
 
         $this->connection->query(sprintf('SET FOREIGN_KEY_CHECKS = 0;'));

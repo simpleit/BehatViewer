@@ -4,7 +4,7 @@ namespace BehatViewer\BehatViewerBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use BehatViewer\BehatViewerBundle\Entity\User;
+use BehatViewer\BehatViewerCoreBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -40,8 +40,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         );
 
         $admin->setEmail('');
-		$admin->setToken(md5(uniqid()));
-		$admin->getRolesCollection()->add($this->getReference('ROLE_ADMIN'));
+        $admin->setToken(md5(uniqid()));
+        $admin->getRolesCollection()->add($this->getReference('ROLE_ADMIN'));
 
         $manager->persist($admin);
         $manager->flush();

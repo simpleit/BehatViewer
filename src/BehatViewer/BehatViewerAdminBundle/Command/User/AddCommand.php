@@ -2,9 +2,9 @@
 namespace BehatViewer\BehatViewerAdminBundle\Command\User;
 
 use BehatViewer\BehatViewerAdminBundle\Command\Command,
-    BehatViewer\BehatViewerBundle\Entity,
-	Symfony\Component\Console\Output\OutputInterface,
-	Symfony\Component\Console\Input\InputInterface;
+    BehatViewer\BehatViewerCoreBundle\Entity,
+    Symfony\Component\Console\Output\OutputInterface,
+    Symfony\Component\Console\Input\InputInterface;
 
 class AddCommand extends Command
 {

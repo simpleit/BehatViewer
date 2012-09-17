@@ -1,7 +1,7 @@
 <?php
 namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 
-use BehatViewer\BehatViewerBundle\Entity;
+use BehatViewer\BehatViewerCoreBundle\Entity;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GitBuilder extends Builder
@@ -16,7 +16,7 @@ class GitBuilder extends Builder
         return 'git clone --depth=50 ' . $this->getRepositoryUrl($strategy);
     }
 
-    protected function getClonePath(\BehatViewer\BehatViewerBundle\Entity\Strategy $strategy)
+    protected function getClonePath(Entity\Strategy $strategy)
     {
         return sprintf(
             $this->container->get('kernel')->getRootDir() . '/data/repos/%s/%s',

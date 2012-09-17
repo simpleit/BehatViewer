@@ -1,11 +1,9 @@
 <?php
 namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 
-use
-    Symfony\Component\DependencyInjection\ContainerAware,
-    BehatViewer\BehatViewerBundle\Entity,
-    Symfony\Component\Console\Output\OutputInterface
-;
+use Symfony\Component\DependencyInjection\ContainerAware,
+    BehatViewer\BehatViewerCoreBundle\Entity,
+    Symfony\Component\Console\Output\OutputInterface;
 
 class BuilderSelector extends Builder
 {
@@ -29,7 +27,7 @@ class BuilderSelector extends Builder
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\Strategy $strategy
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Strategy $strategy
      *
      * @return bool
      */

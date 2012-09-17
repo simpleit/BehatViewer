@@ -2,8 +2,8 @@
 namespace BehatViewer\BehatViewerAdminBundle\Command\Project;
 
 use Symfony\Component\Console\Output\OutputInterface,
-	Symfony\Component\Console\Input\InputInterface,
-	Symfony\Component\Console\Input\InputArgument;
+    Symfony\Component\Console\Input\InputInterface,
+    Symfony\Component\Console\Input\InputArgument;
 
 /**
  *
@@ -15,7 +15,7 @@ class DeleteCommand extends ProjectCommand
      */
     protected function configure()
     {
-		parent::configure();
+        parent::configure();
 
         $this->setName('behat-viewer:project:delete');
     }
@@ -30,16 +30,16 @@ class DeleteCommand extends ProjectCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-		parent::execute($input, $output);
+        parent::execute($input, $output);
 
         $username = $input->getArgument('username');
         $slug = $input->getArgument('project');
         $project = $this->getProject();
 
-		$this->getEntityManager()->remove($project);
-		$this->getEntityManager()->flush();
+        $this->getEntityManager()->remove($project);
+        $this->getEntityManager()->flush();
 
-		$output->writeln(sprintf('Project <info>%s/%s</info> was successfully deleted', $username, $slug));
+        $output->writeln(sprintf('Project <info>%s/%s</info> was successfully deleted', $username, $slug));
 
         return 0;
     }

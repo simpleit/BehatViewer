@@ -3,16 +3,16 @@
 namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
-    BehatViewer\BehatViewerBundle\Entity;
+    BehatViewer\BehatViewerCoreBundle\Entity;
 
 class TagController extends BehatViewerProjectController
 {
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User       $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project    $project
-     * @param \BehatViewer\BehatViewerBundle\Entity\Tag        $tag
-     * @param \BehatViewer\BehatViewerBundle\Entity\Build|null $build
-     * @param string|null                                      $type
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User       $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project    $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Tag        $tag
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Build|null $build
+     * @param string|null                                          $type
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -24,8 +24,8 @@ class TagController extends BehatViewerProjectController
             $build = $project->getLastBuild();
         }
 
-        $features = $this->getDoctrine()->getRepository('BehatViewerBundle:Feature')->findByTagAndBuild($tag, $build);
-        $scenarios = $this->getDoctrine()->getRepository('BehatViewerBundle:Scenario')->findByTagAndBuild($tag, $build);
+        $features = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Feature')->findByTagAndBuild($tag, $build);
+        $scenarios = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Scenario')->findByTagAndBuild($tag, $build);
 
         foreach ($scenarios as $scenario) {
             if (!in_array($scenario->getFeature(), $features)) {

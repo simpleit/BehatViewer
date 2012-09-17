@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
 			new JMS\DiExtraBundle\JMSDiExtraBundle($this),
 
+			new BehatViewer\BehatViewerCoreBundle\BehatViewerCoreBundle(),
 			new BehatViewer\BehatViewerUiBundle\BehatViewerUiBundle(),
 
 			new BehatViewer\BehatViewerBundle\BehatViewerBundle(),

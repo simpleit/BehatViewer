@@ -18,7 +18,7 @@ abstract class UserType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\User',
+            'data_class'      => 'BehatViewer\BehatViewerCoreBundle\Entity\User',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'intention'       => 'user_item',

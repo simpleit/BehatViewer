@@ -2,8 +2,8 @@
 namespace BehatViewer\BehatViewerWorkerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
-    BehatViewer\BehatViewerBundle\Entity,
-    BehatViewer\BehatViewerBundle\DBAL\Type\EnumProjectTypeType,
+    BehatViewer\BehatViewerCoreBundle\Entity,
+    BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumProjectTypeType,
     BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
 
 class DefaultController extends BehatViewerController

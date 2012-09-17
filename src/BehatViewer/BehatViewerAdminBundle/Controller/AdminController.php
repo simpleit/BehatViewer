@@ -4,7 +4,7 @@ namespace BehatViewer\BehatViewerAdminBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     JMS\SecurityExtraBundle\Annotation as Security,
-    BehatViewer\BehatViewerBundle\Entity,
+    BehatViewer\BehatViewerCoreBundle\Entity,
     BehatViewer\BehatViewerAdminBundle\Form\Type\CreateUserType,
     BehatViewer\BehatViewerAdminBundle\Form\Type\EditUserType,
     BehatViewer\BehatViewerBundle\Controller\BehatViewerController;
@@ -46,7 +46,7 @@ class AdminController extends BehatViewerController
      */
     public function usersAction()
     {
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:User');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:User');
         $users = $repository->findAllOrderByLimit(array('username' => 'ASC'));
 
         return $this->getResponse(array(
@@ -55,7 +55,7 @@ class AdminController extends BehatViewerController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User $user
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
@@ -73,7 +73,7 @@ class AdminController extends BehatViewerController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User $user
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
@@ -91,7 +91,7 @@ class AdminController extends BehatViewerController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User $user
      *
      * @return array
      *
@@ -120,8 +120,8 @@ class AdminController extends BehatViewerController
     }
 
     /**
-     * @param \Symfony\Component\Form\Form               $form
-     * @param \BehatViewer\BehatViewerBundle\Entity\User $user
+     * @param \Symfony\Component\Form\Form                   $form
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User $user
      *
      * @return bool
      */

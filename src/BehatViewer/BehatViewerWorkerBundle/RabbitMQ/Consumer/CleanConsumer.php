@@ -9,7 +9,7 @@ class CleanConsumer extends Consumer
     {
         $options = $this->getOptions($msg);
 
-        $repository = $this->getContainer()->get('doctrine')->getRepository('BehatViewerBundle:Build');
+        $repository = $this->getContainer()->get('doctrine')->getRepository('BehatViewerCoreBundle:Build');
         $project = $repository->findOneBySlug($options['project']);
         $repository->removeWeekBuildsForProject($project);
 

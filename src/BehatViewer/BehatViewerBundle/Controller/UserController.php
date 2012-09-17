@@ -97,9 +97,7 @@ class UserController extends BehatViewerController
     {
         $request = $this->getRequest();
         $success = false;
-        /** @var $user \BehatViewer\BehatViewerBundle\Entity\User */
         $user = $this->getUser();
-        /** @var $form \Symfony\Component\Form\Form */
         $form = $this->get('form.factory')->create(new PasswordType(), $user);
 
         $factory = $this->get('security.encoder_factory');

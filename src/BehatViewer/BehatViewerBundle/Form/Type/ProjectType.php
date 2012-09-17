@@ -48,7 +48,7 @@ class ProjectType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\Project',
+            'data_class'      => 'BehatViewer\BehatViewerCoreBundle\Entity\Project',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'intention'       => 'project_item',

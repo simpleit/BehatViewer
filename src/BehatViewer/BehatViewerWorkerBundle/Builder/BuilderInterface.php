@@ -1,8 +1,8 @@
 <?php
 namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 
-use BehatViewer\BehatViewerBundle\Entity;
-use Symfony\Component\Console\Output\OutputInterface;
+use BehatViewer\BehatViewerCoreBundle\Entity,
+    Symfony\Component\Console\Output\OutputInterface;
 
 interface BuilderInterface
 {

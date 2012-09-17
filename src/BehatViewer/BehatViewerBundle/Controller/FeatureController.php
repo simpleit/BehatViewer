@@ -3,16 +3,16 @@
 namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
-    BehatViewer\BehatViewerBundle\Entity,
+    BehatViewer\BehatViewerCoreBundle\Entity,
     JMS\SecurityExtraBundle\Annotation as Security;
 
 class FeatureController extends BehatViewerBuildController
 {
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-     * @param \BehatViewer\BehatViewerBundle\Entity\Build   $build
-     * @param \BehatViewer\BehatViewerBundle\Entity\Feature $feature
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Build   $build
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Feature $feature
      *
      * @return array
      *
@@ -29,10 +29,10 @@ class FeatureController extends BehatViewerBuildController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
-     * @param \BehatViewer\BehatViewerBundle\Entity\Build   $build
-     * @param \BehatViewer\BehatViewerBundle\Entity\Feature $feature
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Build   $build
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Feature $feature
      *
      * @return array
      *
@@ -52,7 +52,7 @@ class FeatureController extends BehatViewerBuildController
     }
 
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\Step $step
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Step $step
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

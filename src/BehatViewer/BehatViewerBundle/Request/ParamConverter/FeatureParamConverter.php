@@ -7,7 +7,7 @@ class FeatureParamConverter extends BehatViewerParamConverter
 {
     protected function getObject(Request $request, array $options)
     {
-        $repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Feature');
+        $repository = $this->container->get('doctrine')->getRepository('BehatViewerCoreBundle:Feature');
         $slug = $request->get($options['mapping']['slug']);
 
         return $repository->findOneByBuildAndSlug($request->get('build'), $slug);
@@ -15,7 +15,7 @@ class FeatureParamConverter extends BehatViewerParamConverter
 
     protected function getClass()
     {
-        return 'BehatViewer\\BehatViewerBundle\\Entity\\Feature';
+        return 'BehatViewer\\BehatViewerCoreBundle\\Entity\\Feature';
     }
 
     protected function getDefaultOptions()

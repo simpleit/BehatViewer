@@ -3,14 +3,14 @@
 namespace BehatViewer\BehatViewerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration,
-    BehatViewer\BehatViewerBundle\Entity,
+    BehatViewer\BehatViewerCoreBundle\Entity,
     JMS\SecurityExtraBundle\Annotation as Security;
 
 class DefinitionsController extends BehatViewerProjectController
 {
     /**
-     * @param \BehatViewer\BehatViewerBundle\Entity\User    $user
-     * @param \BehatViewer\BehatViewerBundle\Entity\Project $project
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\User    $user
+     * @param \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @return array
      *
@@ -21,7 +21,7 @@ class DefinitionsController extends BehatViewerProjectController
     {
         $definitions = array();
         $contexts = array();
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Definition');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Definition');
 
         if ($project !== null) {
             $definitions = $repository->findByProject($project->getId());

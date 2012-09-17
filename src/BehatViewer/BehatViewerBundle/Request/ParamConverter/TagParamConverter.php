@@ -7,7 +7,7 @@ class TagParamConverter extends BehatViewerParamConverter
 {
     protected function getObject(Request $request, array $options)
     {
-        $repository = $this->container->get('doctrine')->getRepository('BehatViewerBundle:Tag');
+        $repository = $this->container->get('doctrine')->getRepository('BehatViewerCoreBundle:Tag');
         $slug = $request->get($options['mapping']['slug']);
 
         return $repository->findOneBySlug($slug);
@@ -15,7 +15,7 @@ class TagParamConverter extends BehatViewerParamConverter
 
     protected function getClass()
     {
-        return 'BehatViewer\\BehatViewerBundle\\Entity\\Tag';
+        return 'BehatViewer\\BehatViewerCoreBundle\\Entity\\Tag';
     }
 
     protected function getDefaultOptions()

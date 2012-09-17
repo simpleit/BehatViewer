@@ -27,7 +27,7 @@ class GithubStrategyType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class'      => 'BehatViewer\BehatViewerBundle\Entity\GithubStrategy'
+            'data_class'      => 'BehatViewer\BehatViewerCoreBundle\Entity\GithubStrategy'
         );
     }
 

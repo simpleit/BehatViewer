@@ -2,10 +2,10 @@
 namespace BehatViewer\BehatViewerAdminBundle\Command\User;
 
 use BehatViewer\BehatViewerAdminBundle\Command\Command,
-    BehatViewer\BehatViewerBundle\Entity,
-	Symfony\Component\Console\Output\OutputInterface,
-	Symfony\Component\Console\Input\InputInterface,
-	Symfony\Component\Console\Input\InputArgument;
+    BehatViewer\BehatViewerCoreBundle\Entity,
+    Symfony\Component\Console\Output\OutputInterface,
+    Symfony\Component\Console\Input\InputInterface,
+    Symfony\Component\Console\Input\InputArgument;
 
 /**
  *
@@ -34,7 +34,7 @@ class DeleteCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $username = $input->getArgument('user');
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:User');
+        $repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:User');
         $user = $repository->findOneByUsername($username);
 
         if (null !== $user) {

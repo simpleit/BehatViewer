@@ -1,7 +1,7 @@
 <?php
 namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 
-use BehatViewer\BehatViewerBundle\Entity;
+use BehatViewer\BehatViewerCoreBundle\Entity;
 
 class GithubBuilder extends GitBuilder
 {

@@ -3,7 +3,7 @@ namespace BehatViewer\BehatViewerWorkerBundle\Builder;
 
 use
     Symfony\Component\Console\Output\ConsoleOutput,
-    BehatViewer\BehatViewerBundle\Entity
+    BehatViewer\BehatViewerCoreBundle\Entity
 ;
 use Symfony\Component\Console\Output\OutputInterface;
 
