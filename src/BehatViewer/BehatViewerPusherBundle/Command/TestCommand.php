@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputInterface,
 /**
  *
  */
-class TestCommand extends \BehatViewer\BehatViewerBundle\Command\Command
+class TestCommand extends \BehatViewer\BehatViewerAdminBundle\Command\Command
 {
     /**
      *
