@@ -16,6 +16,7 @@
 
     rabbitmq_host      = %rabbitmq_host%
     rabbitmq_port      = 5672
+    rabbitmq_api_port  = 55672
     rabbitmq_user      = %rabbitmq_user%
     rabbitmq_password  = %rabbitmq_password%
     rabbitmq_vhost     = /
