@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Input\InputArgument,
-    BehatViewer\BehatViewerBundle\Command\ProjectCommand,
-    BehatViewer\BehatViewerWorkerBundle\Console\Output\CompositeOutput;
+    BehatViewer\BehatViewerAdminBundle\Command\Project\ProjectCommand,
+	BehatViewer\BehatViewerWorkerBundle\Console\Output\CompositeOutput;
 
 /**
  *

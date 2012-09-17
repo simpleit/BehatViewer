@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\EventDispatcher\Event,
     Symfony\Component\Console\Formatter\OutputFormatterStyle,
     Symfony\Component\Console\Input\InputOption,
-    BehatViewer\BehatViewerBundle\Command\ProjectCommand;
+    BehatViewer\BehatViewerAdminBundle\Command\Project\ProjectCommand;
 
 /**
  *

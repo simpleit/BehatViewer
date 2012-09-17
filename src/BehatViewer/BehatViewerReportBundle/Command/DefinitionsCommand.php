@@ -6,7 +6,7 @@ use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Component\Console\Input\InputOption,
     BehatViewer\BehatViewerBundle\Entity,
-    BehatViewer\BehatViewerBundle\Command\ProjectCommand;
+    BehatViewer\BehatViewerAdminBundle\Command\Project\ProjectCommand;
 
 /**
  *

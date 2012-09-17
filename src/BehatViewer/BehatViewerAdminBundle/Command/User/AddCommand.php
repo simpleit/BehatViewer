@@ -1,37 +1,16 @@
 <?php
 namespace BehatViewer\BehatViewerAdminBundle\Command\User;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    Symfony\Component\Console\Input\InputInterface,
-    Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\EventDispatcher\EventSubscriberInterface,
-    Symfony\Component\EventDispatcher\Event,
-    Symfony\Component\Console\Formatter\OutputFormatterStyle,
-    Symfony\Component\Console\Input\InputOption,
-    BehatViewer\BehatViewerBundle\Entity;
+use BehatViewer\BehatViewerAdminBundle\Command\Command,
+    BehatViewer\BehatViewerBundle\Entity,
+	Symfony\Component\Console\Output\OutputInterface,
+	Symfony\Component\Console\Input\InputInterface;
 
-class AddCommand extends ContainerAwareCommand
+class AddCommand extends Command
 {
     protected function configure()
     {
         $this->setName('behat-viewer:user:add');
-    }
-
-    /**
-     * @return \Doctrine\Bundle\DoctrineBundle\Registry
-     */
-    public function getDoctrine()
-    {
-        return $this->getContainer()->get('doctrine');
-    }
-
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     */
-    public function getEntityManager()
-    {
-        return $this->getDoctrine()->getEntityManager();
     }
 
     /**

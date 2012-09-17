@@ -1,47 +1,23 @@
 <?php
 namespace BehatViewer\BehatViewerAdminBundle\Command\Project;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    Symfony\Component\Console\Input\InputInterface,
-    Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\EventDispatcher\EventSubscriberInterface,
-    Symfony\Component\EventDispatcher\Event,
-    Symfony\Component\Console\Formatter\OutputFormatterStyle,
-    Symfony\Component\Console\Input\InputOption,
-    BehatViewer\BehatViewerBundle\Entity;
+use Symfony\Component\Console\Output\OutputInterface,
+	Symfony\Component\Console\Input\InputInterface,
+	Symfony\Component\Console\Input\InputArgument;
 
 /**
  *
  */
-class DeleteCommand extends ContainerAwareCommand
+class DeleteCommand extends ProjectCommand
 {
     /**
      *
      */
     protected function configure()
     {
-        $this
-            ->setName('behat-viewer:project:delete')
-            ->addArgument('username', InputArgument::REQUIRED)
-            ->addArgument('project', InputArgument::REQUIRED)
-        ;
-    }
+		parent::configure();
 
-    /**
-     * @return \Doctrine\Bundle\DoctrineBundle\Registry
-     */
-    public function getDoctrine()
-    {
-        return $this->getContainer()->get('doctrine');
-    }
-
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     */
-    public function getEntityManager()
-    {
-        return $this->getDoctrine()->getManager();
+        $this->setName('behat-viewer:project:delete');
     }
 
     /**
@@ -54,20 +30,16 @@ class DeleteCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+		parent::execute($input, $output);
+
         $username = $input->getArgument('username');
         $slug = $input->getArgument('project');
+        $project = $this->getProject();
 
-        $repository = $this->getDoctrine()->getRepository('BehatViewerBundle:Project');
-        $project = $repository->findOneByUsernameAndSlug($username, $slug);
+		$this->getEntityManager()->remove($project);
+		$this->getEntityManager()->flush();
 
-        if (null !== $project) {
-            $this->getEntityManager()->remove($project);
-            $this->getEntityManager()->flush();
-
-            $output->writeln(sprintf('Project <info>%s/%s</info> was successfully deleted', $username, $slug));
-        } else {
-            throw new \RuntimeException(sprintf('Project %s/%s does not exist', $username, $slug));
-        }
+		$output->writeln(sprintf('Project <info>%s/%s</info> was successfully deleted', $username, $slug));
 
         return 0;
     }

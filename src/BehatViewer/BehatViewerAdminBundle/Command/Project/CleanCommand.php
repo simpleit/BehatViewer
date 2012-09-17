@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Command;
+namespace BehatViewer\BehatViewerAdminBundle\Command\Project;
 
 use Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
@@ -23,7 +23,7 @@ class CleanCommand extends ProjectCommand
         parent::configure();
 
         $this
-            ->setName('behat-viewer:clean')
+            ->setName('behat-viewer:project:clean')
             ->setDescription('Cleans outdated builds')
         ;
     }

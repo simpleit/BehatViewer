@@ -1,20 +1,16 @@
 <?php
 namespace BehatViewer\BehatViewerAdminBundle\Command\User;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    Symfony\Component\Console\Input\InputInterface,
-    Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\EventDispatcher\EventSubscriberInterface,
-    Symfony\Component\EventDispatcher\Event,
-    Symfony\Component\Console\Formatter\OutputFormatterStyle,
-    Symfony\Component\Console\Input\InputOption,
-    BehatViewer\BehatViewerBundle\Entity;
+use BehatViewer\BehatViewerAdminBundle\Command\Command,
+    BehatViewer\BehatViewerBundle\Entity,
+	Symfony\Component\Console\Output\OutputInterface,
+	Symfony\Component\Console\Input\InputInterface,
+	Symfony\Component\Console\Input\InputArgument;
 
 /**
  *
  */
-class DeleteCommand extends ContainerAwareCommand
+class DeleteCommand extends Command
 {
     /**
      *
@@ -25,22 +21,6 @@ class DeleteCommand extends ContainerAwareCommand
             ->setName('behat-viewer:user:remove')
             ->addArgument('user', InputArgument::REQUIRED)
         ;
-    }
-
-    /**
-     * @return \Doctrine\Bundle\DoctrineBundle\Registry
-     */
-    public function getDoctrine()
-    {
-        return $this->getContainer()->get('doctrine');
-    }
-
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     */
-    public function getEntityManager()
-    {
-        return $this->getDoctrine()->getEntityManager();
     }
 
     /**
