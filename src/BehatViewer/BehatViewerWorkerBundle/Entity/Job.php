@@ -3,7 +3,7 @@
 namespace BehatViewer\BehatViewerWorkerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-	BehatViewer\BehatViewerBundle\Entity\Base;
+    BehatViewer\BehatViewerBundle\Entity\Base;
 use BehatViewer\BehatViewerBundle\Entity\Project;
 
 /**
@@ -38,12 +38,12 @@ class Job extends Base
      */
     private $project;
 
-	/**
-	 * @var string $status
-	 *
-	 * @ORM\Column(name="status", type="job_status", nullable=true)
-	 */
-	private $status;
+    /**
+     * @var string $status
+     *
+     * @ORM\Column(name="status", type="job_status", nullable=true)
+     */
+    private $status;
 
     /**
      * @var string $log
@@ -52,47 +52,56 @@ class Job extends Base
      */
     private $log;
 
-	public function getId() {
-		return $this->id;
-	}
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	public function getLog() {
-		return $this->log;
-	}
+    public function getLog()
+    {
+        return $this->log;
+    }
 
-	public function addLog($log) {
-		$this->log .= $log;
+    public function addLog($log)
+    {
+        $this->log .= $log;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getProject() {
-		return $this->project;
-	}
+    public function getProject()
+    {
+        return $this->project;
+    }
 
-	public function setProject(Project $project) {
-		$this->project = $project;
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getDate() {
-		return $this->date;
-	}
+    public function getDate()
+    {
+        return $this->date;
+    }
 
-	public function setDate($date) {
-		$this->date = $date;
+    public function setDate($date)
+    {
+        $this->date = $date;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getStatus() {
-		return $this->status;
-	}
+    public function getStatus()
+    {
+        return $this->status;
+    }
 
-	public function setStatus($status) {
-		$this->status = $status;
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
-		return $this;
-	}
+        return $this;
+    }
 }

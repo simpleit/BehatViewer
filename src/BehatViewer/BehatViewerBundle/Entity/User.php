@@ -185,17 +185,17 @@ class User extends Base implements AdvancedUserInterface
         return $this->getRolesCollection()->toArray();
     }
 
-	public function getRolesCollection()
-	{
-		return $this->roles;
-	}
+    public function getRolesCollection()
+    {
+        return $this->roles;
+    }
 
-	public function setRolesCollection(ArrayCollection $roles)
-	{
-		$this->roles = $roles;
+    public function setRolesCollection(ArrayCollection $roles)
+    {
+        $this->roles = $roles;
 
-		return $this;
-	}
+        return $this;
+    }
 
     public function eraseCredentials()
     {

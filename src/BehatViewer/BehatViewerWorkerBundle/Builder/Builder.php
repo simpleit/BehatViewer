@@ -24,7 +24,7 @@ abstract class Builder extends ContainerAware implements BuilderInterface
             );
         }
 
-		$output->writeln(
+        $output->writeln(
             sprintf(
                 '<info>Starting builder</info> <comment>%s</comment>',
                 get_class($this)

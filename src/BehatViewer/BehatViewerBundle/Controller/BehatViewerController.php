@@ -32,7 +32,7 @@ abstract class BehatViewerController extends Controller
             array(
                 'session' => $this->getSession(),
                 'user' => $this->getRequest()->get('user'),
-				'bundle' => $this->getBundle()
+                'bundle' => $this->getBundle()
             ),
             $variables
         );
@@ -63,18 +63,18 @@ abstract class BehatViewerController extends Controller
         return $this->getSession()->get($key, $default);
     }
 
-	protected function getBundle()
-	{
-		$matches    = array();
-		$controller = $this->getRequest()->attributes->get('_controller');
-		preg_match('/BehatViewer\\\(.*)\\\Controller/', $controller, $matches);
+    protected function getBundle()
+    {
+        $matches    = array();
+        $controller = $this->getRequest()->attributes->get('_controller');
+        preg_match('/BehatViewer\\\(.*)\\\Controller/', $controller, $matches);
 
-		if(0 === preg_match('/BehatViewer\\\(.*)\\\Controller/', $controller, $matches)) {
-			if(0 === preg_match('/(BehatViewer([^:]*)):.*/', $controller, $matches)) {
-				return null;
-			}
-		}
-		
-		return $matches[1];
-	}
+        if (0 === preg_match('/BehatViewer\\\(.*)\\\Controller/', $controller, $matches)) {
+            if (0 === preg_match('/(BehatViewer([^:]*)):.*/', $controller, $matches)) {
+                return null;
+            }
+        }
+
+        return $matches[1];
+    }
 }
