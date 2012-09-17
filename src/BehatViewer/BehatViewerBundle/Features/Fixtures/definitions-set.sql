@@ -1,4 +1,4 @@
-INSERT INTO `behatviewer_definition` (`id`, `project_id`, `snippet`, `context`, `method`, `description`) VALUES
+INSERT INTO `definition` (`id`, `project_id`, `snippet`, `context`, `method`, `description`) VALUES
 (1,  1, 'Given /^I load the "(?P<fixture>[^"]*)" fixture$/', 'FixtureContext', 'iLoadTheFixture()', NULL),
 (2,  1, 'Given /^I (do not|don''t) follow redirects?$/', 'BrowserContext', 'theRedirectionsAreIntercepted()', NULL),
 (3,  1, 'When /^I follow (|the) redirections?$/', 'BrowserContext', 'iFollowTheRedirection()', NULL),

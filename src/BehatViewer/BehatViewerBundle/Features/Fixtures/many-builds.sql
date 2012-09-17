@@ -1,4 +1,4 @@
-INSERT INTO `behatviewer_build` (`id`, `stat_id`, `project_id`, `date`) VALUES
+INSERT INTO `build` (`id`, `stat_id`, `project_id`, `date`) VALUES
 (1,  1,  1, '1970-01-01 00:00:00'),
 (2,  2,  1, '1970-01-01 00:00:00'),
 (3,  3,  1, '1970-01-01 00:00:00'),
@@ -25,7 +25,7 @@ INSERT INTO `behatviewer_build` (`id`, `stat_id`, `project_id`, `date`) VALUES
 (24, 24, 1, '1970-01-01 00:00:00'),
 (25, 25, 1, '1970-01-01 00:00:00');
 
-INSERT INTO `behatviewer_feature` (`id`, `build_id`, `stat_id`, `name`, `slug`, `description`) VALUES
+INSERT INTO `feature` (`id`, `build_id`, `stat_id`, `name`, `slug`, `description`) VALUES
 (1,  1,  1,  'Passed', 'passed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.'),
 (2,  2,  2,  'Passed', 'passed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.'),
 (3,  3,  3,  'Passed', 'passed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.'),
@@ -52,7 +52,7 @@ INSERT INTO `behatviewer_feature` (`id`, `build_id`, `stat_id`, `name`, `slug`, 
 (24, 24, 24, 'Passed', 'passed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.'),
 (25, 25, 25, 'Passed', 'passed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere mollis quam sed rhoncus. Lorem ipsum dolor sit amet, consectetur.');
 
-INSERT INTO `behatviewer_scenario` (`id`, `feature_id`, `name`, `slug`, `status`) VALUES
+INSERT INTO `scenario` (`id`, `feature_id`, `name`, `slug`, `status`) VALUES
 (1,  1, 'Passed', 'passed', 'passed'),
 (2,  2, 'Failed', 'failed', 'failed'),
 (3,  3, 'Passed', 'passed', 'passed'),
@@ -79,7 +79,7 @@ INSERT INTO `behatviewer_scenario` (`id`, `feature_id`, `name`, `slug`, `status`
 (24, 24, 'Failed', 'failed', 'failed'),
 (25, 25, 'Passed', 'passed', 'passed');
 
-INSERT INTO `behatviewer_step` (`scenario_id`, `type`, `background`, `clean_text`, `text`, `file`, `line`, `status`, `definition`, `snippet`, `screen`, `exception`) VALUES
+INSERT INTO `step` (`scenario_id`, `type`, `background`, `clean_text`, `text`, `file`, `line`, `status`, `definition`, `snippet`, `screen`, `exception`) VALUES
 (1, 'Given',  0, 'I am on "/foo/"',    'I am on "/foo/"',    '/foo/bar/passed.feature', '5', 'passed', 'foo\\bar\\Context\\FeatureContext::visit()', '', '', ''),
 (1, 'Then',   0, 'I should see "foo"', 'I should see "foo"', '/foo/bar/passed.feature', '6', 'passed', 'foo\\bar\\Context\\FeatureContext::see()',   '', '', ''),
 (1, 'And',    0, 'I should see "bar"', 'I should see "bar"', '/foo/bar/passed.feature', '7', 'passed', 'foo\\bar\\Context\\FeatureContext::see()',   '', '', ''),
@@ -192,7 +192,7 @@ INSERT INTO `behatviewer_step` (`scenario_id`, `type`, `background`, `clean_text
 (25, 'Then',  0, 'I should see "foo"', 'I should see "foo"', '/foo/bar/passed.feature', '6', 'passed', 'foo\\bar\\Context\\FeatureContext::see()',   '', '', ''),
 (25, 'And',   0, 'I should see "bar"', 'I should see "bar"', '/foo/bar/passed.feature', '7', 'passed', 'foo\\bar\\Context\\FeatureContext::see()',   '', '', '');
 
-INSERT INTO `behatviewer_feature_stat` (`id`, `scenarios`, `scenarios_passed`, `scenarios_failed`, `steps`, `steps_passed`, `steps_failed`, `steps_skipped`, `steps_undefined`, `steps_pending`) VALUES
+INSERT INTO `feature_stat` (`id`, `scenarios`, `scenarios_passed`, `scenarios_failed`, `steps`, `steps_passed`, `steps_failed`, `steps_skipped`, `steps_undefined`, `steps_pending`) VALUES
 (1,  1, 1, 0, 3, 3, 0, 0, 0, 0),
 (2,  1, 1, 0, 4, 3, 1, 0, 0, 0),
 (3,  1, 1, 0, 3, 3, 0, 0, 0, 0),
@@ -219,7 +219,7 @@ INSERT INTO `behatviewer_feature_stat` (`id`, `scenarios`, `scenarios_passed`, `
 (24, 1, 1, 0, 4, 3, 1, 0, 0, 0),
 (25, 1, 1, 0, 3, 3, 0, 0, 0, 0);
 
-INSERT INTO `behatviewer_build_stat` (`id`, `features`, `features_passed`, `features_failed`, `scenarios`, `scenarios_passed`, `scenarios_failed`, `steps`, `steps_passed`, `steps_failed`, `steps_skipped`, `steps_undefined`, `steps_pending`) VALUES
+INSERT INTO `build_stat` (`id`, `features`, `features_passed`, `features_failed`, `scenarios`, `scenarios_passed`, `scenarios_failed`, `steps`, `steps_passed`, `steps_failed`, `steps_skipped`, `steps_undefined`, `steps_pending`) VALUES
 (1,  1, 1, 0, 1, 1, 0, 3, 3, 0, 0, 0, 0),
 (2,  1, 0, 1, 1, 1, 0, 4, 3, 1, 0, 0, 0),
 (3,  1, 1, 0, 1, 1, 0, 3, 3, 0, 0, 0, 0),
