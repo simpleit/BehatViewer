@@ -4,11 +4,11 @@ namespace BehatViewer\BehatViewerBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use BehatViewer\BehatViewerBundle\Entity\User;
+use BehatViewer\BehatViewerBundle\Entity;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class LoadRolesData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -25,32 +25,28 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
     public function load(ObjectManager $manager)
     {
-        $admin = new User();
-        $admin->setUsername('admin');
-        $admin->setPassword('password');
+		foreach($this->getRoles() as $key => $name) {
+			$role = new Entity\Role();
+			$role->setName($name);
+			$role->setRole($key);
+			$manager->persist($role);
 
-        $factory = $this->container->get('security.encoder_factory');
-        $encoder = $factory->getEncoder($admin);
+			$this->addReference($key, $role);
+		}
 
-        $admin->setPassword(
-            $encoder->encodePassword(
-                'password',
-                $admin->getSalt()
-            )
-        );
-
-        $admin->setEmail('');
-		$admin->setToken(md5(uniqid()));
-		$admin->getRolesCollection()->add($this->getReference('ROLE_ADMIN'));
-
-        $manager->persist($admin);
         $manager->flush();
-
-        $this->addReference('USER_ADMIN', $admin);
     }
+
+	protected function getRoles() {
+		return array(
+			'ROLE_USER' => 'User',
+			'ROLE_ADMIN' => 'Admin',
+			'ROLE_PREMIUM' => 'Premium'
+		);
+	}
 
     public function getOrder()
     {
-        return 2;
+        return 1;
     }
 }
