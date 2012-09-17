@@ -1,8 +1,8 @@
 {% extends 'BehatViewerUiBundle::layout.table.html.twig' %}
 
 {% block title %}
-    {% if overview %}
-        <div class="row-fluid">
+    <div class="row-fluid">
+        {% if overview %}
             {% set class = overview.queue_totals.messages_unacknowledged == 0 ? "success" : "danger" %}
             <div class="span4 alert alert-block alert-{{ class }}">
                 <p style="text-align: center; font-size: 4em; margin: 20px 0 30px 0">
@@ -27,8 +27,17 @@
                 </p>
                 <p style="text-align: center; font-size: 1.5em">Total messages</p>
             </div>
-        </div>
-    {% endif %}
+        {% else %}
+            <div class="alert alert-block alert-error">
+                <h4 class="alert-heading">RabbitMQ broker status</h4>
+
+                <p>
+                    RabbitMQ broker at {{ rabbitmq.host }}:{{ rabbitmq.port }} not running.
+                </p
+            </div>
+        {% endif %}
+    </div>
+
 
     <h1 class="page-header">
         Workers status

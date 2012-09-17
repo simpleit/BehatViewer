@@ -36,6 +36,13 @@ twig:
             key: %pusher_key%
             secret: %pusher_secret%
             channel: %pusher_channel%
+        rabbitmq:
+            host: %rabbitmq_host%
+            port: %rabbitmq_port%
+            api_port: %rabbitmq_api_port%
+            user: %rabbitmq_user%
+            password: %rabbitmq_password%
+            vhost: %rabbitmq_vhost%
 
 # Assetic Configuration
 assetic:

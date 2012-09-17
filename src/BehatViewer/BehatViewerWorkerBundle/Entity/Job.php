@@ -73,11 +73,7 @@ class Job extends Entity\Base
         return $this->project;
     }
 
-<<<<<<< HEAD
-    public function setProject(Project $project)
-=======
     public function setProject(Entity\Project $project)
->>>>>>> Moving code to Core bundle
     {
         $this->project = $project;
 

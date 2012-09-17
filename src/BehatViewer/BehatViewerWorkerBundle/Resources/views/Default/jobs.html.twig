@@ -1,6 +1,23 @@
 {% extends 'BehatViewerUiBundle::layout.table.html.twig' %}
 
-{% block title %}<h1 class="page-header">Jobs</h1>{% endblock %}
+{% block title %}
+<div class="row-fluid" xmlns="http://www.w3.org/1999/html">
+        <div class="alert alert-block alert-{{ status.count is defined ? 'success' : 'error' }}">
+            <h4>Message broker status</h4>
+
+            <p>
+                Message broker at {{ pusher.host }}:{{ pusher.port }} is
+                {% if status.count is defined %}
+                    up and running : {{ status.count }} user(s) online.
+                {% else %}
+                    not running : you won't be able to use the realtime log.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <h1 class="page-header">Jobs</h1>
+{% endblock %}
 
 {% block sort %}{sortlist: [[0,1]]}{% endblock %}
 
@@ -35,10 +52,3 @@
     {% endfor %}
 {% endblock %}
 
-{% block alert %}
-    <div class="alert alert-block alert-info">
-        <h4 class="alert-heading">No feature</h4>
-
-        <p>This project has not been built yet. Click on the build button to launch test suite.</p>
-    </div>
-{% endblock %}

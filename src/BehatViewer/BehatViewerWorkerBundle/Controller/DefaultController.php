@@ -49,10 +49,22 @@ class DefaultController extends BehatViewerController
      */
     public function jobsAction()
     {
+		$pusherHost = $this->container->getParameter('pusher_host');
+		$pusherPort = $this->container->getParameter('pusher_port');
+		$pusherKey = $this->container->getParameter('pusher_key');
+		$pusherSecret = $this->container->getParameter('pusher_secret');
+
+		$curl = curl_init('http://' . $pusherHost . ':' . $pusherPort . '/api/1.0.0/' . $pusherKey . '/users/');
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+			'X-Thunder-Secret-Key: ' . $pusherSecret,
+		));
+
         $jobs = $this->getDoctrine()->getRepository('BehatViewerWorkerBundle:Job')->findAll();
 
         return $this->getResponse(array(
-            'items' => $jobs
+            'items' => $jobs,
+			'status' => json_decode(curl_exec($curl))
         ));
     }
 
