@@ -17,7 +17,6 @@
         <parameter key="behat_viewer.build.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\BuildParamConverter</parameter>
         <parameter key="behat_viewer.feature.converter.class">BehatViewer\BehatViewerBundle\Request\ParamConverter\FeatureParamConverter</parameter>
 
-        <parameter key="behat_viewer.db.table_prefix_subscriber.class">BehatViewer\BehatViewerBundle\Extension\Doctrine\BehatViewerTablePrefix</parameter>
         <parameter key="behat_viewer.db.table_prefix">behatviewer_</parameter>
     </parameters>
 
@@ -69,11 +68,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="behat_viewer.db.table_prefix_subscriber" class="%behat_viewer.db.table_prefix_subscriber.class%">
-            <argument>%behat_viewer.db.table_prefix%</argument>
-            <tag name="doctrine.event_subscriber"/>
         </service>
 
         <service id="behat_viewer.markdown_parser" class="%behat_viewer.markdown_parser.class%">
