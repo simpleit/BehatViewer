@@ -1,53 +1,17 @@
 {% extends 'BehatViewerBundle:Project:edit.html.twig' %}
 
 {% block stylesheet %}
-    <link rel="stylesheet" href="{{ asset('bundles/behatviewer/css/codemirror.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/behatviewer/css/rubyblue.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/behatviewerui/css/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/behatviewerui/css/rubyblue.css') }}">
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ asset('bundles/behatviewer/js/codemirror.js') }}"></script>
-    <script src="{{ asset('bundles/behatviewer/js/mode/shell/shell.js') }}"></script>
-    <script src="{{ asset('bundles/behatviewer/js/util/searchcursor.js') }}"></script>
-    <script src="{{ asset('bundles/behatviewer/js/util/match-highlighter.js') }}"></script>
+    <script src="{{ asset('bundles/behatviewerui/js/codemirror.js') }}"></script>
+    <script src="{{ asset('bundles/behatviewerui/js/mode/shell/shell.js') }}"></script>
+    <script src="{{ asset('bundles/behatviewerui/js/util/searchcursor.js') }}"></script>
+    <script src="{{ asset('bundles/behatviewerui/js/util/match-highlighter.js') }}"></script>
     <script>
         $(function() {
-            function isFullScreen(cm) {
-                return /\bfullscreen\b/.test(cm.getWrapperElement().className);
-            }
-            function winHeight() {
-                return window.innerHeight || (document.documentElement || document.body).clientHeight;
-            }
-            function setFullScreen(cm, full) {
-                var wrap = cm.getWrapperElement(), scroll = cm.getScrollerElement();
-                if (full) {
-                    wrap.className += " fullscreen";
-                    scroll.style.height = winHeight() + "px";
-                    document.documentElement.style.overflow = "hidden";
-
-                    noty({
-                        text: 'To exit fullscreen press ESC',
-                        type: 'information',
-                        layout: 'topCenter',
-                        theme: 'noty_theme_twitter'
-                    });
-
-                    $(wrap).appendTo('body');
-                } else {
-                    wrap.className = wrap.className.replace(" fullscreen", "");
-                    scroll.style.height = "";
-                    document.documentElement.style.overflow = "";
-
-                    $(wrap).appendTo(holder);
-                }
-                cm.refresh();
-            }
-            CodeMirror.connect(window, "resize", function() {
-                var showing = document.body.getElementsByClassName("fullscreen")[0];
-                if (!showing) return;
-                showing.CodeMirror.getScrollerElement().style.height = winHeight() + "px";
-            });
-
             var editor = CodeMirror.fromTextArea(document.getElementById("project_script_test_command"), {
                         mode: "text/x-sh",
                         lineNumbers: true,
@@ -56,15 +20,6 @@
                             editor.matchHighlight("matchhighlight");
                             editor.setLineClass(hlLine, null, null);
                             hlLine = editor.setLineClass(editor.getCursor().line, null, "activeline");
-
-                            if(false === isFullScreen(editor)) {
-                                setFullScreen(editor, true);
-                            }
-                        },
-                        extraKeys: {
-                            "Esc": function(cm) {
-                                if (isFullScreen(cm)) setFullScreen(cm, false);
-                            }
                         }
                     }),
                     hlLine = editor.setLineClass(0, "activeline"),

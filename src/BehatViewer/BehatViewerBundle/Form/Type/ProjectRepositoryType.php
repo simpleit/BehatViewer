@@ -38,6 +38,6 @@ class ProjectRepositoryType extends AbstractType
      */
     public function getName()
     {
-        return 'project_script';
+        return 'project_repository';
     }
 }

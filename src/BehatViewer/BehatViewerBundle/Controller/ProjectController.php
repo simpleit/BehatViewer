@@ -186,7 +186,7 @@ class ProjectController extends BehatViewerProjectController
             if (null === $strategy || $form instanceof ProjectRepositoryType) {
                 $strategies = array(
                     'git' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GitStrategy',
-                    'git_local' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GitStrategy',
+                    'git_local' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GitLocalStrategy',
                     'github' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GithubStrategy',
                     'local' => '\\BehatViewer\\BehatViewerCoreBundle\\Entity\\GitStrategy'
                 );
