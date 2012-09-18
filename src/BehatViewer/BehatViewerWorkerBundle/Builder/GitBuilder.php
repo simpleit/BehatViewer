@@ -11,9 +11,9 @@ class GitBuilder extends Builder
         return $strategy->getUrl();
     }
 
-    protected function getCloneCommand(Entity\Strategy $strategy)
+    protected function getCloneCommand(Entity\Strategy $strategy, $path = null)
     {
-        return 'git clone --depth=50 ' . $this->getRepositoryUrl($strategy);
+        return 'git clone --depth=50 ' . $this->getRepositoryUrl($strategy) . ' ' . $path;
     }
 
     protected function getClonePath(Entity\Strategy $strategy)
@@ -34,7 +34,7 @@ class GitBuilder extends Builder
         }
 
         $process = new \BehatViewer\BehatViewerBundle\Process\UnbefferedProcess(
-            $this->getCloneCommand($strategy),
+            $this->getCloneCommand($strategy, $strategy->getProject()->getSlug()),
             realpath($dir . DIRECTORY_SEPARATOR . '..')
         );
 

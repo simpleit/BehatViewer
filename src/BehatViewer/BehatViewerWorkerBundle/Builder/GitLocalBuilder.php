@@ -10,9 +10,9 @@ class GitLocalBuilder extends GitBuilder
         return $strategy->getPath();
     }
 
-    protected function getCloneCommand(Entity\Strategy $strategy)
+    protected function getCloneCommand(Entity\Strategy $strategy, $path = null)
     {
-        return 'git clone --shared ' . $this->getRepositoryUrl($strategy);
+        return 'git clone --shared ' . $this->getRepositoryUrl($strategy) . ' ' . $path;
     }
 
     protected function supports(Entity\Strategy $strategy)

@@ -30,9 +30,11 @@ class LocalBuilder extends Builder
             }
         });
 
-        $analyzer = $this->container->get('behat_viewer.analyzer');
-        $data = json_decode(file_get_contents($path . DIRECTORY_SEPARATOR . 'behat-viewer.json'), true);
-        $analyzer->analyze($strategy->getProject(), $data);
+		if(0 === $status) {
+			$analyzer = $this->container->get('behat_viewer.analyzer');
+			$data = json_decode(file_get_contents($path . DIRECTORY_SEPARATOR . 'behat-viewer.json'), true);
+			$analyzer->analyze($strategy->getProject(), $data);
+		}
 
         return $status;
     }
