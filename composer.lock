@@ -275,15 +275,21 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": null,
+                    "role": null
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "email": null,
+                    "homepage": "http://symfony.com/contributors",
+                    "role": null
                 },
                 {
                     "name": "Doctrine Project",
-                    "homepage": "http://www.doctrine-project.org"
+                    "email": null,
+                    "homepage": "http://www.doctrine-project.org",
+                    "role": null
                 }
             ],
             "description": "Symfony DoctrineFixturesBundle",
@@ -327,15 +333,21 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": null,
+                    "role": null
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "email": null,
+                    "homepage": "http://symfony.com/contributors",
+                    "role": null
                 },
                 {
                     "name": "Doctrine Project",
-                    "homepage": "http://www.doctrine-project.org"
+                    "email": null,
+                    "homepage": "http://www.doctrine-project.org",
+                    "role": null
                 }
             ],
             "description": "Symfony DoctrineMigrationsBundle",
@@ -536,7 +548,7 @@
                 "symfony/framework-bundle": "2.*",
                 "jms/cg": "1.0.0"
             },
-            "time": "2012-01-02 09:50:26",
+            "time": "2011-12-31 19:50:26",
             "type": "symfony-bundle",
             "installation-source": "dist",
             "autoload": {
@@ -578,7 +590,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 09:40:52",
+            "time": "2011-12-31 19:40:52",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -678,7 +690,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 10:32:49",
+            "time": "2011-12-31 20:32:49",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -979,7 +991,10 @@
             ],
             "authors": [
                 {
-                    "name": "Alvaro Videla"
+                    "name": "Alvaro Videla",
+                    "email": null,
+                    "homepage": null,
+                    "role": null
                 }
             ],
             "description": "Integrates php-amqplib with Symfony2 and RabbitMq",
@@ -992,27 +1007,27 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "dev-master",
+            "version": "2.1.x-dev",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioDistributionBundle",
-                "reference": "4e86595e02c6e3d76971f790d7c06ec434e1b513"
+                "reference": "2eee3cb4cd761c851f0d766649fb9ff6f4c97002"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sensio/SensioDistributionBundle/zipball/4e86595e02c6e3d76971f790d7c06ec434e1b513",
-                "reference": "4e86595e02c6e3d76971f790d7c06ec434e1b513",
+                "url": "https://github.com/sensio/SensioDistributionBundle/zipball/2eee3cb4cd761c851f0d766649fb9ff6f4c97002",
+                "reference": "2eee3cb4cd761c851f0d766649fb9ff6f4c97002",
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "2.2.*"
+                "symfony/framework-bundle": "2.1.*"
             },
-            "time": "1347635342",
+            "time": "1347340208",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "installation-source": "source",
@@ -1038,28 +1053,28 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "dev-master",
+            "version": "2.1.x-dev",
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioFrameworkExtraBundle",
-                "reference": "03e32da3fd1bb37e4c6f3c77f1b4cb8a3a78e0a8"
+                "reference": "6d393099b17f301cc09a1d586292ed0b84763011"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sensio/SensioFrameworkExtraBundle/zipball/03e32da3fd1bb37e4c6f3c77f1b4cb8a3a78e0a8",
-                "reference": "03e32da3fd1bb37e4c6f3c77f1b4cb8a3a78e0a8",
+                "url": "https://github.com/sensio/SensioFrameworkExtraBundle/zipball/6d393099b17f301cc09a1d586292ed0b84763011",
+                "reference": "6d393099b17f301cc09a1d586292ed0b84763011",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.1,<2.4-dev",
-                "symfony/framework-bundle": "2.2.*"
+                "symfony/framework-bundle": "2.1.*",
+                "doctrine/common": ">=2.1,<2.4-dev"
             },
-            "time": "1347340790",
+            "time": "1347780475",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "installation-source": "source",
@@ -1361,12 +1376,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "9993b86a4844af0b3dcd79f1c795eb4a8f5ab7d9"
+                "reference": "846df269dd32c495fde203d4568c50e3214b4365"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/zipball/9993b86a4844af0b3dcd79f1c795eb4a8f5ab7d9",
-                "reference": "9993b86a4844af0b3dcd79f1c795eb4a8f5ab7d9",
+                "url": "https://github.com/symfony/symfony/zipball/846df269dd32c495fde203d4568c50e3214b4365",
+                "reference": "846df269dd32c495fde203d4568c50e3214b4365",
                 "shasum": ""
             },
             "require": {
@@ -1415,7 +1430,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": "dev-master"
             },
-            "time": "1347864860",
+            "time": "1347781262",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1583,7 +1598,10 @@
             },
             "authors": [
                 {
-                    "name": "Alvaro Videla"
+                    "name": "Alvaro Videla",
+                    "email": null,
+                    "homepage": null,
+                    "role": null
                 }
             ],
             "description": "This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
