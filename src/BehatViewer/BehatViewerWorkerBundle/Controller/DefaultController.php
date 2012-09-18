@@ -60,7 +60,7 @@ class DefaultController extends BehatViewerController
 			'X-Thunder-Secret-Key: ' . $pusherSecret,
 		));
 
-        $jobs = $this->getDoctrine()->getRepository('BehatViewerWorkerBundle:Job')->findAll();
+        $jobs = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Job')->findAll();
 
         return $this->getResponse(array(
             'items' => $jobs,
@@ -74,7 +74,7 @@ class DefaultController extends BehatViewerController
      * @Configuration\Route("/log/{id}", name="behatviewer.worker.job.log")
      * @Configuration\Template()
      */
-    public function logAction(\BehatViewer\BehatViewerWorkerBundle\Entity\Job $job)
+    public function logAction(\BehatViewer\BehatViewerCoreBundle\Entity\Job $job)
     {
         return $this->getResponse(array(
             'job' => $job

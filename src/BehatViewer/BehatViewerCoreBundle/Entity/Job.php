@@ -1,17 +1,16 @@
 <?php
 
-namespace BehatViewer\BehatViewerWorkerBundle\Entity;
+namespace BehatViewer\BehatViewerCoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    BehatViewer\BehatViewerCoreBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BehatViewer\BehatViewerWorkerBundle\Entity\Job
+ * BehatViewer\BehatViewerCoreBundle\Entity\Job
  *
  * @ORM\Table(name="job")
- * @ORM\Entity(repositoryClass="BehatViewer\BehatViewerWorkerBundle\Entity\Repository\JobRepository")
+ * @ORM\Entity(repositoryClass="BehatViewer\BehatViewerCoreBundle\Entity\Repository\JobRepository")
  */
-class Job extends Entity\Base
+class Job extends Base
 {
     /**
      * @var integer $id
@@ -73,7 +72,7 @@ class Job extends Entity\Base
         return $this->project;
     }
 
-    public function setProject(Entity\Project $project)
+    public function setProject(Project $project)
     {
         $this->project = $project;
 

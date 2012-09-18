@@ -44,10 +44,10 @@ class BuildCommand extends ProjectCommand
 
         parent::execute($input, $output);
 
-        $job = new \BehatViewer\BehatViewerWorkerBundle\Entity\Job();
+        $job = new \BehatViewer\BehatViewerCoreBundle\Entity\Job();
         $job->setDate(new \DateTime());
         $job->setProject($this->getProject());
-        $job->setStatus(\BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_RUNNING);
+        $job->setStatus(\BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType::TYPE_RUNNING);
         $this->getDoctrine()->getManager()->persist($job);
         $this->getDoctrine()->getManager()->flush();
 
@@ -65,11 +65,11 @@ class BuildCommand extends ProjectCommand
             );
 
             $result = $status === 0
-                ? \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_SUCCESS
-                : \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
+                ? \BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType::TYPE_SUCCESS
+                : \BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
 
         } catch (\Exception $exception) {
-            $result = \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
+            $result = \BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
             $status = $exception->getCode() ?: 1;
 
             $this->getApplication()->renderException($exception, $output);

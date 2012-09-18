@@ -1,5 +1,5 @@
 <?php
-namespace BehatViewer\BehatViewerWorkerBundle\DBAL\Type;
+namespace BehatViewer\BehatViewerCoreBundle\DBAL\Type;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;

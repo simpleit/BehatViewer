@@ -5,7 +5,7 @@ use Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Formatter\OutputFormatterInterface;
 use BehatViewer\BehatViewerPusherBundle\Console\Formatter\PusherFormater;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use BehatViewer\BehatViewerWorkerBundle\Entity\Job;
+use BehatViewer\BehatViewerCoreBundle\Entity\Job;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 class PersistentOutput implements OutputInterface, ContainerAwareInterface

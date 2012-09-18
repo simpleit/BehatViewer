@@ -25,5 +25,9 @@ class BehatViewerCoreBundle extends Bundle
         if (false === Type::hasType('project_type')) {
             Type::addType('project_type', 'BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumProjectTypeType');
         }
+
+		if (false === Type::hasType('job_status')) {
+			Type::addType('job_status', 'BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType');
+		}
     }
 }

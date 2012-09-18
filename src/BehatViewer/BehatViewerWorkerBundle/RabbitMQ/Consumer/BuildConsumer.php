@@ -22,10 +22,10 @@ class BuildConsumer extends Consumer
             $pusherOutput
         ));
 
-        $job = new \BehatViewer\BehatViewerWorkerBundle\Entity\Job();
+        $job = new \BehatViewer\BehatViewerCoreBundle\Entity\Job();
         $job->setDate(new \DateTime());
         $job->setProject($project);
-        $job->setStatus(\BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_RUNNING);
+        $job->setStatus(\BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType::TYPE_RUNNING);
         $this->container->get('doctrine')->getManager()->persist($job);
         $this->container->get('doctrine')->getManager()->flush();
 
@@ -43,11 +43,11 @@ class BuildConsumer extends Consumer
             );
 
             $result = $status === 0
-                ? \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_SUCCESS
-                : \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
+                ? \BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType::TYPE_SUCCESS
+                : \BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
 
         } catch (\Exception $exception) {
-            $result = \BehatViewer\BehatViewerWorkerBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
+            $result = \BehatViewer\BehatViewerCoreBundle\DBAL\Type\EnumJobStatusType::TYPE_FAILED;
         }
 
         $job->setStatus($result);
