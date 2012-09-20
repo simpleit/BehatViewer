@@ -19,7 +19,7 @@ security:
 
     providers:
         main:
-            entity: { class: BehatViewerCoreBundle:User, property: username }
+            entity: { class: BehatViewerCoreBundle:User, property: id }
 
 
     access_control:
