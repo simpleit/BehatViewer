@@ -51,15 +51,33 @@ class GithubStrategy extends Strategy
         return $this->username;
     }
 
+	public function setUsername($username) {
+		$this->username = $username;
+
+		return $this;
+	}
+
     public function getRepository()
     {
         return $this->repository;
     }
 
+	public function setRepository($repository) {
+		$this->repository = $repository;
+
+		return $this;
+	}
+
     public function getBranch()
     {
         return $this->branch;
     }
+
+	public function setBranch($branch) {
+		$this->branch = $branch;
+
+		return $this;
+	}
 
     public function getUrl()
     {
