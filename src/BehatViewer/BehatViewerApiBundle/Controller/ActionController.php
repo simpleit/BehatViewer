@@ -52,7 +52,8 @@ class ActionController extends BehatViewerController
     public function githubAction()
     {
         if (null !== ($payload = $this->getRequest()->get('payload'))) {
-            $ghrepository = $payload->repository;
+            $payload = json_decode($payload);
+			$ghrepository = $payload->repository;
 
             $repository = $this->getDoctrine()->getManager()->getRepository('BehatViewerCoreBundle:Project');
             $project = $repository->findOneByUsernameAndSlug($this->getUser()->getUsername(), $ghrepository->name);

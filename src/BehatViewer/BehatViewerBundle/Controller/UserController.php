@@ -6,7 +6,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration,
     Symfony\Component\Security\Core\SecurityContext,
     JMS\SecurityExtraBundle\Annotation as Security,
     BehatViewer\BehatViewerBundle\Form\Type\ProfileType,
-    BehatViewer\BehatViewerBundle\Form\Type\PasswordType;
+    BehatViewer\BehatViewerBundle\Form\Type\RegisterType,
+    BehatViewer\BehatViewerBundle\Form\Type\PasswordType,
+	BehatViewer\BehatViewerCoreBundle\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserController extends BehatViewerController
 {
@@ -42,6 +45,58 @@ class UserController extends BehatViewerController
     {
         return array();
     }
+
+	/**
+	 * @Configuration\Template()
+	 */
+	public function registerAction()
+	{
+		$form = $this->get('form.factory')->create(new RegisterType(), new User());
+		$success = false;
+		$request = $this->getRequest();
+
+		if ('POST' === $request->getMethod()) {
+			$form->bindRequest($request);
+
+			if($form->isValid()) {
+				$user = $form->getData();
+				$user->setToken(md5(uniqid()));
+
+				$repository = $this->getDoctrine()->getRepository('BehatViewerCoreBundle:Role');
+				$role = $repository->findOneByRole('ROLE_USER');
+				$user->getRolesCollection()->add($role);
+
+				if (($password = $user->getPassword())) {
+					if ($password === $form->get('confirm')->getData()) {
+						$factory = $this->get('security.encoder_factory');
+						$encoder = $factory->getEncoder($user);
+
+						$user->setPassword(
+							$encoder->encodePassword(
+								$form->getData()->getPassword(),
+								$user->getSalt()
+							)
+						);
+					}
+				}
+
+				$this->getDoctrine()->getManager()->persist($user);
+				$this->getDoctrine()->getManager()->flush();
+				$this->getDoctrine()->getManager()->refresh($user);
+
+				$token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
+				$context = $this->container->get('security.context');
+				$context->setToken($token);
+
+				return $this->redirect($this->generateUrl('behatviewer.homepage'));
+			}
+		}
+
+		return $this->getResponse(array(
+			'success' => false,
+			'form' => $form->createView(),
+		));
+	}
 
     /**
      * @Configuration\Template()

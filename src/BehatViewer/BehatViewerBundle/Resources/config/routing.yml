@@ -8,6 +8,10 @@ behatviewer.login:
     pattern: /login
     defaults: { _controller: BehatViewerBundle:User:index }
 
+behatviewer.register:
+    pattern: /register
+    defaults: { _controller: BehatViewerBundle:User:register }
+
 behatviewer.login.check:
     pattern: /login/check
     defaults: { _controller: BehatViewerBundle:User:check }

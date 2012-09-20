@@ -40,14 +40,17 @@
                             {% for link in userlinks %}
                                 {% set params = (link.params is defined ? link.params : {}) %}
 
-                                {% if link.divider is defined and link.divider%}
-                                    <li class="divider"></li>
-                                {% else %}
-                                    <li>
-                                        <a href="{{ path(link.route, params) }}">
-                                            {% autoescape false %}{{ link.label }}{% endautoescape %}
-                                        </a>
-                                    </li>
+                                {%  if not link.show is defined or link.show == true %}
+                                    {% if link.divider is defined and link.divider%}
+                                        <li class="divider"></li>
+                                    {% else %}
+
+                                            <li>
+                                                <a href="{{ path(link.route, params) }}">
+                                                    {% autoescape false %}{{ link.label }}{% endautoescape %}
+                                                </a>
+                                            </li>
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                             <li class="divider"></li>
@@ -55,7 +58,10 @@
                         </ul>
                     </li>
                 {% else %}
-                    <li data-rel="login">
+                    <li>
+                        <a href="{{ path('behatviewer.register') }}">Register</a>
+                    </li>
+                    <li>
                         <a href="{{ path('behatviewer.login') }}">Log in</a>
                     </li>
                 {% endif %}
