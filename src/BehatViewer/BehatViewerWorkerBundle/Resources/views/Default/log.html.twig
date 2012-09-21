@@ -24,12 +24,6 @@
                 Thunder.listen(function(ev) {
                     $('#log').append(ev.msg);
 
-                    console.log(
-                            $('#log').position().top,
-                            $('#log').height(),
-                            $('footer').height()
-                    );
-
                     $('html, body')
                             .stop(true, true)
                             .animate(
