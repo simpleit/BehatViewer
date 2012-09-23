@@ -7,6 +7,7 @@ default:
         parameters:
             javascript_session: selenium2
             base_url: "http://%hostname%/app_test.php"
+            fixtures: "src/BehatViewer/BehatViewerBundle/Features/Fixtures"
 
     formatter:
         classes:
