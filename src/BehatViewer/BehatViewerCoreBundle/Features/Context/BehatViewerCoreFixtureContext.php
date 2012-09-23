@@ -96,9 +96,8 @@ class BehatViewerCoreFixtureContext extends BehatContext implements KernelAwareI
      */
     public function iLoadTheFixture($fixture)
     {
-        $dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Fixtures';
+        $dir = $this->getFixturesDirectory();
         $file = $dir . DIRECTORY_SEPARATOR . $fixture;
-
         if (!file_exists($file)) {
             throw new \RuntimeException(sprintf('Fixture %s does not exist', $fixture));
         }
@@ -112,4 +111,10 @@ class BehatViewerCoreFixtureContext extends BehatContext implements KernelAwareI
         }
 
     }
+
+	protected function getFixturesDirectory() {
+		 return $this->kernel->getRootDir() . '/../' . (true === isset($this->parameters['fixtures'])
+			? $this->parameters['fixtures']
+			: dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Fixtures');
+	}
 }
