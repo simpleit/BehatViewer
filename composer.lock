@@ -553,7 +553,7 @@
                 "symfony/framework-bundle": "2.*",
                 "jms/cg": "1.0.0"
             },
-            "time": "2011-12-31 13:50:26",
+            "time": "2011-12-31 12:50:26",
             "type": "symfony-bundle",
             "installation-source": "dist",
             "autoload": {
@@ -595,7 +595,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2011-12-31 13:40:52",
+            "time": "2011-12-31 12:40:52",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -697,7 +697,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2011-12-31 14:32:49",
+            "time": "2011-12-31 13:32:49",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1686,7 +1686,7 @@
                 "behat/mink-extension": "for integration of with Mink",
                 "behat/yii-extension": "for integration of with Yii framework"
             },
-            "time": "2012-05-13 08:23:46",
+            "time": "2012-05-13 06:23:46",
             "bin": [
                 "bin/behat"
             ],
@@ -1744,7 +1744,7 @@
                 "symfony/translation": "If you want to use Symfony2 translations adapter",
                 "symfony/config": "If you want to use Config component to manage resources"
             },
-            "time": "2012-08-01 13:25:15",
+            "time": "2012-08-01 11:25:15",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2196,7 +2196,7 @@
                 "php": ">=5.3.1",
                 "kriswallsmith/buzz": ">=0.5"
             },
-            "time": "2011-12-20 10:04:09",
+            "time": "2011-12-20 09:04:09",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2248,7 +2248,7 @@
                 "behat/mink-extension": "dev-master",
                 "behat/mink-browserkit-driver": "dev-master"
             },
-            "time": "2012-07-03 08:02:55",
+            "time": "2012-07-03 06:02:55",
             "type": "behat-extension",
             "installation-source": "dist",
             "autoload": {
@@ -2346,7 +2346,7 @@
                 "php": ">=5.3.2",
                 "symfony/event-dispatcher": "2.1.*"
             },
-            "time": "2012-09-05 11:30:30",
+            "time": "2012-09-05 09:30:30",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2375,7 +2375,7 @@
                 "guzzle/common": "self.version",
                 "guzzle/parser": "self.version"
             },
-            "time": "2012-09-02 07:01:34",
+            "time": "2012-09-02 05:01:34",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2402,7 +2402,7 @@
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "2012-08-16 17:22:25",
+            "time": "2012-08-16 15:22:25",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2468,18 +2468,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/behat-viewer/BehatViewerExtension.git",
-                "reference": "8939a7e8abf5e8e1eabb85611346810cfa86c0fa"
+                "reference": "52210e27662d0060180e342c443dac239d84565d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/behat-viewer/BehatViewerExtension/zipball/8939a7e8abf5e8e1eabb85611346810cfa86c0fa",
-                "reference": "8939a7e8abf5e8e1eabb85611346810cfa86c0fa",
+                "url": "https://github.com/behat-viewer/BehatViewerExtension/zipball/52210e27662d0060180e342c443dac239d84565d",
+                "reference": "52210e27662d0060180e342c443dac239d84565d",
                 "shasum": ""
             },
             "require-dev": {
                 "behat/behat": "2.4.*"
             },
-            "time": "1348425919",
+            "time": "1348428976",
             "type": "behat-extension",
             "installation-source": "source",
             "autoload": {

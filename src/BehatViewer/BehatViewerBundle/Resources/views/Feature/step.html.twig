@@ -12,7 +12,7 @@
 {% set class = 'warning' %}
 {% endif %}
 
-<div class="step clearfix" style="border-bottom: 1px solid #DDD">
+<div class="step step-{{ step.status }} clearfix" style="border-bottom: 1px solid #DDD">
     <h4 class="alert-heading">
         <span class="label label-{{ class }}">{{ step.status }}</span>
         {% if step.background %}[Background]{% endif %}

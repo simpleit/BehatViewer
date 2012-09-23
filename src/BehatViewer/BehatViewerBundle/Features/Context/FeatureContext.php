@@ -17,6 +17,7 @@ class FeatureContext extends BehatViewerContext
         parent::__construct($parameters);
 
         $this->useContext('browser', new BrowserContext($parameters));
+        $this->useContext('step', new StepContext($parameters));
 
         $this->useContext('core', new BehatViewerCoreContext($parameters));
         $this->useContext('ui', new BehatViewerUiContext($parameters));
