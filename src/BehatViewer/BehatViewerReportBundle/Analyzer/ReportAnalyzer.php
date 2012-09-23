@@ -112,10 +112,11 @@ class ReportAnalyzer extends Analyzer
      */
     protected function getScenarioFromData(array $data)
     {
+		static $untitled = 0;
+
         $scenario = new Entity\Scenario();
-        $scenario->setName($data['name']);
+        $scenario->setName($data['name'] ?: 'Untitled ' . ++$untitled);
         $scenario->setSlug($this->slugify($data['name']));
-        $scenario->setStatus($data['status']);
 
         $tags = $this->getTagsFromData($data['tags']);
         $scenario->addTags($tags);
