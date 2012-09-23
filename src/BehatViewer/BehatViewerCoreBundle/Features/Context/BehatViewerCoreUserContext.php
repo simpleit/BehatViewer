@@ -1,10 +1,11 @@
 <?php
-namespace BehatViewer\BehatViewerBundle\Features\Context;
+namespace BehatViewer\BehatViewerCoreBundle\Features\Context;
 
 use Symfony\Component\HttpKernel\KernelInterface,
-    Behat\Behat\Context\Step;
+    Behat\Behat\Context\Step,
+	Behat\MinkExtension\Context\RawMinkContext;
 
-class UserContext extends BehatViewerContext
+class BehatViewerCoreUserContext extends RawMinkContext
 {
     /**
      * @AfterScenario
@@ -12,7 +13,7 @@ class UserContext extends BehatViewerContext
     public function afterScenario()
     {
         $this->iAmNotLoggedIn();
-        $this->getMainContext()->getSubContext('browser')->getSession()->stop();
+        $this->getSession()->stop();
     }
 
     /**
@@ -37,8 +38,13 @@ class UserContext extends BehatViewerContext
      */
     public function iAmNotLoggedIn()
     {
-        /** @var $browser \BehatViewer\BehatViewerBundle\Features\Context\BrowserContext */
-        $browser = $this->getMainContext()->getSubcontext('browser');
-        $browser->visit('/logout');
+        $this->getSession()->visit($this->locatePath('/logout'));
     }
+
+	protected function locatePath($path)
+	{
+		$startUrl = rtrim($this->getMinkParameter('base_url'), '/') . '/';
+
+		return 0 !== strpos($path, 'http') ? $startUrl . ltrim($path, '/') : $path;
+	}
 }

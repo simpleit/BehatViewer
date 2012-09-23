@@ -10,7 +10,7 @@ default:
 
     formatter:
         classes:
-            "jubianchi\BehatViewerExtension\Formatter\BehatViewerFormatter": "viewer"
+            "BehatViewer\BehatViewerExtension\Formatter\BehatViewerFormatter": "viewer"
 
         name: pretty,viewer
         parameters:
@@ -18,7 +18,7 @@ default:
             screen_id: 99
 
     extensions:
-        jubianchi\BehatViewerExtension\Extension: ~
+        BehatViewer\BehatViewerExtension\Extension: ~
 
 
         Behat\Symfony2Extension\Extension:

@@ -30,10 +30,12 @@ class LocalBuilder extends Builder
             }
         });
 
-		if(0 === $status) {
+		if(0 === $status && file_exists($path . DIRECTORY_SEPARATOR . 'behat-viewer.json')) {
 			$analyzer = $this->container->get('behat_viewer.analyzer');
 			$data = json_decode(file_get_contents($path . DIRECTORY_SEPARATOR . 'behat-viewer.json'), true);
 			$analyzer->analyze($strategy->getProject(), $data);
+		} else {
+			$output->write('<error>There was an error will running the build script or the report was not found</error>');
 		}
 
         return $status;

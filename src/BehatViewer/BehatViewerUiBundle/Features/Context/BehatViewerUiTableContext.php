@@ -1,16 +1,23 @@
 <?php
 
-namespace BehatViewer\BehatViewerBundle\Features\Context;
+namespace BehatViewer\BehatViewerUiBundle\Features\Context;
 
 use Behat\Mink\Exception,
-    Behat\Gherkin\Node\TableNode;
+    Behat\Gherkin\Node\TableNode,
+	Behat\MinkExtension\Context\RawMinkContext;
 
-class TableContext extends BehatViewerContext
+class BehatViewerUiTableContext extends RawMinkContext
 {
-    public function getMinkContext()
-    {
-        return $this->getMainContext()->getSubContext('browser');
-    }
+	/** @var array */
+	protected $parameters = array();
+
+	/**
+	 * @param array $parameters
+	 */
+	public function __construct(array $parameters = array())
+	{
+		$this->parameters = $parameters;
+	}
 
     protected function makeIndex($number)
     {
@@ -39,7 +46,7 @@ class TableContext extends BehatViewerContext
     public function theColumnsSchemaShouldMatch($table, TableNode $content)
     {
         $headSelector = sprintf('%s thead tr', $table);
-        $head = $this->getMinkContext()->getSession()->getPage()->findAll('css', $headSelector);
+        $head = $this->getSession()->getPage()->findAll('css', $headSelector);
         $columns = $head[0]->findAll('css', 'th');
 
         $hash = $content->getHash();
@@ -54,7 +61,7 @@ class TableContext extends BehatViewerContext
                         $this->makeIndex($key + 1),
                         current($column)
                     ),
-                    $this->getMinkContext()->getSession()
+                    $this->getSession()
                 );
             }
         }
@@ -68,7 +75,7 @@ class TableContext extends BehatViewerContext
     public function iShouldSeeColumnsInTheTable($count, $table)
     {
         $headSelector = sprintf('%s thead tr', $table);
-        $head = $this->getMinkContext()->getSession()->getPage()->findAll('css', $headSelector);
+        $head = $this->getSession()->getPage()->findAll('css', $headSelector);
         $columns = $head[0]->findAll('css', 'th');
 
         if (count($columns) != $count) {
@@ -78,7 +85,7 @@ class TableContext extends BehatViewerContext
                     $count,
                     count($columns)
                 ),
-                $this->getMinkContext()->getSession()
+                $this->getSession()
             );
         }
     }
@@ -90,7 +97,7 @@ class TableContext extends BehatViewerContext
      */
     public function iShouldSeeRowsInTheNthTable($occurences, $index, $element)
     {
-        $tables = $this->getMinkContext()->getSession()->getPage()->findAll('css', $element);
+        $tables = $this->getSession()->getPage()->findAll('css', $element);
         if (!isset($tables[$index - 1])) {
             throw new Exception\ElementNotFoundException(sprintf('The %d table "%s" was not found in the page', $index, $element));
         }
@@ -104,7 +111,7 @@ class TableContext extends BehatViewerContext
                     $occurences,
                     count($rows)
                 ),
-                $this->getMinkContext()->getSession()
+                $this->getSession()
             );
         }
     }
@@ -127,12 +134,12 @@ class TableContext extends BehatViewerContext
     public function theDataOfTheRowShouldMatch($index, $element, TableNode $table)
     {
         $rowsSelector = sprintf('%s tbody tr', $element);
-        $rows = $this->getMinkContext()->getSession()->getPage()->findAll('css', $rowsSelector);
+        $rows = $this->getSession()->getPage()->findAll('css', $rowsSelector);
 
         if (!isset($rows[$index - 1])) {
             throw new \Behat\Mink\Exception\ExpectationException(
                 sprintf('The row %s was not found', $this->makeIndex($index)),
-                $this->getMinkContext()->getSession()
+                $this->getSession()
             );
         }
 
@@ -149,7 +156,7 @@ class TableContext extends BehatViewerContext
                     count($hash),
                     count($cells)
                 ),
-                $this->getMinkContext()->getSession()
+                $this->getSession()
             );
         }
 
@@ -163,7 +170,7 @@ class TableContext extends BehatViewerContext
                         $this->makeIndex($index),
                         $cells[$i]->getText()
                     ),
-                    $this->getMinkContext()->getSession()
+                    $this->getSession()
                 );
             }
         }
@@ -177,12 +184,12 @@ class TableContext extends BehatViewerContext
     public function theStColumnOfTheStRowInTheTableShouldContain($colIndex, $rowIndex, $element, $text)
     {
         $rowSelector = sprintf('%s tbody tr', $element);
-        $rows = $this->getMinkContext()->getSession()->getPage()->findAll('css', $rowSelector);
+        $rows = $this->getSession()->getPage()->findAll('css', $rowSelector);
 
         if (!isset($rows[$rowIndex - 1])) {
             throw new \Behat\Mink\Exception\ExpectationException(
                 sprintf('The row %s was not found', $this->makeIndex($rowIndex)),
-                $this->getMinkContext()->getSession()
+                $this->getSession()
             );
         }
 
@@ -197,7 +204,7 @@ class TableContext extends BehatViewerContext
                     $this->makeIndex($colIndex),
                     $this->makeIndex($rowIndex)
                 ),
-                $this->getMinkContext()->getSession()
+                $this->getSession()
             );
         }
 
@@ -210,7 +217,7 @@ class TableContext extends BehatViewerContext
                     $text,
                     $actual
                 ),
-                $this->getMinkContext()->getSession()
+                $this->getSession()
             );
         }
     }
@@ -221,7 +228,7 @@ class TableContext extends BehatViewerContext
     public function theDataShouldMatch($element, TableNode $table)
     {
         $rowsSelector = sprintf('%s tbody tr', $element);
-        $rows = $this->getMinkContext()->getSession()->getPage()->findAll('css', $rowsSelector);
+        $rows = $this->getSession()->getPage()->findAll('css', $rowsSelector);
         $hash = $table->getHash();
 
         if (count($rows) != count($hash)) {
@@ -231,7 +238,7 @@ class TableContext extends BehatViewerContext
                     count($hash),
                     count($rows)
                 ),
-                $this->getMinkContext()->getSession()
+                $this->getSession()
             );
         }
 
@@ -248,7 +255,7 @@ class TableContext extends BehatViewerContext
                         count($keys),
                         count($cells)
                     ),
-                    $this->getMinkContext()->getSession()
+                    $this->getSession()
                 );
             }
 
@@ -262,7 +269,7 @@ class TableContext extends BehatViewerContext
                             $cells[$i]->getText(),
                             $hash[$index][$keys[$i]]
                         ),
-                        $this->getMinkContext()->getSession()
+                        $this->getSession()
                     );
                 }
             }

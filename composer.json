@@ -53,7 +53,7 @@
         "behat/mink-browserkit-driver":         "*",
         "behat/mink-goutte-driver":             "*",
         "behat/mink-zombie-driver":             "*",
-        "jubianchi/behat-viewer-extension":     "*"
+        "jubianchi/behat-viewer-extension":     "dev-develop"
     },
     "scripts": {
         "post-install-cmd": [

@@ -18,5 +18,6 @@ class BehatViewerUiContext extends BehatContext
         $this->useContext('message', new BehatViewerUiMessageContext($parameters));
         $this->useContext('button', new BehatViewerUiButtonContext($parameters));
         $this->useContext('iconicbutton', new BehatViewerUiIconicButtonContext($parameters));
+		$this->useContext('table', new BehatViewerUiTableContext($parameters));
     }
 }

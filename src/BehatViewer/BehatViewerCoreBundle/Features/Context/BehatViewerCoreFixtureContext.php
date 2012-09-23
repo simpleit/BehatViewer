@@ -1,22 +1,38 @@
 <?php
 
-namespace BehatViewer\BehatViewerBundle\Features\Context;
+namespace BehatViewer\BehatViewerCoreBundle\Features\Context;
 
-use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\HttpKernel\KernelInterface,
+	Behat\Behat\Context\BehatContext,
+	Behat\Symfony2Extension\Context\KernelAwareInterface;
 
-class FixtureContext extends BehatViewerContext
+class BehatViewerCoreFixtureContext extends BehatContext implements KernelAwareInterface
 {
     private $manager;
     private $connection;
     private $platform;
+	/** @var array */
+	protected $parameters = array();
+	/**
+	 * @var \Symfony\Component\HttpKernel\KernelInterface
+	 */
+	protected $kernel;
+
+	/**
+	 * @param array $parameters
+	 */
+	public function __construct(array $parameters = array())
+	{
+		$this->parameters = $parameters;
+	}
 
     public function setKernel(KernelInterface $kernel)
     {
-      parent::setKernel($kernel);
+		$this->kernel = $kernel;
 
-      $this->manager = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
-      $this->connection = $this->manager->getConnection();
-      $this->platform = $this->connection->getDatabasePlatform();
+      	$this->manager = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+      	$this->connection = $this->manager->getConnection();
+      	$this->platform = $this->connection->getDatabasePlatform();
     }
 
     /**

@@ -4,7 +4,8 @@ namespace BehatViewer\BehatViewerApiBundle\Features\Context;
 use Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand,
     Behat\Behat\Event\SuiteEvent,
     Symfony\Component\HttpKernel\KernelInterface,
-    BehatViewer\BehatViewerBundle\Features\Context;
+    BehatViewer\BehatViewerBundle\Features\Context,
+    BehatViewer\BehatViewerCoreBundle\Features\Context\BehatViewerCoreFixtureContext;
 
 class FeatureContext extends Context\BehatViewerContext
 {
@@ -12,7 +13,7 @@ class FeatureContext extends Context\BehatViewerContext
     {
         parent::__construct($parameters);
 
-        $this->useContext('fixture', new Context\FixtureContext($parameters));
+        $this->useContext('fixture', new BehatViewerCoreFixtureContext($parameters));
         $this->useContext('brower', new Context\BrowserContext($parameters));
     }
 

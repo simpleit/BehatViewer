@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand,
     Behat\Behat\Event\SuiteEvent,
     Symfony\Component\HttpKernel\KernelInterface,
     BehatViewer\BehatViewerUiBundle\Features\Context\BehatViewerUiContext,
+    BehatViewer\BehatViewerCoreBundle\Features\Context\BehatViewerCoreContext,
     Behat\Symfony2Extension\Context\KernelAwareInterface;
 
 //require_once __DIR__ . '/../../../BehatViewerUiBundle/Features/Context/BehatViewerUiContext.php';
@@ -15,12 +16,10 @@ class FeatureContext extends BehatViewerContext
     {
         parent::__construct($parameters);
 
-        $this->useContext('fixture', new FixtureContext($parameters));
         $this->useContext('browser', new BrowserContext($parameters));
-        $this->useContext('table', new TableContext($parameters));
-        $this->useContext('user', new UserContext($parameters));
 
-        $this->useContext('message', new BehatViewerUiContext($parameters));
+        $this->useContext('core', new BehatViewerCoreContext($parameters));
+        $this->useContext('ui', new BehatViewerUiContext($parameters));
     }
 
     public function setKernel(KernelInterface $kernel)
