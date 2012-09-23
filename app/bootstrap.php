@@ -12,5 +12,6 @@ AnnotationRegistry::registerFile(__DIR__.'/../vendor/symfony/symfony/src/Symfony
 
 AnnotationRegistry::registerFile(__DIR__.'/../vendor/sensio/framework-extra-bundle/Sensio/Bundle/FrameworkExtraBundle/Configuration/ParamConverter.php');
 AnnotationRegistry::registerFile(__DIR__.'/../vendor/sensio/framework-extra-bundle/Sensio/Bundle/FrameworkExtraBundle/Configuration/Template.php');
+AnnotationRegistry::registerFile(__DIR__.'/../vendor/sensio/framework-extra-bundle/Sensio/Bundle/FrameworkExtraBundle/Configuration/Route.php');
 
 AnnotationRegistry::registerFile(__DIR__.'/../vendor/jms/security-extra-bundle/JMS/SecurityExtraBundle/Annotation/PreAuthorize.php');
