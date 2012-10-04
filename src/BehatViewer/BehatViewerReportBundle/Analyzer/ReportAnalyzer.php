@@ -87,9 +87,11 @@ class ReportAnalyzer extends Analyzer
      */
     protected function getFeatureFromData(array $data)
     {
+        static $untitledF = 0;
+
         $feature = new Entity\Feature();
 
-        $feature->setName($data['name']);
+        $feature->setName($data['name'] && !is_array($data['name']) ? $data['name'] : 'Untitled '. ++$untitledF);
         $feature->setSlug($this->slugify($data['name']));
         $feature->setDescription($data['desc']);
 
@@ -115,7 +117,7 @@ class ReportAnalyzer extends Analyzer
 		static $untitled = 0;
 
         $scenario = new Entity\Scenario();
-        $scenario->setName($data['name'] ?: 'Untitled ' . ++$untitled);
+        $scenario->setName($data['name'] && !is_array($data['name']) ? $data['name'] : 'Untitled ' . ++$untitled);
         $scenario->setSlug($this->slugify($data['name']));
 
         $tags = $this->getTagsFromData($data['tags']);
@@ -184,6 +186,10 @@ class ReportAnalyzer extends Analyzer
      */
     protected function slugify($text)
     {
+        if (is_array($text)) {
+            return 'n-a';
+        }
+
         $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
         $text = trim($text, '-');
 

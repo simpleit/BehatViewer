@@ -7,9 +7,8 @@ class VagrantScript extends Script
     {
         $this->addCommands(array(
             'vagrant up',
-            'vagrant ssh -c "cd /vagrant && sudo sh -e ./' . $script . '"',
-            'vagrant halt',
-            'vagrant destroy -f'
+            'vagrant ssh -c "cd /vagrant/app/data/repos/admin/test && sudo sh -e ./' . $script . '"',
+            'vagrant halt'
         ));
     }
 }

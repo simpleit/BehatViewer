@@ -11,6 +11,7 @@ web/bundles/*
 # Configuration files
 app/config/parameters.ini
 app/config/parameters.yml
+app/config/parameters.ini
 
 # IDE
 .idea
@@ -45,3 +46,5 @@ bin/doctrine
 bin/doctrine.php
 app/SymfonyRequirements.php
 
+/nbproject/private/
+/nbproject/*
