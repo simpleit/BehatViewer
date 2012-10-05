@@ -43,5 +43,5 @@
 {% endblock %}
 
 {% block extrabuttons %}
-    <a href="{{ path("behatviewer.project.delete", {"username": project.user.username, "project": project.slug}) }}" class="btn btn-danger">Delete</a>
+    <a href="{{ path("behatviewer.project.delete", {"username": project.user.username, "project": project.slug}) }}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger">Delete</a>
 {% endblock %}

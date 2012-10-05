@@ -44,7 +44,7 @@
     <td class="action" style="min-width: 150px; width: 10%">
         <div class="btn-group" id="toolbar">
             {% if is_granted('EDIT', build.project) %}
-            <a href="{{ path('behatviewer.history.delete', {"username": project.user.username, "project": project.slug, "build": build.id}) }}" class="btn btn-danger" title="Delete"><i class="icon-trash"></i></a>
+            <a href="{{ path('behatviewer.history.delete', {"username": project.user.username, "project": project.slug, "build": build.id}) }}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" title="Delete"><i class="icon-trash"></i></a>
             {% endif %}
             <a href="{{ path('behatviewer.history.entry', {"username": project.user.username, "project": project.slug, "build": build.id}) }}" class="btn">Details &raquo;</a>
         </div>

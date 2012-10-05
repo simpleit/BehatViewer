@@ -1,7 +1,7 @@
 <div class="pull-right">
     <div class="btn-group">
         {% if is_granted('EDIT', project) %}
-            <a href="{{ path('behatviewer.project.delete', {"project": project.slug, "username": project.user.username}) }}" class="btn btn-danger" title="Delete"><i class="icon-trash"></i></a>
+            <a href="{{ path('behatviewer.project.delete', {"project": project.slug, "username": project.user.username}) }}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" title="Delete"><i class="icon-trash"></i></a>
             <a href="{{ path('behatviewer.project.edit', {"project": project.slug, "username": project.user.username}) }}" class="btn" title="Edit"><i class="icon-edit"></i></a>
         {% endif %}
         <button data-toggle="dropdown" class="btn dropdown-toggle">
