@@ -15,18 +15,6 @@
                     'href': path("behatviewer.project.edit", {"project": project.slug, "username": project.user.username }),
                     'label': 'Infos',
                     'active': (app.request.get('_route') == 'behatviewer.project.edit')
-                },
-                {
-                    'href': path("behatviewer.project.edit.repository", {"project": project.slug, "username": project.user.username }),
-                    'label': 'Repository',
-                    'active': (app.request.get('_route') == 'behatviewer.project.edit.repository'),
-                    'show': (is_granted('ROLE_PREMIUM'))
-                },
-                {
-                    'href': path("behatviewer.project.edit.script", {"project": project.slug, "username": project.user.username }),
-                    'label': 'Script',
-                    'active': (app.request.get('_route') == 'behatviewer.project.edit.script'),
-                    'show': (is_granted('ROLE_PREMIUM') and (project.strategy is not null))
                 }
             ]
         }

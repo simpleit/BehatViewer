@@ -15,6 +15,7 @@
         <parameter key="behat_viewer.builder.git_local.class">BehatViewer\BehatViewerWorkerBundle\Builder\GitLocalBuilder</parameter>
         <parameter key="behat_viewer.builder.github.class">BehatViewer\BehatViewerWorkerBundle\Builder\GithubBuilder</parameter>
         <parameter key="behat_viewer.builder.local.class">BehatViewer\BehatViewerWorkerBundle\Builder\LocalBuilder</parameter>
+        <parameter key="behat_viewer.builder.simpleit.class">BehatViewer\BehatViewerWorkerBundle\Builder\SimpleITBuilder</parameter>
     </parameters>
 
     <services>
@@ -56,7 +57,11 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
-
+        <service id="behat_viewer.builder.simpleit" class="%behat_viewer.builder.simpleit.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
         <service id="build_consumer" class="%behat_viewer.consumer.build.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

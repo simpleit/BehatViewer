@@ -32,7 +32,7 @@ class Job extends Base
      * @var \BehatViewer\BehatViewerCoreBundle\Entity\Project $project
      *
      * @ORM\ManyToOne(targetEntity="BehatViewer\BehatViewerCoreBundle\Entity\Project", inversedBy="builds")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $project;
 
