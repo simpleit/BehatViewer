@@ -27,8 +27,8 @@
         {%
             include 'BehatViewerBundle::Components/progress-bar.html.twig'
             with {
-                'passed': feature.build.stat.featuresPassed,
-                'failed': feature.build.stat.featuresFailed,
+                'passed': feature.stat.scenariosPassed,
+                'failed': feature.stat.scenariosFailed,
                 'skipped': 0,
                 'undefined': 0
             }
@@ -39,8 +39,8 @@
             include 'BehatViewerBundle::Components/progress-summary.html.twig'
             with {
                 'class': 'pull-left',
-                'passed': feature.build.stat.featuresPassed,
-                'failed': feature.build.stat.featuresFailed,
+                'passed': feature.stat.scenariosPassed,
+                'failed': feature.stat.scenariosFailed,
                 'skipped': 0,
                 'pending': 0,
                 'undefined': 0
