@@ -1,8 +1,9 @@
 {% set steps = feature.stat.steps %}
+{% set scenarios = feature.stat.scenarios %}
 
-{% if steps > 0 %}
-    {% set passed = feature.stat.stepsPassed %}
-    {% set passedpcnt = ((passed / steps) * 100)|round(3) %}
+{% if scenarios > 0 %}
+    {% set passed = feature.stat.scenariosPassed %}
+    {% set passedpcnt = ((passed / scenarios) * 100)|round(3) %}
 {% else %}
     {% set passedpcnt = 0 %}
 {% endif %}
