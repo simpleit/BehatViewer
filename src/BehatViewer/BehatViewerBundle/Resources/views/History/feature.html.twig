@@ -11,10 +11,10 @@
     {%
         include 'BehatViewerBundle::Components/progress-bar.html.twig'
         with {
-            'passed': feature.stat.stepsPassed,
-            'failed': feature.stat.stepsFailed,
-            'skipped': feature.stat.stepsSkipped + feature.stat.stepsPending,
-            'undefined': feature.stat.stepsUndefined
+            'passed': feature.build.stat.featuresPassed,
+            'failed': feature.build.stat.featuresFailed,
+            'skipped': 0,
+            'undefined': 0
         }
     %}
 
@@ -23,11 +23,11 @@
             include 'BehatViewerBundle::Components/progress-summary.html.twig'
             with {
                 'class': 'pull-left',
-                'passed': feature.stat.stepsPassed,
-                'failed': feature.stat.stepsFailed,
-                'skipped': feature.stat.stepsSkipped,
-                'pending': feature.stat.stepsPending,
-                'undefined': feature.stat.stepsUndefined
+                'passed': feature.build.stat.featuresPassed,
+                'failed': feature.build.stat.featuresFailed,
+                'skipped': 0,
+                'pending': 0,
+                'undefined': 0
             }
         %}
     {% endif %}
