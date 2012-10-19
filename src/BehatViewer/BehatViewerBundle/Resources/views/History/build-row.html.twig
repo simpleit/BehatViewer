@@ -1,7 +1,7 @@
-{% set steps = build.stat.steps %}
+{% set features = build.stat.features %}
 
-{% if steps > 0 %}
-    {% set passedpcnt = ((build.stat.stepsPassed / steps) * 100)|round(3) %}
+{% if features > 0 %}
+    {% set passedpcnt = ((build.stat.featuresPassed / features) * 100)|round(3) %}
 {% else %}
     {% set passedpcnt = 0 %}
 {% endif %}
@@ -28,7 +28,7 @@
             }
         %}
     </td>
-    <td data-value="{{ steps }}">
+    <td data-value="{{ features }}">
         {%
             include 'BehatViewerBundle::Components/progress-summary.html.twig'
             with {
