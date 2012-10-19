@@ -27,7 +27,7 @@
 
 <div class="well sidebar-nav clearfix">
     <ul class="nav nav-list">
-        <li class="nav-header">Summary</li>
+        <li class="nav-header">Progress (Scenarios)</li>
         <li>
             {%
                 include 'BehatViewerBundle::Components/progress-bar.html.twig'
@@ -39,11 +39,7 @@
                 }
             %}
         </li>
-    </ul>
-
-    <ul class="nav nav-list pull-left">
-        <li class="nav-header">Feature:</li>
-        <li>
+        <li style="text-align: center; padding-bottom: 20px;">
             <span class="success" style="color: #62C462; font-weight: bold">
                 Completion: {{ passedpcnt|round }}%
             </span>
